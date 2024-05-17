@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import logo from './assets/images/logo.svg';
 import us from './assets/images/US.svg';
 import vn from './assets/images/VN.svg';
-import up from './assets/images/chevron-up.svg';
 import down from './assets/images/chevron-down.svg';
 
-const Navbar = () => {
+const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,13 +14,15 @@ const Navbar = () => {
   };
 
   return (
-    <div className='font-Inter text-base'>
+    <div className='font-Inter text-base overflow-x-hidden'>
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-primary-green">
         <nav className="max-w-screen-1440 1440:mx-auto mx-4 w-full sm:flex sm:items-center sm:justify-between">
 
           <div className="flex items-center justify-between">
             <div>
-              <img src={logo} className="w-20 h-20"/>
+              <img src={logo}
+                className="w-20 h-20"
+                alt='logo'/>
             </div>
             <div className="sm:hidden">
               <button type="button"
@@ -59,13 +60,13 @@ const Navbar = () => {
           <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
             <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
               <a className="font-medium text-white transition-all ease-in-out duration-300"
-                href="#">Home</a>
+                href="#home">Home</a>
               <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                href="#">List of Centre</a>
+                href="#listOfCentre">List of Centre</a>
               <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                href="#">About us</a>
+                href="#aboutUs">About us</a>
               <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                href="#">Partner Register</a>
+                href="#partnerRegister">Partner Register</a>
             </div>
           </div>
 
@@ -76,11 +77,14 @@ const Navbar = () => {
                 onClick={toggleMenu}>
                 <img className="w-5 h-auto rounded-full"
                   src={us}
+                  alt='US'
                 />
                 <span className="font-medium truncate max-w-[7.5rem]">
                   US
                 </span>
-                <img src={down} className='w-4'/>
+                <img src={down}
+                  className='w-4'
+                  alt='chevron-down'/>
               </button>
 
               {isOpen && (
@@ -120,4 +124,4 @@ const Navbar = () => {
   );
 }
 
-export default Navbar;
+export default Header;
