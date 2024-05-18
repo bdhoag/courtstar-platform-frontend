@@ -1,7 +1,7 @@
 import React from 'react';
-import star from './assets/images/star.svg';
-import nostar from './assets/images/nostar.svg';
-import centre from './assets/images/demo-centre.png'
+import star from '../assets/images/star.svg';
+import nostar from '../assets/images/nostar.svg';
+import centre from '../assets/images/demo-centre.png'
 
 const Centre = () => {
 
