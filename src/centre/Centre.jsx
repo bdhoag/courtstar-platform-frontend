@@ -3,7 +3,9 @@ import star from '../assets/images/star.svg';
 import nostar from '../assets/images/nostar.svg';
 import centre from '../assets/images/demo-centre.png'
 
-const Centre = () => {
+const Centre = ({ onBookingClick }) => {
+
+  const centreList = Array.from({ length: 10 }, (_, index) => index);
 
   return (
     <div className='font-Inter text-base overflow-x-hidden'>
@@ -53,477 +55,56 @@ const Centre = () => {
             </div>
 
             <div className='flex-1 flex flex-col gap-7'>
+              {centreList.map((_, index) => (
+                <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
+                  <img src={centre}
+                    alt="demo centre"
+                    className='w-2/5'
+                  />
 
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
+                  <div className='flex flex-col gap-3'>
+                    <div className='font-semibold'>
+                      Sân cầu lông Đại học FPT Hồ Chí Minh
+                    </div>
+                    <div className='flex gap-1'>
+                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
+                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
+                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
+                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
+                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
                     </div>
                     <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
+                      <span className='font-semibold'>Address: </span>
+                      Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
+                    </div>
+                    <div className='flex gap-3'>
+                      <div>
+                        <span className='font-semibold'>Open time: </span>
+                        10h-22h
+                      </div>
+                      <div>
+                        <span className='font-semibold'>Number of courts: </span>
+                        8
+                      </div>
+                    </div>
+                    <div>
+                      <span className='font-semibold'>Price: </span>
+                      <span className='font-semibold text-rose-600'>100.000₫/h</span>
+                    </div>
+                    <div className='text-sm flex gap-10'>
+                      <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'
+                        onClick={onBookingClick}>
+                        Centre Details
+                      </button>
+                      <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'
+                        onClick={onBookingClick}>
+                        Book Now
+                      </button>
                     </div>
                   </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
+
                 </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                <img src={centre}
-                  alt="demo centre"
-                  className='w-2/5'
-                />
-
-                <div className='flex flex-col gap-3'>
-                  <div className='font-semibold'>
-                    Sân cầu lông Đại học FPT Hồ Chí Minh
-                  </div>
-                  <div className='flex gap-1'>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Address: </span>
-                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
-                  </div>
-                  <div className='flex gap-3'>
-                    <div>
-                      <span className='font-semibold'>Open time: </span>
-                      10h-22h
-                    </div>
-                    <div>
-                      <span className='font-semibold'>Number of courts: </span>
-                      8
-                    </div>
-                  </div>
-                  <div>
-                    <span className='font-semibold'>Price: </span>
-                    <span className='font-semibold text-rose-600'>100.000₫/h</span>
-                  </div>
-                  <div className='text-sm flex gap-10'>
-                    <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'>
-                      Centre Details
-                    </button>
-                    <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-
-              </div>
-
+              ))}
             </div>
 
           </div>
