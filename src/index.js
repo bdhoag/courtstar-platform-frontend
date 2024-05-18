@@ -5,12 +5,14 @@ import Header from './Header';
 import reportWebVitals from './reportWebVitals';
 import Footer from './Footer';
 import Banner from './Banner';
+import Centre from './Centre';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Header />
     <Banner />
+    <Centre />
     <Footer />
   </React.StrictMode>
 );

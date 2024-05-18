@@ -29,9 +29,9 @@ function Dropdown() {
       </button>
       {isOpen && (
         <ul className="border border-gray-200 rounded-lg mt-2">
-          <li className="py-2 px-6 hover:bg-gray-200 transition-all ease-in-out duration-300">Item 1</li>
-          <li className="py-2 px-6 hover:bg-gray-200 transition-all ease-in-out duration-300">Item 2</li>
-          <li className="py-2 px-6 hover:bg-gray-200 transition-all ease-in-out duration-300">Item 3</li>
+          <li className="py-2 px-6 hover:bg-gray-200 transition-all ease-in-out duration-300 cursor-pointer">Item 1</li>
+          <li className="py-2 px-6 hover:bg-gray-200 transition-all ease-in-out duration-300 cursor-pointer">Item 2</li>
+          <li className="py-2 px-6 hover:bg-gray-200 transition-all ease-in-out duration-300 cursor-pointer">Item 3</li>
         </ul>
       )}
     </div>

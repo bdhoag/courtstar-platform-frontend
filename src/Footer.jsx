@@ -5,7 +5,7 @@ import logo from './assets/images/logo.svg';
 const Footer = () => {
   return (
     <div className='font-Inter text-base text-white overflow-x-hidden'>
-      <footer className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-stone-800">
+      <footer className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-800">
         <div className="max-w-screen-1440 1440:mx-auto mx-4 w-full flex flex-col items-center justify-between">
           <div className='flex justify-between items-center w-full py-5'>
             <img src={logo}
