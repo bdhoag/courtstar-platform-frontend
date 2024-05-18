@@ -1,6 +1,6 @@
 import React from 'react';
-import banner from './assets/images/banner.png'
-import Dropdown from './components/Dropdown';
+import banner from '../assets/images/banner.png'
+import Dropdown from '../components/Dropdown';
 
 const Test = () => {
   return (
@@ -9,7 +9,7 @@ const Test = () => {
         <img src={banner}
           alt="Banner"
           className='object-center object-cover opacity-50'/>
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 z-10 max-w-[550px] w-full flex flex-col gap-2.5 items-center justify-between bg-white rounded-3xl py-5 px-10 shadow-2xl">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 z-10 max-w-[550px] w-full flex flex-col gap-3.5 items-center justify-between bg-white rounded-3xl py-5 px-10 shadow-2xl">
           <div className='text-4xl font-medium text-gray-800'>
             Find court now
           </div>
