@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import us from './assets/images/US.svg';
 import vn from './assets/images/VN.svg';
@@ -7,6 +7,18 @@ import down from './assets/images/chevron-down.svg';
 const LanguageSelector = () => {
 
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsOpen(false);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -29,7 +41,7 @@ const LanguageSelector = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute top-10 min-w-40 bg-white shadow-md rounded-lg p-2 mt-2">
+        <div className="z-50 fixed top-14 min-w-40 bg-white shadow-md rounded-lg p-2 mt-2">
           <button
             className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
             onClick={toggleMenu}
