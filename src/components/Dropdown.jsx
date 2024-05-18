@@ -23,7 +23,7 @@ function Dropdown() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="lucide lucide-chevron-down">
+          className={isOpen ? 'rotate-180 lucide lucide-chevron-down' : 'lucide lucide-chevron-down'}>
             <path d="m6 9 6 6 6-6"/>
         </svg>
       </button>

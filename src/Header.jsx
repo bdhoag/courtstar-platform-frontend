@@ -1,7 +1,7 @@
 import React from 'react';
 
 import logo from './assets/images/logo.svg';
-import LanguageSelector from './LanguageSelector';
+import LanguageSelector from './components/LanguageSelector';
 
 const Header = () => {
 
