@@ -7,7 +7,7 @@ function Login() {
             <div className="max-w-md mx-auto py-8 px-4 bg-white shadow-md rounded-lg">
                 <h2 className="text-3xl font-semibold mb-6 text-center">Log in</h2>
                 <p className="text-gray-400 text-sm mb-6 text-center">Don't have account? <a
-                    href="#" className="font-semibold underline text-black">Sign up for free</a></p>
+                    href="#s" className="font-semibold underline text-black">Sign up for free</a></p>
                 <form>
                     <div className="mb-4">
                         <InputText
@@ -26,7 +26,7 @@ function Login() {
                         />
                     </div>
                     <div className="flex items-center justify-between mb-5 px-0.5">
-                        <a href="#" className="font-semibold underline">Forget password?</a>
+                        <a href="#s" className="font-semibold underline">Forget password?</a>
                     </div>
                     <div className='flex items-center justify-center'>
                         <button
@@ -42,6 +42,7 @@ function Login() {
                         >
                             <img className='mx-3 w-fit'
                                 src={google}
+                                alt='google'
                             />
                             Continue with Google
                         </button>

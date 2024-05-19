@@ -12,10 +12,7 @@ import PartnerRegister from './auth/PartnerRegister';
 import CustomerRegister from './auth/CustomerRegister';
 import Login from './auth/Login';
 import MyCentre from './court-manager/MyCentre';
-import ForgotPassword from './ForgotPassword';
-import CheckEmail from './CheckEmail';
-import SetNewPassword from './SetNewPassword';
-import NewPasswordSuccessful from './NewPasswordSuccessful';
+import Admin from './admin/Admin';
 
 export default function App() {
   return (
@@ -30,6 +27,7 @@ export default function App() {
           <Route path="centreBooking" element={<CentreBooking />} />
           <Route path="listOfCentre" element={<Centre />} />
           <Route path="myCentre" element={<MyCentre />} />
+          <Route path="admin" element={<Admin />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
