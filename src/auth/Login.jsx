@@ -1,5 +1,6 @@
 import React from 'react';
 import google from '../assets/images/google.svg';
+import InputText from '../components/InputText';
 function Login() {
     return (
         <div>
@@ -9,25 +10,19 @@ function Login() {
                     href="#" className="font-semibold underline text-black">Sign up for free</a></p>
                 <form>
                     <div className="mb-4">
-                        <label className="block text-gray-700 font-semibold mb-2">
-                            Email address/Phone number
-                        </label>
-                        <input
-                            className="border rounded-lg w-full py-2 px-3 text-gray-700 "
+                        <InputText
                             id="emailOrPhone"
-                            type="text"
+                            name="emailOrPhone"
                             placeholder="Enter your Email/Phone number"
+                            label="Email address/Phone number"
                         />
                     </div>
                     <div className="mb-0">
-                        <label className="block text-gray-700 font-semibold mb-2">
-                            Password
-                        </label>
-                        <input
-                            className="border rounded-lg w-full py-2 px-3 text-gray-700 mb-3"
+                        <InputText
                             id="password"
-                            type="password"
+                            name="password"
                             placeholder="Enter your Password"
+                            label="Password"
                         />
                     </div>
                     <div className="flex items-center justify-between mb-5 px-0.5">
