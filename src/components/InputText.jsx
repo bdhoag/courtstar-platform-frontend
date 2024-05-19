@@ -3,7 +3,9 @@ import React from 'react';
 function InputText(props) {
   return (
     <div className="w-full flex flex-col font-medium gap-2 text-gray-800">
-      <label htmlFor={props.id}
+      <label
+        htmlFor={props.id}
+        className='font-semibold'
       >
         {props.label}
       </label>
