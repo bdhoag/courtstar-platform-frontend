@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Dropdown() {
+function Dropdown(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -8,11 +8,11 @@ function Dropdown() {
   };
 
   return (
-    <div className="w-full">
-      <button className="border border-gray-200 py-3 px-6 rounded-lg w-full text-gray-500 flex justify-between items-center"
+    <div className="w-full text-gray-800">
+      <button className="border border-gray-300 focus:border-2 focus:border-gray-400 py-3 px-6 rounded-lg w-full text-gray-500 flex justify-between items-center"
         onClick={toggleDropdown}>
-        <div className='text-sm'>
-          Select the district
+        <div className='text-sm font-normal text-gray-400'>
+          {props.placeholder}
         </div>
         <svg xmlns="http://www.w3.org/2000/svg"
           width="20"

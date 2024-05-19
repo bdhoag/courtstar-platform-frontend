@@ -1,7 +1,7 @@
 import React from 'react';
-
-import logo from './assets/images/logo.svg';
-import LanguageSelector from './components/LanguageSelector';
+import { Link } from "react-router-dom";
+import logo from '../assets/images/logo.svg';
+import LanguageSelector from '../components/LanguageSelector';
 
 const Header = () => {
 
@@ -51,10 +51,10 @@ const Header = () => {
 
           <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
             <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
-              <a className="font-medium text-white transition-all ease-in-out duration-300"
-                href="#home">Home</a>
-              <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                href="#listOfCentre">List of Centre</a>
+              <Link className="font-medium text-white transition-all ease-in-out duration-300"
+                to="/">Home</Link>
+              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/listOfCentre">List of Centre</Link>
               <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 href="#aboutUs">About us</a>
               <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
