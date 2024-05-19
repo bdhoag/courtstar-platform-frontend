@@ -5,15 +5,16 @@ import InputText from '../components/InputText';
 function PartnerRegister() {
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
-      <div className='flex items-center'>
+      <div className='max-h-[800px] overflow-hidden flex items-center'>
         <div className='bg-gray-500 basis-1/2'>
           <img src={register}
             alt="register"
+            className='object-contain'
           />
         </div>
         <div className='basis-1/2'>
-          <div className='max-w-md mx-auto py-8 px-4 bg-white'>
-            <h2 className='text-2xl font-medium mb-6 text-center'>Partner Register</h2>
+          <div className='max-w-lg mx-auto py-8 px-4 bg-white'>
+            <h2 className='text-2xl font-semibold mb-6 text-center'>Partner Register</h2>
             <div>
               <div className='mb-4 flex gap-5'>
                 <InputText
@@ -73,8 +74,8 @@ function PartnerRegister() {
                   Sign up
                 </button>
               </div>
-              <div className='mt-10 text-sm text-center'>
-                Already have an account?
+              <div className='mt-10 text-sm text-center justify-center flex gap-1.5'>
+                <span>Already have an account?</span>
                 <a
                   className='font-semibold underline text-sm'
                   href="#login"
