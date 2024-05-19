@@ -23,7 +23,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<NewPasswordSuccessful />} />
+          <Route index element={<Home />} />
           <Route path="partnerRegister" element={<PartnerRegister />} />
           <Route path="customerRegister" element={<CustomerRegister />} />
           <Route path="login" element={<Login />} />
