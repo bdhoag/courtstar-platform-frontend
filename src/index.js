@@ -11,6 +11,7 @@ import Centre from './centre/Centre';
 import PartnerRegister from './auth/PartnerRegister';
 import CustomerRegister from './auth/CustomerRegister';
 import Login from './auth/Login';
+import MyCentre from './court-manager/MyCentre';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="login" element={<Login />} />
           <Route path="centreBooking" element={<CentreBooking />} />
           <Route path="listOfCentre" element={<Centre />} />
+          <Route path="myCentre" element={<MyCentre />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
