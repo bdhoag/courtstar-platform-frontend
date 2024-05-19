@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import google from './assets/images/google.svg';
+import React from 'react';
+import google from '../assets/images/google.svg';
 
-function PartnerRegister() {
+function CustomerRegister() {
   return (
     <div>
       <div className='flex'>
         <div className='bg-gray-500 basis-1/2'></div>
         <div className='max-w-md mx-auto py-8 px-4 bg-white'>
-          <h2 className='text-2xl font-bold mb-6 text-center'>Partner Register</h2>
+          <h2 className='text-2xl font-bold mb-6 text-center'>Customer Register</h2>
           <form>
             <div className='mb-4 flex'>
               <div className='mr-2 w-1/2'>
@@ -74,7 +74,7 @@ function PartnerRegister() {
                 <input id="terms" type="checkbox" value=""
                   className='' required />
               </div>
-              <label for="terms" class="ms-2 text-sm font-medium">Agree to our <a href="#" class="underline">Terms of use</a> and <a
+              <label className="ms-2 text-sm font-medium">Agree to our <a href="#" className="underline">Terms of use</a> and <a
                   href='#'
                   className='underline'> Privacy Policy</a></label>
             </div>
@@ -86,12 +86,23 @@ function PartnerRegister() {
                 Sign up
               </button>
             </div>
+            <div className='flex justify-center my-5 '>
+              <button
+                className="text-sm border border-black rounded-full py-3 px-4 w-96 inline-flex items-center"
+                href="#"
+              >
+                <img className='mx-7'
+                  src={google}
+                />
+                Sign up with your Google account
+              </button>
+            </div>
             <div className='mt-10 text-center'>
               Already have an account?
               <a
                 className='font-semibold underline text-sm'
                 href="#"
-              >Log in
+              > Log in
               </a>
             </div>
           </form>
@@ -101,4 +112,4 @@ function PartnerRegister() {
   );
 }
 
-export default PartnerRegister;
+export default CustomerRegister;

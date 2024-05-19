@@ -57,8 +57,8 @@ const Header = () => {
                 to="/listOfCentre">List of Centre</Link>
               <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 href="#aboutUs">About us</a>
-              <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                href="#partnerRegister">Partner Register</a>
+              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/partnerRegister">Partner Register</Link>
             </div>
           </div>
 
@@ -67,12 +67,16 @@ const Header = () => {
             <LanguageSelector />
 
             <div className="flex gap-4">
-              <div className='border border-white rounded-lg py-2 px-6 text-white transition-all ease-in-out duration-300 hover:bg-gray-200 hover:text-primary-green font-semibold cursor-pointer'>
+              <Link className='block border border-white rounded-lg py-2 px-6 text-white transition-all ease-in-out duration-300 hover:bg-gray-200 hover:text-primary-green font-semibold cursor-pointer'
+                to="/login"
+              >
                 Log in
-              </div>
-              <div className='rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-semibold text-gray-200 cursor-pointer'>
+              </Link>
+              <Link className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-semibold text-gray-200 cursor-pointer'
+                to="/customerRegister"
+              >
                 Sign up
-              </div>
+              </Link>
             </div>
           </div>
 
