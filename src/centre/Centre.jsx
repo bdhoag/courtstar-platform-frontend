@@ -93,7 +93,7 @@ const Centre = () => {
                       <span className='font-semibold'>Price: </span>
                       <span className='font-semibold text-rose-600'>100.000₫/h</span>
                     </div>
-                    <div className='text-sm flex gap-10'>
+                    <div className='text-sm flex justify-center gap-20'>
                       <Link className='block text-center py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'
                         to="/centreBooking"
                       >

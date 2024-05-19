@@ -2,7 +2,7 @@ import React from 'react';
 
 function InputText(props) {
   return (
-    <div className="w-full flex gap-2 text-gray-800">
+    <div className="w-full flex flex-col font-medium gap-2 text-gray-800">
       <label htmlFor={props.id}
       >
         {props.label}
