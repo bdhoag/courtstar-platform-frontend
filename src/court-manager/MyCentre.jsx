@@ -5,19 +5,19 @@ import StaffInfo from './StaffInfo';
 import Checkin from './Checkin';
 
 const MyCentre = () => {
-  const [centreA, setCentreA] = useState(0);
+  const [tab, setTab] = useState(0);
 
-  const handleChooseFromA = (data) => {
-    setCentreA(data);
+  const handleChooseFormSideBar = (value) => {
+    setTab(value);
   };
 
   return (
     <div className='bg-gray-100 text-gray-800 flex'>
-      <Sidebar onDataSubmit1={handleChooseFromA}/>
+      <Sidebar onDataSubmit={handleChooseFormSideBar}/>
       <div className='flex-1'>
-        { (centreA === 1) && (<CentreInfo />)}
-        { (centreA === 2) && (<StaffInfo />)}
-        { (centreA === 3) && (<Checkin />)}
+        { (tab === 1) && (<CentreInfo />)}
+        { (tab === 2) && (<StaffInfo />)}
+        { (tab === 3) && (<Checkin />)}
       </div>
     </div>
   );
