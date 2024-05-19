@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import centre from '../assets/images/demo-centre.png';
 import star from '../assets/images/star.svg';
 import nostar from '../assets/images/nostar.svg';
 import mappin from '../assets/images/map-pin.svg';
+import mail from '../assets/images/mail.svg';
+import InputText from '../components/InputText';
+import Dropdown from '../components/Dropdown';
 
 const CentreBooking = () => {
 
+  const [selectedValue, setSelectedValue] = useState(0);
+
+  const handleChange = (value) => {
+    setSelectedValue(value);
+  };
+
   return (
-    <div className='font-Inter text-base overflow-x-hidden'>
+    <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
         <div className="max-w-screen-1440 1440:mx-auto mx-4 py-8 px-12 w-full flex flex-col gap-8">
 
@@ -84,7 +93,153 @@ const CentreBooking = () => {
             </div>
           </div>
 
-          <div>Booking</div>
+          <div className='flex-1 rounded-lg shadow-gray-400 shadow-md'>
+            <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
+              <img src={mail}
+                alt="mail"
+                className='w-6 h-6'
+              />
+              <span className='text-3xl font-medium'>Booking</span>
+            </div>
+            <div className='bg-white rounded-b-lg p-8'>
+              <div className='font-medium mb-10 max-w-2xl w-full relative left-1/3 flex flex-col gap-3'>
+                <div className='relative w-4/5'>
+                  <InputText
+                    placeholder="Enter your name"
+                  />
+                  <div className='text-gray-800 absolute top-2.5 -left-24'>
+                    Full name*:
+                  </div>
+                </div>
+                <div className='relative w-4/5'>
+                  <InputText
+                    placeholder="Enter your phone number"
+                  />
+                  <div className='text-gray-800 absolute top-2.5 -left-[135px]'>
+                    Phone number*:
+                  </div>
+                </div>
+                <div className='relative w-4/5'>
+                  <InputText
+                    placeholder="Enter your email"
+                  />
+                  <div className='text-gray-800 absolute top-2.5 -left-[64px]'>
+                    Email*:
+                  </div>
+                </div>
+                <div className='relative w-4/5 flex justify-center gap-40 my-1'>
+                  <div className='text-gray-800 flex items-center gap-3'>
+                    <input type="radio"
+                      name="bookingType"
+                      id="fixed"
+                      onChange={() => handleChange(2)}
+                      className='cursor-pointer'
+                    />
+                    <label htmlFor="fixed"
+                      className='cursor-pointer'
+                    >
+                      Monthly booking
+                    </label>
+                  </div>
+                  <div className='text-gray-800 flex items-center gap-3'>
+                    <input type="radio"
+                      name="bookingType"
+                      id="once"
+                      onChange={() => handleChange(1)}
+                      className='cursor-pointer'
+                    />
+                    <label htmlFor="once"
+                      className='cursor-pointer'
+                    >
+                      Day booking
+                    </label>
+                  </div>
+                  <div className='text-gray-800 absolute top-0 -left-[121px]'>
+                    Choose type*:
+                  </div>
+                </div>
+                {(selectedValue === 1) && (<div className='pl-2 relative w-4/5'>
+                  <input type="date"
+                    name="date"
+                    id="date"
+                    className='border border-gray-300 rounded-lg py-2 px-6 outline-gray-400'
+                  />
+                  <button className='ml-4 py-1 px-2 rounded-md bg-gray-800 text-white text-sm hover:bg-gray-900 transition-all ease-in-out duration-300'>
+                    See available time slots
+                  </button>
+                  <div className='text-gray-800 absolute top-2.5 -left-[60px]'>
+                    Date*:
+                  </div>
+                </div>)}
+                {(selectedValue === 2) && (<div className='pl-2 relative w-2/5'>
+                  <Dropdown
+                    placeholder="Choose day"
+                  />
+                  <div className='text-gray-800 absolute top-2.5 -left-[115px]'>
+                    Choose day*:
+                  </div>
+                </div>)}
+                <div className='pl-2 relative w-2/5'>
+                  <Dropdown
+                    placeholder="Choose court"
+                  />
+                  <div className='text-gray-800 absolute top-2.5 -left-[117px]'>
+                    Select court*:
+                  </div>
+                </div>
+                <div className='pl-2 relative w-1/2'>
+                  <div className='flex gap-4 items-center w-full'>
+                    <Dropdown
+                      placeholder="_hour"
+                    />
+                    :
+                    <Dropdown
+                      placeholder="_minute"
+                    />
+                  </div>
+                  <div className='text-gray-800 absolute top-2.5 -left-[62px]'>
+                    Time*:
+                  </div>
+                  <button className='absolute -right-24 top-10 ml-4 py-1 px-3 rounded-md bg-gray-800 text-white text-sm hover:bg-gray-900 transition-all ease-in-out duration-300'>
+                    Check
+                  </button>
+                </div>
+                <div className='pl-2 relative w-1/2'>
+                  <div className='flex gap-4 items-center w-full'>
+                    <Dropdown
+                      placeholder="_hour"
+                    />
+                    :
+                    <Dropdown
+                      placeholder="_minute"
+                    />
+                  </div>
+                  <div className='text-gray-800 absolute top-2.5 -left-[31px]'>
+                    to:
+                  </div>
+                </div>
+                <div className='relative w-4/5'>
+                  <InputText
+
+                  />
+                  <div className='text-gray-800 absolute top-2.5 -left-[54px]'>
+                    Price:
+                  </div>
+                </div>
+                <div className='relative w-4/5'>
+                  <InputText
+
+                  />
+                  <div className='text-gray-800 absolute top-2.5 -left-[52px]'>
+                    Note:
+                  </div>
+                </div>
+              </div>
+              <button className='w-full bg-primary-green uppercase py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'>
+                Book Now
+              </button>
+            </div>
+          </div>
 
         </div>
       </div>

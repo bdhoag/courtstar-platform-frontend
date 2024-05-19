@@ -8,7 +8,7 @@ const Centre = ({ onBookingClick }) => {
   const centreList = Array.from({ length: 10 }, (_, index) => index);
 
   return (
-    <div className='font-Inter text-base overflow-x-hidden'>
+    <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
         <div className="max-w-screen-1440 1440:mx-auto mx-4 py-20 px-12 w-full flex flex-col gap-4 items-center justify-between">
 
@@ -56,7 +56,8 @@ const Centre = ({ onBookingClick }) => {
 
             <div className='flex-1 flex flex-col gap-7'>
               {centreList.map((_, index) => (
-                <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
+                <div key={index}
+                  className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
                   <img src={centre}
                     alt="demo centre"
                     className='w-2/5'

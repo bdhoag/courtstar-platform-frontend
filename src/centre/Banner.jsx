@@ -16,7 +16,9 @@ const Test = () => {
           <div className='text-gray-500 text-sm'>
             Search for badminton courts in Ho Chi Minh City
           </div>
-          <Dropdown/>
+          <Dropdown
+            placeholder="Select the district"
+          />
           <button className='bg-primary-green w-full rounded-full py-2.5 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out'>
             Find
           </button>
