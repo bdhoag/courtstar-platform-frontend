@@ -63,8 +63,8 @@ function PartnerRegister() {
                     className='' required />
                 </div>
                 <label className="ms-2 text-sm font-medium">Agree to our <a href="#tou" className="underline">Terms of use</a> and <a
-                    href='#pp'
-                    className='underline'> Privacy Policy</a></label>
+                  href='#pp'
+                  className='underline'> Privacy Policy</a></label>
               </div>
               <div className='flex items-center justify-center'>
                 <button

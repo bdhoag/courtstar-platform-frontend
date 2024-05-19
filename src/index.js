@@ -12,6 +12,10 @@ import PartnerRegister from './auth/PartnerRegister';
 import CustomerRegister from './auth/CustomerRegister';
 import Login from './auth/Login';
 import MyCentre from './court-manager/MyCentre';
+import ForgotPassword from './ForgotPassword';
+import CheckEmail from './CheckEmail';
+import SetNewPassword from './SetNewPassword';
+import NewPasswordSuccessful from './NewPasswordSuccessful';
 
 export default function App() {
   return (
