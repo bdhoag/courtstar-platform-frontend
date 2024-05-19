@@ -1,16 +1,16 @@
 import React from 'react';
 import CentreDropdown from './CentreDropdown';
 
-const Sidebar = ({ onDataSubmit1 }) => {
+const Sidebar = ({ onDataSubmit }) => {
   // const [centreA, setCentreA] = useState(0);
 
-  const handleChooseFromA = (data) => {
+  const handleChooseFromDropdown = (value) => {
     // setCentreA(data);
-    handleSubmit(data);
+    handleSubmit(value);
   };
 
-  const handleSubmit = (data) => {
-    onDataSubmit1(data);
+  const handleSubmit = (value) => {
+    onDataSubmit(value);
   };
 
   return (
@@ -20,9 +20,9 @@ const Sidebar = ({ onDataSubmit1 }) => {
           My Centre
         </div>
         <div className='flex flex-col gap-4'>
-          <CentreDropdown onDataSubmit={handleChooseFromA}/>
-          {/* <CentreDropdown />
-          <CentreDropdown /> */}
+          <CentreDropdown onDataSubmit={handleChooseFromDropdown}/>
+          <CentreDropdown onDataSubmit={handleChooseFromDropdown}/>
+          <CentreDropdown onDataSubmit={handleChooseFromDropdown}/>
         </div>
       </div>
     </div>
