@@ -2,8 +2,9 @@ import React from 'react';
 import star from '../assets/images/star.svg';
 import nostar from '../assets/images/nostar.svg';
 import centre from '../assets/images/demo-centre.png'
+import { Link } from "react-router-dom";
 
-const Centre = ({ onBookingClick }) => {
+const Centre = () => {
 
   const centreList = Array.from({ length: 10 }, (_, index) => index);
 
@@ -93,14 +94,16 @@ const Centre = ({ onBookingClick }) => {
                       <span className='font-semibold text-rose-600'>100.000₫/h</span>
                     </div>
                     <div className='text-sm flex gap-10'>
-                      <button className='py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'
-                        onClick={onBookingClick}>
+                      <Link className='block text-center py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'
+                        to="/centreBooking"
+                      >
                         Centre Details
-                      </button>
-                      <button className='py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'
-                        onClick={onBookingClick}>
+                      </Link>
+                      <Link className='block text-center py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'
+                        to="/centreBooking"
+                      >
                         Book Now
-                      </button>
+                      </Link>
                     </div>
                   </div>
 
