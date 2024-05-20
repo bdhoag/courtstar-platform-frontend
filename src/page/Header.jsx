@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import logo from '../assets/images/logo.svg';
 import LanguageSelector from '../components/LanguageSelector';
+import Login from '../auth/Login';
 
 const Header = () => {
+  const [popupOpen, setPopupOpen] = useState(false);
+  const handleLoginPopup = () => {
+    setPopupOpen(true);
+  }
+  const handleClose = () => {
+    setPopupOpen(false);
+  }
 
   return (
     <div className='font-Inter text-base overflow-x-hidden'>
@@ -67,11 +75,11 @@ const Header = () => {
             <LanguageSelector />
 
             <div className="flex gap-4">
-              <Link className='block border border-white rounded-lg py-2 px-6 text-white transition-all ease-in-out duration-300 hover:bg-gray-200 hover:text-primary-green font-medium cursor-pointer'
-                to="/login"
+              <button className='block border border-white rounded-lg py-2 px-6 text-white transition-all ease-in-out duration-300 hover:bg-gray-200 hover:text-primary-green font-medium cursor-pointer'
+                onClick={handleLoginPopup}
               >
                 Log in
-              </Link>
+              </button>
               <Link className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
                 to="/customerRegister"
               >
@@ -82,6 +90,11 @@ const Header = () => {
 
         </nav>
       </header>
+
+      <Login
+        isOpen={popupOpen}
+        setIsOpen={handleClose}
+      />
     </div>
   );
 }

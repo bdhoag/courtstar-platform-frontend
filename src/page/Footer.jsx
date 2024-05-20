@@ -12,7 +12,7 @@ const Footer = () => {
               alt="logo"
               className='w-52 h-52 block basis-1/3'
             />
-            <div className='flex flex-col basis-1/3 text-center gap-4'>
+            <div className='flex flex-col basis-1/3 gap-4'>
               <div>
                 <a href="#aboutUs"
                   className='hover:text-gray-300 transition-all duration-200 ease-in-out'
