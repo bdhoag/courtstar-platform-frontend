@@ -1,22 +1,18 @@
 import React from 'react';
 
 const Sidebar = ({ onDataSubmit }) => {
-  // const [centreA, setCentreA] = useState(0);
 
-  // const handleChooseFromDropdown = (value) => {
-  //   // setCentreA(data);
-  //   handleSubmit(value);
-  // };
-
-  // const handleSubmit = (value) => {
-  //   onDataSubmit(value);
-  // };
+  const handleSubmit = (value) => {
+    onDataSubmit(value);
+  };
 
   return (
     <div className="py-12 px-6 min-w-64 bg-gray-800 text-gray-500 font-medium flex flex-col gap-10">
       <div className='flex flex-col gap-2'>
         <div className='uppercase font-semibold'>Core</div>
-        <button className='text-left hover:text-white transition-all duration-200 ease-in-out group flex gap-1.5 items-center'>
+        <button className='text-left hover:text-white transition-all duration-200 ease-in-out group flex gap-1.5 items-center'
+          onClick={() => handleSubmit(1)}
+        >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
             className='stroke-gray-500 group-hover:stroke-white transition-all duration-200 ease-in-out'
           >
@@ -30,7 +26,9 @@ const Sidebar = ({ onDataSubmit }) => {
       <div className='flex flex-col gap-2'>
         <div className='uppercase font-semibold'>Management</div>
         <div className='flex flex-col gap-1'>
-          <button className='text-left hover:text-white transition-all duration-200 ease-in-out group flex gap-1.5 items-center'>
+          <button className='text-left hover:text-white transition-all duration-200 ease-in-out group flex gap-1.5 items-center'
+            onClick={() => handleSubmit(2)}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
               className='stroke-gray-500 group-hover:stroke-white transition-all duration-200 ease-in-out'
             >
@@ -40,7 +38,9 @@ const Sidebar = ({ onDataSubmit }) => {
             </svg>
             <div>Centre</div>
           </button>
-          <button className='text-left hover:text-white transition-all duration-200 ease-in-out group flex gap-1.5 items-center'>
+          <button className='text-left hover:text-white transition-all duration-200 ease-in-out group flex gap-1.5 items-center'
+            onClick={() => handleSubmit(3)}
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
               className='stroke-gray-500 group-hover:stroke-white transition-all duration-200 ease-in-out'
             >

@@ -1,7 +1,6 @@
 import React from 'react';
 import centre from '../assets/images/demo-centre.png';
 import star from '../assets/images/star.svg';
-import nostar from '../assets/images/nostar.svg';
 
 const CentreInfo = () => {
   return (
@@ -17,7 +16,7 @@ const CentreInfo = () => {
           </svg>
 
           <div className="font-semibold">
-            Add Court
+            Add Centre
           </div>
         </div>
       </div>

@@ -4,17 +4,7 @@ const Checkin = () => {
     <div className="py-12 pr-12">
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
-          Staff Information
-        </div>
-
-        <div className="flex gap-2.5 px-3 py-1.5 bg-primary-green w-fit rounded-3xl text-white hover:bg-teal-900 ease-in-out duration-300 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
-            <path d="M5 12h14" /><path d="M12 5v14" />
-          </svg>
-
-          <div className="font-semibold">
-            Add Staff
-          </div>
+          Check in
         </div>
       </div>
 
@@ -176,7 +166,7 @@ const Checkin = () => {
               </div>
             </div>
           </div>
-          
+
 
         </div>
       </div>
