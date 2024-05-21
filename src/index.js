@@ -13,6 +13,7 @@ import PartnerRegister from './auth/PartnerRegister';
 import CustomerRegister from './auth/CustomerRegister';
 import MyCentre from './court-manager/MyCentre';
 import Admin from './admin/Admin';
+import Profile from './auth/Profile';
 
 export default function App() {
   return (
@@ -20,7 +21,7 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Profile />} />
           <Route path="partnerRegister" element={<PartnerRegister />} />
           <Route path="customerRegister" element={<CustomerRegister />} />
           <Route path="centreBooking" element={<CentreBooking />} />
