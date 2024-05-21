@@ -12,7 +12,7 @@ module.exports = {
       'lg': '1024px',
       'xl': '1280px',
       '1440': '1440px',
-      '2xl': '1536px',
+      '2xl': '1600px',
     },
     extend: {
       fontFamily: {
@@ -32,7 +32,7 @@ module.exports = {
           to: { opacity: 1, transform: "none" },
         },
         "fade-in-down": {
-          from: { opacity: 0, transform: "translate3d(0, 100%, 0)" },
+          from: { opacity: 0, transform: "translate3d(0, -30%, 0)" },
           to: { opacity: 1, transform: "none" },
         },
         "fade-out-down": {

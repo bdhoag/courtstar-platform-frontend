@@ -4,6 +4,7 @@ import PopupModal from '../components/PopupModal';
 import React, { useState } from 'react';
 import CheckEmail from '../CheckEmail';
 function Login(props) {
+
   const [forgetPopup, setForgetPopup] = useState(false);
   const handleForgetPopup = () => {
     handleClose();
@@ -15,6 +16,7 @@ function Login(props) {
   const handleForgetClose = () => {
     setForgetPopup(false)
   }
+  
   const html = (
     <div className="w-[440px] mx-auto bg-white rounded-lg">
       <h2 className="text-4xl font-semibold mb-6 text-center">Log in</h2>
@@ -66,7 +68,7 @@ function Login(props) {
       <PopupModal
         html={html}
         isOpen={props.isOpen}
-        setIsOpen={handleClose}
+        setIsOpen={props.setIsOpen}
       />
       <CheckEmail
         isOpen={forgetPopup}

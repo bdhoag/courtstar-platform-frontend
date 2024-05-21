@@ -5,12 +5,12 @@ import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
 
 const Header = () => {
-  const [popupOpen, setPopupOpen] = useState(false);
+  const [loginPopupOpen, setLoginPopupOpen] = useState(false);
   const handleLoginPopup = () => {
-    setPopupOpen(true);
+    setLoginPopupOpen(true);
   }
-  const handleClose = () => {
-    setPopupOpen(false);
+  const handleLoginClose = () => {
+    setLoginPopupOpen(false);
   }
 
   return (
@@ -92,8 +92,8 @@ const Header = () => {
       </header>
 
       <Login
-        isOpen={popupOpen}
-        setIsOpen={handleClose}
+        isOpen={loginPopupOpen}
+        setIsOpen={handleLoginClose}
       />
     </div>
   );
