@@ -3,7 +3,7 @@ import register from '../assets/images/register.png';
 import google from '../assets/images/google.svg';
 import InputText from '../components/InputText';
 
-function PartnerRegister() {
+function CustomerRegister() {
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className='max-h-[800px] overflow-hidden flex items-center'>
@@ -102,4 +102,4 @@ function PartnerRegister() {
   );
 }
 
-export default PartnerRegister;
+export default CustomerRegister;
