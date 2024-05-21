@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import logo from '../assets/images/logo.svg';
 import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
+import bell from '../assets/images/bell.svg';
 
 const Header = () => {
   //HANDLE LOGIN POPUP
@@ -12,6 +13,13 @@ const Header = () => {
   }
   const handleLoginClose = () => {
     setLoginPopupOpen(false);
+  }
+
+  //HANDLE LOGIN ACTION
+  const [isLogin, setIsLogin] = useState(false);
+  const login = () => {
+    handleLoginClose();
+    setIsLogin(true);
   }
 
   return (
@@ -75,18 +83,46 @@ const Header = () => {
 
             <LanguageSelector />
 
-            <div className="flex gap-4">
-              <button className='block border border-white rounded-lg py-2 px-6 text-white transition-all ease-in-out duration-300 hover:bg-gray-200 hover:text-primary-green font-medium cursor-pointer'
-                onClick={handleLoginPopup}
-              >
-                Log in
-              </button>
-              <Link className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
-                to="/customerRegister"
-              >
-                Sign up
-              </Link>
-            </div>
+            {(isLogin === false) && (
+              <div className="flex gap-4">
+                <button className='block border border-white rounded-lg py-2 px-6 text-white transition-all ease-in-out duration-300 hover:bg-gray-200 hover:text-primary-green font-medium cursor-pointer'
+                  onClick={handleLoginPopup}
+                >
+                  Log in
+                </button>
+                <Link className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
+                  to="/customerRegister"
+                >
+                  Sign up
+                </Link>
+              </div>
+            )}
+
+            {(isLogin === true) && (
+              <div className='flex gap-8 items-center justify-between'>
+                <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
+                  <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0">
+                    <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                      to="/">Booking History</Link>
+                    <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                      to="/profile">Profile</Link>
+                  </div>
+                </div>
+                <div className="flex gap-4 items-center">
+                  <button className='rounded-full w-8 h-8 hover:bg-gray-800 flex justify-center items-center transition-all duration-300 ease-in-out'>
+                    <img src={bell}
+                      alt="bell"
+                    />
+                  </button>
+                  <button className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
+                    onClick={() => setIsLogin(false)}
+                  >
+                    Log out
+                  </button>
+                </div>
+              </div>
+            )}
+
           </div>
 
         </nav>
@@ -95,6 +131,7 @@ const Header = () => {
       <Login
         isOpen={loginPopupOpen}
         setIsOpen={handleLoginClose}
+        login={login}
       />
     </div>
   );

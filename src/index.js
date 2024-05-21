@@ -13,6 +13,7 @@ import PartnerRegister from './auth/PartnerRegister';
 import CustomerRegister from './auth/CustomerRegister';
 import MyCentre from './court-manager/MyCentre';
 import Admin from './admin/Admin';
+import Profile from './auth/Profile';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="listOfCentre" element={<Centre />} />
           <Route path="myCentre" element={<MyCentre />} />
           <Route path="admin" element={<Admin />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
