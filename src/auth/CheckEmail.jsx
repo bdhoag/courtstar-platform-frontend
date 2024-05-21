@@ -1,10 +1,23 @@
 import PopupModal from '../components/PopupModal';
 import React, { useState } from 'react';
+import SetNewPassword from './SetNewPassword';
 
 function CheckEmail(props) {
+  //CLOSE CHECK EMAIL POPUP
   const handleClose = () => {
     props.setIsOpen();
   }
+
+  //HANDLE NEW PASSWORD POPUP
+  const [newPasswordPopup, setNewPasswordPopup] = useState(false);
+    const handleSetNewPasswordPopup = () => {
+        handleClose();
+        setNewPasswordPopup(true);
+    }
+    const handleSetNewPasswordPopupClose = () => {
+        setNewPasswordPopup(false)
+    }
+
   const html = (
     <div className='max-w-md mx-auto py-8 px-4'>
       <h2 className='text-4xl font-semibold mb-4 text-center'>Check Your Email</h2>
@@ -29,6 +42,7 @@ function CheckEmail(props) {
       <div className='flex items-center justify-center px-10'>
         <button
           className='bg-primary-green hover:bg-teal-900 text-white border rounded-full w-full h-10'
+          onClick={handleSetNewPasswordPopup}
         > Verify Code
         </button>
       </div>
@@ -50,6 +64,10 @@ function CheckEmail(props) {
         isOpen={props.isOpen}
         setIsOpen={handleClose}
       />
+      <SetNewPassword
+          isOpen={newPasswordPopup}
+          setIsOpen={handleSetNewPasswordPopupClose}
+        />
     </div>
   );
 }
