@@ -65,7 +65,7 @@ const Centre = () => {
                   />
 
                   <div className='flex flex-col gap-3'>
-                    <div className='font-semibold'>
+                    <div className='font-semibold text-xl'>
                       Sân cầu lông Đại học FPT Hồ Chí Minh
                     </div>
                     <div className='flex gap-1'>
@@ -94,16 +94,16 @@ const Centre = () => {
                       <span className='font-semibold text-rose-600'>100.000₫/h</span>
                     </div>
                     <div className='text-sm flex justify-center gap-20'>
-                      <Link className='block text-center py-1 w-40 border border-gray-800 rounded-md font-semibold hover:bg-gray-300 transition-all ease-in-out duration-300'
+                      <Link className='block text-center py-1 w-full border border-gray-800 rounded-md font-semibold hover:text-white hover:bg-gray-800 transition-all ease-in-out duration-300'
                         to="/centreBooking"
                       >
                         Centre Details
                       </Link>
-                      <Link className='block text-center py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'
+                      {/* <Link className='block text-center py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'
                         to="/centreBooking"
                       >
                         Book Now
-                      </Link>
+                      </Link> */}
                     </div>
                   </div>
 
