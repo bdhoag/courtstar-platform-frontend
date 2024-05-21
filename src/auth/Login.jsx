@@ -2,7 +2,7 @@ import google from '../assets/images/google.svg';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
 import React, { useState } from 'react';
-import CheckEmail from '../CheckEmail';
+import ForgotPassword from '../ForgotPassword';
 function Login(props) {
 
   const [forgetPopup, setForgetPopup] = useState(false);
@@ -70,7 +70,7 @@ function Login(props) {
         isOpen={props.isOpen}
         setIsOpen={props.setIsOpen}
       />
-      <CheckEmail
+      <ForgotPassword
         isOpen={forgetPopup}
         setIsOpen={handleForgetClose}
       />
