@@ -1,5 +1,5 @@
 import React from 'react';
-import InputText from './components/InputText';
+import InputText from '../components/InputText';
 function SetNewPassword() {
     return (
         <div>

@@ -2,21 +2,24 @@ import google from '../assets/images/google.svg';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
 import React, { useState } from 'react';
-import CheckEmail from '../CheckEmail';
+import ForgotPassword from './ForgotPassword';
 function Login(props) {
 
+  //CLOSE LOGIN MODAL
+  const handleClose = () => {
+    props.setIsOpen();
+  }
+
+  //HANDLE FORGET PASSWORD POPUP
   const [forgetPopup, setForgetPopup] = useState(false);
   const handleForgetPopup = () => {
     handleClose();
     setForgetPopup(true);
   }
-  const handleClose = () => {
-    props.setIsOpen();
-  }
   const handleForgetClose = () => {
     setForgetPopup(false)
   }
-  
+
   const html = (
     <div className="w-[440px] mx-auto bg-white rounded-lg">
       <h2 className="text-4xl font-semibold mb-6 text-center">Log in</h2>
@@ -68,9 +71,9 @@ function Login(props) {
       <PopupModal
         html={html}
         isOpen={props.isOpen}
-        setIsOpen={props.setIsOpen}
+        setIsOpen={handleClose}
       />
-      <CheckEmail
+      <ForgotPassword
         isOpen={forgetPopup}
         setIsOpen={handleForgetClose}
       />
