@@ -32,7 +32,7 @@ module.exports = {
           to: { opacity: 1, transform: "none" },
         },
         "fade-in-down": {
-          from: { opacity: 0, transform: "translate3d(0, 100%, 0)" },
+          from: { opacity: 0, transform: "translate3d(0, -30%, 0)" },
           to: { opacity: 1, transform: "none" },
         },
         "fade-out-down": {
