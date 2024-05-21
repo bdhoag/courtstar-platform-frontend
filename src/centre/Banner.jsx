@@ -4,8 +4,8 @@ import Dropdown from '../components/Dropdown';
 
 const Test = () => {
   return (
-    <div className='font-Inter text-base overflow-x-hidden'>
-      <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full max-h-[800px] relative">
+    <div className='font-Inter text-base bg-gray-100 overflow-x-hidden'>
+      <div className="flex flex-wrap  sm:justify-start sm:flex-nowrap 2xl:max-w-screen-1440 2xl:mx-auto max-h-[500px] relative">
         <img src={banner}
           alt="Banner"
           className='object-center object-cover opacity-50'/>
