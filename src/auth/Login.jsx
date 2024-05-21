@@ -46,7 +46,9 @@ function Login(props) {
           <button onClick={handleForgetPopup} className="text-sm font-semibold underline">Forget password?</button>
         </div>
         <div className='flex items-center justify-center'>
-          <button className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'>
+          <button className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
+            onClick={props.login}  
+          >
             Log in
           </button>
         </div>
