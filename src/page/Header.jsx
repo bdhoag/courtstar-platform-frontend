@@ -103,7 +103,7 @@ const Header = () => {
                 <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
                   <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0">
                     <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                      to="/">Booking History</Link>
+                      to="/bookingHistory">Booking History</Link>
                     <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                       to="/profile">Profile</Link>
                   </div>

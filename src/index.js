@@ -14,6 +14,7 @@ import CustomerRegister from './auth/CustomerRegister';
 import MyCentre from './court-manager/MyCentre';
 import Admin from './admin/Admin';
 import Profile from './auth/Profile';
+import BookingHistory from './customer/BookingHistory';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="myCentre" element={<MyCentre />} />
           <Route path="admin" element={<Admin />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="bookingHistory" element={<BookingHistory />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

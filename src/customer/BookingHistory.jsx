@@ -3,7 +3,7 @@ import star from '../assets/images/star.svg';
 import nostar from '../assets/images/nostar.svg';
 import centre from '../assets/images/demo-centre.png'
 
-const Centre = () => {
+const BookingHistory = () => {
 
     const centreList = Array.from({ length: 10 }, (_, index) => index);
 
@@ -98,4 +98,4 @@ const Centre = () => {
         </div>
     );
 }
-export default Centre;
+export default BookingHistory;
