@@ -4,9 +4,7 @@ import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
 
 function Login(props) {
-  const handleClose = () => {
-    props.setIsOpen();
-  }
+
   const html = (
     <div className="w-[440px] mx-auto bg-white rounded-lg">
       <h2 className="text-4xl font-semibold mb-6 text-center">Log in</h2>
@@ -58,7 +56,7 @@ function Login(props) {
       <PopupModal
         html={html}
         isOpen={props.isOpen}
-        setIsOpen={handleClose}
+        setIsOpen={props.setIsOpen}
       />
     </div>
   );
