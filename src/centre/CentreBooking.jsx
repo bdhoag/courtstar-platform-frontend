@@ -18,25 +18,32 @@ const CentreBooking = () => {
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
-        <div className="max-w-screen-1440 1440:mx-auto mx-4 py-8 px-12 w-full flex flex-col gap-8">
-
-          <div className='w-full flex items-center gap-8'>
-            <div className='basis-3/5 overflow-x-hidden'>
+        <div className="max-w-screen-1440 1440:mx-auto mx-4 py-8 px-12 w-full flex flex-col gap-3">
+          <div className="flex justify-between items-center">
+            <div className="">
               <div className='text-3xl font-semibold'>
                 Sân cầu lông Đại học FPT Hồ Chí Minh
               </div>
               <div className='flex gap-2 my-3'>
                 <div className='flex gap-1'>
-                  <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                  <img src={nostar} alt="No Star" className='cursor-pointer w-5'/>
-                  <img src={nostar} alt="No Star" className='cursor-pointer w-5'/>
+                  <img src={star} alt="Star" className='cursor-pointer w-5' />
+                  <img src={star} alt="Star" className='cursor-pointer w-5' />
+                  <img src={star} alt="Star" className='cursor-pointer w-5' />
+                  <img src={nostar} alt="No Star" className='cursor-pointer w-5' />
+                  <img src={nostar} alt="No Star" className='cursor-pointer w-5' />
                 </div>
                 <div className='text-sm'>
                   (10 feedbacks)
                 </div>
               </div>
+            </div>
+            <a href="#book" className="h-fit bg-primary-green uppercase py-2 rounded-md text-white font-semibold px-3 hover:bg-teal-900 transition-all duration-300 ease-in-out flex justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-calendar-plus"><path d="M8 2v4" /><path d="M16 2v4" /><path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" /><path d="M3 10h18" /><path d="M16 19h6" /><path d="M19 16v6" /></svg>
+              BOOK NOW
+            </a>
+          </div>
+          <div className='w-full flex items-center gap-8'>
+            <div className='basis-3/5 overflow-x-hidden'>
               <div>
                 <img src={centre}
                   alt="demo centre"
@@ -74,26 +81,45 @@ const CentreBooking = () => {
                 />
               </div>
             </div>
-            <div className='flex-1 rounded-lg shadow-gray-400 shadow-md'>
-              <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
-                <img src={mappin}
-                  alt="map pin"
-                  className='w-6 h-6'
-                />
-                <span className='text-3xl font-medium'>Address</span>
-              </div>
-              <div className='bg-white rounded-b-lg p-8'>
-                <div className='font-medium mb-10'>
-                  Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
+            <div className='flex-1 h-full flex flex-col justify-evenly gap-6'>
+
+              <div className="rounded-lg shadow-gray-400 shadow-md">
+                <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
+                  <img src={mappin}
+                    alt="map pin"
+                    className='w-6 h-6'
+                  />
+                  <span className='text-3xl font-medium'>Address</span>
                 </div>
-                <button className='w-full bg-primary-green uppercase py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'>
-                  See on map
-                </button>
+                <div className='bg-white rounded-b-lg p-8'>
+                  <div className='font-medium mb-10'>
+                    Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
+                  </div>
+                  <button className='w-full bg-primary-green uppercase py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'>
+                    See on map
+                  </button>
+                </div>
+              </div>
+              <div className="rounded-lg shadow-gray-400 shadow-md bg-white p-8">
+                <div className='flex gap-3'>
+                  <div className='w-1/2'>
+                    <span className='font-semibold'>Open time: </span>
+                    10h-22h
+                  </div>
+                  <div className='w-1/2'>
+                    <span className='font-semibold'>Number of courts: </span>
+                    8
+                  </div>
+                </div>
+                <div>
+                  <span className='font-semibold'>Price: </span>
+                  <span className='font-semibold text-rose-600'>100.000₫/h</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className='flex-1 rounded-lg shadow-gray-400 shadow-md'>
+          <div id="book" className='flex-1 rounded-lg shadow-gray-400 shadow-md'>
             <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
               <img src={mail}
                 alt="mail"
