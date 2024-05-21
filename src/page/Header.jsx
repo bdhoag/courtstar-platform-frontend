@@ -5,6 +5,7 @@ import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
 
 const Header = () => {
+  //HANDLE LOGIN POPUP
   const [loginPopupOpen, setLoginPopupOpen] = useState(false);
   const handleLoginPopup = () => {
     setLoginPopupOpen(true);
