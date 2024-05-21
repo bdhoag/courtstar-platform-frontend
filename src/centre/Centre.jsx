@@ -11,7 +11,7 @@ const Centre = () => {
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
-        <div className="max-w-screen-1440 1440:mx-auto mx-4 py-20 px-12 w-full flex flex-col gap-4 items-center justify-between">
+        <div className="max-w-screen-1440 1440:mx-auto mx-4 py-10 px-12 w-full flex flex-col gap-4 items-center justify-between">
 
           <div className='font-bold text-3xl uppercase text-center w-full'>
             List of centre
