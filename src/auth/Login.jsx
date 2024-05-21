@@ -1,11 +1,19 @@
-import React from 'react';
 import google from '../assets/images/google.svg';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
-
+import React, { useState } from 'react';
+import CheckEmail from '../CheckEmail';
 function Login(props) {
+  const [forgetPopup, setForgetPopup] = useState(false);
+  const handleForgetPopup = () => {
+    handleClose();
+    setForgetPopup(true);
+  }
   const handleClose = () => {
     props.setIsOpen();
+  }
+  const handleForgetClose = () => {
+    setForgetPopup(false)
   }
   const html = (
     <div className="w-[440px] mx-auto bg-white rounded-lg">
@@ -30,7 +38,7 @@ function Login(props) {
           />
         </div>
         <div className="flex items-center justify-between mt-4 mb-5 px-0.5">
-          <a href="#s" className="text-sm font-semibold underline">Forget password?</a>
+          <button onClick={handleForgetPopup} className="text-sm font-semibold underline">Forget password?</button>
         </div>
         <div className='flex items-center justify-center'>
           <button className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'>
@@ -59,6 +67,10 @@ function Login(props) {
         html={html}
         isOpen={props.isOpen}
         setIsOpen={handleClose}
+      />
+      <CheckEmail
+        isOpen={forgetPopup}
+        setIsOpen={handleForgetClose}
       />
     </div>
   );
