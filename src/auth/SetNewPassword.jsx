@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
 function SetNewPassword(props) {
+  //CLOSE SET NEW PASSWORD POPUP
   const handleClose = () => {
     props.setIsOpen();
   }
+
   const html = (
-    <div className="max-w-md mx-auto">
-      <h2 className="text-3xl font-semibold mb-3 text-center">Set a new password</h2>
-      <p className="text-gray-400 text-xs mb-6 text-center">Create a new password. Ensure it differs from previous ones for security </p>
-      <form>
-        <div className="mb-4 px-10 text-xs">
+    <div className="w-[440px]">
+      <h2 className="text-4xl font-semibold mb-5 text-center">Set a new password</h2>
+      <p className="text-gray-400 text-sm mb-5 text-center">Create a new password. Ensure it differs from previous ones for security </p>
+      <div>
+        <div className="mb-4">
           <InputText
             id="newPassword"
             name="newPassword"
@@ -18,7 +20,7 @@ function SetNewPassword(props) {
             label="New password"
           />
         </div>
-        <div className="mb-4 px-10 text-xs">
+        <div className="mb-4">
           <InputText
             id="confirmPassword"
             name="confirmPassword"
@@ -26,14 +28,14 @@ function SetNewPassword(props) {
             label="Confirm password"
           />
         </div>
-        <div className='flex items-center justify-center px-10'>
+        <div className='flex items-center justify-center'>
           <button
-            className='bg-primary-green hover:bg-teal-900 text-white border rounded-full w-full h-10'
+            className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
             type="submit"
           > Update password
           </button>
         </div>
-      </form>
+      </div>
     </div>
   )
   return (

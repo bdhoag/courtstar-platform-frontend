@@ -19,11 +19,11 @@ function CheckEmail(props) {
     }
 
   const html = (
-    <div className='max-w-md mx-auto py-8 px-4'>
-      <h2 className='text-4xl font-semibold mb-4 text-center'>Check Your Email</h2>
-      <p class="text-gray-400 text-sm font-semibold mb-8 text-center">
+    <div className='w-[440px]'>
+      <h2 className="text-4xl font-semibold mb-5 text-center">Check Your Email</h2>
+      <p class="text-gray-400 text-sm mb-5 text-center">
         <span>We sent a reset link to </span>
-        <span class="font-bold text-black">contact@dscode.com</span>
+        <span class="font-semibold text-black">contact@dscode.com</span>
         <br />
         enter 5 digit code that mentioned in the email
       </p>
@@ -38,18 +38,20 @@ function CheckEmail(props) {
           className='text-center border-2 rounded-md h-12 w-12' maxLength='1' />
         <input type="text"
           className='text-center border-2 rounded-md h-12 w-12' maxLength='1' />
+        <input type="text"
+          className='text-center border-2 rounded-md h-12 w-12' maxLength='1' />
       </div>
-      <div className='flex items-center justify-center px-10'>
+      <div className='flex items-center justify-center'>
         <button
-          className='bg-primary-green hover:bg-teal-900 text-white border rounded-full w-full h-10'
+          className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
           onClick={handleSetNewPasswordPopup}
         > Verify Code
         </button>
       </div>
-      <div className='mt-10 text-sm text-center justify-center flex gap-1.5 font-semibold text-gray-400'>
+      <div className='mt-5 text-sm text-center justify-center flex gap-1.5 text-gray-400'>
         <span>Haven't got the email yet?</span>
         <a
-          className='font-semibold text-blue-500 underline'
+          className='font-semibold text-gray-800 underline'
           href="#login"
         >Resend email
         </a>

@@ -19,21 +19,21 @@ function ForgotPassword(props) {
   }
 
   const html = (
-    <div className="max-w-md mx-auto">
-      <h2 className="text-3xl font-semibold mb-3 text-center">Forgot Password</h2>
-      <p className="text-gray-400 text-xs mb-6 text-center">Enter your email and we'll send you a link to get back into your account </p>
+    <div className="w-[440px]">
+      <h2 className="text-4xl font-semibold mb-5 text-center">Forgot Password</h2>
+      <p className="text-gray-400 text-sm mb-5 text-center">Enter your email and we'll send you a link to get back into your account </p>
       <div>
-        <div className="mb-4 px-10 text-xs">
+        <div className='mb-4'>
           <InputText
-            id="emailOrPhone"
-            name="emailOrPhone"
-            placeholder="Enter your Email"
-            label="Your Email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            label="Email"
           />
         </div>
-        <div className='flex items-center justify-center px-10'>
+        <div>
           <button
-            className='bg-primary-green hover:bg-teal-900 text-white border rounded-full w-full h-10'
+            className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
             onClick={handleCheckEmailPopup}
           > Send Code
           </button>

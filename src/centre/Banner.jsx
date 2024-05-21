@@ -9,7 +9,7 @@ const Banner = () => {
         <img src={banner}
           alt="Banner"
           className='object-center object-cover opacity-50'/>
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 z-10 max-w-[500px] w-full flex flex-col gap-3.5 items-center justify-between bg-white rounded-3xl py-5 px-10 shadow-gray-800 shadow-lg">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 z-10 max-w-[450px] w-full flex flex-col gap-3.5 items-center justify-between bg-white rounded-3xl py-5 px-10 shadow-gray-800 shadow-lg">
           <div className='text-4xl font-medium text-gray-800'>
             Find court now
           </div>

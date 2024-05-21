@@ -99,7 +99,7 @@ module.exports = {
         shake: "shake 500ms ease-in-out",
         "fade-in-up-fast": "fade-in-up 150ms ease-in-out",
         "fade-out-down-fast": "fade-out-down 150ms ease-in-out",
-        "fade-in-down": "fade-in-down 300ms ease-in-out",
+        "fade-in-down": "fade-in-down 250ms ease-in-out",
         "fade-in-down-slow": "fade-in-down 500ms ease-in-out",
         "fade-out": "fade-out 250ms ease-in-out",
         "fade-in": "fade-in 300ms ease-in-out",

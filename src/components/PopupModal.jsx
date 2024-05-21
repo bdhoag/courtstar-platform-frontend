@@ -14,7 +14,7 @@ const PopupModal = (props) => {
         </div>
 
         <div className='fixed z-50 top-0 left-0 h-screen w-screen flex justify-center items-center'>
-          <div className='relative animate-fade-in-down-slow w-fit p-10 rounded-3xl shadow-2xl bg-white opacity-100'>
+          <div className='relative animate-fade-in-down w-fit p-10 rounded-3xl shadow-2xl bg-white'>
             {props.html}
             <button className='absolute p-2 top-3 right-3 hover:bg-gray-200 rounded-full transition-all duration-300 ease-in-out'
               onClick={handleClose}

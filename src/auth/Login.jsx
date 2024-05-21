@@ -21,9 +21,9 @@ function Login(props) {
   }
 
   const html = (
-    <div className="w-[440px] mx-auto bg-white rounded-lg">
-      <h2 className="text-4xl font-semibold mb-6 text-center">Log in</h2>
-      <p className="text-gray-400 text-sm mb-6 text-center">Don't have account? <a
+    <div className="w-[440px]">
+      <h2 className="text-4xl font-semibold mb-5 text-center">Log in</h2>
+      <p className="text-gray-400 text-sm mb-5 text-center">Don't have account? <a
         href="#s" className="font-semibold underline text-gray-800">Sign up for free</a></p>
       <div>
         <div className="mb-4">
