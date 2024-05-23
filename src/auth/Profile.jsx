@@ -1,13 +1,26 @@
 import React from 'react';
+import axios from "axios";
 import InputText from '../components/InputText';
 
-function Profile() {
+function Profile(){
+
+    const load = () => {
+        axios
+            .get("http://localhost:8080/api/users")
+            .then(data => console.log(data.data))
+            .catch(error => console.log(error));
+    };
+
     return (
         <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
 
             <div className='items-center bg-gray-100 py-10'>
                 <div className='max-w-xl mx-auto py-8 px-16 bg-white rounded-lg'>
-                    <h2 className='text-2xl font-bold mb-6 text-center'>Your Profile</h2>
+                    <h2 className='text-2xl font-bold mb-6 text-center'
+                        onClick={load}
+                    >
+                        Your Profile
+                    </h2>
                     <div>
                         <div className='mb-4 flex gap-5'>
                             <InputText
