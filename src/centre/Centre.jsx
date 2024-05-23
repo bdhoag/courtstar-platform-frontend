@@ -1,8 +1,8 @@
 import React from 'react';
 import star from '../assets/images/star.svg';
-import nostar from '../assets/images/nostar.svg';
 import centre from '../assets/images/demo-centre.png'
 import { Link } from "react-router-dom";
+import Rating from '../components/Rating';
 
 const Centre = () => {
 
@@ -24,13 +24,11 @@ const Centre = () => {
                   <div className='font-bold text-2xl uppercase'>
                     Rating
                   </div>
-                  <div className='flex gap-1 p-5'>
-                    <img src={star} alt="Star" className='cursor-pointer'/>
-                    <img src={star} alt="Star" className='cursor-pointer'/>
-                    <img src={star} alt="Star" className='cursor-pointer'/>
-                    <img src={nostar} alt="No Star" className='cursor-pointer'/>
-                    <img src={nostar} alt="No Star" className='cursor-pointer'/>
-                  </div>
+                  <Rating
+                    ratingWrapper='flex gap-1 p-5'
+                    value={5}
+                    editable={true}
+                  />
                 </div>
                 <div>
                   <div className='font-bold text-2xl uppercase mb-5'>
