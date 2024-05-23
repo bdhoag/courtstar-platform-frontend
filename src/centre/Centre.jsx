@@ -14,7 +14,7 @@ const Centre = () => {
         <div className="max-w-screen-1440 1440:mx-auto mx-4 py-10 px-12 w-full flex flex-col gap-4 items-center justify-between">
 
           <div className='font-bold text-3xl uppercase text-center w-full'>
-            List of centre
+            List of centres
           </div>
           <div className='flex gap-5 w-full'>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/css/index.css';
 import './assets/css/scrollbar.css';
@@ -15,8 +15,21 @@ import MyCentre from './court-manager/MyCentre';
 import Admin from './admin/Admin';
 import Profile from './auth/Profile';
 import BookingHistory from './customer/BookingHistory';
+import SpinnerLoading from './components/SpinnerLoading';
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
+
+  if (loading) {
+    return <SpinnerLoading />
+  }
+
   return (
     <BrowserRouter>
       <ScrollToTop />
