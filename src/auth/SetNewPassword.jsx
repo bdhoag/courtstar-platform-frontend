@@ -1,10 +1,21 @@
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
 function SetNewPassword(props) {
   //CLOSE SET NEW PASSWORD POPUP
   const handleClose = () => {
     props.setIsOpen();
+  }
+
+  //HANDLE TOAST
+  const notify = () => {
+    handleClose();
+    
+    toast.success("Password updated!", {
+      className: 'fixed top-16 right-0'
+    });
   }
 
   const html = (
@@ -31,8 +42,8 @@ function SetNewPassword(props) {
         <div className='flex items-center justify-center'>
           <button
             className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
-            type="submit"
-          > Update password
+            onClick={notify}
+          > Confirm
           </button>
         </div>
       </div>
@@ -45,6 +56,8 @@ function SetNewPassword(props) {
         isOpen={props.isOpen}
         setIsOpen={handleClose}
       />
+
+      <ToastContainer />
     </div>
   );
 }
