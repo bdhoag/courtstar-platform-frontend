@@ -1,6 +1,9 @@
 import React from 'react';
 import centre from '../assets/images/demo-centre.png';
 import star from '../assets/images/star.svg';
+import LockOpen from '../assets/images/lock-open.svg'
+import LockClose from '../assets/images/lock-close.svg'
+import Dropdown from '../components/Dropdown';
 
 const CentreInfo = () => {
   return (
@@ -79,15 +82,32 @@ const CentreInfo = () => {
                 8
               </div>
             </div>
-            <div>
-              <span className='font-semibold'>Price: </span>
-              <span className='font-semibold text-rose-600'>100.000₫/h</span>
+            <div className="flex gap-3">
+              <div className="">
+                <span className='font-semibold'>Status: </span>
+                <span className='font-semibold text-primary-green'>Active</span>
+              </div>
+              <div>
+                <span className='font-semibold'>Price: </span>
+                <span className='font-semibold text-rose-600'>100.000₫/h</span>
+              </div>
             </div>
+
             <div className="font-semibold flex gap-6">
               <div className="flex justify-center gap-2.5 text-white bg-primary-green w-1/2 py-2 rounded-md hover:bg-teal-900 ease-in-out duration-300 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
                 <div className="">
                   Edit
+                </div>
+              </div>
+              <div className="flex justify-center gap-2.5 text-primary-green border-2 border-primary-green w-1/2 py-2 rounded-md hover:text-red-600 hover:border-red-600 ease-in-out duration-100 cursor-pointer group">
+                <img className='group-hover:hidden stroke-primary-green' src={LockOpen} alt="lock-open" />
+                <img className='group-hover:block hidden stroke-primary-green' src={LockClose} alt="lock-close" />
+                <div className="group-hover:hidden">
+                  Activated
+                </div>
+                <div className="hidden group-hover:block">
+                  Close
                 </div>
               </div>
               <div className="flex justify-center gap-2.5 text-red-600 border-2 border-red-600 w-1/2 py-2 rounded-md hover:bg-red-600 hover:text-white ease-in-out duration-300 cursor-pointer">
@@ -103,7 +123,10 @@ const CentreInfo = () => {
           <div className="font-bold text-lg">
             FEEDBACKS
           </div>
-          <div className="mt-3 h-96 overflow-y-scroll border-2 rounded-xl divide-y">
+          <div className="">
+            <Dropdown></Dropdown>
+          </div>
+          <div className="mt-3 divide-y">
             <div className="px-4 py-4 flex flex-col gap-2">
               <div className="flex gap-7">
                 <div className=" font-semibold">
@@ -118,7 +141,7 @@ const CentreInfo = () => {
                 </div>
               </div>
               <div className="">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.
               </div>
               <div className="w-full bg-slate-500"></div>
             </div>
