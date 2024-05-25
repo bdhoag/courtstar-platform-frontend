@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import centre from '../assets/images/demo-centre.png';
 import star from '../assets/images/star.svg';
 import LockOpen from '../assets/images/lock-open.svg'
 import LockClose from '../assets/images/lock-close.svg'
 import Dropdown from '../components/Dropdown';
+import AddCentre from './AddCentre';
+function CentreInfo() {
+  //HANDLE  POPUP
+  const [addCentrePopup, setAddCentrePopup] = useState(false);
+  const handleAddCentrePopup = () => {
+    setAddCentrePopup(true);
+  }
+  const handleAddCentrePopupClose = () => {
+    setAddCentrePopup(false)
+  }
 
-const CentreInfo = () => {
   return (
-    <div className="py-12 pr-12">
-      <div className="flex justify-between">
-        <div className="text-3xl font-bold">
-          Centre Information
-        </div>
-
-        <div className="flex gap-2.5 px-3 py-1.5 bg-primary-green w-fit rounded-3xl text-white hover:bg-teal-900 ease-in-out duration-300 cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
-            <path d="M5 12h14" /><path d="M12 5v14" />
-          </svg>
-
-          <div className="font-semibold">
-            Add Centre
+    <div>
+      <AddCentre
+        isOpen={addCentrePopup}
+        setIsOpen={handleAddCentrePopupClose}
+      />
+      <div className="py-12 pr-12">
+        <div className="flex justify-between">
+          <div className="text-3xl font-bold">
+            Centre Information
           </div>
+          <button className="flex gap-2.5 px-3 py-1.5 bg-primary-green w-fit rounded-3xl text-white hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
+            onClick={handleAddCentrePopup}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
+              <path d="M5 12h14" /><path d="M12 5v14" />
+            </svg>
+            <div className="font-semibold">
+              Add Centre
+            </div>
+          </button>
         </div>
       </div>
 
@@ -205,7 +219,7 @@ const CentreInfo = () => {
 
 
     </div>
-  );
+  )
 }
 
 export default CentreInfo;
