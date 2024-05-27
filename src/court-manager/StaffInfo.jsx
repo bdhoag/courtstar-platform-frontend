@@ -1,6 +1,6 @@
 const StaffInfo = () => {
   return (
-    <div className="py-12 pr-12">
+    <div className="w-[70rem] pt-12">
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
           Staff Information
@@ -147,7 +147,7 @@ const StaffInfo = () => {
               </div>
             </div>
           </div>
-          
+
         </div>
 
       </div>

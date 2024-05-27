@@ -20,9 +20,9 @@ const Sidebar = ({ onDataSubmit }) => {
           My Centre
         </div>
         <div className='flex flex-col gap-4'>
-          <CentreDropdown onDataSubmit={handleChooseFromDropdown}/>
-          <CentreDropdown onDataSubmit={handleChooseFromDropdown}/>
-          <CentreDropdown onDataSubmit={handleChooseFromDropdown}/>
+          <CentreDropdown isOpen={true} onDataSubmit={handleChooseFromDropdown}/>
+          <CentreDropdown isOpen={false} onDataSubmit={handleChooseFromDropdown}/>
+          <CentreDropdown isOpen={false} onDataSubmit={handleChooseFromDropdown}/>
         </div>
       </div>
     </div>
