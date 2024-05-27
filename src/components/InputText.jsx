@@ -14,6 +14,8 @@ function InputText(props) {
         id={props.id}
         className='w-full py-2.5 px-6 border border-gray-300 rounded-lg placeholder:text-sm placeholder:font-normal outline-gray-400'
         placeholder={props.placeholder}
+        onChange={props.onchange}
+        value={props.value}
       />
     </div>
   );

@@ -1,8 +1,7 @@
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
+import { toast } from 'react-toastify';
 function SetNewPassword(props) {
   //CLOSE SET NEW PASSWORD POPUP
   const handleClose = () => {
@@ -12,9 +11,9 @@ function SetNewPassword(props) {
   //HANDLE TOAST
   const notify = () => {
     handleClose();
-    
     toast.success("Password updated!", {
-      className: 'fixed top-16 right-0'
+      className: 'fixed top-16 right-0',
+      toastId: 'new-password'
     });
   }
 
@@ -56,8 +55,6 @@ function SetNewPassword(props) {
         isOpen={props.isOpen}
         setIsOpen={handleClose}
       />
-
-      <ToastContainer />
     </div>
   );
 }

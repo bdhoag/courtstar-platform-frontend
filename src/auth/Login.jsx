@@ -3,6 +3,9 @@ import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
 import React, { useState } from 'react';
 import ForgotPassword from './ForgotPassword';
+import axiosInstance from '../config/axiosConfig';
+import { toast } from 'react-toastify';
+
 function Login(props) {
 
   //CLOSE LOGIN MODAL
@@ -20,6 +23,41 @@ function Login(props) {
     setForgetPopup(false)
   }
 
+  //HANDLE LOGIN ACTION
+  const [formLogin, setFormLogin] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormLogin((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
+
+  const handleLogin = async () => {
+    await  axiosInstance.post(`/courtstar/auth/token`, formLogin)
+                .then(res => {
+                  const dataObj = res.data;
+                  localStorage.setItem('token', dataObj.data.token);
+                  handleClose();
+                  props.setIsLogin(true);
+                  toast.success(dataObj.message, {
+                    className: 'fixed top-16 right-0',
+                    toastId: 'login-success'
+                  });
+                })
+                .catch(error => {
+                  toast.error(error.message, {
+                    className: 'fixed top-16 right-0',
+                    toastId: 'login-error'
+                  });
+                })
+                .finally();
+  };
+
   const html = (
     <div className="w-[440px]">
       <h2 className="text-4xl font-semibold mb-5 text-center">Log in</h2>
@@ -32,6 +70,8 @@ function Login(props) {
             name="email"
             placeholder="Enter your email"
             label="Email"
+            value={formLogin.email}
+            onchange={handleChange}
           />
         </div>
         <div className="mb-0">
@@ -40,6 +80,8 @@ function Login(props) {
             name="password"
             placeholder="Enter your password"
             label="Password"
+            value={formLogin.password}
+            onchange={handleChange}
           />
         </div>
         <div className="flex items-center justify-between mt-4 mb-5 px-0.5">
@@ -47,7 +89,7 @@ function Login(props) {
         </div>
         <div className='flex items-center justify-center'>
           <button className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
-            onClick={props.login}  
+            onClick={handleLogin}
           >
             Log in
           </button>
