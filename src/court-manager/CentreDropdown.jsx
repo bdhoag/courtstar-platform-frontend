@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const CentreDropdown = ({ onDataSubmit }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const CentreDropdown = (props) => {
+  const [isOpen, setIsOpen] = useState(props.isOpen);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -15,7 +15,7 @@ const CentreDropdown = ({ onDataSubmit }) => {
   };
 
   const handleSubmit = (value) => {
-    onDataSubmit(value);
+    props.onDataSubmit(value);
   };
 
   return (

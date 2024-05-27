@@ -15,13 +15,16 @@ function CentreInfo() {
     setAddCentrePopup(false)
   }
 
+
+
+
   return (
-    <div>
+    <div className='w-[70rem] pt-12'>
       <AddCentre
         isOpen={addCentrePopup}
         setIsOpen={handleAddCentrePopupClose}
       />
-      <div className="py-12 pr-12">
+      <div className="">
         <div className="flex justify-between">
           <div className="text-3xl font-bold">
             Centre Information
@@ -72,7 +75,7 @@ function CentreInfo() {
             </div>
           </div>
           <div className='flex justify-center flex-col gap-3 bg-white w-1/2'>
-            <div className='font-semibold'>
+            <div className='text-xl font-semibold'>
               Sân cầu lông Đại học FPT Hồ Chí Minh
             </div>
             <div className='flex gap-1'>
@@ -216,8 +219,6 @@ function CentreInfo() {
           </div>
         </div>
       </div>
-
-
     </div>
   )
 }
