@@ -17,6 +17,8 @@ import Profile from './auth/Profile';
 import BookingHistory from './customer/BookingHistory';
 import SpinnerLoading from './components/SpinnerLoading';
 
+
+
 export default function App() {
   const [loading, setLoading] = useState(true);
 
