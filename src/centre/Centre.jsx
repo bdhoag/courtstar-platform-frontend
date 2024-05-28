@@ -43,8 +43,8 @@ const Centre = () => {
                     />
                     -
                     <input type="text"
-                      name="minPrice"
-                      id="minPrice"
+                      name="maxPrice"
+                      id="maxPrice"
                       className='border rounded-lg py-1.5 px-6 w-24 placeholder:text-sm'
                       placeholder='MAX'
                     />
