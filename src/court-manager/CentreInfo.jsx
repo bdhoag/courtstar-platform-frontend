@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import centre from '../assets/images/demo-centre.png';
 import star from '../assets/images/star.svg';
-import LockOpen from '../assets/images/lock-open.svg'
-import LockClose from '../assets/images/lock-close.svg'
-import Dropdown from '../components/Dropdown';
+import LockOpen from '../assets/images/lock-open.svg';
+import LockClose from '../assets/images/lock-close.svg';
 import AddCentre from './AddCentre';
+import Pagination from "../components/Pagination";
 function CentreInfo() {
   //HANDLE  POPUP
   const [addCentrePopup, setAddCentrePopup] = useState(false);
@@ -16,6 +16,194 @@ function CentreInfo() {
   }
 
 
+  const apiFeedbacks = [
+    {
+      id: 1,
+      name: 'Huỳnh Đoàn Thanh Phong',
+      rating: 4,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 2,
+      name: 'Nguyen Thai Thanh',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 3,
+      name: 'thanh ngu',
+      rating: 3,
+      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 4,
+      name: 'phong ngu',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 5,
+      name: 'sang ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 6,
+      name: 'phat ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 7,
+      name: 'alo ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 8,
+      name: 'hay di ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 9,
+      name: 'dung ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 10,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 11,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 12,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 13,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 14,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 15,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 16,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 17,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 18,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 19,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 20,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 21,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 22,
+      name: 'thanh ngu',
+      rating: 3,
+      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 23,
+      name: 'phong ngu',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 24,
+      name: 'thanh ngu',
+      rating: 3,
+      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 25,
+      name: 'phong ngu',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 26,
+      name: 'thanh ngu',
+      rating: 3,
+      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 27,
+      name: 'phong ngu',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 28,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 29,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 30,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 31,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    }
+  ]
 
 
   return (
@@ -137,89 +325,12 @@ function CentreInfo() {
           </div>
         </div>
         <div className="mt-9">
-          <div className="font-bold text-lg">
-            FEEDBACKS
-          </div>
           <div className="">
-            <Dropdown></Dropdown>
-          </div>
-          <div className="mt-3 divide-y">
-            <div className="px-4 py-4 flex flex-col gap-2">
-              <div className="flex gap-7">
-                <div className=" font-semibold">
-                  Huỳnh Đoàn Thanh Phong
-                </div>
-                <div className='flex gap-1'>
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                </div>
-              </div>
-              <div className="">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.
-              </div>
-              <div className="w-full bg-slate-500"></div>
-            </div>
-            <div className="px-4 py-4 flex flex-col gap-2">
-              <div className="flex gap-7">
-                <div className=" font-semibold">
-                  Huỳnh Đoàn Thanh Phong
-                </div>
-                <div className='flex gap-1'>
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                </div>
-              </div>
-              <div className="">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.
-              </div>
-              <div className=" bg-slate-500"></div>
-            </div>
-            <div className="px-4 py-4 flex flex-col gap-2">
-              <div className="flex gap-7">
-                <div className=" font-semibold">
-                  Huỳnh Đoàn Thanh Phong
-                </div>
-                <div className='flex gap-1'>
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                </div>
-              </div>
-              <div className="">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.
-              </div>
-              <div className=" bg-slate-500"></div>
-            </div>
-            <div className="px-4 py-4 flex flex-col gap-2">
-              <div className="flex gap-7">
-                <div className=" font-semibold">
-                  Huỳnh Đoàn Thanh Phong
-                </div>
-                <div className='flex gap-1'>
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                </div>
-              </div>
-              <div className="">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.
-              </div>
-              <div className=" bg-slate-500"></div>
-            </div>
+            <Pagination title='FEEDBACKS' listItem={apiFeedbacks} itemsPerPage={10} />
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

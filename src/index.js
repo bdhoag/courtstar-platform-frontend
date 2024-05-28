@@ -16,7 +16,7 @@ import Admin from './admin/Admin';
 import Profile from './auth/Profile';
 import BookingHistory from './customer/BookingHistory';
 import SpinnerLoading from './components/SpinnerLoading';
-
+import Pagination from './components/Pagination';
 
 
 export default function App() {
@@ -46,6 +46,7 @@ export default function App() {
           <Route path="admin" element={<Admin />} />
           <Route path="profile" element={<Profile />} />
           <Route path="bookingHistory" element={<BookingHistory />} />
+          <Route path='pagination' element={<Pagination />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
