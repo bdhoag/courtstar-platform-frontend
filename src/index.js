@@ -16,7 +16,6 @@ import Admin from './admin/Admin';
 import Profile from './auth/Profile';
 import BookingHistory from './customer/BookingHistory';
 import SpinnerLoading from './components/SpinnerLoading';
-import Pagination from './components/Pagination';
 
 
 export default function App() {

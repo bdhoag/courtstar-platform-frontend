@@ -1,6 +1,15 @@
 import React from 'react';
 
 function InputText(props) {
+  /**
+   * ALL PROPS:
+   * id: string
+   * label: string
+   * name: string
+   * placeholder: string
+   * onchange: () => {}
+   * value: string
+   */
   return (
     <div className="w-full flex flex-col font-medium gap-2 text-gray-800">
       <label

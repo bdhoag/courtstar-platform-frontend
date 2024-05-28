@@ -4,6 +4,7 @@ import google from '../assets/images/google.svg';
 import InputText from '../components/InputText';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
+import Password from '../components/Password';
 
 function CustomerRegister() {
   //HANDLE CHECK BOX PRIVACY
@@ -108,13 +109,14 @@ function CustomerRegister() {
                 />
               </div>
               <div className='mb-6'>
-                <InputText
+                <Password
                   id="password"
                   name="password"
                   placeholder="Enter your password"
                   label="Password*"
                   value={formCustomerRegister.password}
                   onchange={handleChange}
+                  evaluate={true}
                 />
                 <div className='text-gray-500 text-xs py-1 px-0.5'>
                   Use 8 or more characters with a mix of letters, numbers & symbols
