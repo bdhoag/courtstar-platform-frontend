@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/images/logo.svg';
 import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
@@ -17,6 +17,15 @@ const Header = () => {
 
   //HANDLE LOGIN ACTION
   const [isLogin, setIsLogin] = useState(false);
+
+  //HANDLE LOGOUT ACTION
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('account_id');
+    setIsLogin(false);
+    navigate('/');
+  };
 
   return (
     <div className='font-Inter text-base overflow-x-hidden'>
@@ -111,7 +120,7 @@ const Header = () => {
                     />
                   </button>
                   <button className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
-                    onClick={() => setIsLogin(false)}
+                    onClick={logout}
                   >
                     Log out
                   </button>
