@@ -42,6 +42,7 @@ function Login(props) {
                 .then(res => {
                   const dataObj = res.data;
                   localStorage.setItem('token', dataObj.data.token);
+                  localStorage.setItem('account_id', dataObj.data.account_id);
                   handleClose();
                   props.setIsLogin(true);
                   toast.success(dataObj.message, {
