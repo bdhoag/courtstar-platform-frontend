@@ -66,13 +66,13 @@ function Pagination(props) {
         ))}
       </div>
       <div className="flex justify-center items-center gap-1.5 font-semibold my-1">
-        <a href='#top' className='flex justify-center w-7 rounded-md hover:bg-slate-300 hover:text-white' onClick={() => handleChangePage(1)} disabled={currentPage === 1}>
+        <a href='#top' className='flex justify-center w-7 rounded-md hover:bg-slate-300 hover:text-white ease-in-out duration-200' onClick={() => handleChangePage(1)} disabled={currentPage === 1}>
           &laquo;
         </a>
         <div className="">
           {renderPageNumbers()}
         </div>
-        <a href='#top' className='flex justify-center w-7 rounded-md hover:bg-slate-300 hover:text-white' onClick={() => handleChangePage(totalPages)} disabled={currentPage === totalPages}>
+        <a href='#top' className='flex justify-center w-7 rounded-md hover:bg-slate-300 hover:text-white ease-in-out duration-200' onClick={() => handleChangePage(totalPages)} disabled={currentPage === totalPages}>
           &raquo;
         </a>
       </div>

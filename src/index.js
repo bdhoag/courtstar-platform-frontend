@@ -46,7 +46,6 @@ export default function App() {
           <Route path="admin" element={<Admin />} />
           <Route path="profile" element={<Profile />} />
           <Route path="bookingHistory" element={<BookingHistory />} />
-          <Route path='pagination' element={<Pagination />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
