@@ -19,7 +19,7 @@ function StaffInfo ()  {
         <div className="text-3xl font-bold">
           Staff Information
         </div>
-        <button className="flex gap-2.5 px-3 py-1.5 bg-primary-green w-fit rounded-3xl text-white hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
+        <button className="flex gap-2 px-3 py-2 bg-primary-green w-fit rounded-md text-white hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
             onClick={handleAddStaffPopup}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus">
               <path d="M5 12h14" /><path d="M12 5v14" />

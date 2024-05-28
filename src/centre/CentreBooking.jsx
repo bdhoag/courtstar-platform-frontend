@@ -69,11 +69,6 @@ const CentreBooking = () => {
     />
   ));
   return (
-    <div className="w-full pt-12">
-        <CustPayment
-          isOpen={custPaymentPopup}
-          setIsOpen={handleCustPaymentPopupClose}
-        />
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
         <div className="max-w-screen-1440 1440:mx-auto mx-4 py-8 px-12 w-full flex flex-col gap-3">
@@ -95,9 +90,9 @@ const CentreBooking = () => {
                 </div>
               </div>
             </div>
-            <a href="#book" className="h-fit bg-primary-green uppercase py-2 rounded-md text-white font-semibold px-3 hover:bg-teal-900 transition-all duration-300 ease-in-out flex justify-center gap-2">
+            <a href="#book" className="h-fit bg-primary-green py-2 rounded-md text-white font-semibold px-3 hover:bg-teal-900 transition-all duration-300 ease-in-out flex justify-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-calendar-plus"><path d="M8 2v4" /><path d="M16 2v4" /><path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" /><path d="M3 10h18" /><path d="M16 19h6" /><path d="M19 16v6" /></svg>
-              BOOK NOW
+              Book now
             </a>
           </div>
           <div className='w-full flex items-center gap-8'>
@@ -132,7 +127,7 @@ const CentreBooking = () => {
                   <div className='font-medium mb-10'>
                     Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
                   </div>
-                  <button className='w-full bg-primary-green uppercase py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'>
+                  <button className='w-full bg-primary-green py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'>
                     See on map
                   </button>
                 </div>
@@ -298,7 +293,7 @@ const CentreBooking = () => {
                   </div>
                 </div>
               </div>
-              <button className='w-full bg-primary-green uppercase py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'
+              <button className='w-full bg-primary-green py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'
               onClick={handleCustPaymentPopup}>
                 Book Now
               </button>
@@ -307,7 +302,10 @@ const CentreBooking = () => {
 
         </div>
       </div>
-    </div>
+      <CustPayment
+        isOpen={custPaymentPopup}
+        setIsOpen={handleCustPaymentPopupClose}
+      />
     </div>
   );
 }

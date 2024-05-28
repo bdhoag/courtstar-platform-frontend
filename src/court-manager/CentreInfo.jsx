@@ -29,7 +29,7 @@ function CentreInfo() {
           <div className="text-3xl font-bold">
             Centre Information
           </div>
-          <button className="flex gap-2.5 px-3 py-1.5 bg-primary-green w-fit rounded-3xl text-white hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
+          <button className="flex gap-2 px-3 py-2 bg-primary-green w-fit rounded-md text-white hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
             onClick={handleAddCentrePopup}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus">
               <path d="M5 12h14" /><path d="M12 5v14" />
@@ -111,13 +111,13 @@ function CentreInfo() {
             </div>
 
             <div className="font-semibold flex gap-6">
-              <div className="flex justify-center gap-2.5 text-white bg-primary-green w-1/2 py-2 rounded-md hover:bg-teal-900 ease-in-out duration-300 cursor-pointer">
+              <button className="flex justify-center items-center gap-2.5 text-white bg-primary-green w-1/2 py-2 rounded-md hover:bg-teal-900 ease-in-out duration-300 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
                 <div className="">
                   Edit
                 </div>
-              </div>
-              <div className="flex justify-center gap-2.5 text-primary-green border-2 border-primary-green w-1/2 py-2 rounded-md hover:text-red-600 hover:border-red-600 ease-in-out duration-100 cursor-pointer group">
+              </button>
+              <button className="flex justify-center items-center gap-2.5 text-primary-green border-2 border-primary-green w-1/2 py-2 rounded-md hover:text-red-600 hover:border-red-600 ease-in-out duration-100 cursor-pointer group">
                 <img className='group-hover:hidden stroke-primary-green' src={LockOpen} alt="lock-open" />
                 <img className='group-hover:block hidden stroke-primary-green' src={LockClose} alt="lock-close" />
                 <div className="group-hover:hidden">
@@ -126,13 +126,13 @@ function CentreInfo() {
                 <div className="hidden group-hover:block">
                   Close
                 </div>
-              </div>
-              <div className="flex justify-center gap-2.5 text-red-600 border-2 border-red-600 w-1/2 py-2 rounded-md hover:bg-red-600 hover:text-white ease-in-out duration-300 cursor-pointer">
+              </button>
+              <button className="flex justify-center items-center gap-2.5 text-red-600 border-2 border-red-600 w-1/2 py-2 rounded-md hover:bg-red-600 hover:text-white ease-in-out duration-300 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
                 <div className="">
                   Delete
                 </div>
-              </div>
+              </button>
             </div>
           </div>
         </div>
