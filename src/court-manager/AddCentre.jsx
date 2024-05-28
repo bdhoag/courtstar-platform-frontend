@@ -3,6 +3,7 @@ import PopupModal from '../components/PopupModal';
 import React from 'react';
 import centre from '../assets/images/demo-centre.png';
 import Dropdown from '../components/Dropdown';
+import paypal from '../assets/images/paypal-logo.png';
 function AddCentre(props) {
 
     //CLOSE ADD 
@@ -101,6 +102,34 @@ function AddCentre(props) {
                         placeholder="_minute"
                     />
                 </div>
+            </div>
+            <div className="bg-white mt-4 mx-auto">
+                <h2 className="text-4xl font-semibold mb-5 text-center">PAYMENT METHOD</h2>
+            </div>
+            <div>
+                <div>
+                    <img src={paypal}
+                        alt="demo paypal"
+                        className='h-auto max-w-lg mx-auto'
+                    />
+                </div>
+                <div className='mb-4'>
+                    <InputText
+                        id="Manager Name"
+                        name="Manager Name"
+                        placeholder="Enter name of Manager"
+                        label="Manager Name"
+                    />
+                </div>
+                <div className='mb-4'>
+                    <InputText
+                        id="Account Number"
+                        name="Account Number"
+                        placeholder="Enter account number of Manager'Paypal Account"
+                        label="Account number"
+                    />
+                </div>
+
             </div>
         </div>
     )

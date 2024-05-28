@@ -8,8 +8,17 @@ import arrow from '../assets/images/arrow.svg';
 import banner from '../assets/images/banner.png';
 import InputText from '../components/InputText';
 import Dropdown from '../components/Dropdown';
+import CustPayment from '../auth/CustPayment';
 
 const CentreBooking = () => {
+  //HANDLE  POPUP
+  const [custPaymentPopup, setCustPaymentPopup] = useState(false);
+  const handleCustPaymentPopup = () => {
+    setCustPaymentPopup(true);
+  }
+  const handleCustPaymentPopupClose = () => {
+    setCustPaymentPopup(false)
+  }
   // State to keep track of the selected value in the booking type radio buttons
   const [selectedValue, setSelectedValue] = useState(0);
 
@@ -60,6 +69,11 @@ const CentreBooking = () => {
     />
   ));
   return (
+    <div className="w-full pt-12">
+        <CustPayment
+          isOpen={custPaymentPopup}
+          setIsOpen={handleCustPaymentPopupClose}
+        />
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
         <div className="max-w-screen-1440 1440:mx-auto mx-4 py-8 px-12 w-full flex flex-col gap-3">
@@ -284,7 +298,8 @@ const CentreBooking = () => {
                   </div>
                 </div>
               </div>
-              <button className='w-full bg-primary-green uppercase py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'>
+              <button className='w-full bg-primary-green uppercase py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'
+              onClick={handleCustPaymentPopup}>
                 Book Now
               </button>
             </div>
@@ -292,6 +307,7 @@ const CentreBooking = () => {
 
         </div>
       </div>
+    </div>
     </div>
   );
 }
