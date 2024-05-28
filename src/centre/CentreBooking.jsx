@@ -8,7 +8,7 @@ import arrow from '../assets/images/arrow.svg';
 import banner from '../assets/images/banner.png';
 import InputText from '../components/InputText';
 import Dropdown from '../components/Dropdown';
-import CustPayment from '../auth/CustPayment';
+import CustPayment from '../payment/CustPayment';
 
 const CentreBooking = () => {
   //HANDLE  POPUP
