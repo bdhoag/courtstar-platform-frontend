@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import ForgotPassword from './ForgotPassword';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
+import Password from '../components/Password';
 
 function Login(props) {
 
@@ -74,13 +75,14 @@ function Login(props) {
           />
         </div>
         <div className="mb-0">
-          <InputText
+          <Password
             id="password"
             name="password"
             placeholder="Enter your password"
             label="Password"
             value={formLogin.password}
             onchange={handleChange}
+            evaluate={false}
           />
         </div>
         <div className="flex items-center justify-between mt-4 mb-5 px-0.5">
