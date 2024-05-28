@@ -34,13 +34,11 @@ function CustomerRegister() {
     await  axiosInstance.post(`/courtstar/account`, formCustomerRegister)
                 .then(res => {
                   toast.success("Register successfully!", {
-                    className: 'fixed top-16 right-0',
                     toastId: 'login-success'
                   });
                 })
                 .catch(error => {
                   toast.error(error.message, {
-                    className: 'fixed top-16 right-0',
                     toastId: 'login-error'
                   });
                 })

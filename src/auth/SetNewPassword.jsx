@@ -12,7 +12,6 @@ function SetNewPassword(props) {
   const notify = () => {
     handleClose();
     toast.success("Password updated!", {
-      className: 'fixed top-16 right-0',
       toastId: 'new-password'
     });
   }

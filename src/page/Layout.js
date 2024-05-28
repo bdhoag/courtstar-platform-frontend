@@ -3,6 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../assets/css/toast.css';
 
 const Layout = () => {
   return (
@@ -10,7 +11,7 @@ const Layout = () => {
       <Header />
       <Outlet />
       <Footer />
-      <ToastContainer />
+      <ToastContainer draggable/>
     </div>
   )
 };

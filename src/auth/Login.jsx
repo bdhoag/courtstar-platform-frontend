@@ -46,13 +46,11 @@ function Login(props) {
                   handleClose();
                   props.setIsLogin(true);
                   toast.success(dataObj.message, {
-                    className: 'fixed top-16 right-0',
                     toastId: 'login-success'
                   });
                 })
                 .catch(error => {
                   toast.error(error.message, {
-                    className: 'fixed top-16 right-0',
                     toastId: 'login-error'
                   });
                 })
