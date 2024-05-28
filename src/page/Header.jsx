@@ -4,8 +4,6 @@ import logo from '../assets/images/logo.svg';
 import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
 import bell from '../assets/images/bell.svg';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
   //HANDLE LOGIN POPUP
@@ -131,8 +129,6 @@ const Header = () => {
         setIsOpen={handleLoginClose}
         setIsLogin={setIsLogin}
       />
-
-      <ToastContainer />
     </div>
   );
 }
