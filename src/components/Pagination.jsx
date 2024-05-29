@@ -4,6 +4,13 @@ import Dropdown from "./Dropdown";
 
 function Pagination(props) {
 
+  /**
+   * ALL PROPS:
+   * listItem: API array
+   * itemsPerPage: int
+   * content: class (string)
+   * title: string
+   */
   const apiFeedbacks = props.listItem;
 
   const itemsPerPage = props.itemsPerPage; // Number of feedbacks to show per page
@@ -48,7 +55,7 @@ function Pagination(props) {
         {props.title}
       </div>
       <div className="">
-        <Dropdown/>
+        <Dropdown />
       </div>
       <div className="p-4 divide-y-2">
         {paginatedFeedbacks.map((feedback) => (
@@ -65,17 +72,19 @@ function Pagination(props) {
           </div>
         ))}
       </div>
-      <div className="flex justify-center items-center gap-1.5 font-semibold my-1">
-        <a href='#top' className='flex justify-center w-7 rounded-md hover:bg-slate-300 hover:text-white ease-in-out duration-200' onClick={() => handleChangePage(1)} disabled={currentPage === 1}>
-          &laquo;
-        </a>
-        <div className="">
-          {renderPageNumbers()}
+      {itemsPerPage <= apiFeedbacks.length &&
+        <div className="flex justify-center items-center gap-1.5 font-semibold my-1">
+          <a href='#top' className='flex justify-center w-7 rounded-md hover:bg-slate-300 hover:text-white ease-in-out duration-200' onClick={() => handleChangePage(1)} disabled={currentPage === 1}>
+            &laquo;
+          </a>
+          <div className="">
+            {renderPageNumbers()}
+          </div>
+          <a href='#top' className='flex justify-center w-7 rounded-md hover:bg-slate-300 hover:text-white ease-in-out duration-200' onClick={() => handleChangePage(totalPages)} disabled={currentPage === totalPages}>
+            &raquo;
+          </a>
         </div>
-        <a href='#top' className='flex justify-center w-7 rounded-md hover:bg-slate-300 hover:text-white ease-in-out duration-200' onClick={() => handleChangePage(totalPages)} disabled={currentPage === totalPages}>
-          &raquo;
-        </a>
-      </div>
+      }
     </div>
   );
 }

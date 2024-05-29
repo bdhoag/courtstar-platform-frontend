@@ -8,7 +8,6 @@ import NoPage from "./page/NoPage";
 import ScrollToTop from './components/ScrollToTop';
 import Home from './Home';
 import CentreBooking from './centre/CentreBooking';
-import Centre from './centre/Centre';
 import PartnerRegister from './auth/PartnerRegister';
 import CustomerRegister from './auth/CustomerRegister';
 import MyCentre from './court-manager/MyCentre';
@@ -43,7 +42,6 @@ export default function App() {
           <Route path="partnerRegister" element={<PartnerRegister />} />
           <Route path="customerRegister" element={<CustomerRegister />} />
           <Route path="centreBooking" element={<CentreBooking />} />
-          <Route path="listOfCentre" element={<Centre />} />
           <Route
             path="myCentre"
             element={

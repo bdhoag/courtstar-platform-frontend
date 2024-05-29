@@ -90,8 +90,6 @@ const Header = () => {
             <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
               <Link className="font-medium text-white transition-all ease-in-out duration-300"
                 to="/">Home</Link>
-              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/listOfCentre">List of Centre</Link>
               <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 href="#aboutUs">About us</a>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
