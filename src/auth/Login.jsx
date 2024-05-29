@@ -6,8 +6,10 @@ import ForgotPassword from './ForgotPassword';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import Password from '../components/Password';
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
+  const navigate = useNavigate();
 
   //CLOSE LOGIN MODAL
   const handleClose = () => {
@@ -44,7 +46,9 @@ function Login(props) {
                   const dataObj = res.data;
                   localStorage.setItem('token', dataObj.data.token);
                   localStorage.setItem('account_id', dataObj.data.account_id);
+                  localStorage.setItem('role', dataObj.data.role);
                   handleClose();
+                  navigate('/');
                   props.setIsLogin(true);
                   toast.success(dataObj.message, {
                     toastId: 'login-success'

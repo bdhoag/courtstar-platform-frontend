@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/images/logo.svg';
 import LanguageSelector from '../components/LanguageSelector';
@@ -19,13 +19,28 @@ const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   //HANDLE LOGOUT ACTION
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('account_id');
+    localStorage.removeItem('role');
     setIsLogin(false);
     navigate('/');
   };
+
+  //HANDLE ROLE
+  const [role, setRole] = useState('');
+  useEffect(() => {
+    setRole(localStorage.getItem('role'));
+  }, [isLogin]);
+
+  useEffect(() => {
+    const userRole = localStorage.getItem('role');
+    if (userRole) {
+      setIsLogin(true);
+    }
+  }, [])
+
 
   return (
     <div className='font-Inter text-base overflow-x-hidden'>
@@ -80,7 +95,17 @@ const Header = () => {
               <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 href="#aboutUs">About us</a>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/partnerRegister">Partner Register</Link>
+              to="/partnerRegister">Partner Register</Link>
+              {
+                role === 'ADMIN' &&
+                <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/admin">My Dashboard</Link>
+              }
+              {
+                (role === 'ADMIN' || role === 'CENTRE_MANAGER' || role === 'CENTRE_STAFF') &&
+                <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/myCentre">My Centre</Link>
+              }
             </div>
           </div>
 

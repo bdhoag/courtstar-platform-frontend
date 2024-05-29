@@ -16,6 +16,9 @@ import Admin from './admin/Admin';
 import Profile from './auth/Profile';
 import BookingHistory from './customer/BookingHistory';
 import SpinnerLoading from './components/SpinnerLoading';
+import ManagerRoute from './routes/ManagerRoute';
+import AdminRoute from './routes/AdminRoute';
+import CustomerRoute from './routes/CustomerRoute';
 
 
 export default function App() {
@@ -41,10 +44,38 @@ export default function App() {
           <Route path="customerRegister" element={<CustomerRegister />} />
           <Route path="centreBooking" element={<CentreBooking />} />
           <Route path="listOfCentre" element={<Centre />} />
-          <Route path="myCentre" element={<MyCentre />} />
-          <Route path="admin" element={<Admin />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="bookingHistory" element={<BookingHistory />} />
+          <Route
+            path="myCentre"
+            element={
+              <ManagerRoute>
+                <MyCentre />
+              </ManagerRoute>
+            }
+          />
+          <Route
+            path="admin"
+            element={
+              <AdminRoute>
+                <Admin />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <CustomerRoute>
+                <Profile />
+              </CustomerRoute>
+            }
+          />
+          <Route
+            path="bookingHistory"
+            element={
+              <CustomerRoute>
+                <BookingHistory />
+              </CustomerRoute>
+            }
+          />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
