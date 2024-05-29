@@ -43,9 +43,6 @@ function CustPayment(props) {
                         Confirm
                     </button>
                 </div>
-                <div className='flex justify-center mt-4 '>
-
-                </div>
             </div>
         </div>
     );
