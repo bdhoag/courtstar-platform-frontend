@@ -229,7 +229,7 @@ function CentreInfo() {
         </div>
       </div>
 
-      <div className="bg-white px-9 py-7 rounded-xl mt-4">
+      <div className="bg-white px-9 py-7 rounded-xl my-4">
         <div className="flex gap-11">
           <div className="w-1/2">
             <div>
@@ -325,9 +325,7 @@ function CentreInfo() {
           </div>
         </div>
         <div className="mt-9">
-          <div className="">
-            <Pagination title='FEEDBACKS' listItem={apiFeedbacks} itemsPerPage={10} />
-          </div>
+          <Pagination title='FEEDBACKS' listItem={apiFeedbacks} itemsPerPage={10} />
         </div>
       </div>
     </div >
