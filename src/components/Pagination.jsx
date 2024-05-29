@@ -57,7 +57,7 @@ function Pagination(props) {
               {feedback.name}
             </div>
             <div className="">
-              <Rating star="w-5" value={feedback.rating} />
+              <Rating ratingWrapper='flex' star="w-5" value={feedback.rating} />
             </div>
             <div className='text-sm'>
               {feedback.content}
