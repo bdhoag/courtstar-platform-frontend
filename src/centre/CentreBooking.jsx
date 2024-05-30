@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import centre from '../assets/images/demo-centre.png';
-import star from '../assets/images/star.svg';
-import nostar from '../assets/images/nostar.svg';
+// import star from '../assets/images/star.svg';
+// import nostar from '../assets/images/nostar.svg';
 import mappin from '../assets/images/map-pin.svg';
 import mail from '../assets/images/mail.svg';
 import banner from '../assets/images/banner.png';
@@ -10,6 +10,7 @@ import Dropdown from '../components/Dropdown';
 import CustPayment from '../payment/CustPayment';
 import Slider from '../components/Slider'
 import Pagination from '../components/Pagination';
+import Rating from '../components/Rating';
 const CentreBooking = () => {
   //HANDLE  POPUP
   const [custPaymentPopup, setCustPaymentPopup] = useState(false);
@@ -238,14 +239,12 @@ const CentreBooking = () => {
                 Sân cầu lông Đại học FPT Hồ Chí Minh
               </div>
               <div className='flex gap-2 my-3'>
-                <div className='flex gap-1'>
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={star} alt="Star" className='cursor-pointer w-5' />
-                  <img src={nostar} alt="No Star" className='cursor-pointer w-5' />
-                  <img src={nostar} alt="No Star" className='cursor-pointer w-5' />
-                </div>
-                <div className='text-sm'>
+                <Rating
+                  ratingWrapper='flex gap-1'
+                  value={3}
+                  editable={false}
+                />
+                <div className='text-base'>
                   (10 feedbacks)
                 </div>
               </div>
@@ -449,7 +448,7 @@ const CentreBooking = () => {
               <span className='text-3xl font-medium'>Feedbacks</span>
             </div>
             <div className="mt-5">
-              <Pagination title='FEEDBACKS' listItem={apiFeedbacks} itemsPerPage={5} content='px-9 pb-5'/>
+              <Pagination title='FEEDBACKS' listItem={apiFeedbacks} itemsPerPage={5} content='px-9 pb-5' />
             </div>
           </div>
 

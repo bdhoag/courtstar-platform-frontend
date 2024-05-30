@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import centre from '../assets/images/demo-centre.png';
-import star from '../assets/images/star.svg';
+// import star from '../assets/images/star.svg';
 import LockOpen from '../assets/images/lock-open.svg';
 import LockClose from '../assets/images/lock-close.svg';
 import AddCentre from './AddCentre';
 import Pagination from "../components/Pagination";
+import Rating from '../components/Rating';
 function CentreInfo() {
   //HANDLE  POPUP
   const [addCentrePopup, setAddCentrePopup] = useState(false);
@@ -266,13 +267,11 @@ function CentreInfo() {
             <div className='text-xl font-semibold'>
               Sân cầu lông Đại học FPT Hồ Chí Minh
             </div>
-            <div className='flex gap-1'>
-              <img src={star} alt="Star" className='cursor-pointer w-5' />
-              <img src={star} alt="Star" className='cursor-pointer w-5' />
-              <img src={star} alt="Star" className='cursor-pointer w-5' />
-              <img src={star} alt="Star" className='cursor-pointer w-5' />
-              <img src={star} alt="Star" className='cursor-pointer w-5' />
-            </div>
+            <Rating
+              ratingWrapper='flex gap-1'
+              value={5}
+              editable={false}
+            />
             <div>
               <span className='font-semibold'>Address: </span>
               Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.

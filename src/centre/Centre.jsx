@@ -1,5 +1,5 @@
 import React from 'react';
-import star from '../assets/images/star.svg';
+// import star from '../assets/images/star.svg';
 import centre from '../assets/images/demo-centre.png'
 import { Link } from "react-router-dom";
 import Rating from '../components/Rating';
@@ -66,13 +66,11 @@ const Centre = () => {
                     <div className='font-semibold text-xl'>
                       Sân cầu lông Đại học FPT Hồ Chí Minh
                     </div>
-                    <div className='flex gap-1'>
-                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                      <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                    </div>
+                    <Rating
+                        ratingWrapper='flex gap-1'
+                        value={5}
+                        editable={false}
+                    />
                     <div>
                       <span className='font-semibold'>Address: </span>
                       Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
