@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import star from '../assets/images/star.svg';
-import nostar from '../assets/images/nostar.svg';
+// import star from '../assets/images/star.svg';
+// import nostar from '../assets/images/nostar.svg';
 import centre from '../assets/images/demo-centre.png'
 import FeedbackForm from './FeedbackForm'
+import Rating from '../components/Rating';
 
 const BookingHistory = () => {
 
@@ -19,7 +20,7 @@ const BookingHistory = () => {
 
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
-      <FeedbackForm 
+      <FeedbackForm
         isOpen={feedbackPopup}
         setIsOpen={handleFeedbackPopupClose}
       />
@@ -59,7 +60,7 @@ const BookingHistory = () => {
                   </div>
                   <div className='text-sm flex justify-center gap-20'>
                     <button className='block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300'
-                    onClick={handleFeedbackPopup}>
+                      onClick={handleFeedbackPopup}>
                       Feedback
                     </button>
                   </div>
@@ -95,13 +96,11 @@ const BookingHistory = () => {
                       <span className='font-semibold text-rose-600'>200.000₫/h</span>
                     </div>
                     <div className='text-sm flex justify-center gap-20'>
-                      <div className='flex gap-1'>
-                        <img src={star} alt="Star" className='cursor-pointer w-5' />
-                        <img src={star} alt="Star" className='cursor-pointer w-5' />
-                        <img src={star} alt="Star" className='cursor-pointer w-5' />
-                        <img src={star} alt="Star" className='cursor-pointer w-5' />
-                        <img src={nostar} alt="NoStar" className='cursor-pointer w-5' />
-                      </div>
+                      <Rating
+                        ratingWrapper='flex gap-1'
+                        value={4}
+                        editable={false}
+                      />
                     </div>
                   </div>
                 </div>

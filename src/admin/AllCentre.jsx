@@ -1,6 +1,7 @@
 import Dropdown from "../components/Dropdown";
 import InputText from "../components/InputText";
-import star from '../assets/images/star.svg';
+// import star from '../assets/images/star.svg';
+import Rating from "../components/Rating";
 
 const AllCentre = () => {
   return (
@@ -65,13 +66,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -94,13 +93,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -123,13 +120,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -152,13 +147,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -181,13 +174,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -210,13 +201,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -239,13 +228,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -268,13 +255,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -297,13 +282,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -326,13 +309,11 @@ const AllCentre = () => {
               100.000₫/h
             </div>
             <div className="flex justify-center items-center flex-1 pl-8">
-              <div className='flex gap-1'>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-                <img src={star} alt="Star" className='cursor-pointer w-5'/>
-              </div>
+              <Rating
+                ratingWrapper='flex gap-1'
+                value={5}
+                editable={false}
+              />
             </div>
             <div className="flex flex-1 items-center justify-end gap-3">
               <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
