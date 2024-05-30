@@ -11,8 +11,9 @@ import CustPayment from '../payment/CustPayment';
 import Slider from '../components/Slider'
 import Pagination from '../components/Pagination';
 import Rating from '../components/Rating';
+import Calendar from '../components/Calendar';
 const CentreBooking = () => {
-  
+
   const items = ['Item 1', 'Item 2', 'Item 3'];
 
   const handleSelect = (item) => {
@@ -449,6 +450,8 @@ const CentreBooking = () => {
               </button>
             </div>
           </div>
+
+          <Calendar />
 
           <div className='flex-1 bg-white rounded-lg shadow-gray-400 shadow-md'>
             <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
