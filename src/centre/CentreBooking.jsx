@@ -12,6 +12,13 @@ import Slider from '../components/Slider'
 import Pagination from '../components/Pagination';
 import Rating from '../components/Rating';
 const CentreBooking = () => {
+  
+  const items = ['Item 1', 'Item 2', 'Item 3'];
+
+  const handleSelect = (item) => {
+    console.log(`Selected: ${item}`);
+  };
+
   //HANDLE  POPUP
   const [custPaymentPopup, setCustPaymentPopup] = useState(false);
   const handleCustPaymentPopup = () => {
@@ -374,7 +381,9 @@ const CentreBooking = () => {
                 </div>)}
                 {(selectedValue === 2) && (<div className='pl-2 relative w-2/5'>
                   <Dropdown
-                    placeholder="Choose day"
+                    placeholder="Select role"
+                    items={items}
+                    onSelect={handleSelect}
                   />
                   <div className='text-gray-800 absolute top-2.5 -left-[115px]'>
                     Choose day*:
@@ -382,7 +391,9 @@ const CentreBooking = () => {
                 </div>)}
                 <div className='pl-2 relative w-2/5'>
                   <Dropdown
-                    placeholder="Choose court"
+                    placeholder="Select role"
+                    items={items}
+                    onSelect={handleSelect}
                   />
                   <div className='text-gray-800 absolute top-2.5 -left-[117px]'>
                     Select court*:
@@ -391,11 +402,9 @@ const CentreBooking = () => {
                 <div className='pl-2 relative w-1/2'>
                   <div className='flex gap-4 items-center w-full'>
                     <Dropdown
-                      placeholder="_hour"
-                    />
-                    :
-                    <Dropdown
-                      placeholder="_minute"
+                      placeholder="Select role"
+                      items={items}
+                      onSelect={handleSelect}
                     />
                   </div>
                   <div className='text-gray-800 absolute top-2.5 -left-[62px]'>
@@ -408,11 +417,9 @@ const CentreBooking = () => {
                 <div className='pl-2 relative w-1/2'>
                   <div className='flex gap-4 items-center w-full'>
                     <Dropdown
-                      placeholder="_hour"
-                    />
-                    :
-                    <Dropdown
-                      placeholder="_minute"
+                      placeholder="Select role"
+                      items={items}
+                      onSelect={handleSelect}
                     />
                   </div>
                   <div className='text-gray-800 absolute top-2.5 -left-[31px]'>
@@ -443,7 +450,7 @@ const CentreBooking = () => {
             </div>
           </div>
 
-          <div className='flex-1 rounded-lg shadow-gray-400 shadow-md'>
+          <div className='flex-1 bg-white rounded-lg shadow-gray-400 shadow-md'>
             <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
               <span className='text-3xl font-medium'>Feedbacks</span>
             </div>

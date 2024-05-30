@@ -4,6 +4,12 @@ import InputText from "../components/InputText";
 import Rating from "../components/Rating";
 
 const AllCentre = () => {
+  const items = ['Item 1', 'Item 2', 'Item 3'];
+
+  const handleSelect = (item) => {
+    console.log(`Selected: ${item}`);
+  };
+
   return (
     <div className="py-5 px-7">
       <div className="flex justify-between">
@@ -26,6 +32,8 @@ const AllCentre = () => {
             <div className="font-semibold mb-2">District</div>
             <Dropdown
               placeholder="Select district"
+              items={items}
+              onSelect={handleSelect}
             />
           </div>
           <div className="w-1/5 flex gap-2 justify-between">
@@ -50,6 +58,8 @@ const AllCentre = () => {
             <div className="font-semibold mb-2">Feedback</div>
             <Dropdown
               placeholder="Rating star"
+              items={items}
+              onSelect={handleSelect}
             />
           </div>
           <div className=""></div>

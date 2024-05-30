@@ -3,7 +3,11 @@ import Rating from "./Rating";
 import Dropdown from "./Dropdown";
 
 function Pagination(props) {
+  const items = ['Item 1', 'Item 2', 'Item 3'];
 
+  const handleSelect = (item) => {
+    console.log(`Selected: ${item}`);
+  };
   /**
    * ALL PROPS:
    * listItem: API array
@@ -55,7 +59,11 @@ function Pagination(props) {
         {props.title}
       </div>
       <div className="">
-        <Dropdown />
+        <Dropdown
+          placeholder=""
+          items={items}
+          onSelect={handleSelect}
+        />
       </div>
       <div className="p-4 divide-y-2">
         {paginatedFeedbacks.map((feedback) => (
