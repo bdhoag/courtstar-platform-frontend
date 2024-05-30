@@ -9,7 +9,7 @@ import InputText from '../components/InputText';
 import Dropdown from '../components/Dropdown';
 import CustPayment from '../payment/CustPayment';
 import Slider from '../components/Slider'
-
+import Pagination from '../components/Pagination';
 const CentreBooking = () => {
   //HANDLE  POPUP
   const [custPaymentPopup, setCustPaymentPopup] = useState(false);
@@ -36,6 +36,196 @@ const CentreBooking = () => {
     { id: 5, url: centre },
     { id: 6, url: centre }
   ];
+
+  //List of feedbacks to display in Feedbacks modal
+  const apiFeedbacks = [
+    {
+      id: 1,
+      name: 'Huỳnh Đoàn Thanh Phong',
+      rating: 4,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 2,
+      name: 'Nguyen Thai Thanh',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 3,
+      name: 'thanh ngu',
+      rating: 3,
+      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 4,
+      name: 'phong ngu',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 5,
+      name: 'sang ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 6,
+      name: 'phat ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 7,
+      name: 'alo ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 8,
+      name: 'hay di ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 9,
+      name: 'dung ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 10,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 11,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 12,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 13,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 14,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 15,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 16,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 17,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 18,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 19,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 20,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 21,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 22,
+      name: 'thanh ngu',
+      rating: 3,
+      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 23,
+      name: 'phong ngu',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 24,
+      name: 'thanh ngu',
+      rating: 3,
+      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 25,
+      name: 'phong ngu',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 26,
+      name: 'thanh ngu',
+      rating: 3,
+      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 27,
+      name: 'phong ngu',
+      rating: 3,
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 28,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 29,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 30,
+      name: 'ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    },
+    {
+      id: 31,
+      name: 'buon ngu',
+      rating: 4,
+      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+    }
+  ]
 
 
   return (
@@ -66,7 +256,7 @@ const CentreBooking = () => {
             </a>
           </div>
           <div className='w-full flex items-center gap-8'>
-            <Slider imagesDemoList={imagesDemoList}/>
+            <Slider imagesDemoList={imagesDemoList} />
             <div className='flex-1 h-full flex flex-col justify-evenly gap-6'>
 
               <div className="rounded-lg shadow-gray-400 shadow-md">
@@ -248,9 +438,18 @@ const CentreBooking = () => {
                 </div>
               </div>
               <button className='w-full bg-primary-green py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'
-              onClick={handleCustPaymentPopup}>
+                onClick={handleCustPaymentPopup}>
                 Book Now
               </button>
+            </div>
+          </div>
+
+          <div className='flex-1 rounded-lg shadow-gray-400 shadow-md'>
+            <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
+              <span className='text-3xl font-medium'>Feedbacks</span>
+            </div>
+            <div className="mt-5">
+              <Pagination title='FEEDBACKS' listItem={apiFeedbacks} itemsPerPage={5} content='px-9 pb-5'/>
             </div>
           </div>
 
