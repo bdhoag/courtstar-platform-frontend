@@ -3,6 +3,11 @@ import banner from '../assets/images/banner.png'
 import Dropdown from '../components/Dropdown';
 
 const Banner = () => {
+  const items = ['Item 1', 'Item 2', 'Item 3'];
+
+  const handleSelect = (item) => {
+    console.log(`Selected: ${item}`);
+  };
   return (
     <div className='font-Inter text-base bg-gray-100 overflow-x-hidden'>
       <div className="flex flex-wrap  sm:justify-start sm:flex-nowrap 2xl:max-w-screen-1440 2xl:mx-auto max-h-[500px] relative">
@@ -18,6 +23,8 @@ const Banner = () => {
           </div>
           <Dropdown
             placeholder="Select the district"
+            items={items}
+            onSelect={handleSelect}
           />
           <button className='bg-primary-green w-full rounded-full py-2.5 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out'>
             Find

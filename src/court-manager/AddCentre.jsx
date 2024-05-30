@@ -6,7 +6,13 @@ import Dropdown from '../components/Dropdown';
 import paypal from '../assets/images/paypal-logo.png';
 function AddCentre(props) {
 
-    //CLOSE ADD 
+    const items = ['Item 1', 'Item 2', 'Item 3'];
+
+    const handleSelect = (item) => {
+        console.log(`Selected: ${item}`);
+    };
+
+    //CLOSE ADD
     const handleClose = () => {
         props.setIsOpen();
     }
@@ -81,11 +87,9 @@ function AddCentre(props) {
                 </div>
                 <div className='flex gap-4 items-center w-1/2'>
                     <Dropdown
-                        placeholder="_hour"
-                    />
-                    :
-                    <Dropdown
-                        placeholder="_minute"
+                        placeholder="Select role"
+                        items={items}
+                        onSelect={handleSelect}
                     />
                 </div>
             </div>
@@ -95,11 +99,9 @@ function AddCentre(props) {
                 </div>
                 <div className='flex gap-4 items-center w-1/2'>
                     <Dropdown
-                        placeholder="_hour"
-                    />
-                    :
-                    <Dropdown
-                        placeholder="_minute"
+                        placeholder="Select role"
+                        items={items}
+                        onSelect={handleSelect}
                     />
                 </div>
             </div>
