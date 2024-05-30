@@ -7,7 +7,7 @@ import PopupModal from '../components/PopupModal';
 
 function FeedbackForm(props) {
 
-    //CLOSE ADD 
+    //CLOSE FEEDBACK POPUP 
     const handleClose = () => {
         props.setIsOpen();
     }

@@ -6,7 +6,7 @@ import FeedbackForm from './FeedbackForm'
 
 const BookingHistory = () => {
 
-  //HANDLE  POPUP
+  //HANDLE FEEDBACK POPUP
   const [feedbackPopup, setFeedbackPopup] = useState(false);
   const handleFeedbackPopup = () => {
     setFeedbackPopup(true);
@@ -58,7 +58,7 @@ const BookingHistory = () => {
                     <span className='font-semibold text-rose-600'>200.000₫/h</span>
                   </div>
                   <div className='text-sm flex justify-center gap-20'>
-                    <button className='block text-center py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'
+                    <button className='block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300'
                     onClick={handleFeedbackPopup}>
                       Feedback
                     </button>
