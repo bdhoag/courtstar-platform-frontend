@@ -4,7 +4,6 @@ import star from '../assets/images/star.svg';
 import nostar from '../assets/images/nostar.svg';
 import mappin from '../assets/images/map-pin.svg';
 import mail from '../assets/images/mail.svg';
-import arrow from '../assets/images/arrow.svg';
 import banner from '../assets/images/banner.png';
 import InputText from '../components/InputText';
 import Dropdown from '../components/Dropdown';
