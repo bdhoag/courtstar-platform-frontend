@@ -1,7 +1,7 @@
 import InputText from "../components/InputText";
 const Checkin = () => {
   return (
-    <div className="w-[70rem] pt-12">
+    <div className="w-[70rem] my-12">
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
           Check in
