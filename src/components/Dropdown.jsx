@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function Dropdown({ placeholder, items, onSelect, className = '', itemClassName = '' }) {
+function Dropdown({ placeholder, items, onSelect, initialValue, className = '', itemClassName = '' }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const dropdownRef = useRef(null);
@@ -28,6 +28,10 @@ function Dropdown({ placeholder, items, onSelect, className = '', itemClassName 
     };
   }, []);
 
+  useEffect(() => {
+    setSelectedItem(initialValue);
+  }, [initialValue]);
+
   return (
     <div className={`w-full text-gray-800 relative ${className}`} ref={dropdownRef}>
       <button
@@ -36,8 +40,8 @@ function Dropdown({ placeholder, items, onSelect, className = '', itemClassName 
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        <div className={`text-sm font-normal ${selectedItem ? 'text-gray-800' : 'text-gray-400'}`}>
-          {selectedItem || placeholder}
+        <div className={`text-sm font-normal ${(selectedItem || initialValue) ? 'text-gray-800' : 'text-gray-400'}`}>
+          {selectedItem || initialValue || placeholder}
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
