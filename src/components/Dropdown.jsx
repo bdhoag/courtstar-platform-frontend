@@ -33,7 +33,10 @@ function Dropdown(props) {
   }, [props.initialValue]);
 
   return (
-    <div className={`w-full text-gray-800 relative ${props.className}`} ref={dropdownRef}>
+    <div
+      className={`w-full text-gray-800 relative ${props.className}`}
+      ref={dropdownRef}
+    >
       <button
         className={`border border-gray-300 focus:outline focus:outline-1 focus:outline-gray-400 py-3 px-6 rounded-lg w-full text-gray-500 flex justify-between items-center ${props.buttonClassName}`}
         onClick={toggleDropdown}
