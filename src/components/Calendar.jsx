@@ -280,7 +280,7 @@ export default function Calendar(props) {
                     <td key={index}
                       className={
                         !(day < moment().format('MM/DD') ||
-                          (day === moment().format('MM/DD') && (8 + slot) < (parseInt(moment().format('h')) + 1))
+                          (day === moment().format('MM/DD') && (8 + slot) < (parseInt(moment().format('H')) + 1))
                         )
                           ?
                           "border p-1  xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-[#cdfae7]"
