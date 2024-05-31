@@ -102,7 +102,7 @@ export default function Calendar(props) {
             </div>
             <div className="flex gap-5">
 
-              <button className='w-full bg-primary-green p-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out font-semibold'
+              <button className='w-full bg-primary-green p-2 rounded-md text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-semibold'
               onClick={props.handleButton}
               >
                 {typeOfCalendar === 'booking' ?
@@ -283,7 +283,7 @@ export default function Calendar(props) {
                           (day === moment().format('MM/DD') && (8 + slot) < (parseInt(moment().format('H')) + 1))
                         )
                           ?
-                          "border p-1  xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-[#cdfae7]"
+                          "border p-1  xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-500 ease hover:bg-[#CDFAE7]"
                           :
                           "border p-1  xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto bg-gray-300"
                       }>
