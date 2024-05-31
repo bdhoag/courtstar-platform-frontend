@@ -1,8 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import register from '../assets/images/register.png';
 import InputText from '../components/InputText';
+import axiosInstance from '../config/axiosConfig';
+import { toast } from 'react-toastify';
+import Password from '../components/Password';
 
 function PartnerRegister() {
+  //HANDLE CHECK BOX PRIVACY
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+      setIsChecked(event.target.checked);
+  };
+
+  //HANDLE REGISTER ACTION
+  const [formPartnerRegister, setFormPartnerRegister] = useState({
+    email: '',
+    password: '',
+    phone: '',
+    firstName: '',
+    lastName: ''
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormPartnerRegister((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  };
+
+  const handleRegister = async () => {
+    await  axiosInstance.post(`/courtstar/account/partner`, formPartnerRegister)
+                .then(res => {
+                  toast.success("Register successfully!", {
+                    toastId: 'login-success'
+                  });
+                })
+                .catch(error => {
+                  toast.error(error.message, {
+                    toastId: 'login-error'
+                  });
+                })
+                .finally();
+  };
+
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className='max-h-[800px] overflow-hidden flex items-center'>
@@ -22,12 +64,16 @@ function PartnerRegister() {
                   name="firstName"
                   placeholder="Enter your first name"
                   label="First Name*"
+                  value={formPartnerRegister.firstName}
+                  onchange={handleChange}
                 />
                 <InputText
                   id="lastName"
                   name="lastName"
                   placeholder="Enter your last name"
                   label="Last Name*"
+                  value={formPartnerRegister.lastName}
+                  onchange={handleChange}
                 />
               </div>
               <div className='mb-4'>
@@ -36,6 +82,8 @@ function PartnerRegister() {
                   name="email"
                   placeholder="Enter your email"
                   label="Email*"
+                  value={formPartnerRegister.email}
+                  onchange={handleChange}
                 />
               </div>
               <div className='mb-4'>
@@ -44,14 +92,19 @@ function PartnerRegister() {
                   name="phone"
                   placeholder="Enter your phone"
                   label="Phone*"
+                  value={formPartnerRegister.phone}
+                  onchange={handleChange}
                 />
               </div>
               <div className='mb-6'>
-                <InputText
+              <Password
                   id="password"
                   name="password"
                   placeholder="Enter your password"
                   label="Password*"
+                  value={formPartnerRegister.password}
+                  onchange={handleChange}
+                  evaluate={true}
                 />
                 <div className='text-gray-500 text-xs py-1 px-0.5'>
                   Use 8 or more characters with a mix of letters, numbers & symbols
@@ -59,8 +112,13 @@ function PartnerRegister() {
               </div>
               <div className='flex items-center justify-center mb-5'>
                 <div className='flex items-center h-5'>
-                  <input id="terms" type="checkbox" value=""
-                    className='' required />
+                  <input id="terms"
+                    type="checkbox"
+                    value="ON"
+                    className=''
+                    required
+                    onChange={handleCheckboxChange}
+                  />
                 </div>
                 <label className="ms-2 text-sm font-medium">Agree to our <a href="#tou" className="underline">Terms of use</a> and <a
                   href='#pp'
@@ -68,8 +126,9 @@ function PartnerRegister() {
               </div>
               <div className='flex items-center justify-center'>
                 <button
-                  className='bg-primary-green hover:bg-teal-900 text-white font-medium border rounded-full w-48 h-12 transition-all duration-300 ease-in-out'
-                  type="submit"
+                  className='bg-primary-green hover:bg-teal-900 disabled:bg-opacity-65 disabled:pointer-events-none text-white font-medium border rounded-full w-48 h-12 transition-all duration-300 ease-in-out'
+                  disabled={!isChecked}
+                  onClick={handleRegister}
                 >
                   Sign up
                 </button>
