@@ -7,9 +7,12 @@ import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import Password from '../components/Password';
 import { useNavigate } from 'react-router-dom';
+import SpinnerLoading from '../components/SpinnerLoading';
 
 function Login(props) {
   const navigate = useNavigate();
+
+  const loading = true;
 
   //CLOSE LOGIN MODAL
   const handleClose = () => {
@@ -40,26 +43,27 @@ function Login(props) {
     }));
   };
 
-  const handleLogin = async () => {
-    await  axiosInstance.post(`/courtstar/auth/token`, formLogin)
-                .then(res => {
-                  const dataObj = res.data;
-                  localStorage.setItem('token', dataObj.data.token);
-                  localStorage.setItem('account_id', dataObj.data.account_id);
-                  localStorage.setItem('role', dataObj.data.role);
-                  handleClose();
-                  navigate('/');
-                  props.setIsLogin(true);
-                  toast.success(dataObj.message, {
-                    toastId: 'login-success'
-                  });
-                })
-                .catch(error => {
-                  toast.error(error.message, {
-                    toastId: 'login-error'
-                  });
-                })
-                .finally();
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    await axiosInstance.post(`/courtstar/auth/token`, formLogin)
+      .then(res => {
+        const dataObj = res.data;
+        localStorage.setItem('token', dataObj.data.token);
+        localStorage.setItem('account_id', dataObj.data.account_id);
+        localStorage.setItem('role', dataObj.data.role);
+        handleClose();
+        navigate('/');
+        props.setIsLogin(true);
+        toast.success(dataObj.message, {
+          toastId: 'login-success'
+        });
+      })
+      .catch(error => {
+        toast.error(error.message, {
+          toastId: 'login-error'
+        });
+      })
+      .finally();
   };
 
   const html = (
@@ -67,7 +71,7 @@ function Login(props) {
       <h2 className="text-4xl font-semibold mb-5 text-center">Log in</h2>
       <p className="text-gray-400 text-sm mb-5 text-center">Don't have account? <a
         href="#s" className="font-semibold underline text-gray-800">Sign up for free</a></p>
-      <div>
+      <form onSubmit={handleLogin}>
         <div className="mb-4">
           <InputText
             id="email"
@@ -90,11 +94,17 @@ function Login(props) {
           />
         </div>
         <div className="flex items-center justify-between mt-4 mb-5 px-0.5">
-          <button onClick={handleForgetPopup} className="text-sm font-semibold underline">Forget password?</button>
+          <div
+            onClick={handleForgetPopup}
+            className="text-sm font-semibold underline cursor-pointer"
+          >
+            Forget password?
+          </div>
         </div>
         <div className='flex items-center justify-center'>
-          <button className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
-            onClick={handleLogin}
+          <button
+            type='submit'
+            className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
           >
             Log in
           </button>
@@ -111,7 +121,7 @@ function Login(props) {
             Continue with Google
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 

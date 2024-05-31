@@ -74,7 +74,7 @@ const Password = (props) => {
         >
           {props.label}
         </label>
-        <button className='px-1.5'
+        <div className='px-1.5'
           onClick={toggleShowPassword}
         >
           {
@@ -84,7 +84,7 @@ const Password = (props) => {
             :
             (<img src={eye} alt="eye" />)
           }
-        </button>
+        </div>
       </div>
       <input
         type={showPassword ? "text" : "password"}
