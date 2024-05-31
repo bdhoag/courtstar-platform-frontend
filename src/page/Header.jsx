@@ -4,6 +4,8 @@ import logo from '../assets/images/logo.svg';
 import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
 import bell from '../assets/images/bell.svg';
+import axiosInstance from '../config/axiosConfig';
+import DropdownHeader from '../components/DropdownHeader'
 
 const Header = () => {
   //HANDLE LOGIN POPUP
@@ -32,6 +34,7 @@ const Header = () => {
   const [role, setRole] = useState('');
   useEffect(() => {
     setRole(localStorage.getItem('role'));
+    if (isLogin) load();
   }, [isLogin]);
 
   useEffect(() => {
@@ -41,6 +44,24 @@ const Header = () => {
     }
   }, [])
 
+  const [account, setAccount] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    role: ""
+  });
+
+  const load = async () => {
+    await axiosInstance.get(`/courtstar/account/myInfor`)
+      .then(res => {
+        setAccount(res.data.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally();
+  };
 
   return (
     <div className='font-Inter text-base overflow-x-hidden'>
@@ -51,7 +72,7 @@ const Header = () => {
             <div>
               <img src={logo}
                 className="w-20 h-20"
-                alt='logo' />
+                alt='logo'  />
             </div>
             <div className="sm:hidden">
               <button type="button"
@@ -127,28 +148,32 @@ const Header = () => {
             )}
 
             {(isLogin === true) && (
-              <div className='flex gap-8 items-center justify-between'>
-                <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
-                  <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0">
-                    <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                      to="/bookingHistory">Booking History</Link>
-                    <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                      to="/profile">Profile</Link>
-                  </div>
-                </div>
-                <div className="flex gap-4 items-center">
-                  <button className='rounded-full w-8 h-8 hover:bg-gray-800 flex justify-center items-center transition-all duration-300 ease-in-out'>
-                    <img src={bell}
-                      alt="bell"
-                    />
-                  </button>
-                  <button className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
-                    onClick={logout}
-                  >
-                    Log out
-                  </button>
-                </div>
+              <div className="flex gap-3">
+                <DropdownHeader userEmail={account.email} logout={logout} />
+                <img src={bell}
+                  alt="bell"
+                />
               </div>
+              // <div className='flex gap-8 items-center justify-between'>
+              //   <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
+              //     <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0">
+              //       <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+              //         to="/bookingHistory">Booking History</Link>
+              //       <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+              //         to="/profile">Profile</Link>
+              //     </div>
+              //   </div>
+              //   <div className="flex gap-4 items-center">
+              //     <button className='rounded-full w-8 h-8 hover:bg-gray-800 flex justify-center items-center transition-all duration-300 ease-in-out'>
+              //
+              //     </button>
+              //     <button className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
+              //       onClick={logout}
+              //     >
+              //       Log out
+              //     </button>
+              //   </div>
+              // </div>
             )}
 
           </div>
