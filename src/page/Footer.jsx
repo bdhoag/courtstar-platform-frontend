@@ -28,10 +28,8 @@ const Footer = () => {
                 </a>
               </div>
               <div>
-                <a href="#privacy"
-                  className='hover:text-gray-300 transition-all duration-200 ease-in-out'>
-                  Privacy
-                </a>
+              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/PrivacyPolicy">Privacy Policy</Link>
               </div>
             </div>
             <div className='basis-1/3 flex flex-col gap-5'>

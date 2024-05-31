@@ -19,7 +19,7 @@ import ManagerRoute from './routes/ManagerRoute';
 import AdminRoute from './routes/AdminRoute';
 import CustomerRoute from './routes/CustomerRoute';
 import AboutUs from './about-us/AboutUs';
-
+import PrivacyPolicy from './about-us/PrivacyPolicy';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -44,6 +44,7 @@ export default function App() {
           <Route path="customerRegister" element={<CustomerRegister />} />
           <Route path="centreBooking" element={<CentreBooking />} />
           <Route path="aboutUs" element={<AboutUs />} />
+          <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
           <Route
             path="myCentre"
             element={
