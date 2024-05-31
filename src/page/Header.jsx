@@ -64,7 +64,7 @@ const Header = () => {
   };
 
   return (
-    <div className='font-Inter text-base overflow-x-hidden'>
+    <div className='font-Inter text-base overflow-x-hidden w-full shadow-lg fixed z-30'>
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-primary-green">
         <nav className="max-w-screen-1440 1440:mx-auto mx-4 w-full sm:flex sm:items-center sm:justify-between">
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import us from '../assets/images/US.svg';
 import vn from '../assets/images/VN.svg';
@@ -8,18 +8,8 @@ const LanguageSelector = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [lang, setLang] = useState(us);
+  const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsOpen(false);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -30,8 +20,21 @@ const LanguageSelector = () => {
     setIsOpen(!isOpen);
   }
 
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative inline-flex">
+    <div className="relative inline-flex" ref={dropdownRef}>
       <button className="py-1 ps-1 pe-3 inline-flex items-center gap-x-2 font-semibold text-white w-28"
         onClick={toggleMenu}>
         <img className="w-5 h-auto rounded-full"

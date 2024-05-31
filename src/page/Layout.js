@@ -8,7 +8,9 @@ import '../assets/css/toast.css';
 const Layout = () => {
   return (
     <div className="relative">
+
       <Header />
+      <div className="min-h-20"></div>
       <Outlet />
       <Footer />
       <ToastContainer draggable/>
