@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 import logo from '../assets/images/logo.svg';
 
 const Footer = () => {
@@ -14,16 +14,12 @@ const Footer = () => {
             />
             <div className='flex flex-col basis-1/3 gap-4'>
               <div>
-                <a href="#aboutUs"
-                  className='hover:text-gray-300 transition-all duration-200 ease-in-out'
-                  >About us
-                </a>
+              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/aboutUs">About us</Link>
               </div>
               <div>
-                <a href="#partnershipRegistration"
-                  className='hover:text-gray-300 transition-all duration-200 ease-in-out'>
-                  Partnership registration
-                </a>
+              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/partnerRegister">Partner Registration</Link>
               </div>
               <div>
                 <a href="#terms"
