@@ -25,6 +25,7 @@ function InputText(props) {
         placeholder={props.placeholder}
         onChange={props.onchange}
         value={props.value}
+        disabled={props.disabled}
       />
     </div>
   );
