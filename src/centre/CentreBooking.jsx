@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import centre from '../assets/images/demo-centre.png';
 // import star from '../assets/images/star.svg';
 // import nostar from '../assets/images/nostar.svg';
@@ -12,7 +12,46 @@ import Slider from '../components/Slider'
 import Pagination from '../components/Pagination';
 import Rating from '../components/Rating';
 import Calendar from '../components/Calendar';
+import axiosInstance from '../config/axiosConfig';
 const CentreBooking = () => {
+  //Function to load customer profile in input field
+  useEffect(() => {
+    load();
+  }, []);
+
+  const [account, setAccount] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    role: ""
+  });
+
+  const [profileForm, setProfileForm] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+  });
+
+
+  useEffect(() => {
+    setProfileForm({
+      fullName: account.firstName + " " + account.lastName,
+      email: account.email,
+      phone: account.phone,
+    });
+  }, [account]);
+
+  const load = async () => {
+    await axiosInstance.get(`/courtstar/account/myInfor`)
+      .then(res => {
+        setAccount(res.data.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally();
+  };
 
   const items = ['Item 1', 'Item 2', 'Item 3'];
 
@@ -45,6 +84,7 @@ const CentreBooking = () => {
     { id: 5, url: centre },
     { id: 6, url: centre }
   ];
+
 
   //List of feedbacks to display in Feedbacks modal
   const apiFeedbacks = [
@@ -314,7 +354,9 @@ const CentreBooking = () => {
               <div className='font-medium mb-10 max-w-2xl w-full relative left-1/3 flex flex-col gap-3'>
                 <div className='relative w-4/5'>
                   <InputText
-                    placeholder="Enter your name"
+                    id="fullName"
+                    name="fullName"
+                    value={profileForm.fullName}
                   />
                   <div className='text-gray-800 absolute top-2.5 -left-24'>
                     Full name*:
@@ -322,7 +364,9 @@ const CentreBooking = () => {
                 </div>
                 <div className='relative w-4/5'>
                   <InputText
-                    placeholder="Enter your phone number"
+                    id="phone"
+                    name="phone"
+                    value={profileForm.phone}
                   />
                   <div className='text-gray-800 absolute top-2.5 -left-[135px]'>
                     Phone number*:
@@ -330,7 +374,9 @@ const CentreBooking = () => {
                 </div>
                 <div className='relative w-4/5'>
                   <InputText
-                    placeholder="Enter your email"
+                    id="email"
+                    name="email"
+                    value={profileForm.email}
                   />
                   <div className='text-gray-800 absolute top-2.5 -left-[64px]'>
                     Email*:
