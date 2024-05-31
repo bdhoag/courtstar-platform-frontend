@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 
 
 const AboutUs = () => {
-    
+
     return (
         <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
             <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
@@ -16,12 +16,12 @@ const AboutUs = () => {
                         <div className='text-3xl font-semibold py-5'>
                             <p className='text-2xl font-semibold py-5 text-center'> COURTSTAR - A healthy body leads to a healthy mind</p>
                             <p className='text-xl font-semibold py-6'> 1. History and Development</p>
-                            <p className='text-base font-normal'>
+                            <div className='text-base font-normal'>
                                 <p>- Founded in 2024 in Vietnam as CourtStar. CourtStar has emerged as Vietnam's leading badminton court booking site.</p>
                                 <p>- CourtStar boasts a dynamic team, embodying youth and energy.</p>
                                 <p>- CourtStar is currently has many badminton courts with good facilities.</p>
                                 <p>- With a team of enthusiastic and dynamic staff. Strict yard approval policies. We are sure that we will bring a great experience to you when booking a badminton court on our website</p>
-                            </p>
+                            </div>
                             <p className='text-xl font-semibold py-6'>2. Mission and Vision</p>
                             <p className='text-lg font-semibold'>Vision</p>
                             <p className='font-normal text-base py-6'>CourStar aspires to be the foremost center in the field of badminton yard in Viet Nam.</p>
@@ -47,7 +47,7 @@ const AboutUs = () => {
                                 <li>Diverse advertising policies.</li>
                                 <li>Improve the reputation of badminton courts.</li>
                             </ul>
-                            
+
 
                         </div>
 
@@ -67,4 +67,3 @@ const AboutUs = () => {
 }
 
 export default AboutUs;
-

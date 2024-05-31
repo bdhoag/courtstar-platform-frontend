@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const PrivacyPolicy = () => {
-    
+
     return (
         <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
             <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
@@ -165,4 +165,3 @@ const PrivacyPolicy = () => {
 }
 
 export default PrivacyPolicy;
-

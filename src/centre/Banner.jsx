@@ -3,7 +3,31 @@ import banner from '../assets/images/banner.png'
 import Dropdown from '../components/Dropdown';
 
 const Banner = () => {
-  const items = ['Item 1', 'Item 2', 'Item 3'];
+  const items = [
+    'Thu Duc City',
+    'District 1',
+    'District 3',
+    'District 4',
+    'District 5',
+    'District 6',
+    'District 7',
+    'District 8',
+    'District 10',
+    'District 11',
+    'District 12',
+    'Binh Tan District',
+    'Binh Thanh District',
+    'Go Vap District',
+    'Phu Nhuan District',
+    'Tan Binh District',
+    'Tan Phu District',
+    'Nha Be Province',
+    'Can Gio Province',
+    'Cu Chi Province',
+    'Hoc Mon Province',
+    'Binh Chanh Province'
+];
+
 
   const handleSelect = (item) => {
     console.log(`Selected: ${item}`);
