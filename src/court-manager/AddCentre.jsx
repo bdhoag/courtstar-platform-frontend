@@ -5,7 +5,7 @@ import centre from '../assets/images/demo-centre.png';
 import Dropdown from '../components/Dropdown';
 import paypal from '../assets/images/paypal-logo.svg';
 function AddCentre(props) {
-  
+
     const items = ['Item 1', 'Item 2', 'Item 3'];
 
     const handleSelect = (item) => {
@@ -105,13 +105,13 @@ function AddCentre(props) {
                 </div>
             </div>
             <div className="bg-white mt-4 mx-auto">
-                <h2 className="text-4xl font-semibold mb-5 text-center">PAYMENT METHOD</h2>
+                <h2 className="text-3xl font-semibold mb-3 text-center">PAYMENT METHOD</h2>
             </div>
             <div>
                 <div>
                     <img src={paypal}
                         alt="demo paypal"
-                        className='h-auto  mx-auto'
+                        className='h-auto mx-auto w-7/12 mb-3'
                     />
                 </div>
                 <div className='mb-4'>
@@ -126,7 +126,7 @@ function AddCentre(props) {
                     <InputText
                         id="Account Number"
                         name="Account Number"
-                        placeholder="Enter account number of Manager'Paypal Account"
+                        placeholder="Enter account number of Manager's Paypal Account"
                         label="Account number"
                     />
                 </div>

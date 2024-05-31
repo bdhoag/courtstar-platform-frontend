@@ -43,7 +43,7 @@ function Profile(){
   }, [account]);
 
   const load =  async () => {
-    await  axiosInstance.get(`/courtstar/account/${localStorage.getItem('account_id')}`)
+    await  axiosInstance.get(`/courtstar/account/myInfor`)
                 .then(res => {
                   setAccount(res.data.data);
                 })
