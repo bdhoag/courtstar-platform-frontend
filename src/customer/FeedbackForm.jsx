@@ -13,13 +13,13 @@ function FeedbackForm(props) {
     }
     const html = (
         <div className='w-[28rem] mx-auto'>
-            <div class="max-w-md mx-auto">
-                <h2 class="text-2xl font-bold mb-3 text-center">Rate us!</h2>
-                <p class="text-gray-600 text-sm mb-3 text-center">
+            <div className='max-w-md mx-auto'>
+                <h2 className='text-2xl font-bold mb-3 text-center'>Rate us!</h2>
+                <p className='text-gray-600 text-sm mb-3 text-center'>
                     Your feedback is useful for us to understand your needs, <br />so we can customize our services to suit you perfectly.
                 </p>
-                <div class="mb-3">
-                    <p class="text-gray-700 font-semibold text-center">How would your rate our centre?</p>
+                <div className='mb-3'>
+                    <p className='text-gray-700 font-semibold text-center'>How would your rate our centre?</p>
                 </div>
                 <div>
                     <img src={centre}
@@ -35,7 +35,7 @@ function FeedbackForm(props) {
                         editable={true}
                     />
                 </div>
-                <div class="mb-3">
+                <div className='mb-3'>
                     <label class="block text-gray-700 font-bold mb-2" for="comment">
                         Add a comment...
                     </label>
@@ -45,7 +45,7 @@ function FeedbackForm(props) {
 
                 /> */}
                     <textarea
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         id="comment"
                         rows="3"
                         placeholder="Enter your comment here..."
@@ -54,7 +54,7 @@ function FeedbackForm(props) {
                 </div>
                 <div class="flex justify-center">
                     <button
-                        class="bg-primary-green hover:bg-teal-900 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                        className='bg-primary-green hover:bg-teal-900 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline'
                         type="submit"
                     >
                         Send now

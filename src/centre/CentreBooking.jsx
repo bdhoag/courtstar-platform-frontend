@@ -5,75 +5,76 @@ import centre from '../assets/images/demo-centre.png';
 import mappin from '../assets/images/map-pin.svg';
 import mail from '../assets/images/mail.svg';
 import banner from '../assets/images/banner.png';
-import InputText from '../components/InputText';
-import Dropdown from '../components/Dropdown';
-import CustPayment from '../payment/CustPayment';
+// import InputText from '../components/InputText';
+// import Dropdown from '../components/Dropdown';
+// import CustPayment from '../payment/CustPayment';
 import Slider from '../components/Slider'
 import Pagination from '../components/Pagination';
 import Rating from '../components/Rating';
 import Calendar from '../components/Calendar';
 import axiosInstance from '../config/axiosConfig';
+import BookingForm from './BookingForm';
 const CentreBooking = () => {
-  //Function to load customer profile in input field
-  useEffect(() => {
-    load();
-  }, []);
+  // //Function to load customer profile in input field
+  // useEffect(() => {
+  //   load();
+  // }, []);
 
-  const [account, setAccount] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    role: ""
-  });
+  // const [account, setAccount] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   phone: "",
+  //   role: ""
+  // });
 
-  const [profileForm, setProfileForm] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-  });
+  // const [profileForm, setProfileForm] = useState({
+  //   fullName: "",
+  //   email: "",
+  //   phone: "",
+  // });
 
 
-  useEffect(() => {
-    setProfileForm({
-      fullName: account.firstName + " " + account.lastName,
-      email: account.email,
-      phone: account.phone,
-    });
-  }, [account]);
+  // useEffect(() => {
+  //   setProfileForm({
+  //     fullName: account.firstName + " " + account.lastName,
+  //     email: account.email,
+  //     phone: account.phone,
+  //   });
+  // }, [account]);
 
-  const load = async () => {
-    await axiosInstance.get(`/courtstar/account/myInfor`)
-      .then(res => {
-        setAccount(res.data.data);
-      })
-      .catch(error => {
-        console.log(error.message);
-      })
-      .finally();
-  };
+  // const load = async () => {
+  //   await axiosInstance.get(`/courtstar/account/myInfor`)
+  //     .then(res => {
+  //       setAccount(res.data.data);
+  //     })
+  //     .catch(error => {
+  //       console.log(error.message);
+  //     })
+  //     .finally();
+  // };
 
-  const items = ['Item 1', 'Item 2', 'Item 3'];
+  // const items = ['Item 1', 'Item 2', 'Item 3'];
 
-  const handleSelect = (item) => {
-    console.log(`Selected: ${item}`);
-  };
+  // const handleSelect = (item) => {
+  //   console.log(`Selected: ${item}`);
+  // };
 
-  //HANDLE  POPUP
-  const [custPaymentPopup, setCustPaymentPopup] = useState(false);
-  const handleCustPaymentPopup = () => {
-    setCustPaymentPopup(true);
+  //HANDLE BOOKING FORM POPUP
+  const [bookingFormPopup, setBookingFormPopup] = useState(false);
+  const handleBookingFormPopup = () => {
+    setBookingFormPopup(true);
   }
-  const handleCustPaymentPopupClose = () => {
-    setCustPaymentPopup(false)
+  const handleBookingFormPopupClose = () => {
+    setBookingFormPopup(false)
   }
-  // State to keep track of the selected value in the booking type radio buttons
-  const [selectedValue, setSelectedValue] = useState(0);
+  // // State to keep track of the selected value in the booking type radio buttons
+  // const [selectedValue, setSelectedValue] = useState(0);
 
-  // Function to handle changes in the booking type radio buttons
-  const handleChange = (value) => {
-    setSelectedValue(value);
-  };
+  // // Function to handle changes in the booking type radio buttons
+  // const handleChange = (value) => {
+  //   setSelectedValue(value);
+  // };
 
   // List of images to be displayed in the image carousel
   const imagesDemoList = [
@@ -491,7 +492,7 @@ const CentreBooking = () => {
                 </div>
               </div> */}
               <div className="">
-                <Calendar handleButton={handleCustPaymentPopup} typeOfCalendar='booking' />
+                <Calendar handleButton={handleBookingFormPopup} typeOfCalendar='booking' />
               </div>
             </div>
           </div>
@@ -509,9 +510,9 @@ const CentreBooking = () => {
 
         </div>
       </div>
-      <CustPayment
-        isOpen={custPaymentPopup}
-        setIsOpen={handleCustPaymentPopupClose}
+      <BookingForm
+        isOpen={bookingFormPopup}
+        setIsOpen={handleBookingFormPopupClose}
       />
     </div>
   );
