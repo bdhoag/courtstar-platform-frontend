@@ -51,7 +51,7 @@ const Header = () => {
             <div>
               <img src={logo}
                 className="w-20 h-20"
-                alt='logo'/>
+                alt='logo' />
             </div>
             <div className="sm:hidden">
               <button type="button"
@@ -66,9 +66,9 @@ const Header = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round">
-                    <line x1="3" x2="21" y1="6" y2="6"/>
-                    <line x1="3" x2="21" y1="12" y2="12"/>
-                    <line x1="3" x2="21" y1="18" y2="18"/>
+                  <line x1="3" x2="21" y1="6" y2="6" />
+                  <line x1="3" x2="21" y1="12" y2="12" />
+                  <line x1="3" x2="21" y1="18" y2="18" />
                 </svg>
                 <svg className="hidden flex-shrink-0 size-4"
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ const Header = () => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round">
-                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                  <path d="M18 6 6 18" /><path d="m6 6 12 12" />
                 </svg>
               </button>
             </div>
@@ -90,19 +90,19 @@ const Header = () => {
             <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
               <Link className="font-medium text-white transition-all ease-in-out duration-300"
                 to="/">Home</Link>
-              <a className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                href="#aboutUs">About us</a>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-              to="/partnerRegister">Partner Register</Link>
+                to="/aboutUs">About us</Link>
+              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/partnerRegister">Partner Register</Link>
               {
                 role?.includes('ADMIN') &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/admin">My Dashboard</Link>
+                  to="/admin">My Dashboard</Link>
               }
               {
                 (role?.includes('ADMIN') || role?.includes('CENTRE_MANAGER') || role?.includes('CENTRE_MANAGER')) &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/myCentre">My Centre</Link>
+                  to="/myCentre">My Centre</Link>
               }
             </div>
           </div>

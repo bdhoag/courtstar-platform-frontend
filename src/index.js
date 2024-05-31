@@ -18,6 +18,7 @@ import SpinnerLoading from './components/SpinnerLoading';
 import ManagerRoute from './routes/ManagerRoute';
 import AdminRoute from './routes/AdminRoute';
 import CustomerRoute from './routes/CustomerRoute';
+import AboutUs from './about-us/AboutUs';
 
 
 export default function App() {
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="partnerRegister" element={<PartnerRegister />} />
           <Route path="customerRegister" element={<CustomerRegister />} />
           <Route path="centreBooking" element={<CentreBooking />} />
+          <Route path="aboutUs" element={<AboutUs />} />
           <Route
             path="myCentre"
             element={
