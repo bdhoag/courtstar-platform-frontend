@@ -91,18 +91,16 @@ const Header = () => {
               <Link className="font-medium text-white transition-all ease-in-out duration-300"
                 to="/">Home</Link>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/listOfCentre">List of Centre</Link>
-              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 to="/aboutUs">About us</Link>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 to="/partnerRegister">Partner Register</Link>
               {
-                role === 'ADMIN' &&
+                role?.includes('ADMIN') &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                   to="/admin">My Dashboard</Link>
               }
               {
-                (role === 'ADMIN' || role === 'CENTRE_MANAGER' || role === 'CENTRE_STAFF') &&
+                (role?.includes('ADMIN') || role?.includes('CENTRE_MANAGER') || role?.includes('CENTRE_MANAGER')) &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                   to="/myCentre">My Centre</Link>
               }

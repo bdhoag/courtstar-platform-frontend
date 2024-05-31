@@ -1,25 +1,30 @@
 import InputText from '../components/InputText';
-import PopupModal from '../components/PopupModal';
+import Dialog from '../components/Dialog';
 import React from 'react';
 import centre from '../assets/images/demo-centre.png';
 import Dropdown from '../components/Dropdown';
-import paypal from '../assets/images/paypal-logo.png';
+import paypal from '../assets/images/paypal-logo.svg';
 function AddCentre(props) {
+  
+    const items = ['Item 1', 'Item 2', 'Item 3'];
 
-    //CLOSE ADD 
+    const handleSelect = (item) => {
+        console.log(`Selected: ${item}`);
+    };
+
+    //CLOSE ADD
     const handleClose = () => {
         props.setIsOpen();
     }
     const html = (
-        <div className="bg-white mt-4 mx-auto">
-            <h2 className="text-4xl font-semibold mb-5 text-center">CENTRE INFORMATION</h2>
+        <div>
             <div>
                 <img src={centre}
                     alt="demo centre"
-                    className='h-auto max-w-lg mx-auto'
+                    className='h-auto mx-auto'
                 />
             </div>
-            <div className='flex gap-2 my-2 py-1.5 border rounded-md bg-white overflow-hidden mx-auto max-w-lg'>
+            <div className='flex gap-2 my-2 py-1.5 border rounded-md bg-white overflow-hidden mx-auto'>
                 <img src={centre}
                     alt="demo centre"
                     className='w-1/4 rounded-lg'
@@ -41,7 +46,7 @@ function AddCentre(props) {
                     className='w-1/4 rounded-lg'
                 />
             </div>
-            <div className='max-w-lg mx-auto'>
+            <div className='mx-auto'>
                 <div className='mb-4'>
                     <InputText
                         id="email"
@@ -75,31 +80,27 @@ function AddCentre(props) {
                     />
                 </div>
             </div>
-            <div className='max-w-lg mx-auto'>
+            <div className='mx-auto'>
                 <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold'>
                     Open Time:
                 </div>
                 <div className='flex gap-4 items-center w-1/2'>
                     <Dropdown
-                        placeholder="_hour"
-                    />
-                    :
-                    <Dropdown
-                        placeholder="_minute"
+                        placeholder="Select role"
+                        items={items}
+                        onSelect={handleSelect}
                     />
                 </div>
             </div>
-            <div className='max-w-lg mx-auto'>
+            <div className='mx-auto'>
                 <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold'>
                     to:
                 </div>
                 <div className='flex gap-4 items-center w-1/2'>
                     <Dropdown
-                        placeholder="_hour"
-                    />
-                    :
-                    <Dropdown
-                        placeholder="_minute"
+                        placeholder="Select role"
+                        items={items}
+                        onSelect={handleSelect}
                     />
                 </div>
             </div>
@@ -110,7 +111,7 @@ function AddCentre(props) {
                 <div>
                     <img src={paypal}
                         alt="demo paypal"
-                        className='h-auto max-w-lg mx-auto'
+                        className='h-auto  mx-auto'
                     />
                 </div>
                 <div className='mb-4'>
@@ -121,7 +122,7 @@ function AddCentre(props) {
                         label="Manager Name"
                     />
                 </div>
-                <div className='mb-4'>
+                <div className=''>
                     <InputText
                         id="Account Number"
                         name="Account Number"
@@ -135,10 +136,11 @@ function AddCentre(props) {
     )
     return (
         <div>
-            <PopupModal
+            <Dialog
                 html={html}
                 isOpen={props.isOpen}
                 setIsOpen={handleClose}
+                title='centre information'
             />
         </div>
     );

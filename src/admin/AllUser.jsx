@@ -1,6 +1,12 @@
 import Dropdown from "../components/Dropdown";
 import InputText from "../components/InputText";
 const AllUser = () => {
+
+  const items = ['Item 1', 'Item 2', 'Item 3'];
+
+  const handleSelect = (item) => {
+    console.log(`Selected: ${item}`);
+  };
   return (
     <div className="py-5 px-7">
       <div className="flex justify-between">
@@ -39,6 +45,8 @@ const AllUser = () => {
             <div className="font-semibold mb-2">Role</div>
             <Dropdown
               placeholder="Select role"
+              items={items}
+              onSelect={handleSelect}
             />
           </div>
           <div className=""></div>

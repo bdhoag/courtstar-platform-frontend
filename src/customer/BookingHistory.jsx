@@ -1,14 +1,29 @@
-import React from 'react';
-import star from '../assets/images/star.svg';
-import nostar from '../assets/images/nostar.svg';
+import React, { useState } from 'react';
+// import star from '../assets/images/star.svg';
+// import nostar from '../assets/images/nostar.svg';
 import centre from '../assets/images/demo-centre.png'
+import FeedbackForm from './FeedbackForm'
+import Rating from '../components/Rating';
 
 const BookingHistory = () => {
+
+  //HANDLE FEEDBACK POPUP
+  const [feedbackPopup, setFeedbackPopup] = useState(false);
+  const handleFeedbackPopup = () => {
+    setFeedbackPopup(true);
+  }
+  const handleFeedbackPopupClose = () => {
+    setFeedbackPopup(false)
+  }
 
   const centreList = Array.from({ length: 10 }, (_, index) => index);
 
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
+      <FeedbackForm
+        isOpen={feedbackPopup}
+        setIsOpen={handleFeedbackPopupClose}
+      />
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
         <div className="max-w-screen-1440 1440:mx-auto mx-4 py-10 px-12 w-full flex flex-col gap-4 items-center justify-between">
           <div className='font-bold text-3xl uppercase text-start w-full pb-5 pl-2'>
@@ -44,7 +59,8 @@ const BookingHistory = () => {
                     <span className='font-semibold text-rose-600'>200.000₫/h</span>
                   </div>
                   <div className='text-sm flex justify-center gap-20'>
-                    <button className='block text-center py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'>
+                    <button className='block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300'
+                      onClick={handleFeedbackPopup}>
                       Feedback
                     </button>
                   </div>
@@ -80,13 +96,11 @@ const BookingHistory = () => {
                       <span className='font-semibold text-rose-600'>200.000₫/h</span>
                     </div>
                     <div className='text-sm flex justify-center gap-20'>
-                      <div className='flex gap-1'>
-                        <img src={star} alt="Star" className='cursor-pointer w-5' />
-                        <img src={star} alt="Star" className='cursor-pointer w-5' />
-                        <img src={star} alt="Star" className='cursor-pointer w-5' />
-                        <img src={star} alt="Star" className='cursor-pointer w-5' />
-                        <img src={nostar} alt="NoStar" className='cursor-pointer w-5' />
-                      </div>
+                      <Rating
+                        ratingWrapper='flex gap-1'
+                        value={4}
+                        editable={false}
+                      />
                     </div>
                   </div>
                 </div>
