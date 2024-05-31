@@ -33,6 +33,18 @@ const LanguageSelector = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsOpen(false);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div className="relative inline-flex" ref={dropdownRef}>
       <button className="py-1 ps-1 pe-3 inline-flex items-center gap-x-2 font-semibold text-white w-28"
