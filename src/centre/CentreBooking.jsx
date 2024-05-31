@@ -310,8 +310,8 @@ const CentreBooking = () => {
               />
               <span className='text-3xl font-medium'>Booking</span>
             </div>
-            <div className='bg-white rounded-b-lg p-8'>
-              <div className='font-medium mb-10 max-w-2xl w-full relative left-1/3 flex flex-col gap-3'>
+            <div className='bg-white rounded-b-lg p-8 pt-0'>
+              {/* <div className='font-medium mb-10 max-w-2xl w-full relative left-1/3 flex flex-col gap-3'>
                 <div className='relative w-4/5'>
                   <InputText
                     placeholder="Enter your name"
@@ -443,15 +443,14 @@ const CentreBooking = () => {
                     Note:
                   </div>
                 </div>
+              </div> */}
+              <div className="">
+                <Calendar handleButton={handleCustPaymentPopup} typeOfCalendar='booking' />
               </div>
-              <button className='w-full bg-primary-green py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'
-                onClick={handleCustPaymentPopup}>
-                Book Now
-              </button>
             </div>
           </div>
 
-          <Calendar />
+
 
           <div className='flex-1 bg-white rounded-lg shadow-gray-400 shadow-md'>
             <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
