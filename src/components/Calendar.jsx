@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Dropdown from './Dropdown'
 import moment from 'moment';
-import x from '../assets/images/x.svg';
 
 export default function Calendar(props) {
 
@@ -47,6 +46,13 @@ export default function Calendar(props) {
     setCurrentWeekIndex(index);
   };
 
+  // handle select field
+  const [currentFieldIndex, setCurrentFieldIndex] = useState(0);
+  const fieldItems = ['Field 1', 'Field 2', 'Field 3'];
+  const handleSelectField = (item) => {
+    console.log(`Selected: ${item}`);
+  };
+
   //HANDLE < > BUTTON
   const goNext = () => {
     handleSelectWeek(weekItems[currentWeekIndex + 1]);
@@ -77,6 +83,13 @@ export default function Calendar(props) {
                   onSelect={handleSelectWeek}
                 />
               </div>
+              <div className='w-32'>
+                <Dropdown
+                  items={fieldItems}
+                  onSelect={handleSelectField}
+                  initialValue={fieldItems[currentFieldIndex]}
+                />
+              </div>
               <div className="flex text-gray-500">
                 <button className="p-1 hover:text-gray-800 transition-all duration-200 ease-in-out disabled:text-gray-300"
                   onClick={goPrevious}
@@ -103,10 +116,10 @@ export default function Calendar(props) {
             <div className="flex gap-5">
 
               <button className='w-full bg-primary-green p-2 rounded-md text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-semibold'
-              onClick={props.handleButton}
+                onClick={props.handleButton}
               >
                 {typeOfCalendar === 'booking' ?
-                'Book now' : 'Check in'
+                  'Book now' : 'Check in'
                 }
               </button>
             </div>
