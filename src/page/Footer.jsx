@@ -22,10 +22,13 @@ const Footer = () => {
                 to="/partnerRegister">Partner Registration</Link>
               </div>
               <div>
-                <a href="#terms"
-                  className='hover:text-gray-300 transition-all duration-200 ease-in-out'>
-                  Terms
-                </a>
+              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/CustomerTerm">Term for Customer</Link>
+              </div>
+              <div>
+                
+              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/PartnerTerm">Term for Partner</Link>
               </div>
               <div>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
