@@ -58,13 +58,22 @@ function Pagination(props) {
       <div className="font-bold text-lg">
         {props.title}
       </div>
-      <div className="">
+      <div className="flex gap-1 items-center">
         <Dropdown
           placeholder=""
           items={items}
           onSelect={handleSelect}
         />
+        <Dropdown
+          placeholder=""
+          items={items}
+          onSelect={handleSelect}
+        />
+        <Rating
+          ratingWrapper='flex'
+        />
       </div>
+
       <div className="p-4 divide-y-2">
         {paginatedFeedbacks.map((feedback) => (
           <div key={feedback.id} className="flex flex-col gap-1.5 py-4">
