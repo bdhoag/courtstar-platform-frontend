@@ -33,7 +33,12 @@ export default function App() {
   }, []);
 
   if (loading) {
-    return <SpinnerLoading />
+    return  <SpinnerLoading 
+              type='page'
+              height='80'
+              width='80'
+              color='#2B5A50'
+            />
   }
 
   return (
