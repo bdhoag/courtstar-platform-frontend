@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/images/logo.svg';
 import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
-import bell from '../assets/images/bell.svg';
 import axiosInstance from '../config/axiosConfig';
 import DropdownHeader from '../components/DropdownHeader'
+import BellNotification from '../components/BellNotification';
 
 const Header = () => {
   //HANDLE LOGIN POPUP
@@ -62,6 +62,22 @@ const Header = () => {
       })
       .finally();
   };
+  // Mock notifications for demonstration purposes
+  const apiNotifications = [
+    {
+      id: 1, message: "Your centre booking is about to begin",
+      time: "1 minute ago"
+    },
+    {
+      id: 2, message: "There's a new centre needs approval",
+      time: "1 hour ago"
+    }
+  ]
+
+  const handleNotificationClick = (notification) => {
+    console.log("Notification clicked:", notification);
+    // Mark the notification as read or handle the click as necessary
+  };
 
   return (
     <div className='font-Inter text-base overflow-x-hidden w-full shadow-lg fixed z-30'>
@@ -72,7 +88,7 @@ const Header = () => {
             <div>
               <img src={logo}
                 className="w-20 h-20"
-                alt='logo'  />
+                alt='logo' />
             </div>
             <div className="sm:hidden">
               <button type="button"
@@ -150,8 +166,9 @@ const Header = () => {
             {(isLogin === true) && (
               <div className="flex gap-3">
                 <DropdownHeader userEmail={account.email} logout={logout} />
-                <img src={bell}
-                  alt="bell"
+                <BellNotification
+                  notifications={apiNotifications}
+                  onNotificationClick={handleNotificationClick}
                 />
               </div>
               // <div className='flex gap-8 items-center justify-between'>
