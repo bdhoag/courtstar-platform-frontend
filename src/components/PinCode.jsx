@@ -1,18 +1,29 @@
+import { useEffect, useRef } from 'react';
 import PinInput from 'react-pin-input';
 
 const PinCode = (props) => {
+
+  const pinRef = useRef(null);
+
+  useEffect(() => {
+    if (props.clear && pinRef.current) {
+      pinRef.current.clear();
+    }
+  }, [props.clear]);
+
   return (
     <PinInput
+      ref={pinRef}
       length={6}
-      initialValue=""
-      onChange={(value, index) => {}}
+      initialValue={props.value}
+      onChange={(value, index) => props.onChange(value)}
       type="numeric"
       inputMode="number"
       style={{
-        padding: '20px',
+        padding: '18px',
         display: 'flex',
         justifyContent: 'space-evenly',
-        gap: '10px'
+        gap: '5px'
       }}
       inputStyle={{
         borderColor: '#e5e7eb',
@@ -20,7 +31,7 @@ const PinCode = (props) => {
         borderRadius: '6px',
       }}
       inputFocusStyle={{borderColor: '#6b7280'}}
-      onComplete={(value, index) => {}}
+      onComplete={props.onComplete}
       autoSelect={true}
       regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
     />

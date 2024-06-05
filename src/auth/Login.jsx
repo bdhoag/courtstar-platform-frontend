@@ -1,7 +1,7 @@
 import google from '../assets/images/google.svg';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ForgotPassword from './ForgotPassword';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
@@ -70,6 +70,14 @@ function Login(props) {
         }
       );
   };
+
+  useEffect(() => {
+    if (props.isOpen)
+      setFormLogin({
+        email: '',
+        password: '',
+      });
+  }, [props.isOpen])
 
   const html = (
     <div className="w-[440px]">
