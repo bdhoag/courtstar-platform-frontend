@@ -4,14 +4,17 @@ import PopupModal from '../components/PopupModal';
 import ResetPassword from './ResetPassword';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
+import Button from '../components/Button';
 
 function ForgotPassword(props) {
+  const [loading, setLoading] = useState(false);
   //HANDLE CHECK EMAIL POPUP
   const [checkEmailPopup, setCheckEmailPopup] = useState(false);
   const [otpTimeCount, setOtpTimeCount] = useState('');
 
   const handleCheckEmailPopup = async (event) => {
     event.preventDefault();
+    setLoading(true);
     await axiosInstance.put(`/courtstar/account/regenerate-otp`, email)
       .then((res) => {
         setOtpTimeCount(res.data.data);
@@ -25,6 +28,7 @@ function ForgotPassword(props) {
       })
       .finally(
         () => {
+          setLoading(false);
         }
       );
 
@@ -70,12 +74,15 @@ function ForgotPassword(props) {
           />
         </div>
         <div>
-          <button
-            className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
+          <Button
+            label='Send Code'
+            fullWidth
+            fullRounded
+            size='medium'
+            className='bg-primary-green hover:bg-teal-900 text-white'
+            loading={loading}
             onClick={handleCheckEmailPopup}
-          >
-            Send Code
-          </button>
+          />
         </div>
       </div>
     </div>

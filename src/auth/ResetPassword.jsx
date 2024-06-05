@@ -5,8 +5,12 @@ import Password from '../components/Password';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import SpinnerLoading from '../components/SpinnerLoading';
+import Button from '../components/Button';
 
 function ResetPassword(props) {
+  const [loading, setLoading] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
   // State object for email, OTP, and new password fields
   const [formData, setFormData] = useState({
     email: '',
@@ -32,6 +36,7 @@ function ResetPassword(props) {
 
   // Function to handle form submission
   const handleSubmit = async (event) => {
+    setConfirmLoading(true);
     event.preventDefault();
     await axiosInstance.post(`/courtstar/account/reset-password`, formData)
       .then(() => {
@@ -44,7 +49,11 @@ function ResetPassword(props) {
         toast.error(error.message, {
           toastId: 'reset-password-error'
         });
-      });
+      })
+      .finally(() => {
+        setConfirmLoading(false);
+      })
+      ;
   };
 
   // Function to handle OTP input change
@@ -83,6 +92,7 @@ function ResetPassword(props) {
 
 
   const resendCode = async () => {
+    setLoading(true);
     await axiosInstance.put(`/courtstar/account/regenerate-otp`, props.email)
       .then((res) => {
         setOtpTime(res.data.data);
@@ -93,6 +103,7 @@ function ResetPassword(props) {
         });
       }).finally(
         () => {
+          setLoading(false);
         }
       )
   };
@@ -173,19 +184,32 @@ function ResetPassword(props) {
 
         <div className='text-sm text-center justify-center text-gray-400'>
           Haven't got the email yet?
-          <div className={resendCodeCount ? `font-semibold text-red-500` : `font-semibold text-gray-800 cursor-pointer hover:text-primary-green`} onClick={resendCode}>
+          {
+            loading
+            ?
+              <SpinnerLoading
+                type='button'
+                height='20'
+                width='20'
+                color='#000'
+              />
+            :
+            <div className={resendCodeCount ? `font-semibold text-red-500` : `font-semibold text-gray-800 cursor-pointer hover:text-primary-green`} onClick={resendCode}>
             {resendCodeCount ? <p>{formatTime(cooldownTime)}</p> : 'Resend'}
-          </div>
+          </div>}
         </div>
       </div>
 
       <div className='flex items-center justify-center'>
-        <button
-          className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
+        <Button
+          label='Confirm'
+          fullWidth
+          fullRounded
+          size='medium'
+          className='bg-primary-green hover:bg-teal-900 text-white'
+          loading={confirmLoading}
           onClick={handleSubmit}
-        >
-          Confirm
-        </button>
+        />
       </div>
     </div>
   );
