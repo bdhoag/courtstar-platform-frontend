@@ -164,7 +164,7 @@ const Header = () => {
             )}
 
             {(isLogin === true) && (
-              <div className="flex gap-3">
+              <div className="flex items-center gap-3">
                 <DropdownHeader userEmail={account.email} logout={logout} />
                 <BellNotification
                   notifications={apiNotifications}

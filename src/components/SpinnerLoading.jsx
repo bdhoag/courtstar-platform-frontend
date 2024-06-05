@@ -1,17 +1,24 @@
 import React from 'react'
 import { ColorRing } from 'react-loader-spinner';
 
-export default function SpinnerLoading() {
+export default function SpinnerLoading(props) {
+  /**
+   * ALL PROPS
+   * type: 'page' || 'button'
+   * height: string
+   * width: string
+   * color: string
+   */
   return (
-    <div className='h-screen w-screen flex items-center justify-center'>
+    <div className={`${props.type === 'page' ? 'h-screen w-screen' : ''} flex items-center justify-center`}>
       <ColorRing
         visible={true}
-        height="80"
-        width="80"
+        height={props.height}
+        width={props.width}
         ariaLabel="color-ring-loading"
         wrapperStyle={{}}
         wrapperClass="color-ring-wrapper"
-        colors={['#2B5A50','#2B5A50','#2B5A50','#2B5A50','#2B5A50']}
+        colors={[props.color,props.color,props.color,props.color,props.color]}
         />
     </div>
 

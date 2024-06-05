@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import banner from '../assets/images/banner.png'
 import Dropdown from '../components/Dropdown';
+import Button from '../components/Button';
 
 const Banner = () => {
   const items = [
@@ -26,8 +27,9 @@ const Banner = () => {
     'Cu Chi Province',
     'Hoc Mon Province',
     'Binh Chanh Province'
-];
+  ];
 
+  const [loading, setLoading] = useState(false);
 
   const handleSelect = (item) => {
     console.log(`Selected: ${item}`);
@@ -50,9 +52,20 @@ const Banner = () => {
             items={items}
             onSelect={handleSelect}
           />
-          <button className='bg-primary-green w-full rounded-full py-2.5 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out'>
-            Find
-          </button>
+          <Button 
+            label='Find'
+            fullWidth
+            fullRounded
+            size='medium'
+            className='bg-primary-green hover:bg-teal-900 text-white'
+            loading={loading}
+            onClick={() => {
+              setLoading(true);
+              setTimeout(() => {
+                setLoading(false);
+              }, 3000);
+            }}
+          />
         </div>
       </div>
     </div>

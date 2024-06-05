@@ -7,12 +7,12 @@ import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import Password from '../components/Password';
 import { useNavigate } from 'react-router-dom';
-import SpinnerLoading from '../components/SpinnerLoading';
+import Button from '../components/Button';
 
 function Login(props) {
   const navigate = useNavigate();
 
-  const loading = true;
+  const [loading, setLoading] = useState(false);
 
   //CLOSE LOGIN MODAL
   const handleClose = () => {
@@ -45,6 +45,7 @@ function Login(props) {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setLoading(true);
     await axiosInstance.post(`/courtstar/auth/token`, formLogin)
       .then(res => {
         const dataObj = res.data;
@@ -63,7 +64,11 @@ function Login(props) {
           toastId: 'login-error'
         });
       })
-      .finally();
+      .finally(
+        () => {
+          setLoading(false);
+        }
+      );
   };
 
   const html = (
@@ -102,12 +107,15 @@ function Login(props) {
           </div>
         </div>
         <div className='flex items-center justify-center'>
-          <button
+          <Button 
             type='submit'
-            className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
-          >
-            Log in
-          </button>
+            label='Log in'
+            fullWidth
+            fullRounded
+            size='medium'
+            className='bg-primary-green hover:bg-teal-900 text-white'
+            loading={loading}
+          />
         </div>
         <div className='flex justify-center mt-4 '>
           <button
