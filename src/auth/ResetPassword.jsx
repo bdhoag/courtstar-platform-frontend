@@ -4,6 +4,7 @@ import PinCode from '../components/PinCode';
 import Password from '../components/Password';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 
 function ResetPassword(props) {
   // State object for email, OTP, and new password fields
@@ -71,41 +72,53 @@ function ResetPassword(props) {
       }));
       setClearPin(true);
       setTimeout(() => setClearPin(false), 100);
+      setResendCodeCount(true);
     }
   }, [props.isOpen]);
 
   // States and function for handling OTP resend cooldown
-  const [resendCodeCount, setResendCodeCount] = useState(false);
+  const [resendCodeCount, setResendCodeCount] = useState(true);
   const [cooldownTime, setCooldownTime] = useState(0); // Cooldown time in seconds
+  const [otpTime, setOtpTime] = useState('');
+
 
   const resendCode = async () => {
-    if (resendCodeCount) {
-      return;
-    }
     await axiosInstance.put(`/courtstar/account/regenerate-otp`, props.email)
-      .then(() => {
+      .then((res) => {
+        setOtpTime(res.data.data);
         setResendCodeCount(true);
-        setCooldownTime(60 * 3); // Set cooldown time to 3 minutes
       }).catch(error => {
         toast.error(error.message, {
           toastId: 'email-error'
         });
-      });
+      }).finally(
+        () => {
+        }
+      )
   };
+
+  useEffect(() => {
+    setOtpTime(props.otpTime);
+  }, [props.otpTime]);
+
+  const [currentTime, setCurrentTime] = useState(moment().unix());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(moment().unix());
+    }, 1000); // Cập nhật thời gian mỗi giây
+
+    return () => clearInterval(intervalId); // Hủy bỏ interval khi component bị unmount
+  }, []);
 
   // Timer effect to handle cooldown countdown
   useEffect(() => {
-    if (cooldownTime <= 0) {
-      setResendCodeCount(false);
-      return;
+    if (otpTime) {
+      let timeCount = 60 * 3 - (currentTime - parseInt(otpTime));
+      if (timeCount > 0) setCooldownTime(timeCount);
+      else setResendCodeCount(false);
     }
-
-    const timer = setInterval(() => {
-      setCooldownTime((prevTime) => prevTime - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [cooldownTime]);
+  }, [otpTime, currentTime]);
 
   // Function to format cooldown time in MM:SS format
   const formatTime = (seconds) => {

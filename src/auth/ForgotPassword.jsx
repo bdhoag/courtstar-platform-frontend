@@ -8,11 +8,13 @@ import { toast } from 'react-toastify';
 function ForgotPassword(props) {
   //HANDLE CHECK EMAIL POPUP
   const [checkEmailPopup, setCheckEmailPopup] = useState(false);
+  const [otpTimeCount, setOtpTimeCount] = useState('');
 
   const handleCheckEmailPopup = async (event) => {
     event.preventDefault();
     await axiosInstance.put(`/courtstar/account/regenerate-otp`, email)
-      .then(() => {
+      .then((res) => {
+        setOtpTimeCount(res.data.data);
         handleClose();
         setCheckEmailPopup(true);
       })
@@ -21,7 +23,10 @@ function ForgotPassword(props) {
           toastId: 'email-error'
         });
       })
-      .finally();
+      .finally(
+        () => {
+        }
+      );
 
   };
   const handleCheckEmailPopupClose = () => {
@@ -51,7 +56,7 @@ function ForgotPassword(props) {
         Forgot Password
       </div>
       <div className="text-gray-400 text-sm mb-5 text-center">
-        Enter your email and we'll send you a link to get back into your account
+        Enter your email and we'll send you a code to verify your email!
       </div>
       <div>
         <div className='mb-4'>
@@ -87,6 +92,7 @@ function ForgotPassword(props) {
         isOpen={checkEmailPopup}
         setIsOpen={handleCheckEmailPopupClose}
         email={email}
+        otpTime={otpTimeCount}
       />
     </div>
   );
