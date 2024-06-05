@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import InputText from '../components/InputText';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
+import SpinnerLoading from '../components/SpinnerLoading';
+import Button from '../components/Button';
 
 function Profile() {
+
+  const [loading, setLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
 
   useEffect(() => {
     load();
@@ -42,6 +47,7 @@ function Profile() {
   }, [account]);
 
   const load = async () => {
+    setLoading(true);
     await axiosInstance.get(`/courtstar/account/myInfor`)
       .then(res => {
         setAccount(res.data.data);
@@ -49,10 +55,15 @@ function Profile() {
       .catch(error => {
         console.log(error.message);
       })
-      .finally();
+      .finally(
+        () => {
+          setLoading(false);
+        }
+      );
   };
 
   const handleUpdate = async () => {
+    setUpdateLoading(true);
     const { email, ...updateData } = profileForm;
     try {
       await axiosInstance.put(`/courtstar/account/${localStorage.getItem('account_id')}`, updateData);
@@ -64,10 +75,22 @@ function Profile() {
       toast.error(error.message, {
         toastId: 'update-error'
       });
+    } finally {
+      setUpdateLoading(false);
     }
   };
 
   return (
+    loading 
+    ? 
+    <div className='h-[652px] flex items-center justify-center'>
+      <SpinnerLoading
+        height='80'
+        width='80'
+        color='#2B5A50'
+      />
+    </div>
+    :
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
 
       <div className='items-center bg-gray-100 py-10'>
@@ -121,22 +144,28 @@ function Profile() {
               />
             </div>
             <div className="pb-5 px-5 pt-3 -mx-5 font-semibold flex gap-6">
-              <button className="flex justify-center items-center gap-2.5 text-white bg-primary-green w-1/2 py-2 rounded-md hover:bg-teal-900 ease-in-out duration-300 cursor-pointer" onClick={handleUpdate} type='submit'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check"><path d="M20 6 9 17l-5-5" /></svg>
-                <div className="">
-                  Update
-                </div>
-              </button>
-              <div className="flex justify-center bg-white gap-2.5 text-red-600 border-2 border-red-600 w-1/2 py-2 rounded-md hover:bg-red-600 hover:text-white ease-in-out duration-300 cursor-pointer">
-                <div className="">
-                  Cancel
-                </div>
-              </div>
+              <Button
+                label='Update'
+                fullWidth
+                size='medium'
+                className='bg-primary-green hover:bg-teal-900 text-white'
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check"><path d="M20 6 9 17l-5-5" /></svg>
+                }
+                loading={updateLoading}
+                onClick={handleUpdate}
+              />
+              <Button
+                label='Cancel'
+                fullWidth
+                size='medium'
+                className='text-red-600 border-2 border-red-600 w-1/2  hover:bg-red-600 hover:text-white !font-semibold'
+              />
             </div>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

@@ -13,6 +13,7 @@ export default function Button(props) {
    * icon: svg
    * iconClass: string
    * loading: boolean
+   * loadingColor: string
    * onClick: () => {}
    */
 
@@ -21,10 +22,10 @@ export default function Button(props) {
   useEffect(() => {
     const computedClass = 
       (props.className || '') +
-      (props.fullWidth ? ' w-full ' : '') +
-      (props.fullRounded ? ' rounded-full ' : '') +
+      (props.fullWidth ? ' !w-full ' : '') +
+      (props.fullRounded ? ' !rounded-full ' : '') +
       (props.size === 'small' ? ' py-1 px-3 ' : props.size === 'medium' ? ' py-2.5 px-6 ' : props.size === 'large' ? ' py-3.5 px-8 ' : '') +
-      ' flex gap-2 items-center justify-center font-medium disabled:bg-opacity-90 disabled:pointer-events-none transition-all duration-300 ease-in-out';
+      ' flex gap-2 items-center justify-center font-medium disabled:bg-opacity-90 disabled:pointer-events-none transition-all duration-300 ease-in-out rounded-md';
 
     setBtnClass(computedClass);
   }, [props.className, props.fullWidth, props.fullRounded, props.size]);
@@ -41,16 +42,16 @@ export default function Button(props) {
           type='button'
           height='24'
           width='24'
-          color='#fff'
+          color={props.loadingColor ? props.loadingColor : '#fff'}
         />
       ) : (
         <>
           {props.icon && (
-            <img
-              src={props.icon}
-              alt="btn-icon"
+            <div 
               className={`${props.iconClass} w-5`}
-            />
+            >
+              {props.icon}
+            </div>
           )}
           {props.label}
         </>
