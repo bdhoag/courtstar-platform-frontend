@@ -22,12 +22,17 @@ const Header = () => {
 
   //HANDLE LOGOUT ACTION
   const navigate = useNavigate();
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('account_id');
-    localStorage.removeItem('role');
-    setIsLogin(false);
-    navigate('/');
+  const logout = async() => {
+    await axiosInstance.post(`/courtstar/auth/logout`, localStorage.getItem('token'))
+      .then(res => {
+        localStorage.clear();
+        setIsLogin(false);
+        navigate('/');
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally();
   };
 
   //HANDLE ROLE
@@ -38,10 +43,43 @@ const Header = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    const userRole = localStorage.getItem('role');
-    if (userRole) {
-      setIsLogin(true);
+    const token = localStorage.getItem('token')
+
+    const introspect = async() => {
+      await axiosInstance.post(`/courtstar/auth/introspect`, token)
+      .then(res => {
+        if (res.data.data.success) {
+          refresh();
+        } else {
+          localStorage.clear();
+        }
+      })
+      .catch(error => {
+        console.log(error.message);
+        localStorage.clear();
+      })
+      .finally();
     }
+
+    const refresh = async() => {
+      await axiosInstance.post(`/courtstar/auth/refresh`, token)
+      .then(res => {
+        const dataObj = res.data;
+        localStorage.setItem('token', dataObj.data.token);
+        localStorage.setItem('account_id', dataObj.data.account_id);
+        localStorage.setItem('role', dataObj.data.role);
+        setIsLogin(true);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally();
+    }
+
+    if (token) {
+      introspect();
+    }
+
   }, [])
 
   const [account, setAccount] = useState({
@@ -132,12 +170,12 @@ const Header = () => {
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 to="/partnerRegister">Partner Register</Link>
               {
-                role?.includes('ADMIN') &&
+                role?.includes('ADMIN') && isLogin &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                   to="/admin">My Dashboard</Link>
               }
               {
-                (role?.includes('ADMIN') || role?.includes('CENTRE_MANAGER') || role?.includes('CENTRE_MANAGER')) &&
+                (role?.includes('ADMIN') || role?.includes('MANAGER') || role?.includes('STAFF')) && isLogin &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                   to="/myCentre">My Centre</Link>
               }
