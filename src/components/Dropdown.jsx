@@ -69,7 +69,7 @@ function Dropdown(props) {
       </button>
       {isOpen && (
         <ul
-          className="absolute w-full max-h-52 overflow-y-auto flex flex-col border border-gray-200 bg-white z-10 shadow-md rounded-lg mt-0.5"
+          className={`absolute ${props.dir==='up'?'-top-[216px]':''} w-full max-h-52 overflow-y-auto flex flex-col border border-gray-200 bg-white z-10 shadow-md rounded-lg mt-0.5`}
           role="listbox"
         >
           {props.items.map((item, index) => (
