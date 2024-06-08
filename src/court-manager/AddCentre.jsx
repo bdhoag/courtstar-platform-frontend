@@ -8,6 +8,7 @@ import Dropdown from '../components/Dropdown';
 import arrow from '../assets/images/arrow.svg';
 import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
+import { toast } from "react-toastify";
 
 function AddCentre(props) {
 
@@ -123,9 +124,15 @@ function AddCentre(props) {
     await axiosInstance.post(`/courtstar/manager/create`, centreForm)
       .then(res => {
         console.log(res.data);
+        toast.success("Create Successfully!", {
+          toastId: 'add-centre-success'
+        });
       })
       .catch(error => {
         console.log(error.message);
+        toast.error(error.message, {
+          toastId: 'add-centre-error'
+        });
       })
       .finally();
   }
