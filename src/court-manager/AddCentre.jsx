@@ -139,6 +139,23 @@ function AddCentre(props) {
       .finally();
   }
 
+
+  //clear form
+  const clearForm = () => {
+
+    setCentreForm({
+      name: '',
+      address: '',
+      openTime: '',
+      closeTime: '',
+      pricePerHour: '',
+      numberOfCourt: '',
+      paymentMethod: '',
+      approveDate: moment().format('yyyy-MM-DD'),
+      images: []
+    })
+  }
+
   const html = (
     <div>
       <div>
@@ -315,6 +332,7 @@ function AddCentre(props) {
         submit={submit}
         setIsOpen={handleClose}
         title='Centre Information'
+        clearForm={clearForm}
       />
     </div>
   );

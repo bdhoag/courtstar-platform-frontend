@@ -13,6 +13,7 @@ const Dialog = (props) => {
 
   const handleClose = () => {
     props.setIsOpen();
+    props.clearForm();
   }
 
   const handleSubmit = () => {
