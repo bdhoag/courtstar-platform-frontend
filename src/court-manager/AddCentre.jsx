@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { imageDb } from '../uploadimagefirebase/Config';
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes, deleteObject } from "firebase/storage";
 import { v4 } from "uuid";
 import InputText from '../components/InputText';
 import Dialog from '../components/Dialog';
@@ -9,6 +9,7 @@ import arrow from '../assets/images/arrow.svg';
 import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
+import '../assets/css/DeleteButton.css'; 
 
 function AddCentre(props) {
 
@@ -62,16 +63,16 @@ function AddCentre(props) {
   };
 
   // const handleImageChange = (e, index) => {
-  //   const { value } = e.target;
-  //   setCentreForm(prevState => {
-  //     const newImages = [...prevState.images];
-  //     newImages[index] = value;
-  //     return {
-  //       ...prevState,
-  //       images: newImages
-  //     };
-  //   });
-  // };
+    //   const { value } = e.target;
+    //   setCentreForm(prevState => {
+    //     const newImages = [...prevState.images];
+    //     newImages[index] = value;
+    //     return {
+    //       ...prevState,
+    //       images: newImages
+    //     };
+    //   });
+    // };
 
   // Handle image upload
   const [imgUrls, setImgUrls] = useState([]);
@@ -81,28 +82,30 @@ function AddCentre(props) {
       const imgRef = ref(imageDb, `files/${v4()}`);
       uploadBytes(imgRef, selectedImg).then(value => {
         getDownloadURL(value.ref).then(url => {
-          setImgUrls(prevUrls => [...prevUrls, url]);
+          setImgUrls(prevUrls => [...prevUrls, { url, ref: value.ref }]);
         });
       });
     }
   };
 
+  const handleDeleteImage = (imgRef, url) => {
+    deleteObject(imgRef).then(() => {
+      setImgUrls(prevUrls => prevUrls.filter(img => img.url !== url));
+      setCentreForm(prevState => ({
+        ...prevState,
+        images: prevState.images.filter(image => image !== url)
+      }));
+    }).catch(error => {
+      console.error("Error deleting image: ", error);
+    });
+  };
+
   useEffect(() => {
     setCentreForm(prevState => ({
         ...prevState,
-        images: imgUrls
+        images: imgUrls.map(img => img.url)
     }));
 }, [imgUrls]); // This effect runs whenever imgUrls changes
-
-  // useEffect(() => {
-  //   listAll(ref(imageDb, "files")).then(imgs => {
-  //     imgs.items.forEach(val => {
-  //       getDownloadURL(val).then(url => {
-  //         setImgUrls(prevUrls => [...prevUrls, url]);
-  //       });
-  //     });
-  //   });
-  // }, []);
 
   // Scroll handlers
   const scrollLeft = () => {
@@ -141,7 +144,7 @@ function AddCentre(props) {
     <div>
       <div>
         {imgUrls.length > 0 && (
-          <img src={imgUrls[0]} alt="Centre" className='h-64 w-fit mx-auto rounded-xl' />
+          <img src={imgUrls[0].url} alt="Centre" className='h-64 w-fit mx-auto rounded-xl' />
         )}
       </div>
       <div className='flex gap-2 my-2 py-1.5 border rounded-md bg-white overflow-hidden mx-auto relative'>
@@ -153,8 +156,15 @@ function AddCentre(props) {
             <span className='text-4xl font-bold'>+</span>
           </div>
           <input id='image-upload-input' type="file" onChange={handleImageChange} className='hidden' />
-          {imgUrls.map((url, index) => (
-            <img key={index} src={url} alt={`Court ${index + 1}`} className='min-w-24 h-16 rounded-lg object-cover object-center' />
+          {imgUrls.map((img, index) => (
+            <div key={index} className="image-container">
+              <img src={img.url} alt={`Court ${index + 1}`} className='min-w-24 h-16 rounded-lg object-cover object-center' />
+              <button 
+                className="delete-button" 
+                onClick={() => handleDeleteImage(img.ref, img.url)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                </button>
+            </div>
           ))}
         </div>
         <button onClick={scrollRight} className="absolute top-0  right-0 h-full opacity-30 bg-slate-100 w-8 transition-all ease-in-out duration-300 hover:bg-gray-500">
