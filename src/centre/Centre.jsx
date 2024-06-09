@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import star from '../assets/images/star.svg';
-import centre from '../assets/images/demo-centre.png'
+// import centre from '../assets/images/demo-centre.png'
 import { Link } from "react-router-dom";
 import Rating from '../components/Rating';
 import axiosInstance from '../config/axiosConfig';
@@ -13,24 +13,22 @@ const Centre = () => {
 
   const [centreList, setCentreList] = useState([]);
 
-  const load = async () => {
-    setLoading(true);
-    await axiosInstance.get(`/courtstar/centre/allCentre`)
-      .then(res => {
-        setCentreList(res.data.data);
-      })
-      .catch(error => {
-        console.log(error.message);
-      })
-      .finally(
-        () => {
-          setLoading(false);
-          console.log(centreList);
-        }
-      );
-  };
-
   useEffect(() => {
+    const load = async () => {
+      setLoading(true);
+      await axiosInstance.get(`/courtstar/centre/allCentre`)
+        .then(res => {
+          setCentreList(res.data.data.reverse());
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+        .finally(
+          () => {
+            setLoading(false);
+          }
+        );
+    };
     load();
   }, [])
 
