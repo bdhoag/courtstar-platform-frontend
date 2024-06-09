@@ -91,10 +91,10 @@ const Centre = () => {
                     className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
                     <img src={centre.images[0].url}
                       alt="demo centre"
-                      className='w-2/5 h-56 object-cover object-center'
+                      className='w-2/5 h-56 object-cover object-center rounded-lg'
                     />
 
-                    <div className='flex flex-col gap-3 w-3/5 justify-between'>
+                    <div className='flex flex-col gap-3 flex-1 justify-between'>
                       <div className='font-semibold text-xl'>
                         {centre.name}
                       </div>
@@ -125,7 +125,7 @@ const Centre = () => {
                       </div>
                       <div className='text-sm flex justify-center gap-20'>
                         <Link className='block text-center py-1 w-full border border-gray-800 rounded-md font-semibold hover:text-white hover:bg-gray-800 transition-all ease-in-out duration-300'
-                          to="/centreBooking"
+                          to={`/centreBooking/${centre.id}`}
                         >
                           Centre Details
                         </Link>

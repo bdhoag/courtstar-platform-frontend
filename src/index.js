@@ -34,7 +34,7 @@ export default function App() {
   }, []);
 
   if (loading) {
-    return  <SpinnerLoading 
+    return  <SpinnerLoading
               type='page'
               height='80'
               width='80'
@@ -48,16 +48,16 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home/>} />
-          <Route path="partnerRegister" element={<PartnerRegister />} />
-          <Route path="customerRegister" element={<CustomerRegister />} />
-          <Route path="centreBooking" element={<CentreBooking />} />
-          <Route path="aboutUs" element={<AboutUs />} />
-          <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
-          <Route path="CustomerTerm" element={<CustomerTerm />} />
-          <Route path="PartnerTerm" element={<PartnerTerm />} />
-          <Route path="FirebaseImageUpload" element={<FirebaseImageUpload />} />
+          <Route path="/partnerRegister" element={<PartnerRegister />} />
+          <Route path="/customerRegister" element={<CustomerRegister />} />
+          <Route path="/centreBooking/:id" element={<CentreBooking />} />
+          <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+          <Route path="/CustomerTerm" element={<CustomerTerm />} />
+          <Route path="/PartnerTerm" element={<PartnerTerm />} />
+          <Route path="/FirebaseImageUpload" element={<FirebaseImageUpload />} />
           <Route
-            path="myCentre"
+            path="/myCentre"
             element={
               <ManagerRoute>
                 <MyCentre />
@@ -65,7 +65,7 @@ export default function App() {
             }
           />
           <Route
-            path="admin"
+            path="/admin"
             element={
               <AdminRoute>
                 <Admin />
@@ -73,7 +73,7 @@ export default function App() {
             }
           />
           <Route
-            path="profile"
+            path="/profile"
             element={
               <CustomerRoute>
                 <Profile />
@@ -81,7 +81,7 @@ export default function App() {
             }
           />
           <Route
-            path="bookingHistory"
+            path="/bookingHistory"
             element={
               <CustomerRoute>
                 <BookingHistory />
