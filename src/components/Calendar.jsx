@@ -62,6 +62,23 @@ export default function Calendar(props) {
     handleSelectWeek(weekItems[currentWeekIndex - 1]);
   }
 
+  //Handle choose multiple day
+  const [selectDay, setSelectDay] = useState([]);
+  const handleClick = (slot, day) => {
+    console.log("Slot: ", slot, "Day: ", day);
+
+    setSelectDay((prevSelectedDays) => {
+      // Check if the day is already selected
+      if (prevSelectedDays.includes(day)) {
+        // If the day is already selected, remove it from the selection
+        return prevSelectedDays.filter(selectedDay => selectedDay !== day);
+      } else {
+        // If the day is not selected, add it to the selection
+        return [...prevSelectedDays, {slot, day}];
+      }
+    });
+  }
+
   return (
     <div className=''>
 
@@ -290,7 +307,9 @@ export default function Calendar(props) {
                     </span>
                   </td>
                   {selectedWeek.map((day, index) => (
-                    <td key={index}
+                    <td
+                      key={index}
+                      onClick={() => handleClick(slot, day)}
                       className={
                         !(day < moment().format('MM/DD') ||
                           (day === moment().format('MM/DD') && (8 + slot) < (parseInt(moment().format('H')) + 1))
@@ -300,7 +319,7 @@ export default function Calendar(props) {
                           :
                           "border p-1  xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto bg-gray-300"
                       }>
-                      <div className="relative flex flex-col  mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 overflow-hidden">
+                      <div className="relative flex flex-col mx-auto xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 overflow-hidden">
                         <div className="top h-5 w-full">
                           <span className="text-gray-500"></span>
                         </div>
