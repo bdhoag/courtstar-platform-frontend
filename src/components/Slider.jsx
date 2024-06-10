@@ -37,19 +37,21 @@ const Slider = (props) => {
     />
   ));
 
-  return(
+  return (
     <div className='group'>
       <div className='relative '>
         <img src={imgDisplay.url}
           alt="demo centre"
           className='w-[50rem] h-[25rem] rounded-lg object-cover'
         />
-        <button onClick={changeActiveMinus} className="absolute group-hover:flex top-0 left-0 hidden h-full opacity-30 bg-slate-100 w-1/12 transition-all ease-in-out duration-300">
-          <img src={arrow} alt="arrow" className='my-auto mx-auto' />
-        </button>
-        <button onClick={changeActivePlus} className="absolute group-hover:flex top-0 right-0 hidden h-full opacity-30 bg-slate-100 w-1/12 transition-all ease-in-out duration-1000">
-          <img src={arrow} alt="arrow" className='rotate-180 my-auto mx-auto' />
-        </button>
+        <div className='control transition-all ease-in-out duration-1000 opacity-0 group-hover:opacity-30'>
+          <button onClick={changeActiveMinus} className="absolute top-0 left-0 h-full bg-slate-100 w-1/12">
+            <img src={arrow} alt="arrow" className='my-auto mx-auto' />
+          </button>
+          <button onClick={changeActivePlus} className="absolute top-0 right-0 h-full bg-slate-100 w-1/12">
+            <img src={arrow} alt="arrow" className='rotate-180 my-auto mx-auto' />
+          </button>
+        </div>
       </div>
       <div className='flex w-fit h-20 justify-center gap-2 mt-2 py-1.5 px-2.5 border rounded-md bg-white mx-auto'>
         {renderListImg}
