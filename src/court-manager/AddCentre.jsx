@@ -140,20 +140,45 @@ function AddCentre(props) {
   }
 
 
-  //clear form
-  const clearForm = () => {
+  // //clear form
+  // const clearForm = () => {
+    
+    
+  //   setCentreForm({
+  //     name: '',
+  //     address: '',
+  //     openTime: '',
+  //     closeTime: '',
+  //     pricePerHour: '',
+  //     numberOfCourt: '',
+  //     paymentMethod: '',
+  //     approveDate: moment().format('yyyy-MM-DD'),
+  //     images: []
+  //   })
+  // }
 
-    setCentreForm({
-      name: '',
-      address: '',
-      openTime: '',
-      closeTime: '',
-      pricePerHour: '',
-      numberOfCourt: '',
-      paymentMethod: '',
-      approveDate: moment().format('yyyy-MM-DD'),
-      images: []
-    })
+  const clearForm = () => {
+    // Tạo một mảng các Promise để xóa các ảnh đã upload
+    const deleteImagesPromises = imgUrls.map(img => deleteObject(img.ref));
+    // Sử dụng Promise.all để chờ tất cả các Promise xóa ảnh hoàn thành
+    Promise.all(deleteImagesPromises)
+      .then(() => {
+        setImgUrls([]);
+        setCentreForm({
+          name: '',
+          address: '',
+          openTime: '',
+          closeTime: '',
+          pricePerHour: '',
+          numberOfCourt: '',
+          paymentMethod: '',
+          approveDate: moment().format('yyyy-MM-DD'),
+          images: []
+        });
+      })
+      .catch(error => {
+        console.error("Error deleting images: ", error);
+      });
   }
 
   const html = (
