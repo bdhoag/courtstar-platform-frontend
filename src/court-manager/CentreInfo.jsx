@@ -5,7 +5,7 @@ import LockOpen from '../assets/images/lock-open.svg';
 import LockClose from '../assets/images/lock-close.svg';
 import AddCentre from './AddCentre';
 import Pagination from "../components/Pagination";
-import Rating from '../components/Rating';
+// import Rating from '../components/Rating';
 import Slider from '../components/Slider';
 import moment from 'moment';
 function CentreInfo(props) {

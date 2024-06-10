@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { imageDb } from './Config';
+import { imageDb } from './firebaseConfig';
 import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 
@@ -33,13 +33,13 @@ function FirebaseImageUpload(){
 
     return(
         <div className="App">
-                <input type="file" onChange={(e)=>setImg(e.target.files[0])} /> 
+                <input type="file" onChange={(e)=>setImg(e.target.files[0])} />
                 <button onClick={handleClick}>Upload</button>
                 <br/>
                 {
                     imgUrl.map(dataVal=><div>
-                        <img src={dataVal} height="200px" width="200px" />
-                        <br/> 
+                        <img src={dataVal} height="200px" width="200px" alt="demo"/>
+                        <br/>
                     </div>)
                 }
         </div>

@@ -22,7 +22,6 @@ import AboutUs from './about-us/AboutUs';
 import PrivacyPolicy from './about-us/PrivacyPolicy';
 import CustomerTerm from './about-us/CustomerTerm';
 import PartnerTerm from './about-us/PartnerTerm';
-import FirebaseImageUpload from './uploadimagefirebase/FirebaseImageUpload';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -55,7 +54,6 @@ export default function App() {
           <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
           <Route path="/CustomerTerm" element={<CustomerTerm />} />
           <Route path="/PartnerTerm" element={<PartnerTerm />} />
-          <Route path="/FirebaseImageUpload" element={<FirebaseImageUpload />} />
           <Route
             path="/myCentre"
             element={

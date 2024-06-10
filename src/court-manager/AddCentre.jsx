@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { imageDb } from '../uploadimagefirebase/Config';
+import { imageDb } from '../config/firebaseConfig';
 import { getDownloadURL, ref, uploadBytes, deleteObject } from "firebase/storage";
 import { v4 } from "uuid";
 import InputText from '../components/InputText';
 import Dialog from '../components/Dialog';
 import Dropdown from '../components/Dropdown';
-import arrow from '../assets/images/arrow.svg';
+// import arrow from '../assets/images/arrow.svg';
 import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
@@ -107,13 +107,13 @@ function AddCentre(props) {
   }, [imgUrls]); // This effect runs whenever imgUrls changes
 
   // Scroll handlers
-  const scrollLeft = () => {
-    document.getElementById('image-scroll-container').scrollLeft -= 100;
-  };
+  // const scrollLeft = () => {
+  //   document.getElementById('image-scroll-container').scrollLeft -= 100;
+  // };
 
-  const scrollRight = () => {
-    document.getElementById('image-scroll-container').scrollLeft += 100;
-  };
+  // const scrollRight = () => {
+  //   document.getElementById('image-scroll-container').scrollLeft += 100;
+  // };
 
   const handleImageChange = (e) => {
     const selectedImg = e.target.files[0];
@@ -142,8 +142,8 @@ function AddCentre(props) {
 
   // //clear form
   // const clearForm = () => {
-    
-    
+
+
   //   setCentreForm({
   //     name: '',
   //     address: '',
