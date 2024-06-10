@@ -90,7 +90,6 @@ const BookingForm = (props) => {
           name="fullName"
           label="Full Name*"
           placeholder='Enter full name'
-          value={profileForm.fullName.trim()}
           onchange={handleChange}
         />
       </div>
