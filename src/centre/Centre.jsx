@@ -120,7 +120,7 @@ const Centre = () => {
                       <div>
                         <span className='font-semibold'>Price: </span>
                         <span className='font-semibold text-rose-600'>
-                          {centre.pricePerHour}₫/h
+                          {centre.pricePerHour.toLocaleString('de-DE')} VND/h
                         </span>
                       </div>
                       <div className='text-sm flex justify-center gap-20'>
