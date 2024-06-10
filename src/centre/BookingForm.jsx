@@ -56,7 +56,7 @@ const BookingForm = (props) => {
 
   useEffect(() => {
     setBookingForm({
-      fullName: account.firstName + " " + account.lastName,
+      fullName: (account.firstName + " " + account.lastName).trim(),
       email: account.email,
       phoneNumber: account.phone,
       amount: 0,
