@@ -26,17 +26,13 @@ const Footer = () => {
                 to="/CustomerTerm">Term for Customer</Link>
               </div>
               <div>
-                
+
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 to="/PartnerTerm">Term for Partner</Link>
               </div>
               <div>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 to="/PrivacyPolicy">Privacy Policy</Link>
-              </div>
-              <div>
-              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/FirebaseImageUpload">Firebase Image Upload</Link>
               </div>
             </div>
             <div className='basis-1/3 flex flex-col gap-5'>
