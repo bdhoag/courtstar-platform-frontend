@@ -6,8 +6,11 @@ import Login from '../auth/Login';
 import axiosInstance from '../config/axiosConfig';
 import DropdownHeader from '../components/DropdownHeader'
 import BellNotification from '../components/BellNotification';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
+  const { t } = useTranslation();
+
   //HANDLE LOGIN POPUP
   const [loginPopupOpen, setLoginPopupOpen] = useState(false);
   const handleLoginPopup = () => {
@@ -164,20 +167,20 @@ const Header = () => {
           <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
             <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
               <Link className="font-medium text-white transition-all ease-in-out duration-300"
-                to="/">Home</Link>
+                to="/">{t('home')}</Link>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/aboutUs">About us</Link>
+                to="/aboutUs">{t('aboutUs')}</Link>
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/partnerRegister">Partner Register</Link>
+                to="/partnerRegister">{t('partnerRegister')}</Link>
               {
                 role?.includes('ADMIN') && isLogin &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                  to="/admin">My Dashboard</Link>
+                  to="/admin">{t('myDashboard')}</Link>
               }
               {
                 (role?.includes('ADMIN') || role?.includes('MANAGER') || role?.includes('STAFF')) && isLogin &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                  to="/myCentre">My Centre</Link>
+                  to="/myCentre">{t('myCentre')}</Link>
               }
             </div>
           </div>
@@ -191,12 +194,12 @@ const Header = () => {
                 <button className='block border border-white rounded-lg py-2 px-6 text-white transition-all ease-in-out duration-300 hover:bg-gray-200 hover:text-primary-green font-medium cursor-pointer'
                   onClick={handleLoginPopup}
                 >
-                  Log in
+                  {t('logIn')}
                 </button>
                 <Link className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
                   to="/customerRegister"
                 >
-                  Sign up
+                  {t('signUp')}
                 </Link>
               </div>
             )}

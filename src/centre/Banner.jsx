@@ -2,31 +2,35 @@ import React, { useState } from 'react';
 import banner from '../assets/images/banner.png'
 import Dropdown from '../components/Dropdown';
 import Button from '../components/Button';
+import { useTranslation } from 'react-i18next';
 
 const Banner = () => {
+  const { t } = useTranslation();
+
   const items = [
-    'Thu Duc City',
-    'District 1',
-    'District 3',
-    'District 4',
-    'District 5',
-    'District 6',
-    'District 7',
-    'District 8',
-    'District 10',
-    'District 11',
-    'District 12',
-    'Binh Tan District',
-    'Binh Thanh District',
-    'Go Vap District',
-    'Phu Nhuan District',
-    'Tan Binh District',
-    'Tan Phu District',
-    'Nha Be Province',
-    'Can Gio Province',
-    'Cu Chi Province',
-    'Hoc Mon Province',
-    'Binh Chanh Province'
+    t('thuDucCity'),
+    t('district1'),
+    t('district3'),
+    t('district4'),
+    t('district5'),
+    t('district6'),
+    t('district7'),
+    t('district8'),
+    t('district10'),
+    t('district11'),
+    t('district12'),
+    t('binhTanDistrict'),
+    t('binhThanhDistrict'),
+    t('goVapDistrict'),
+    t('phuNhuanDistrict'),
+    t('tanBinhDistrict'),
+    t('tanPhuDistrict'),
+    t('nhaBeProvince'),
+    t('canGioProvince'),
+    t('cuChiProvince'),
+    t('hocMonProvince'),
+    t('binhChanhProvince'),
+    t('Binh Chanh Province')
   ];
 
   const [loading, setLoading] = useState(false);
@@ -42,18 +46,18 @@ const Banner = () => {
           className='object-center object-cover opacity-50'/>
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 z-10 max-w-[450px] w-full flex flex-col gap-3.5 items-center justify-between bg-white rounded-3xl py-5 px-10 shadow-gray-800 shadow-lg">
           <div className='text-4xl font-medium text-gray-800'>
-            Find court now
+            {t('findCourtNow')}
           </div>
-          <div className='text-gray-500 text-sm'>
-            Search for badminton courts in Ho Chi Minh City
+          <div className='text-gray-500 text-sm text-center'>
+            {t('searchForBadmintonCourtsInHoChiMinhCity')}
           </div>
           <Dropdown
-            placeholder="Select the district"
+            placeholder={t('selectTheDistrict')}
             items={items}
             onSelect={handleSelect}
           />
-          <Button 
-            label='Find'
+          <Button
+            label={t('find')}
             fullWidth
             fullRounded
             size='medium'

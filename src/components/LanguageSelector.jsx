@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import us from '../assets/images/US.svg';
 import vn from '../assets/images/VN.svg';
 import down from '../assets/images/chevron-down.svg';
+import { useTranslation } from 'react-i18next';
 
 const LanguageSelector = () => {
+
+  const { i18n } = useTranslation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [lang, setLang] = useState(us);
@@ -16,6 +18,11 @@ const LanguageSelector = () => {
   };
 
   const handleChoose = (lang) => {
+    let currentLang = "";
+    if (lang === us) currentLang="en";
+    else currentLang="vi";
+    i18n.changeLanguage(currentLang);
+    localStorage.setItem("lang", currentLang);
     setLang(lang);
     setIsOpen(!isOpen);
   }
