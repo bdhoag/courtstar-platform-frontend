@@ -3,17 +3,20 @@ import axiosInstance from '../config/axiosConfig';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
 // import Dropdown from '../components/Dropdown';
-import CustPayment from '../payment/CustPayment';
 
 const BookingForm = (props) => {
   //HANDLE BOOKING FORM POPUP
-  const [custPaymentPopup, setCustPaymentPopup] = useState(false);
-  const handleCustPaymentPopup = () => {
+  const handleCustPayment = async() => {
     handleClose();
-    setCustPaymentPopup(true);
-  }
-  const handleCustPaymentPopupClose = () => {
-    setCustPaymentPopup(false)
+    await axiosInstance.post(`/courtstar/payment/create-order`, bookingForm)
+      .then(res => {
+        console.log(res.data.orderurl);
+        window.location.href = res.data.orderurl;
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally();
   }
 
   //CLOSE LOGIN MODAL
@@ -34,15 +37,17 @@ const BookingForm = (props) => {
     role: ""
   });
 
-  const [profileForm, setProfileForm] = useState({
+  const [bookingForm, setBookingForm] = useState({
     fullName: "",
     email: "",
-    phone: "",
+    phoneNumber: "",
+    amount: "",
+    description: ""
   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setProfileForm((prevForm) => ({
+    setBookingForm((prevForm) => ({
       ...prevForm,
       [name]: value,
     }));
@@ -50,10 +55,12 @@ const BookingForm = (props) => {
 
 
   useEffect(() => {
-    setProfileForm({
+    setBookingForm({
       fullName: account.firstName + " " + account.lastName,
       email: account.email,
-      phone: account.phone,
+      phoneNumber: account.phone,
+      amount: 0,
+      description: ""
     });
   }, [account]);
 
@@ -90,16 +97,17 @@ const BookingForm = (props) => {
           name="fullName"
           label="Full Name*"
           placeholder='Enter full name'
+          value={bookingForm.fullName}
           onchange={handleChange}
         />
       </div>
       <div className='mb-2'>
         <InputText
-          id="phone"
-          name="phone"
+          id="phoneNumber"
+          name="phoneNumber"
           label="Phone*"
           placeholder='Enter phone number'
-          value={profileForm.phone.trim()}
+          value={bookingForm.phoneNumber}
           onchange={handleChange}
         />
       </div>
@@ -109,114 +117,32 @@ const BookingForm = (props) => {
           name="email"
           label="Email*"
           placeholder='Enter your email'
-          value={profileForm.email.trim()}
+          value={bookingForm.email}
           onchange={handleChange}
         />
       </div>
-      {/* <div className='relative w-4/5 flex justify-center gap-40 my-1'>
-      <div className='text-gray-800 flex items-center gap-3'>
-        <input type="radio"
-          name="bookingType"
-          id="fixed"
-          onChange={() => handleChange(2)}
-          className='cursor-pointer'
-        />
-        <label htmlFor="fixed"
-          className='cursor-pointer'
-        >
-          Monthly booking
-        </label>
-      </div>
-      <div className='text-gray-800 flex items-center gap-3'>
-        <input type="radio"
-          name="bookingType"
-          id="once"
-          onChange={() => handleChange(1)}
-          className='cursor-pointer'
-        />
-        <label htmlFor="once"
-          className='cursor-pointer'
-        >
-          Day booking
-        </label>
-      </div>
-      <div className='text-gray-800 absolute top-0 -left-[121px]'>
-        Choose type*:
-      </div>
-    </div>
-    {(selectedValue === 1) && (<div className='pl-2 relative w-4/5'>
-      <input type="date"
-        name="date"
-        id="date"
-        className='border border-gray-300 rounded-lg py-2 px-6 outline-gray-400'
-      />
-      <button className='ml-4 py-1 px-2 rounded-md bg-gray-800 text-white text-sm hover:bg-gray-900 transition-all ease-in-out duration-300'>
-        See available time slots
-      </button>
-      <div className='text-gray-800 absolute top-2.5 -left-[60px]'>
-        Date*:
-      </div>
-    </div>)}
-    {(selectedValue === 2) && (<div className='pl-2 relative w-2/5'>
-      <Dropdown
-        placeholder="Select role"
-        items={items}
-        onSelect={handleSelect}
-      />
-      <div className='text-gray-800 absolute top-2.5 -left-[115px]'>
-        Choose day*:
-      </div>
-    </div>)}
-    <div className='pl-2 relative w-2/5'>
-      <Dropdown
-        placeholder="Select role"
-        items={items}
-        onSelect={handleSelect}
-      />
-      <div className='text-gray-800 absolute top-2.5 -left-[117px]'>
-        Select court*:
-      </div>
-    </div>
-    <div className='pl-2 relative w-1/2'>
-      <div className='flex gap-4 items-center w-full'>
-        <Dropdown
-          placeholder="Select role"
-          items={items}
-          onSelect={handleSelect}
-        />
-      </div>
-      <div className='text-gray-800 absolute top-2.5 -left-[62px]'>
-        Time*:
-      </div>
-      <button className='absolute -right-24 top-10 ml-4 py-1 px-3 rounded-md bg-gray-800 text-white text-sm hover:bg-gray-900 transition-all ease-in-out duration-300'>
-        Check
-      </button>
-    </div>
-    <div className='pl-2 relative w-1/2'>
-      <div className='flex gap-4 items-center w-full'>
-        <Dropdown
-          placeholder="Select role"
-          items={items}
-          onSelect={handleSelect}
-        />
-      </div>
-      <div className='text-gray-800 absolute top-2.5 -left-[31px]'>
-        to:
-      </div>
-    </div> */}
       <div className='mb-2'>
         <InputText
           label="Price"
+          id="amount"
+          name="amount"
+          value={bookingForm.amount}
+          onchange={handleChange}
         />
       </div>
       <div className='mb-4'>
         <InputText
           label="Note"
+          id="description"
+          name="description"
+          placeholder='Note something'
+          value={bookingForm.description}
+          onchange={handleChange}
         />
       </div>
       <div className='flex items-center justify-center'>
         <button className='bg-primary-green w-full rounded-full py-3 text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-medium'
-          onClick={handleCustPaymentPopup}
+          onClick={handleCustPayment}
         >
           Confirm
         </button>
@@ -230,10 +156,10 @@ const BookingForm = (props) => {
         isOpen={props.isOpen}
         setIsOpen={handleClose}
       />
-      <CustPayment
+      {/* <CustPayment
         isOpen={custPaymentPopup}
         setIsOpen={handleCustPaymentPopupClose}
-      />
+      /> */}
     </div>
   )
 
