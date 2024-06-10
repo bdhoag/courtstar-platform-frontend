@@ -23,7 +23,7 @@ const CentreDropdown = (props) => {
       <button className={isOpen ? 'py-3 px-6 rounded-t-lg w-full text-white bg-gray-800 flex justify-between items-center' : 'py-3 px-6 rounded-lg w-full text-white bg-gray-800 flex justify-between items-center'}
         onClick={toggleDropdown}>
         <div className='text-lg font-semibold'>
-          Centre A
+          {props.centreName}
         </div>
         <svg xmlns="http://www.w3.org/2000/svg"
           width="20"

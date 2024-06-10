@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CentreDropdown from './CentreDropdown';
 
-const Sidebar = ({ onDataSubmit }) => {
+const Sidebar = (props) => {
   // const [centreA, setCentreA] = useState(0);
 
   const handleChooseFromDropdown = (value) => {
@@ -10,7 +10,7 @@ const Sidebar = ({ onDataSubmit }) => {
   };
 
   const handleSubmit = (value) => {
-    onDataSubmit(value);
+    props.onDataSubmit(value);
   };
 
   return (
@@ -18,11 +18,23 @@ const Sidebar = ({ onDataSubmit }) => {
       <div className="min-w-60 flex flex-col gap-6">
         <div className='text-2xl font-bold text-center'>
           My Centre
+          {/* {props.centreList[0].name} */}
         </div>
         <div className='flex flex-col gap-4'>
-          <CentreDropdown isOpen={true} onDataSubmit={handleChooseFromDropdown}/>
-          <CentreDropdown isOpen={false} onDataSubmit={handleChooseFromDropdown}/>
-          <CentreDropdown isOpen={false} onDataSubmit={handleChooseFromDropdown}/>
+          {props.centreList.map((centre) => (
+            <div
+              key={centre.id}
+              className=""
+            >
+              <CentreDropdown
+                centreName={centre.name}
+                isOpen={true}
+                onDataSubmit={handleChooseFromDropdown}
+              />
+            </div>
+          ))}
+          {/* <CentreDropdown isOpen={false} onDataSubmit={handleChooseFromDropdown} />
+          <CentreDropdown isOpen={false} onDataSubmit={handleChooseFromDropdown} /> */}
         </div>
       </div>
     </div>
