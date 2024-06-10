@@ -9,14 +9,12 @@ const CentreDropdown = (props) => {
 
   // const [tab, setTab] = useState(0);
 
-  const handleClick = (value) => {
+  const handleClick = (value, centreId) => {
     // setTab(value);
-    handleSubmit(value);
+    props.onDataSubmit(value, centreId);
   };
 
-  const handleSubmit = (value) => {
-    props.onDataSubmit(value);
-  };
+
 
   return (
     <div className="w-full">
@@ -41,17 +39,17 @@ const CentreDropdown = (props) => {
       {isOpen && (
         <ul className="bg-white rounded-b-lg text-center">
           <button className="block w-full py-3 px-6 bg-gray-200 hover:bg-white transition-all ease-in-out duration-300 cursor-pointer"
-            onClick={() => handleClick(1)}
+            onClick={() => handleClick(1, props.centreId)}
           >
             Centre Information
           </button>
           <button className="block w-full py-3 px-6 bg-gray-200 hover:bg-white transition-all ease-in-out duration-300 cursor-pointer"
-            onClick={() => handleClick(2)}
+            onClick={() => handleClick(2, props.centreId)}
           >
             Staff Information
           </button>
           <button className="block w-full py-3 px-6 bg-gray-200 hover:bg-white transition-all ease-in-out duration-300 cursor-pointer rounded-b-lg hover:rounded-b-lg"
-            onClick={() => handleClick(3)}
+            onClick={() => handleClick(3, props.centreId)}
           >
             Check in
           </button>

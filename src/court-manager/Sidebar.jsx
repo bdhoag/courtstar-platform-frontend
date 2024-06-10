@@ -4,13 +4,9 @@ import CentreDropdown from './CentreDropdown';
 const Sidebar = (props) => {
   // const [centreA, setCentreA] = useState(0);
 
-  const handleChooseFromDropdown = (value) => {
+  const handleChooseFromDropdown = (value, centreId) => {
     // setCentreA(data);
-    handleSubmit(value);
-  };
-
-  const handleSubmit = (value) => {
-    props.onDataSubmit(value);
+    props.onDataSubmit(value, centreId);
   };
 
   return (
@@ -21,14 +17,15 @@ const Sidebar = (props) => {
           {/* {props.centreList[0].name} */}
         </div>
         <div className='flex flex-col gap-4'>
-          {props.centreList.map((centre) => (
+          {props.centreList.map((centre, index) => (
             <div
               key={centre.id}
               className=""
             >
               <CentreDropdown
+                centreId={centre.id}
                 centreName={centre.name}
-                isOpen={true}
+                isOpen={false}
                 onDataSubmit={handleChooseFromDropdown}
               />
             </div>
