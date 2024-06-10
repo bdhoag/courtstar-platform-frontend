@@ -6,7 +6,9 @@ import LockClose from '../assets/images/lock-close.svg';
 import AddCentre from './AddCentre';
 import Pagination from "../components/Pagination";
 import Rating from '../components/Rating';
-function CentreInfo() {
+import Slider from '../components/Slider';
+import moment from 'moment';
+function CentreInfo(props) {
   //HANDLE  POPUP
   const [addCentrePopup, setAddCentrePopup] = useState(false);
   const handleAddCentrePopup = () => {
@@ -207,6 +209,8 @@ function CentreInfo() {
   ]
 
 
+  // console.log(props.centre.images[0].url);
+
   return (
     <div className='w-[70rem] pt-12'>
       <AddCentre
@@ -229,57 +233,69 @@ function CentreInfo() {
           </button>
         </div>
       </div>
-
-      <div className="bg-white px-9 py-7 rounded-xl my-4">
+      <div
+        key={centre.id}
+        className="bg-white px-9 py-7 rounded-xl my-4"
+      >
         <div className="flex gap-11">
           <div className="w-1/2">
-            <div>
-              <img src={centre}
+            {props.centre.images && <Slider imagesDemoList={props.centre.images} />}
+            {/* <div>
+              <img src={props.centre.images.url}
                 alt="demo centre"
                 className='w-full'
               />
             </div>
             <div className='flex gap-2 mt-2 py-1.5 px-2.5 border rounded-md bg-white overflow-hidden'>
-              <img src={centre}
+              <img src={props.centre.images[0]?.url}
                 alt="demo centre"
                 className='w-28 rounded-lg'
               />
-              <img src={centre}
+              <img src={props.centre.images[1]?.url}
                 alt="demo centre"
                 className='w-28 rounded-lg'
               />
-              <img src={centre}
+              <img src={props.centre.images[2]?.url}
                 alt="demo centre"
                 className='w-28 rounded-lg'
               />
-              <img src={centre}
+              <img src={props.centre.images[3]?.url}
                 alt="demo centre"
                 className='w-28 rounded-lg'
               />
-              <img src={centre}
+              <img src={props.centre.images[4]?.url}
+                alt="demo centre"
+                className='w-28 rounded-lg'
+              />
+              <img src={props.centre.images[5]?.url}
                 alt="demo centre"
                 className='w-28 rounded-lg'
               />
 
-            </div>
+            </div> */}
           </div>
+
           <div className='flex justify-center flex-col gap-3 bg-white w-1/2'>
             <div className='text-xl font-semibold'>
-              Sân cầu lông Đại học FPT Hồ Chí Minh
+              {props.centre.name}
             </div>
-            <Rating
+            {/* <Rating
               ratingWrapper='flex gap-1'
               value={5}
               editable={false}
-            />
+            /> */}
             <div>
               <span className='font-semibold'>Address: </span>
-              Lô E2a-7, Đường D1, Khu Công nghệ cao, P.Long Thạnh Mỹ, Tp. Thủ Đức, TP.HCM.
+              {props.centre.address}
             </div>
             <div className='flex gap-3'>
               <div>
                 <span className='font-semibold'>Open time: </span>
-                10h-22h
+
+                {
+                  `${moment(props.centre.openTime, "HH:mm:ss").format("H")}h
+                  - ${moment(props.centre.closeTime, "HH:mm:ss").format("H")}h`
+                }
               </div>
               <div>
                 <span className='font-semibold'>Number of courts: </span>
