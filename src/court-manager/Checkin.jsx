@@ -3,7 +3,7 @@ import Dropdown from "../components/Dropdown"
 import PopupModal from "../components/PopupModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
-const Checkin = () => {
+const CheckIn = (props) => {
   //HANDLE  POPUP
   const [checkInPopup, setCheckInPopup] = useState(false);
   const handleCheckInPopup = () => {
@@ -12,78 +12,7 @@ const Checkin = () => {
   const handleCheckInPopupClose = () => {
     setCheckInPopup(false)
   }
-  const apiCheckin = [
-    {
-      id: 1,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 2,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 3,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 4,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 5,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 6,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 7,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 8,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 9,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 10,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    }
-  ];
+  const apiCheckin = props.apiCheckin;
 
   const optionDropdownSlot = [
     '1 (7:00-8:00)', '2 (8:00-9:00)', '3 (9:00-10:00)', '4 (10:00-11:00)', '5 (11:00-12:00)', '6 (12:00-13:00)', '7 (13:00-14:00)', '8 (14:00-15:00)'
@@ -232,4 +161,4 @@ const Checkin = () => {
   );
 }
 
-export default Checkin;
+export default CheckIn;

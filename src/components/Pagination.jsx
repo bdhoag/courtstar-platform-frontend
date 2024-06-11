@@ -55,7 +55,7 @@ function Pagination(props) {
 
   return (
     <div className={props.content} id='top'>
-      <div className="font-bold text-lg">
+      <div className="font-semibold text-lg">
         {props.title}
       </div>
       <div className="flex gap-1 items-center">
