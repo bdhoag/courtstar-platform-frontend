@@ -98,11 +98,11 @@ const Centre = () => {
                       <div className='font-semibold text-xl'>
                         {centre.name}
                       </div>
-                      {/* <Rating
+                      <Rating
                         ratingWrapper='flex gap-1'
-                        value={5}
+                        value={centre.rating}
                         editable={false}
-                      /> */}
+                      />
                       <div>
                         <span className='font-semibold'>Address: </span>
                         {centre.address}
