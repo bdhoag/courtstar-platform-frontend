@@ -6,8 +6,10 @@ import Rating from '../components/Rating';
 import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 const Centre = () => {
+  const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +41,7 @@ const Centre = () => {
         <div className="max-w-screen-1440 1440:mx-auto mx-4 py-10 px-12 w-full flex flex-col gap-4 items-center justify-between">
 
           <div className='font-bold text-3xl uppercase text-center w-full'>
-            List of centres
+            {t('listOfCentres')}
           </div>
 
           {loading
@@ -53,7 +55,7 @@ const Centre = () => {
                 <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex flex-col justify-between gap-10'>
                   <div>
                     <div className='font-bold text-2xl uppercase'>
-                      Rating
+                      {t('rating')}
                     </div>
                     <Rating
                       ratingWrapper='flex gap-1 p-5'
@@ -63,7 +65,7 @@ const Centre = () => {
                   </div>
                   <div>
                     <div className='font-bold text-2xl uppercase mb-5'>
-                      Price range
+                      {t('priceRange')}
                     </div>
                     <div className='flex gap-2 items-center justify-between'>
                       <input type="text"
@@ -104,21 +106,21 @@ const Centre = () => {
                         editable={false}
                       /> */}
                       <div>
-                        <span className='font-semibold'>Address: </span>
+                        <span className='font-semibold'>{t('address')}: </span>
                         {centre.address}
                       </div>
                       <div className='flex gap-3'>
                         <div>
-                          <span className='font-semibold'>Open time: </span>
+                          <span className='font-semibold'>{t('openTime')}: </span>
                           {moment(centre.openTime, 'HH:mm:ss').format('HH:mm')} - {moment(centre.closeTime, 'HH:mm:ss').format('HH:mm')}
                         </div>
                         <div>
-                          <span className='font-semibold'>Number of courts: </span>
+                          <span className='font-semibold'>{t('numberOfCourt')}: </span>
                           {centre.numberOfCourt}
                         </div>
                       </div>
                       <div>
-                        <span className='font-semibold'>Price: </span>
+                        <span className='font-semibold'>{t('price')}: </span>
                         <span className='font-semibold text-rose-600'>
                           {centre?.pricePerHour.toLocaleString('de-DE')} VND/h
                         </span>
@@ -127,7 +129,7 @@ const Centre = () => {
                         <Link className='block text-center py-1 w-full border border-gray-800 rounded-md font-semibold hover:text-white hover:bg-gray-800 transition-all ease-in-out duration-300'
                           to={`/centreBooking/${centre.id}`}
                         >
-                          Centre Details
+                          {t('centreDetail')}
                         </Link>
                         {/* <Link className='block text-center py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'
                         to="/centreBooking"

@@ -7,8 +7,10 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import SpinnerLoading from '../components/SpinnerLoading';
 import Button from '../components/Button';
+import { useTranslation } from 'react-i18next';
 
 function ResetPassword(props) {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   // State object for email, OTP, and new password fields
@@ -143,15 +145,15 @@ function ResetPassword(props) {
     <div className='w-[440px] flex flex-col gap-5'>
       <div className="flex flex-col gap-2">
         <div className="text-4xl font-semibold text-center">
-          Check Your Email
+          {t('checkYourEmail')}
         </div>
 
         <div className="text-gray-400 text-sm text-center">
           <div>
-            We just sent a verification code to <span className="font-semibold text-black">{formData.email}</span>
+            {t('weSent')}<span className="font-semibold text-black">{formData.email}</span>
           </div>
           <div>
-            Enter the 6-digit code mentioned in the email!
+            {t('enterDigit')}
           </div>
         </div>
 
@@ -165,8 +167,8 @@ function ResetPassword(props) {
         <Password
           id="newPassword"
           name="newPassword"
-          placeholder="Enter your new password"
-          label="New password"
+          placeholder={t('enterNewPassword')}
+          label={t('newPassword')}
           value={formData.newPassword}
           onchange={handleChange}
           evaluate={true}
@@ -175,34 +177,34 @@ function ResetPassword(props) {
         <Password
           id="confirmPassword"
           name="confirmPassword"
-          placeholder="Enter your new password"
-          label="Confirm new password"
+          placeholder={t('enterConfirmNewPassword')}
+          label={t('confirmNewPassword')}
           value={formData.confirmPassword}
           onchange={handleChange}
           evaluate={false}
         />
 
         <div className='text-sm text-center justify-center text-gray-400'>
-          Haven't got the email yet?
+        {t('gotEmailYet')}
           {
             loading
-            ?
+              ?
               <SpinnerLoading
                 type='button'
                 height='20'
                 width='20'
                 color='#000'
               />
-            :
-            <div className={resendCodeCount ? `font-semibold text-red-500` : `font-semibold text-gray-800 cursor-pointer hover:text-primary-green`} onClick={resendCode}>
-            {resendCodeCount ? <p>{formatTime(cooldownTime)}</p> : 'Resend'}
-          </div>}
+              :
+              <div className={resendCodeCount ? `font-semibold text-red-500` : `font-semibold text-gray-800 cursor-pointer hover:text-primary-green`} onClick={resendCode}>
+                {resendCodeCount ? <p>{formatTime(cooldownTime)}</p> : t('resend')}
+              </div>}
         </div>
       </div>
 
       <div className='flex items-center justify-center'>
         <Button
-          label='Confirm'
+          label={t('confirm')}
           fullWidth
           fullRounded
           size='medium'
