@@ -3,7 +3,6 @@ import axiosInstance from '../config/axiosConfig';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
 import Button from '../components/Button';
-import { toast } from 'react-toastify';
 
 const BookingForm = (props) => {
   const [loading, setLoading] = useState(false);
@@ -18,7 +17,7 @@ const BookingForm = (props) => {
     load();
   }, []);
 
-  const [account, setAccount] = useState({});
+  const [account, setAccount] = useState();
   const [bookingForm, setBookingForm] = useState({
     fullName: "",
     email: "",
@@ -41,20 +40,23 @@ const BookingForm = (props) => {
   };
 
   useEffect(() => {
+    if(account)
     setPaymentForm({
       fullName: (account.firstName + " " + account.lastName).trim(),
       email: account.email,
       phone: account.phone,
       description: ""
     });
+  }, [account]);
 
+  useEffect(() => {
     setBookingForm((prevForm) => ({
       ...prevForm,
-      fullName: (account.firstName + " " + account.lastName).trim(),
-      email: account.email,
-      phone: account.phone,
+      fullName: paymentForm.fullName,
+      email: paymentForm.email,
+      phone: paymentForm.phone,
   }));
-  }, [account]);
+  }, [paymentForm]);
 
   useEffect(() => {
     setBookingForm((prevForm) => ({
@@ -81,34 +83,15 @@ const BookingForm = (props) => {
       .finally();
   };
 
-  // const handlePayment = async() => {
-  //   setLoading(true);
-  //   await axiosInstance.post(`/courtstar/payment/create-order`, paymentForm)
-  //     .then(res => {
-  //       console.log(res.data.orderurl);
-  //       window.location.href = res.data.orderurl;
-  //     })
-  //     .catch(error => {
-  //       console.log(error.message);
-  //     })
-  //     .finally(()=>{
-  //       setLoading(false);
-  //       handleClose();
-  //     });
-  // }
-
-  const handleBooking = async() => {
+  const handlePayment = async() => {
     setLoading(true);
-    await axiosInstance.post(`/courtstar/booking`, bookingForm)
+    await axiosInstance.post(`/courtstar/payment/create-order`, paymentForm)
       .then(res => {
-        toast.success("Booking successfully!", {
-          toastId: 'booking-success'
-        });
+        localStorage.setItem("bookingForm", JSON.stringify(bookingForm));
+        window.location.href = res.data.orderurl;
       })
       .catch(error => {
-        toast.error(error.message, {
-          toastId: 'booking-error'
-        });
+        console.log(error.message);
       })
       .finally(()=>{
         setLoading(false);
@@ -134,7 +117,7 @@ const BookingForm = (props) => {
           placeholder='Enter full name'
           value={paymentForm.fullName || ""}
           onchange={handleChange}
-          disabled={account.firstName}
+          disabled={account?.firstName}
         />
       </div>
       <div className='mb-2'>
@@ -145,7 +128,7 @@ const BookingForm = (props) => {
           placeholder='Enter phone number'
           value={paymentForm.phone || ""}
           onchange={handleChange}
-          disabled={account.phone}
+          disabled={account?.phone}
         />
       </div>
       <div className='mb-2'>
@@ -156,7 +139,7 @@ const BookingForm = (props) => {
           placeholder='Enter your email'
           value={paymentForm.email || ""}
           onchange={handleChange}
-          disabled={account.email}
+          disabled={account?.email}
         />
       </div>
       <div className='mb-4'>
@@ -177,7 +160,7 @@ const BookingForm = (props) => {
           size='medium'
           className='bg-primary-green hover:bg-teal-900 text-white'
           loading={loading}
-          onClick={handleBooking}
+          onClick={handlePayment}
         />
       </div>
     </div>
