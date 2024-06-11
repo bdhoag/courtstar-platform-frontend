@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-// import star from '../assets/images/star.svg';
-// import centre from '../assets/images/demo-centre.png'
 import { Link } from "react-router-dom";
 import Rating from '../components/Rating';
 import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import moment from 'moment';
 
-const Centre = () => {
-
+const Centre = ({ selectedDistrict }) => {
   const [loading, setLoading] = useState(false);
-
   const [centreList, setCentreList] = useState([]);
+  const [filteredCentreList, setFilteredCentreList] = useState([]);
+
+  const extractDistrictFromAddress = (address) => {
+    const districtMatch = address.match(/Quận\s\d+|Quận\s\w+/i);
+    return districtMatch ? districtMatch[0] : '';
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -23,15 +25,22 @@ const Centre = () => {
         .catch(error => {
           console.log(error.message);
         })
-        .finally(
-          () => {
-            setLoading(false);
-          }
-        );
+        .finally(() => {
+          setLoading(false);
+        });
     };
     load();
-  }, [])
+  }, []);
 
+  useEffect(() => {
+    if (selectedDistrict) {
+      setFilteredCentreList(
+        centreList.filter(centre => extractDistrictFromAddress(centre.address) === selectedDistrict)
+      );
+    } else {
+      setFilteredCentreList(centreList);
+    }
+  }, [selectedDistrict, centreList]);
 
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
@@ -42,12 +51,9 @@ const Centre = () => {
             List of centres
           </div>
 
-          {loading
-            ?
-            <SpinnerLoading
-              color='#2B5A50'
-            />
-            :
+          {loading ? (
+            <SpinnerLoading color='#2B5A50' />
+          ) : (
             <div className='flex gap-5 w-full'>
               <div>
                 <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex flex-col justify-between gap-10'>
@@ -55,25 +61,23 @@ const Centre = () => {
                     <div className='font-bold text-2xl uppercase'>
                       Rating
                     </div>
-                    <Rating
-                      ratingWrapper='flex gap-1 p-5'
-                      value={5}
-                      editable={true}
-                    />
+                    <Rating ratingWrapper='flex gap-1 p-5' value={5} editable={true} />
                   </div>
                   <div>
                     <div className='font-bold text-2xl uppercase mb-5'>
                       Price range
                     </div>
                     <div className='flex gap-2 items-center justify-between'>
-                      <input type="text"
+                      <input
+                        type="text"
                         name="minPrice"
                         id="minPrice"
                         className='border rounded-lg py-1.5 px-6 w-24 placeholder:text-sm'
                         placeholder='MIN'
                       />
                       -
-                      <input type="text"
+                      <input
+                        type="text"
                         name="maxPrice"
                         id="maxPrice"
                         className='border rounded-lg py-1.5 px-6 w-24 placeholder:text-sm'
@@ -85,15 +89,16 @@ const Centre = () => {
               </div>
 
               <div className='flex-1 flex flex-col gap-7'>
-
-                {centreList.map((centre) => (
-                  <div key={centre.id}
-                    className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
-                    <img src={centre.images[0].url}
+                {filteredCentreList.map((centre) => (
+                  <div
+                    key={centre.id}
+                    className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'
+                  >
+                    <img
+                      src={centre.images[0].url}
                       alt="demo centre"
                       className='w-2/5 h-56 object-cover object-center rounded-lg'
                     />
-
                     <div className='flex flex-col gap-3 flex-1 justify-between'>
                       <div className='font-semibold text-xl'>
                         {centre.name}
@@ -124,29 +129,24 @@ const Centre = () => {
                         </span>
                       </div>
                       <div className='text-sm flex justify-center gap-20'>
-                        <Link className='block text-center py-1 w-full border border-gray-800 rounded-md font-semibold hover:text-white hover:bg-gray-800 transition-all ease-in-out duration-300'
+                        <Link
+                          className='block text-center py-1 w-full border border-gray-800 rounded-md font-semibold hover:text-white hover:bg-gray-800 transition-all ease-in-out duration-300'
                           to={`/centreBooking/${centre.id}`}
                         >
                           Centre Details
                         </Link>
-                        {/* <Link className='block text-center py-1 w-40 border bg-gray-800 text-white rounded-md font-semibold hover:bg-gray-950 transition-all ease-in-out duration-300'
-                        to="/centreBooking"
-                      >
-                        Book Now
-                      </Link> */}
                       </div>
                     </div>
-
                   </div>
                 ))}
               </div>
 
             </div>
-          }
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Centre;
