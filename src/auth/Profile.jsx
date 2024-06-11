@@ -4,8 +4,10 @@ import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import SpinnerLoading from '../components/SpinnerLoading';
 import Button from '../components/Button';
+import { useTranslation } from 'react-i18next';
 
 function Profile() {
+  const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
@@ -97,21 +99,21 @@ function Profile() {
         <div className='max-w-xl mx-auto py-8 px-16 bg-white rounded-lg'>
           <h2 className='text-2xl font-bold mb-6 text-center'
           >
-            Your Profile
+            {t('yourProfile')}
           </h2>
           <div>
             <div className='mb-4 flex gap-5'>
               <InputText
                 id="firstName"
                 name="firstName"
-                label="First Name"
+                label={t('firstName')}
                 onchange={handleChange}
                 value={profileForm.firstName}
               />
               <InputText
                 id="lastName"
                 name="lastName"
-                label="Last Name"
+                label={t('lastName')}
                 onchange={handleChange}
                 value={profileForm.lastName}
               />
@@ -129,7 +131,7 @@ function Profile() {
               <InputText
                 id="phone"
                 name="phone"
-                label="Phone"
+                label={t('phone')}
                 onchange={handleChange}
                 value={profileForm.phone}
               />
@@ -138,14 +140,14 @@ function Profile() {
               <InputText
                 id="password"
                 name="password"
-                label="Password"
+                label={t('password')}
                 onchange={handleChange}
                 value={profileForm.password}
               />
             </div>
             <div className="pb-5 px-5 pt-3 -mx-5 font-semibold flex gap-6">
               <Button
-                label='Update'
+                label={t('update')}
                 fullWidth
                 size='medium'
                 className='bg-primary-green hover:bg-teal-900 text-white'
@@ -156,7 +158,7 @@ function Profile() {
                 onClick={handleUpdate}
               />
               <Button
-                label='Cancel'
+                label={t('cancel')}
                 fullWidth
                 size='medium'
                 className='text-red-600 border-2 border-red-600 w-1/2  hover:bg-red-600 hover:text-white !font-semibold'

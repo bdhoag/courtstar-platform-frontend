@@ -8,9 +8,11 @@ import { toast } from 'react-toastify';
 import Password from '../components/Password';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
+import { useTranslation } from 'react-i18next';
 
 function Login(props) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
 
@@ -81,16 +83,16 @@ function Login(props) {
 
   const html = (
     <div className="w-[440px]">
-      <h2 className="text-4xl font-semibold mb-5 text-center">Log in</h2>
-      <p className="text-gray-400 text-sm mb-5 text-center">Don't have account? <a
-        href="#s" className="font-semibold underline text-gray-800">Sign up for free</a></p>
+      <h2 className="text-4xl font-semibold mb-5 text-center">{t('logIn')}</h2>
+      <p className="text-gray-400 text-sm mb-5 text-center">{t('dontHaveAccount')}? <a
+        href="#s" className="font-semibold underline text-gray-800">{t('signUpForFree')}</a></p>
       <form onSubmit={handleLogin}>
         <div className="mb-4">
           <InputText
             id="email"
             name="email"
-            placeholder="Enter your email"
-            label="Email"
+            placeholder={t('enterEmail')}
+            label="Email*"
             value={formLogin.email}
             onchange={handleChange}
           />
@@ -99,8 +101,8 @@ function Login(props) {
           <Password
             id="password"
             name="password"
-            placeholder="Enter your password"
-            label="Password"
+            placeholder={t('enterPassword')}
+            label={t('password')}
             value={formLogin.password}
             onchange={handleChange}
             evaluate={false}
@@ -111,13 +113,13 @@ function Login(props) {
             onClick={handleForgetPopup}
             className="text-sm font-semibold underline cursor-pointer"
           >
-            Forget password?
+            {t('forgetPassword')}?
           </div>
         </div>
         <div className='flex items-center justify-center'>
           <Button 
             type='submit'
-            label='Log in'
+            label={t('logIn')}
             fullWidth
             fullRounded
             size='medium'
@@ -134,7 +136,7 @@ function Login(props) {
               src={google}
               alt='google'
             />
-            Continue with Google
+            {t('continueWithGoogle')}
           </button>
         </div>
       </form>

@@ -5,8 +5,10 @@ import ResetPassword from './ResetPassword';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import Button from '../components/Button';
+import { useTranslation } from 'react-i18next';
 
 function ForgotPassword(props) {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   //HANDLE CHECK EMAIL POPUP
   const [checkEmailPopup, setCheckEmailPopup] = useState(false);
@@ -57,17 +59,17 @@ function ForgotPassword(props) {
   const html = (
     <div className="w-[440px]">
       <div className="text-4xl font-semibold mb-5 text-center">
-        Forgot Password
+        {t('forgotPassword')}
       </div>
       <div className="text-gray-400 text-sm mb-5 text-center">
-        Enter your email and we'll send you a code to verify your email!
+        {t('forgotPasswordNote')}
       </div>
       <div>
         <div className='mb-4'>
           <InputText
             id="emailForget"
             name="emailForget"
-            placeholder="Enter your email"
+            placeholder={t('enterEmail')}
             label="Email"
             value={email}
             onchange={handleInputChange}
@@ -75,7 +77,7 @@ function ForgotPassword(props) {
         </div>
         <div>
           <Button
-            label='Send Code'
+            label={t('sendCode')}
             fullWidth
             fullRounded
             size='medium'

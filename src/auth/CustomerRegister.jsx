@@ -5,13 +5,15 @@ import InputText from '../components/InputText';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import Password from '../components/Password';
+import { useTranslation } from 'react-i18next';
 
 function CustomerRegister() {
+  const { t } = useTranslation();
   //HANDLE CHECK BOX PRIVACY
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = (event) => {
-      setIsChecked(event.target.checked);
+    setIsChecked(event.target.checked);
   };
 
   //HANDLE REGISTER ACTION
@@ -32,18 +34,18 @@ function CustomerRegister() {
   };
 
   const handleRegister = async () => {
-    await  axiosInstance.post(`/courtstar/account`, formCustomerRegister)
-                .then(res => {
-                  toast.success("Register successfully!", {
-                    toastId: 'login-success'
-                  });
-                })
-                .catch(error => {
-                  toast.error(error.message, {
-                    toastId: 'login-error'
-                  });
-                })
-                .finally();
+    await axiosInstance.post(`/courtstar/account`, formCustomerRegister)
+      .then(res => {
+        toast.success("Register successfully!", {
+          toastId: 'login-success'
+        });
+      })
+      .catch(error => {
+        toast.error(error.message, {
+          toastId: 'login-error'
+        });
+      })
+      .finally();
   };
 
   // const handleGoogleRegister = async () => {
@@ -68,22 +70,22 @@ function CustomerRegister() {
         </div>
         <div className='basis-1/2'>
           <div className='max-w-lg mx-auto py-8 px-4 bg-white'>
-            <h2 className='text-2xl font-semibold mb-6 text-center'>Customer Register</h2>
+            <h2 className='text-2xl font-semibold mb-6 text-center'>{t('customerRegister')}</h2>
             <div>
               <div className='mb-4 flex gap-5'>
                 <InputText
                   id="firstName"
                   name="firstName"
-                  placeholder="Enter your first name"
-                  label="First Name*"
+                  placeholder={t('enterFirstName')}
+                  label={t('firstName')}
                   value={formCustomerRegister.firstName}
                   onchange={handleChange}
                 />
                 <InputText
                   id="lastName"
                   name="lastName"
-                  placeholder="Enter your last name"
-                  label="Last Name*"
+                  placeholder={t('enterLastName')}
+                  label={t('lastName')}
                   value={formCustomerRegister.lastName}
                   onchange={handleChange}
                 />
@@ -92,7 +94,7 @@ function CustomerRegister() {
                 <InputText
                   id="email"
                   name="email"
-                  placeholder="Enter your email"
+                  placeholder={t('enterEmail')}
                   label="Email*"
                   value={formCustomerRegister.email}
                   onchange={handleChange}
@@ -102,8 +104,8 @@ function CustomerRegister() {
                 <InputText
                   id="phone"
                   name="phone"
-                  placeholder="Enter your phone"
-                  label="Phone*"
+                  placeholder={t('enterPhone')}
+                  label={t('phone')}
                   value={formCustomerRegister.phone}
                   onchange={handleChange}
                 />
@@ -112,14 +114,14 @@ function CustomerRegister() {
                 <Password
                   id="password"
                   name="password"
-                  placeholder="Enter your password"
-                  label="Password*"
+                  placeholder={t('enterPassword')}
+                  label={t('password')}
                   value={formCustomerRegister.password}
                   onchange={handleChange}
                   evaluate={true}
                 />
                 <div className='text-gray-500 text-xs py-1 px-0.5'>
-                  Use 8 or more characters with a mix of letters, numbers & symbols
+                  {t('conditionPassword')}
                 </div>
               </div>
               <div className='flex items-center justify-center mb-5'>
@@ -132,9 +134,9 @@ function CustomerRegister() {
                     onChange={handleCheckboxChange}
                   />
                 </div>
-                <label className="ms-2 text-sm font-medium">Agree to our <a href="#tou" className="underline">Terms of use</a> and <a
+                <label className="ms-2 text-sm font-medium">{t('agreeToOur')} <a href="#tou" className="underline">{t('termOfUse')}</a> {t('and')} <a
                   href='#pp'
-                  className='underline'> Privacy Policy</a></label>
+                  className='underline'> {t('privacyPolicy')}</a></label>
               </div>
               <div className='flex items-center justify-center'>
                 <button
@@ -142,7 +144,7 @@ function CustomerRegister() {
                   disabled={!isChecked}
                   onClick={handleRegister}
                 >
-                  Sign up
+                  {t('signUp')}
                 </button>
               </div>
               <div className='flex justify-center my-5 '>
@@ -156,15 +158,15 @@ function CustomerRegister() {
                     src={google}
                     alt='google'
                   />
-                  Sign up with your Google account
+                  {t('signUpWithGoogleAccount')}
                 </a>
               </div>
               <div className='mt-10 text-sm text-center justify-center flex gap-1.5'>
-                <span>Already have an account?</span>
+                <span>{t('alreadyHaveAnAccount')}?</span>
                 <a
                   className='font-semibold underline text-sm'
                   href="#login"
-                >Log in
+                >{t('logIn')}
                 </a>
               </div>
             </div>
