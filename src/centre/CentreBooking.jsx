@@ -14,11 +14,11 @@ import moment from 'moment';
 const CentreBooking = () => {
 
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [centre, setCentre] = useState({});
+  const [formCalendar, setFormCalendar] = useState({});
 
   const load = useCallback(async () => {
-    setLoading(true);
     await axiosInstance.get(`/courtstar/centre/getCentre/${id}`)
       .then(res => {
         setCentre(res.data.data);
@@ -46,15 +46,10 @@ const CentreBooking = () => {
     setBookingFormPopup(false)
   }
 
-  // List of images to be displayed in the image carousel
-  // const imagesDemoList = [
-  //   { id: 1, url: centre },
-  //   { id: 2, url: centre },
-  //   { id: 3, url: banner },
-  //   { id: 4, url: centre },
-  //   { id: 5, url: centre },
-  //   { id: 6, url: centre }
-  // ];
+  const submit = (formCalendar) => {
+    handleBookingFormPopup();
+    setFormCalendar(formCalendar);
+  }
 
 
   //List of feedbacks to display in Feedbacks modal
@@ -271,7 +266,7 @@ const CentreBooking = () => {
                 <div className='flex gap-2 my-3'>
                   <Rating
                     ratingWrapper='flex gap-1'
-                    value={3}
+                    value={centre.rating}
                     editable={false}
                   />
                   <div className='text-base'>
@@ -335,7 +330,11 @@ const CentreBooking = () => {
               </div>
               <div className='bg-white rounded-b-lg p-8 pt-0'>
                 <div className="">
-                  <Calendar handleButton={handleBookingFormPopup} typeOfCalendar='booking' />
+                  <Calendar
+                    handleButton={submit}
+                    typeOfCalendar='booking'
+                    centre={centre}
+                  />
                 </div>
               </div>
             </div>
@@ -358,6 +357,8 @@ const CentreBooking = () => {
       <BookingForm
         isOpen={bookingFormPopup}
         setIsOpen={handleBookingFormPopupClose}
+        formCalendar={formCalendar}
+        centre={centre}
       />
     </div>
   );

@@ -103,6 +103,11 @@ const Centre = ({ selectedDistrict }) => {
                       <div className='font-semibold text-xl'>
                         {centre.name}
                       </div>
+                      <Rating
+                        ratingWrapper='flex gap-1'
+                        value={centre.rating}
+                        editable={false}
+                      />
                       <div>
                         <span className='font-semibold'>Address: </span>
                         {centre.address}
