@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = (props) => {
+  const { t } = useTranslation();
 
   const [centreIsSelected, setCentreIsSelected] = useState();
   const [tab, setTab] = useState();
@@ -34,14 +36,14 @@ const Sidebar = (props) => {
               : "py-1 font-bold text-lg cursor-pointer hover:px-3 rounded-md hover:bg-primary-green hover:text-white hover:scale-105 ease-in-out duration-300"
           }
         >
-          My Balance
+          {t('myBalance')}
         </div>
       </div>
 
       <div className="">
         <div className="flex justify-between items-center">
           <div className="font-bold text-lg">
-            My Centre
+            {t('myCentre')}
           </div>
           <button
             className="flex gap-2 p-1 w-fit rounded-md text-primary-green hover:bg-primary-green hover:text-white
@@ -94,7 +96,7 @@ const Sidebar = (props) => {
                       : 'cursor-pointer rounded-md hover:px-3 hover:bg-gray-800 hover:text-white ease-in-out duration-300'
                     }
                   >
-                    Centre Staff
+                    {t('centreStaff')}
                   </div>
 
                   <div
