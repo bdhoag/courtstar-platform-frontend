@@ -9,8 +9,10 @@ import Dropdown from '../components/Dropdown';
 import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 
 function AddCentre(props) {
+  const { t } = useTranslation();
 
   // CLOSE ADD CENTRE DIALOG
   const handleClose = () => {
@@ -129,6 +131,7 @@ function AddCentre(props) {
         toast.success("Create Successfully!", {
           toastId: 'add-centre-success'
         });
+        setImgUrls([]);
       })
       .catch(error => {
         console.log(error.message);
@@ -242,8 +245,8 @@ function AddCentre(props) {
           <InputText
             id="name"
             name="name"
-            placeholder="Enter name of centre"
-            label="Centre Name"
+            placeholder={t('enterCentreName')}
+            label={t('centreName')}
             value={centreForm.name}
             onchange={handleChange}
           />
@@ -252,8 +255,8 @@ function AddCentre(props) {
           <InputText
             id="address"
             name="address"
-            placeholder="Enter address of centre"
-            label="Centre Address"
+            placeholder={t('enterCentreAddress')}
+            label={t('centreAddress')}
             value={centreForm.address}
             onchange={handleChange}
           />
@@ -262,8 +265,8 @@ function AddCentre(props) {
           <InputText
             id="numberOfCourt"
             name="numberOfCourt"
-            placeholder="Enter number of courts"
-            label="Number of courts"
+            placeholder={t('enterNumberOfCourt')}
+            label={t('numberOfCourt')}
             value={centreForm.numberOfCourt}
             onchange={handleChange}
           />
@@ -272,8 +275,8 @@ function AddCentre(props) {
           <InputText
             id="pricePerHour"
             name="pricePerHour"
-            placeholder="Enter price per hour"
-            label="Price per hour"
+            placeholder={t('enterPricePerHour')}
+            label={t('pricePerHour')}
             value={centreForm.pricePerHour}
             onchange={handleChange}
           />
@@ -282,11 +285,11 @@ function AddCentre(props) {
       <div className="flex gap-4">
         <div className='basis-1/2'>
           <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2'>
-            Open Time:
+          {t('openTimes')}:
           </div>
           <div className='flex gap-4 items-center'>
             <Dropdown
-              placeholder="Select open time"
+              placeholder={t('selectOpenTime')}
               items={items}
               onSelect={handleSelectOpenTime}
               dir='up'
@@ -295,11 +298,11 @@ function AddCentre(props) {
         </div>
         <div className='basis-1/2'>
           <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2'>
-            Close time:
+          {t('closeTime')}:
           </div>
           <div className='flex gap-4 items-center'>
             <Dropdown
-              placeholder="Select close time"
+              placeholder={t('selectCloseTime')}
               items={items}
               onSelect={handleSelectCloseTime}
               dir='up'
@@ -312,8 +315,8 @@ function AddCentre(props) {
           <InputText
             id="paymentMethod"
             name="paymentMethod"
-            placeholder="Enter payment method"
-            label="Payment method"
+            placeholder={t('enterPaymentMethod')}
+            label={t('paymentMethod')}
             value={centreForm.paymentMethod}
             onchange={handleChange}
           />
@@ -356,7 +359,7 @@ function AddCentre(props) {
         isOpen={props.isOpen}
         submit={submit}
         setIsOpen={handleClose}
-        title='Centre Information'
+        title={t('centreInformation')}
         clearForm={clearForm}
       />
     </div>

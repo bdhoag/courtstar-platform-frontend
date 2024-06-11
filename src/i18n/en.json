@@ -79,5 +79,15 @@
   "confirmNewPassword":"Confirm New Password",
   "gotEmailYet":"Haven't got the email yet?",
   "resend":"Resend",
-  "confirm":"Confirm"
+  "confirm":"Confirm",
+  "myBalance": "My Balance",
+  "centreStaff": "Centre Staff",
+  "centreInformation": "Centre Information",
+  "enterCentreName":"Enter Name of Centre",
+  "centreName":"Centre Name",
+  "enterCentreAddress":"Enter Address of Centre",
+  "centreAddress":"Centre Address",
+  "enterNumberOfCourt":"Enter Number of Court",
+  "enterPricePerHour":"Enter Price per Hour",
+  "pricePerHour":"Price per Hour"
 }
