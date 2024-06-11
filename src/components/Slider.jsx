@@ -29,7 +29,7 @@ const Slider = (props) => {
   // Render the list of thumbnail images
   const renderListImg = imagesDemoList.map((image, index) => (
     <img
-      src={image.url}
+      src={image?.url}
       onClick={() => clickImgActive(index)}
       key={index}
       alt="demo centre"
@@ -40,7 +40,7 @@ const Slider = (props) => {
   return (
     <div className='group'>
       <div className='relative '>
-        <img src={imgDisplay.url}
+        <img src={imgDisplay?.url}
           alt="demo centre"
           className='w-[50rem] h-[25rem] rounded-lg object-cover'
         />
@@ -53,7 +53,7 @@ const Slider = (props) => {
           </button>
         </div>
       </div>
-      <div className='flex w-fit h-20 justify-center gap-2 mt-2 py-1.5 px-2.5 border rounded-md bg-white mx-auto'>
+      <div className='flex w-fit h-20 gap-2 mt-2 py-1.5 px-2.5 border rounded-md bg-white mx-auto overflow-x-auto'>
         {renderListImg}
       </div>
     </div>
