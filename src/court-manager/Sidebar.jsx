@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const url = window.location.href;
+    const id = url.split('/myCentre/')[1];
+    if (id === "balance") setCentreIsSelected(id);
+    else setCentreIsSelected(parseInt(id));
+    handleSelectTab(0);
+  }, []);
 
   const [centreIsSelected, setCentreIsSelected] = useState("balance");
   const [tab, setTab] = useState();
