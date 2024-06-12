@@ -9,50 +9,87 @@ import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 function CentreInfo(props) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [centreDetail, setCentreDetail] = useState(props.centreDetail);
   const imgList = props.imgList;
   const apiFeedbacks = props.apiFeedbacks;
 
   const handleDisable = async (centreId) => {
-    console.log("dis");
-    try {
-      const res = await axiosInstance.post(`/courtstar/centre/disable/${centreId}`);
-      if (res.data.data) {
-        setCentreDetail((prevForm) => ({
-          ...prevForm,
-          status: false
-        }))
-        toast.success('Disable successfully', {
-          toastId: 'disable-success'
-        });
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+    await axiosInstance.post(`/courtstar/centre/disable/${centreId}`)
+      .then(res => {
+        if (res.data.data) {
+          setCentreDetail((prevForm) => ({
+            ...prevForm,
+            status: false
+          }))
+          toast.success('Disable successfully', {
+            toastId: 'disable-success'
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(
+      // () => {
+      //   setLoading(false);
+      // }
+    );
   }
 
   const handleActive = async (centreId) => {
-    console.log("active");
-    try {
-      const res = await axiosInstance.post(`/courtstar/centre/active/${centreId}`);
-      if (res.data.data) {
-        setCentreDetail((prevForm) => ({
-          ...prevForm,
-          status: true
-        }))
-        toast.success('Active successfully', {
-          toastId: 'active-success'
-        });
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+    await axiosInstance.post(`/courtstar/centre/active/${centreId}`)
+      .then(res => {
+        if (res.data.data) {
+          setCentreDetail((prevForm) => ({
+            ...prevForm,
+            status: true
+          }))
+          toast.success('Active successfully', {
+            toastId: 'active-success'
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(
+      // () => {
+      //   setLoading(false);
+      // }
+    );
   }
 
+  const handleDelete = async (centreId) => {
+    await axiosInstance.post(`/courtstar/centre/delete/${centreId}`)
+      .then(res => {
+        if (res.data.data) {
+          console.log('delete');
+          toast.success('Delete successfully', {
+            toastId: 'delete-success'
+          });
+          navigate(`/myCentre/balance`)
+          window.location.reload();
+        } else {
+          toast.success('Cannot delete', {
+            toastId: 'delete-unsuccess'
+          });
+        }
 
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(
+      // () => {
+      //   setLoading(false);
+      // }
+    );
+  }
 
   return (
     <div className="flex flex-col gap-2 py-2">
@@ -123,6 +160,7 @@ function CentreInfo(props) {
             <button
               className="flex justify-center items-center gap-2.5 text-white bg-red-600 w-1/2 py-2 rounded-md
             hover:bg-red-800 hover:text-white ease-in-out duration-300 cursor-pointer"
+              onClick={() => handleDelete(centreDetail.id)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
