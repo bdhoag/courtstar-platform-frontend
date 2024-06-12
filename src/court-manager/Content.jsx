@@ -268,7 +268,7 @@ const Content = (props) => {
           <>
             {loading
               ?
-              <div className="min-h-screen flex items-center justify-center">
+              <div className="h-[500px] flex items-center justify-center">
                 < SpinnerLoading
                   height='80'
                   width='80'
