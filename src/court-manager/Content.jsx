@@ -4,34 +4,63 @@ import SpinnerLoading from '../components/SpinnerLoading';
 import StaffInfo from './StaffInfo';
 import CheckIn from './CheckIn';
 import CentreInfo from './CentreInfo';
+import MyBalance from './MyBalance';
+import { useParams } from 'react-router-dom';
 
 const Content = (props) => {
 
-  const [loading, setLoading] = useState();
-  const [centreDetail, setCentreDetail] = useState([]);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [centreDetail, setCentreDetail] = useState({});
   const [imgList, setImgList] = useState([]);
+  const [staffList, setStaffList] = useState([]);
+  const [checkIn, setCheckIn] = useState([]);
 
   useEffect(() => {
-    if (props.centreId > 0) {
+    setLoading(true);
+    if (id > 0) {
       const load = async () => {
-        setLoading(true);
-        await axiosInstance.get(`/courtstar/centre/getCentre/${props.centreId}`)
+        setImgList([]);
+        setCentreDetail({});
+        await axiosInstance.get(`/courtstar/centre/getCentre/${id}`)
           .then(res => {
             setCentreDetail(res.data.data);
             setImgList(res.data.data.images);
+            setStaffList(res.data.data.centreStaffs)
           })
           .catch(error => {
             console.log(error.message);
           })
           .finally(
             () => {
-              setLoading(false);
+              setTimeout(() => {
+                setLoading(false);
+              }, 1000);
             }
           );
       }
       load();
+      const loadCheckIn = async () => {
+        setLoading(true);
+        await axiosInstance.get(`/courtstar/booking/${id}`)
+          .then(res => {
+            setCheckIn(res.data.data);
+          })
+          .catch(error => {
+            console.log(error.message);
+          })
+          .finally(
+            () => {
+              setTimeout(() => {
+                setLoading(false);
+              }, 1000);
+            }
+          );
+      }
+      loadCheckIn();
     }
-  }, [props.centreId])
+  }, [id])
+
 
   const apiFeedbacks = [
     {
@@ -222,92 +251,16 @@ const Content = (props) => {
     }
   ]
 
-  const apiCheckin = [
-    {
-      id: 1,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 2,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 3,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 4,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 5,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 6,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 7,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 8,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 9,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    },
-    {
-      id: 10,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      email: 'huynhdoanthanhphong@gmail.com',
-      phone: '0987654321',
-      Slot: '1'
-    }
-  ];
-
   return (
     <div className="flex-1 flex justify-center max-w-screen-1440 px-14 mx-auto">
 
       {
-        props.centreId === 0
+        id === "balance"
           ?
           <>
-            <div className="my-auto text-2xl font-bold">
-              "Em có sai với ai đi nữa, em có làm cái gì đi nữa. Nếu có phải trả giá em cũng xin chấp nhận. Ra xã hội làm ăn bươn chãi, liều nhiều thì ăn nhiều, liều ít thì ăn ít. Muốn thành công phải trải qua đắng cay ngọt bùi. Làm ăn phải chấp nhận mạo hiểm, nguy hiểm.
-              <br />
-              <br />
-              Sau này, chỉ có làm, chịu khó, cần cù bù siêng năng, chỉ có làm thì mới có ăn… ".
-            </div>
+            <MyBalance
+              balanceDetail={props.balanceDetail}
+            />
           </>
           :
           <>
@@ -337,7 +290,9 @@ const Content = (props) => {
                   props.tab === 1 &&
                   (
                     <div className="">
-                      <StaffInfo />
+                      <StaffInfo
+                        staffList={staffList}
+                      />
                     </div>
                   )
                 }
@@ -347,7 +302,8 @@ const Content = (props) => {
                   (
                     <div className="">
                       <CheckIn
-                        apiCheckin={apiCheckin}
+                        apiCheckin={checkIn}
+                        centreDetail={centreDetail}
                       />
                     </div>
                   )

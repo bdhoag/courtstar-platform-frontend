@@ -180,7 +180,7 @@ const Header = () => {
               {
                 (role?.includes('ADMIN') || role?.includes('MANAGER') || role?.includes('STAFF')) && isLogin &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                  to="/myCentre">{t('myCentre')}</Link>
+                  to="/myCentre/balance">{t('myCentre')}</Link>
               }
             </div>
           </div>

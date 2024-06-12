@@ -12,7 +12,7 @@ function CentreInfo(props) {
 
   const centreDetail = props.centreDetail;
   const imgList = props.imgList;
-  const apiFeedbacks = props.apiFeedbacks
+  const apiFeedbacks = props.apiFeedbacks;
 
   // console.log(props.centre.images[0].url);
 
@@ -23,7 +23,7 @@ function CentreInfo(props) {
       </div>
 
       <div className="flex justify-between gap-4">
-        <div className="w-3/5">
+        <div className="w-[44rem]">
           <Slider
             imagesDemoList={imgList}
           />
@@ -31,7 +31,7 @@ function CentreInfo(props) {
 
         <div className="flex-1 w-[410px] flex flex-col gap-3">
 
-          <div className="flex gap-3">
+          <div className="flex gap-3 font-semibold">
             {
               centreDetail.status
                 ?
@@ -82,7 +82,7 @@ function CentreInfo(props) {
 
             <button
               className="flex justify-center items-center gap-2.5 text-white bg-red-600 w-1/2 py-2 rounded-md
-          hover:bg-red-800 hover:text-white ease-in-out duration-300 cursor-pointer"
+            hover:bg-red-800 hover:text-white ease-in-out duration-300 cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -116,8 +116,8 @@ function CentreInfo(props) {
                 <div className="flex justify-between text-lg font-semibold">
                   {t('information')}
                   <button
-                    className="flex justify-center items-center gap-2.5 text-white bg-primary-green rounded-md
-                  text-base px-2 hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
+                    className="flex justify-center items-center text-primary-green  rounded-md
+                    px-2 hover:bg-primary-green hover:text-white ease-in-out duration-300 cursor-pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +133,6 @@ function CentreInfo(props) {
                       <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                       <path d="m15 5 4 4" />
                     </svg>
-                    {t('edit')}
                   </button>
                 </div>
                 <div className="px-2">
@@ -164,8 +163,8 @@ function CentreInfo(props) {
                   {centreDetail.numberOfCourt}
                 </div>
                 <button
-                  className="flex justify-center items-center gap-2.5 text-white bg-primary-green rounded-md
-                  text-base px-2 hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
+                  className="flex justify-center items-center text-primary-green  rounded-md
+                    px-2 hover:bg-primary-green hover:text-white ease-in-out duration-300 cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +180,6 @@ function CentreInfo(props) {
                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                     <path d="m15 5 4 4" />
                   </svg>
-                  {t('edit')}
                 </button>
               </div>
               <div className="mx-auto">

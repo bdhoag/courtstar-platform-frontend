@@ -7,11 +7,10 @@ import Content from './Content';
 
 const MyCentre = () => {
 
-
   const [centreList, setCentreList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [centreId, setCentreId] = useState();
   const [tab, setTab] = useState();
+  const [balanceDetail, setBalanceDetail] = useState();
 
   useEffect(() => {
     const load = async () => {
@@ -29,12 +28,24 @@ const MyCentre = () => {
         );
     }
     load();
+
+    const loadBalanceDetail = async () => {
+      setLoading(true);
+      await axiosInstance.get(`/courtstar/manager/info`)
+        .then(res => {
+          setBalanceDetail(res.data.data);
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+        .finally(
+          () => {
+            setLoading(false);
+          }
+        );
+    }
+    loadBalanceDetail();
   }, []);
-
-
-  const handleChooseFromSidebar = (centreId) => {
-    setCentreId(centreId);
-  };
 
   const handleChooseTabFromSidebar = (tab) => {
     setTab(tab);
@@ -70,12 +81,11 @@ const MyCentre = () => {
         <div className='bg-gray-100 text-gray-800 flex'>
           <Sidebar
             centreList={centreList}
-            onDataSubmit={handleChooseFromSidebar}
             onDataTabSubmit={handleChooseTabFromSidebar}
             handleAddCentrePopup={handleAddCentrePopup}
           />
           <Content
-            centreId={centreId}
+            balanceDetail={balanceDetail}
             tab={tab}
           />
         </div>
