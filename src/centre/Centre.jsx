@@ -38,9 +38,6 @@ const Centre = ({ selectedDistrict }) => {
     load();
   }, []);
 
-  console.log(centreList);
-  console.log(filteredCentreList);
-
   useEffect(() => {
     setFilteredCentreList(centreList);
     if (selectedDistrict) {
