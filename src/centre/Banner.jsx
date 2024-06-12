@@ -33,26 +33,19 @@ const Banner = ({ onDistrictSelect }) => {
     t('binhChanhProvince'),
   ];
 
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [loading, setLoading] = useState(false);
-
   const handleSelect = (item) => {
-    setSelectedDistrict(item);
+    onDistrictSelect(item)
     if (item === t('findCourtNow')) {
       onDistrictSelect(''); // Reset state when "findCourtNow" is selected
     }
   };
 
   const handleFindClick = () => {
-    if (selectedDistrict === t('findCourtNow')) {
-      onDistrictSelect(''); // Reset state when "findCourtNow" is selected
-    } else {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        onDistrictSelect(selectedDistrict);
-      }, 1000);
-    }
+    // if (selectedDistrict === t('findCourtNow')) {
+    //   onDistrictSelect(''); // Reset state when "findCourtNow" is selected
+    // } else {
+    //   onDistrictSelect(selectedDistrict);
+    // }
   };
 
   return (
@@ -77,7 +70,6 @@ const Banner = ({ onDistrictSelect }) => {
             fullRounded
             size='medium'
             className='bg-primary-green hover:bg-teal-900 text-white'
-            loading={loading}
             onClick={handleFindClick}
           />
         </div>

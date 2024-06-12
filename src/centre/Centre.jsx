@@ -9,9 +9,11 @@ import RangeSlider from './RangeSlider';
 
 const Centre = ({ selectedDistrict }) => {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const [centreList, setCentreList] = useState([]);
-  const [filteredCentreList, setFilteredCentreList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [centreList, setCentreList] = useState();
+  const [filteredCentreList, setFilteredCentreList] = useState();
+  const [minValue, setMinValue] = useState();
+  const [maxValue, setMaxValue] = useState();
 
   const extractDistrictFromAddress = (address) => {
     const districtMatch = address.match(/Quận\s\d+|Quận\s\w+/i);
@@ -24,6 +26,7 @@ const Centre = ({ selectedDistrict }) => {
       await axiosInstance.get(`/courtstar/centre/allCentre`)
         .then(res => {
           setCentreList(res.data.data.reverse());
+          setFilteredCentreList(res.data.data);
         })
         .catch(error => {
           console.log(error.message);
@@ -36,14 +39,28 @@ const Centre = ({ selectedDistrict }) => {
   }, []);
 
   useEffect(() => {
+    setFilteredCentreList(centreList);
     if (selectedDistrict) {
       setFilteredCentreList(
-        centreList.filter(centre => extractDistrictFromAddress(centre.address) === selectedDistrict)
+        prevList => prevList.filter(centre => extractDistrictFromAddress(centre.address) === selectedDistrict)
       );
-    } else {
-      setFilteredCentreList(centreList);
     }
-  }, [selectedDistrict, centreList]);
+    if (minValue) {
+      setFilteredCentreList(
+        prevList => prevList.filter(centre => centre.pricePerHour >= parseFloat(minValue))
+      );
+    }
+    if (maxValue) {
+      setFilteredCentreList(
+        prevList => prevList.filter(centre => centre.pricePerHour <= parseFloat(maxValue))
+      );
+    }
+  }, [selectedDistrict, minValue, maxValue, centreList]);
+
+  const handlePriceChange = (min, max) => {
+    setMaxValue(max);
+    setMinValue(min);
+  }
 
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
@@ -67,15 +84,19 @@ const Centre = ({ selectedDistrict }) => {
                     <Rating ratingWrapper='flex gap-1 p-5' value={5} editable={true} />
                   </div>
                   <div>
-                    <div className='font-bold text-2xl uppercase mb-5'>
+                    <div className='font-bold text-2xl uppercase'>
                       {t('priceRange')}
                     </div>
-                    <RangeSlider />
+                    <RangeSlider 
+                      priceRange={handlePriceChange}
+                    />
                   </div>
                 </div>
               </div>
 
-              <div className='flex-1 flex flex-col gap-7'>
+              {
+                filteredCentreList?.length > 0 &&
+                <div className='flex-1 flex flex-col gap-7'>
                 {filteredCentreList.map((centre) => (
                   <div
                     key={centre.id}
@@ -127,6 +148,7 @@ const Centre = ({ selectedDistrict }) => {
                   </div>
                 ))}
               </div>
+              }
 
             </div>
           )}
