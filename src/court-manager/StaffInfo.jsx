@@ -16,16 +16,16 @@ function StaffInfo() {
     setAddStaffPopup(false)
   }
   const [staffInfo, setStaffInfo] = useState([]);
+  const loadStaffInfo = async () => {
+    try {
+      const res = await axiosInstance.get(`/courtstar/staff/centre/${id}`);
+      setStaffInfo(res.data.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
-    const loadStaffInfo = async () => {
-      try {
-        const res = await axiosInstance.get(`/courtstar/staff/centre/${id}`);
-        setStaffInfo(res.data.data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
     loadStaffInfo();
   }, [id]);
 
@@ -35,6 +35,7 @@ function StaffInfo() {
         id={id}
         isOpen={addStaffPopup}
         setIsOpen={handleAddStaffPopupClose}
+        loadStaffInfo={loadStaffInfo}
       />
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
