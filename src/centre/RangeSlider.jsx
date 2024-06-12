@@ -50,13 +50,13 @@ const RangeSlider = (props) => {
     };
 
     const handleMinInputChange = (event) => {
-        const value = event.target.value === '' ? '' : Number(event.target.value);
+        const value = event.target.value === '' ? '' : Math.min(Number(event.target.value), 500000);
         setMinValue(value);
         setRange([value, range[1]]);
     };
 
     const handleMaxInputChange = (event) => {
-        const value = event.target.value === '' ? '' : Number(event.target.value);
+        const value = event.target.value === '' ? '' : Math.min(Number(event.target.value), 500000);
         setMaxValue(value);
         setRange([range[0], value]);
     };

@@ -64,14 +64,14 @@ const Banner = ({ onDistrictSelect }) => {
             items={items}
             onSelect={handleSelect}
           />
-          <Button
+          {/* <Button
             label={t('find')}
             fullWidth
             fullRounded
             size='medium'
             className='bg-primary-green hover:bg-teal-900 text-white'
             onClick={handleFindClick}
-          />
+          /> */}
         </div>
       </div>
     </div>

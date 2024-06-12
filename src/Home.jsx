@@ -9,6 +9,8 @@ const Home = () => {
     setSelectedDistrict(district);
   };
 
+  console.log(selectedDistrict);
+
   return (
     <div>
       <Banner onDistrictSelect={handleDistrictSelect} />

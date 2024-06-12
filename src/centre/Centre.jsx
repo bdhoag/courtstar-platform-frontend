@@ -10,14 +10,15 @@ import RangeSlider from './RangeSlider';
 const Centre = ({ selectedDistrict }) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-  const [centreList, setCentreList] = useState();
-  const [filteredCentreList, setFilteredCentreList] = useState();
+  const [centreList, setCentreList] = useState([]);
+  const [filteredCentreList, setFilteredCentreList] = useState([]);
   const [minValue, setMinValue] = useState();
   const [maxValue, setMaxValue] = useState();
 
   const extractDistrictFromAddress = (address) => {
-    const districtMatch = address.match(/Quận\s\d+|Quận\s\w+/i);
-    return districtMatch ? districtMatch[0] : '';
+    const districtMatch = address.match(/(?:Quận\s(?:\d+|[A-Za-zÀ-ỹ]+(?:\s[A-Za-zÀ-ỹ]+)*)|Thành phố\s[A-Za-zÀ-ỹ]+(?:\s[A-Za-zÀ-ỹ]+)*|Huyện\s[A-Za-zÀ-ỹ]+(?:\s[A-Za-zÀ-ỹ]+)*)/i);
+    console.log("Matched District:", districtMatch ? districtMatch[0] : '');
+    return districtMatch ? districtMatch[0].trim() : '';
   };
 
   useEffect(() => {
@@ -39,22 +40,17 @@ const Centre = ({ selectedDistrict }) => {
   }, []);
 
   useEffect(() => {
-    setFilteredCentreList(centreList);
+    let filteredList = centreList;
     if (selectedDistrict) {
-      setFilteredCentreList(
-        prevList => prevList.filter(centre => extractDistrictFromAddress(centre.address) === selectedDistrict)
-      );
+      filteredList = filteredList.filter(centre => extractDistrictFromAddress(centre.address).toLowerCase() === selectedDistrict.toLowerCase());
     }
     if (minValue) {
-      setFilteredCentreList(
-        prevList => prevList.filter(centre => centre.pricePerHour >= parseFloat(minValue))
-      );
+      filteredList = filteredList.filter(centre => centre.pricePerHour >= parseFloat(minValue));
     }
     if (maxValue) {
-      setFilteredCentreList(
-        prevList => prevList.filter(centre => centre.pricePerHour <= parseFloat(maxValue))
-      );
+      filteredList = filteredList.filter(centre => centre.pricePerHour <= parseFloat(maxValue));
     }
+    setFilteredCentreList(filteredList);
   }, [selectedDistrict, minValue, maxValue, centreList]);
 
   const handlePriceChange = (min, max) => {
@@ -87,7 +83,7 @@ const Centre = ({ selectedDistrict }) => {
                     <div className='font-bold text-2xl uppercase'>
                       {t('priceRange')}
                     </div>
-                    <RangeSlider 
+                    <RangeSlider
                       priceRange={handlePriceChange}
                     />
                   </div>
@@ -97,57 +93,57 @@ const Centre = ({ selectedDistrict }) => {
               {
                 filteredCentreList?.length > 0 &&
                 <div className='flex-1 flex flex-col gap-7'>
-                {filteredCentreList.map((centre) => (
-                  <div
-                    key={centre.id}
-                    className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'
-                  >
-                    <img
-                      src={centre.images[0].url}
-                      alt="demo centre"
-                      className='w-2/5 h-56 object-cover object-center rounded-lg'
-                    />
-                    <div className='flex flex-col gap-3 flex-1 justify-between'>
-                      <div className='font-semibold text-xl'>
-                        {centre.name}
-                      </div>
-                      <Rating
-                        ratingWrapper='flex gap-1'
-                        value={centre.rating}
-                        editable={false}
+                  {filteredCentreList.map((centre) => (
+                    <div
+                      key={centre.id}
+                      className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'
+                    >
+                      <img
+                        src={centre.images[0].url}
+                        alt="demo centre"
+                        className='w-2/5 h-56 object-cover object-center rounded-lg'
                       />
-                      <div>
-                        <span className='font-semibold'>{t('address')}: </span>
-                        {centre.address}
-                      </div>
-                      <div className='flex gap-3'>
+                      <div className='flex flex-col gap-3 flex-1 justify-between'>
+                        <div className='font-semibold text-xl'>
+                          {centre.name}
+                        </div>
+                        <Rating
+                          ratingWrapper='flex gap-1'
+                          value={centre.rating}
+                          editable={false}
+                        />
                         <div>
-                          <span className='font-semibold'>{t('openTime')}: </span>
-                          {moment(centre.openTime, 'HH:mm:ss').format('HH:mm')} - {moment(centre.closeTime, 'HH:mm:ss').format('HH:mm')}
+                          <span className='font-semibold'>{t('address')}: </span>
+                          {centre.address}
+                        </div>
+                        <div className='flex gap-3'>
+                          <div>
+                            <span className='font-semibold'>{t('openTime')}: </span>
+                            {moment(centre.openTime, 'HH:mm:ss').format('HH:mm')} - {moment(centre.closeTime, 'HH:mm:ss').format('HH:mm')}
+                          </div>
+                          <div>
+                            <span className='font-semibold'>{t('numberOfCourt')}: </span>
+                            {centre.numberOfCourt}
+                          </div>
                         </div>
                         <div>
-                          <span className='font-semibold'>{t('numberOfCourt')}: </span>
-                          {centre.numberOfCourt}
+                          <span className='font-semibold'>{t('price')}: </span>
+                          <span className='font-semibold text-rose-600'>
+                            {centre?.pricePerHour.toLocaleString('de-DE')} VND/h
+                          </span>
                         </div>
-                      </div>
-                      <div>
-                        <span className='font-semibold'>{t('price')}: </span>
-                        <span className='font-semibold text-rose-600'>
-                          {centre?.pricePerHour.toLocaleString('de-DE')} VND/h
-                        </span>
-                      </div>
-                      <div className='text-sm flex justify-center gap-20'>
-                        <Link
-                          className='block text-center py-1 w-full border border-gray-800 rounded-md font-semibold hover:text-white hover:bg-gray-800 transition-all ease-in-out duration-300'
-                          to={`/centreBooking/${centre.id}`}
-                        >
-                          {t('centreDetail')}
-                        </Link>
+                        <div className='text-sm flex justify-center gap-20'>
+                          <Link
+                            className='block text-center py-1 w-full border border-gray-800 rounded-md font-semibold hover:text-white hover:bg-gray-800 transition-all ease-in-out duration-300'
+                            to={`/centreBooking/${centre.id}`}
+                          >
+                            {t('centreDetail')}
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
               }
 
             </div>
