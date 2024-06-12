@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import star from '../assets/images/star.svg';
 import LockOpen from '../assets/images/lock-open.svg';
 import LockClose from '../assets/images/lock-close.svg';
@@ -7,14 +7,52 @@ import Pagination from "../components/Pagination";
 import Slider from '../components/Slider';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+import axiosInstance from '../config/axiosConfig';
+import { toast } from 'react-toastify';
 function CentreInfo(props) {
   const { t } = useTranslation();
 
-  const centreDetail = props.centreDetail;
+  const [centreDetail, setCentreDetail] = useState(props.centreDetail);
   const imgList = props.imgList;
   const apiFeedbacks = props.apiFeedbacks;
 
-  // console.log(props.centre.images[0].url);
+  const handleDisable = async (centreId) => {
+    console.log("dis");
+    try {
+      const res = await axiosInstance.post(`/courtstar/centre/disable/${centreId}`);
+      if (res.data.data) {
+        setCentreDetail((prevForm) => ({
+          ...prevForm,
+          status: false
+        }))
+        toast.success('Disable successfully', {
+          toastId: 'disable-success'
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  const handleActive = async (centreId) => {
+    console.log("active");
+    try {
+      const res = await axiosInstance.post(`/courtstar/centre/active/${centreId}`);
+      if (res.data.data) {
+        setCentreDetail((prevForm) => ({
+          ...prevForm,
+          status: true
+        }))
+        toast.success('Active successfully', {
+          toastId: 'active-success'
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+
 
   return (
     <div className="flex flex-col gap-2 py-2">
@@ -37,7 +75,8 @@ function CentreInfo(props) {
                 ?
                 <button
                   className="flex justify-center items-center gap-2.5 text-white bg-primary-green w-1/2
-                py-2 rounded-md hover:bg-black ease-in-out duration-200 cursor-pointer group"
+                  py-2 rounded-md hover:bg-black ease-in-out duration-200 cursor-pointer group"
+                  onClick={() => handleDisable(centreDetail.id)}
                 >
                   <img
                     className='group-hover:hidden'
@@ -59,7 +98,8 @@ function CentreInfo(props) {
                 :
                 <button
                   className="flex justify-center items-center gap-2.5 text-white border-2 bg-black w-1/2
-                py-2 rounded-md hover:bg-primary-green ease-in-out duration-200 cursor-pointer group"
+                  py-2 rounded-md hover:bg-primary-green ease-in-out duration-200 cursor-pointer group"
+                  onClick={() => handleActive(centreDetail.id)}
                 >
                   <img
                     className='group-hover:block hidden stroke-primary-green'
