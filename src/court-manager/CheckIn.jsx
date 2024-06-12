@@ -131,170 +131,179 @@ const CheckIn = (props) => {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl mt-4">
-        <div className="px-10 pt-6 flex justify-between gap-1">
-          <div className="w-3/12">
-            <InputText
-              id="name"
-              name="name"
-              placeholder={t('enterUserName')}
-              label={t('fullName')}
-            />
-          </div>
-          <div className="w-3/12">
-            <InputText
-              id="email"
-              name="email"
-              placeholder={t('enterUserEmail')}
-              label="Email"
-            />
-          </div>
-          <div className="w-2/12">
-            <Dropdown
-              label="Date"
-              items={optionDropdownDate}
-              onSelect={handleSelectDate}
-              placeholder="Select date"
-            />
-          </div>
-          <div className="w-2/12">
-            <InputText
-              id="phone"
-              name="phone"
-              placeholder={t('enterUserPhone')}
-              label={t('phone')}
-            />
-          </div>
-          <div className="w-2/12 pr-3">
-            <Dropdown
-              label={t('slot')}
-              items={optionDropdownSlot}
-              placeholder={t('selectSlot')}
-              onSelect={handleSelectSlot}
-              itemClassName="!px-4 !text-sm"
-              buttonClassName="!px-3"
-            />
-          </div>
-          <div className="w-9"></div>
-        </div>
-        <div className="divide-y-2">
-          {apiCheckin.map((checkin) => (
-            <div key={checkin.id} className="px-10 py-3 flex items-center justify-between">
-              <div className="w-3/12 px-3 truncate">
-                {checkin?.account?.firstName} {checkin?.account?.lastName}
-                {checkin?.guest?.fullName}
-              </div>
-              <div className="w-3/12 px-3 truncate">
-                {checkin?.account?.email}
-                {checkin?.guest?.email}
-              </div>
-              <div className="w-2/12 flex justify-center">
-                {moment(checkin?.date, 'yyyy-MM-DD').format('DD/MM')}
-              </div>
-              <div className="w-2/12 flex justify-center">
-                {checkin?.account?.phone}
-                {checkin?.guest?.phone}
-              </div>
-              <div className="w-2/12 flex flex-col justify-center items-center font-semibold">
-                {checkin?.slot?.slotNo}
-                <div className="text-sm font-normal">
-                  ({moment(checkin?.slot?.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(checkin?.slot?.endTime, 'HH:mm:ss').format('HH:mm')})
+      {
+        apiCheckin.length
+          ?
+          <>
+            <div className="bg-white rounded-xl mt-4">
+              <div className="px-10 pt-6 flex justify-between gap-1">
+                <div className="w-3/12">
+                  <InputText
+                    id="name"
+                    name="name"
+                    placeholder={t('enterUserName')}
+                    label={t('fullName')}
+                  />
                 </div>
+                <div className="w-3/12">
+                  <InputText
+                    id="email"
+                    name="email"
+                    placeholder={t('enterUserEmail')}
+                    label="Email"
+                  />
+                </div>
+                <div className="w-2/12">
+                  <Dropdown
+                    label="Date"
+                    items={optionDropdownDate}
+                    onSelect={handleSelectDate}
+                    placeholder="Select date"
+                  />
+                </div>
+                <div className="w-2/12">
+                  <InputText
+                    id="phone"
+                    name="phone"
+                    placeholder={t('enterUserPhone')}
+                    label={t('phone')}
+                  />
+                </div>
+                <div className="w-2/12 pr-3">
+                  <Dropdown
+                    label={t('slot')}
+                    items={optionDropdownSlot}
+                    placeholder={t('selectSlot')}
+                    onSelect={handleSelectSlot}
+                    itemClassName="!px-4 !text-sm"
+                    buttonClassName="!px-3"
+                  />
+                </div>
+                <div className="w-9"></div>
               </div>
-              <button
-                onClick={
-                  () => handleCheckInPopup(checkin.id, checkin?.slot?.startTime, checkin?.slot?.endTime, checkin?.slot?.slotNo,
-                    checkin?.totalPrice, checkin?.status)
-                }
-                className="p-2 rounded-full bg-slate-100 hover:bg-primary-green hover:text-white ease-in-out duration-200"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className={checkin?.status ? "lucide lucide-undo-2" : "lucide lucide-calendar-check"}
-                >
-                  {checkin?.status ? (
-                    <>
-                      <path d="M9 14 4 9l5-5" />
-                      <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />
-                    </>
-                  ) : (
-                    <>
-                      <path d="M8 2v4" />
-                      <path d="M16 2v4" />
-                      <rect width="18" height="18" x="3" y="4" rx="2" />
-                      <path d="M3 10h18" />
-                      <path d="m9 16 2 2 4-4" />
-                    </>
-                  )}
-                </svg>
-              </button>
+              <div className="divide-y-2">
+                {apiCheckin.map((checkin) => (
+                  <div key={checkin.id} className="px-10 py-3 flex items-center justify-between">
+                    <div className="w-3/12 px-3 truncate">
+                      {checkin?.account?.firstName} {checkin?.account?.lastName}
+                      {checkin?.guest?.fullName}
+                    </div>
+                    <div className="w-3/12 px-3 truncate">
+                      {checkin?.account?.email}
+                      {checkin?.guest?.email}
+                    </div>
+                    <div className="w-2/12 flex justify-center">
+                      {moment(checkin?.date, 'yyyy-MM-DD').format('DD/MM')}
+                    </div>
+                    <div className="w-2/12 flex justify-center">
+                      {checkin?.account?.phone}
+                      {checkin?.guest?.phone}
+                    </div>
+                    <div className="w-2/12 flex flex-col justify-center items-center font-semibold">
+                      {checkin?.slot?.slotNo}
+                      <div className="text-sm font-normal">
+                        ({moment(checkin?.slot?.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(checkin?.slot?.endTime, 'HH:mm:ss').format('HH:mm')})
+                      </div>
+                    </div>
+                    <button
+                      onClick={
+                        () => handleCheckInPopup(checkin.id, checkin?.slot?.startTime, checkin?.slot?.endTime, checkin?.slot?.slotNo,
+                          checkin?.totalPrice, checkin?.status)
+                      }
+                      className="p-2 rounded-full bg-slate-100 hover:bg-primary-green hover:text-white ease-in-out duration-200"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className={checkin?.status ? "lucide lucide-undo-2" : "lucide lucide-calendar-check"}
+                      >
+                        {checkin?.status ? (
+                          <>
+                            <path d="M9 14 4 9l5-5" />
+                            <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />
+                          </>
+                        ) : (
+                          <>
+                            <path d="M8 2v4" />
+                            <path d="M16 2v4" />
+                            <rect width="18" height="18" x="3" y="4" rx="2" />
+                            <path d="M3 10h18" />
+                            <path d="m9 16 2 2 4-4" />
+                          </>
+                        )}
+                      </svg>
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      <PopupModal
-        isOpen={checkInPopup}
-        setIsOpen={handleCheckInPopupClose}
-        html={
-          <div className="flex gap-7 max-w-5xl">
-            <div className="flex flex-col gap-3">
-              <div className="font-semibold text-xl">
-                {props.centreDetail.name}
-              </div>
-              <div>
-                <span className="font-semibold">Address: </span>
-                {props.centreDetail.address}
-              </div>
-              <div className="flex gap-3">
-                <div>
-                  <span className="font-semibold">Slot: </span>
-                  ({moment(formCheckIn.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(formCheckIn.endTime, 'HH:mm:ss').format('HH:mm')})
+            <PopupModal
+              isOpen={checkInPopup}
+              setIsOpen={handleCheckInPopupClose}
+              html={
+                <div className="flex gap-7 max-w-5xl">
+                  <div className="flex flex-col gap-3">
+                    <div className="font-semibold text-xl">
+                      {props.centreDetail.name}
+                    </div>
+                    <div>
+                      <span className="font-semibold">Address: </span>
+                      {props.centreDetail.address}
+                    </div>
+                    <div className="flex gap-3">
+                      <div>
+                        <span className="font-semibold">Slot: </span>
+                        ({moment(formCheckIn.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(formCheckIn.endTime, 'HH:mm:ss').format('HH:mm')})
+                      </div>
+                      <div>
+                        <span className="font-semibold">Court number: </span>
+                        {formCheckIn.slotNo}
+                      </div>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Total price: </span>
+                      <span className="font-semibold text-rose-600">{formCheckIn.totalPrice}₫/h</span>
+                    </div>
+                    <div className="text-sm flex justify-center gap-20">
+                      <button
+                        className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300"
+                        onClick={
+                          formCheckIn.status
+                            ?
+                            () => {
+                              handleUndoCheckin(formCheckIn.checkinId);
+                            }
+                            :
+                            () => {
+                              handleCheckin(formCheckIn.checkinId);
+                            }
+                        }
+                      >
+                        {formCheckIn.status
+                          ?
+                          'Undo'
+                          :
+                          'Check in'
+                        }
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span className="font-semibold">Court number: </span>
-                  {formCheckIn.slotNo}
-                </div>
-              </div>
-              <div>
-                <span className="font-semibold">Total price: </span>
-                <span className="font-semibold text-rose-600">{formCheckIn.totalPrice}₫/h</span>
-              </div>
-              <div className="text-sm flex justify-center gap-20">
-                <button
-                  className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300"
-                  onClick={
-                    formCheckIn.status
-                      ?
-                      () => {
-                        handleUndoCheckin(formCheckIn.checkinId);
-                      }
-                      :
-                      () => {
-                        handleCheckin(formCheckIn.checkinId);
-                      }
-                  }
-                >
-                  {formCheckIn.status
-                    ?
-                    'Undo'
-                    :
-                    'Check in'
-                  }
-                </button>
-              </div>
-            </div>
-          </div>
-        }
-      />
+              }
+            />
+          </>
+          :
+          'Do not have any booking'
+      }
+
     </div>
   );
 };
