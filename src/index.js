@@ -24,7 +24,6 @@ import PrivacyPolicy from './about-us/PrivacyPolicy';
 import CustomerTerm from './about-us/CustomerTerm';
 import PartnerTerm from './about-us/PartnerTerm';
 import PaymentResult from './payment/PaymentResult';
-import QrCodeScanner from './scan-qr/QrCodeScanner';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -58,7 +57,6 @@ export default function App() {
           <Route path="/CustomerTerm" element={<CustomerTerm />} />
           <Route path="/PartnerTerm" element={<PartnerTerm />} />
           <Route path="/payment/result" element={<PaymentResult />} />
-          <Route path="/scan" element={<QrCodeScanner />} />
           <Route
             path="/myCentre/:id"
             element={

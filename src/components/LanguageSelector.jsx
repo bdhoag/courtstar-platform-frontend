@@ -34,6 +34,14 @@ const LanguageSelector = () => {
   };
 
   useEffect(() => {
+    const curLang = localStorage.getItem("lang");
+    if (curLang) {
+      if (curLang === "vi") setLang(vn);
+      else setLang(us);
+    }
+  }, []);
+
+  useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);

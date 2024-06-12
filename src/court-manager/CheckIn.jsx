@@ -7,6 +7,10 @@ import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import Button from "../components/Button";
+import QrScanner from 'react-qr-scanner'
+import SpinnerLoading from "../components/SpinnerLoading";
+
 const CheckIn = (props) => {
   const { t } = useTranslation();
   const { id } = useParams(); // Get the booking ID from the URL parameters
@@ -50,27 +54,38 @@ const CheckIn = (props) => {
 
   // Function to handle the check-in process
   const handleCheckin = async (checkInId) => {
-    try {
-      const res = await axiosInstance.post(`/courtstar/check-in/${checkInId}`);
-      if (res.data.data) {
-        handleCheckInPopupClose();
-        toast.success('Check-in successfully', {
-          toastId: 'checkin-success'
-        });
-        // Reload the check-in data after successful check-in
-        const loadCheckIn = async () => {
-          try {
-            const res = await axiosInstance.get(`/courtstar/booking/${id}`);
-            setApiCheckin(res.data.data);
-          } catch (error) {
-            console.log(error.message);
-          }
-        };
-        loadCheckIn();
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+    setQrLoading(true);
+    let booking = {};
+    await axiosInstance.post(`/courtstar/check-in/${checkInId}`)
+      .then(res => {
+        if (res.data.data) {
+          handleCheckInPopupClose();
+          toast.success('Check-in successfully', {
+            toastId: 'checkin-success'
+          });
+          // Reload the check-in data after successful check-in
+          axiosInstance.get(`/courtstar/booking/${id}`)
+            .then(res => {
+              setApiCheckin(res.data.data);
+              booking = res.data.data.filter(booking => booking.id === checkInId)[0];
+              setQrLoading(false);
+              if (qrPopup) {
+                handleQrPopupClose();
+                handleCheckInPopup(booking.id, booking.slot.startTime, booking.slot.endTime, booking.slot.slotNo,
+                  booking.totalPrice, booking.status);
+              }
+            })
+            .catch(error => {
+              console.log(error.message);
+            });
+        }
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(() => {
+
+      });
   };
 
   // Function to handle the check-in process
@@ -123,11 +138,68 @@ const CheckIn = (props) => {
     console.log(`Selected: ${item}`);
   };
 
+
+  //HANDLE QR SCANNER
+  // Function to close the qr popup
+  const [qrLoading, setQrLoading] = useState(true);
+  const [qrPopup, setQrPopup] = useState(false);
+  const handleQrPopupClose = () => {
+    setQrPopup(false);
+  };
+
+  const [data, setData] = useState("");
+
+  const handleScan = (result) => {
+    if (result) {
+      setData(result);
+    }
+  };
+
+  const handleError = (error) => {
+    console.error(error);
+  };
+
+  const previewStyle = {
+    height: 240,
+    width: 320,
+  };
+
+  useEffect(() => {
+    if(data) {
+      let id = parseInt(data.text);
+      if (apiCheckin.filter(booking => booking.id === id)[0]) handleCheckin(id);
+      else {
+        toast.warning('Nhầm sân rồi bạn ơi!', {
+          toastId: 'checkin-fail'
+        });
+      }
+
+    }
+  }, [data])
+
   return (
     <div className="w-[70rem] my-12">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <div className="text-3xl font-bold">
           Check in ({apiCheckin.length})
+        </div>
+        <div>
+          <Button
+            label={t('Check in')}
+            fullWidth
+            size='medium'
+            className='bg-primary-green hover:bg-teal-900 text-white'
+            icon={
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-qr-code"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+            }
+            onClick={()=>{
+              setQrLoading(true);
+              setQrPopup(true);
+              setTimeout(() => {
+                setQrLoading(false);
+              }, 500);
+            }}
+          />
         </div>
       </div>
 
@@ -299,9 +371,54 @@ const CheckIn = (props) => {
                 </div>
               }
             />
+
+            <PopupModal
+              isOpen={qrPopup}
+              setIsOpen={handleQrPopupClose}
+              html={
+                <div>
+                  <h1 className="text-3xl font-bold mb-6 text-center">QR Scanner</h1>
+                  <div className="bg-white rounded-lg">
+                    {
+                      qrPopup && !qrLoading
+                      ?
+                      <QrScanner
+                        delay={300}
+                        style={previewStyle}
+                        onError={handleError}
+                        onScan={handleScan}
+                        className="w-full h-[500px]"
+                      />
+                      :
+                      <div className='w-[320px] h-[240px] flex items-center justify-center'>
+                        <SpinnerLoading
+                          height='80'
+                          width='80'
+                          color='#2B5A50'
+                        />
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            />
           </>
           :
-          'Do not have any booking'
+          <div className="flex flex-col items-center justify-center h-96 text-3xl text-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="150" height="150"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-ticket-x">
+                <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="m9.5 14.5 5-5"/><path d="m9.5 9.5 5 5"/>
+              </svg>
+            There are no booking yet!
+          </div>
       }
 
     </div>
