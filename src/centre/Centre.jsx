@@ -23,7 +23,7 @@ const Centre = ({ selectedDistrict }) => {
   useEffect(() => {
     const load = async () => {
       setLoading(true);
-      await axiosInstance.get(`/courtstar/centre/allCentre`)
+      await axiosInstance.get(`/courtstar/centre/getAllCentreActive`)
         .then(res => {
           setCentreList(res.data.data.reverse());
           setFilteredCentreList(res.data.data);
@@ -37,6 +37,9 @@ const Centre = ({ selectedDistrict }) => {
     };
     load();
   }, []);
+
+  console.log(centreList);
+  console.log(filteredCentreList);
 
   useEffect(() => {
     setFilteredCentreList(centreList);
@@ -87,7 +90,7 @@ const Centre = ({ selectedDistrict }) => {
                     <div className='font-bold text-2xl uppercase'>
                       {t('priceRange')}
                     </div>
-                    <RangeSlider 
+                    <RangeSlider
                       priceRange={handlePriceChange}
                     />
                   </div>
