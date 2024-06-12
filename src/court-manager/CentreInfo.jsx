@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import star from '../assets/images/star.svg';
 import LockOpen from '../assets/images/lock-open.svg';
 import LockClose from '../assets/images/lock-close.svg';

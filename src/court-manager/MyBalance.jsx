@@ -1,27 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import axiosInstance from '../config/axiosConfig';
+import React from 'react'
 import Counter from '../components/Counter';
-import AddCentre from './AddCentre';
 
 export default function MyBalance(props) {
 
   const balanceDetail = props.balanceDetail;
 
-  //add centre handle
-  const [addCentrePopup, setAddCentrePopup] = useState(false);
-  const handleAddCentrePopup = () => {
-    setAddCentrePopup(true);
-  }
-  const handleAddCentrePopupClose = () => {
-    setAddCentrePopup(false)
-  }
-
   return (
     <div className='self-center'>
-      <AddCentre
-        isOpen={addCentrePopup}
-        setIsOpen={handleAddCentrePopupClose}
-      />
       <div className="text-xl font-semibold">
         {balanceDetail?.account?.firstName} {balanceDetail?.account?.lastName}
       </div>
@@ -36,8 +21,7 @@ export default function MyBalance(props) {
         </div>
         <button
           className="flex items-center justify-center font-semibold gap-2 py-1 px-3 w-fit text-3xl bg-primary-green rounded-md text-white
-        hover:bg-teal-900 hover:text-white ease-in-out duration-300 cursor-pointer"
-          onClick={handleAddCentrePopup}
+        hover:bg-teal-900 hover:text-white ease-in-out duration-300 cursor-pointer"          onClick={props.handleAddCentrePopup}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

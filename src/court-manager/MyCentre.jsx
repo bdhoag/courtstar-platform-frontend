@@ -87,6 +87,7 @@ const MyCentre = () => {
           <Content
             balanceDetail={balanceDetail}
             tab={tab}
+            handleAddCentrePopup={handleAddCentrePopup}
           />
         </div>
       }

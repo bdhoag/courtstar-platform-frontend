@@ -15,6 +15,7 @@ const Content = (props) => {
   const [imgList, setImgList] = useState([]);
   const [staffList, setStaffList] = useState([]);
   const [checkIn, setCheckIn] = useState([]);
+  const handleAddCentrePopup = props.handleAddCentrePopup;
 
   useEffect(() => {
     setLoading(true);
@@ -260,6 +261,7 @@ const Content = (props) => {
           <>
             <MyBalance
               balanceDetail={props.balanceDetail}
+              handleAddCentrePopup={handleAddCentrePopup}
             />
           </>
           :
