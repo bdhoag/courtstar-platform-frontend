@@ -5,6 +5,7 @@ import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+import RangeSlider from './RangeSlider';
 
 const Centre = ({ selectedDistrict }) => {
   const { t } = useTranslation();
@@ -69,23 +70,7 @@ const Centre = ({ selectedDistrict }) => {
                     <div className='font-bold text-2xl uppercase mb-5'>
                       {t('priceRange')}
                     </div>
-                    <div className='flex gap-2 items-center justify-between'>
-                      <input
-                        type="text"
-                        name="minPrice"
-                        id="minPrice"
-                        className='border rounded-lg py-1.5 px-6 w-24 placeholder:text-sm'
-                        placeholder='MIN'
-                      />
-                      -
-                      <input
-                        type="text"
-                        name="maxPrice"
-                        id="maxPrice"
-                        className='border rounded-lg py-1.5 px-6 w-24 placeholder:text-sm'
-                        placeholder='MAX'
-                      />
-                    </div>
+                    <RangeSlider />
                   </div>
                 </div>
               </div>

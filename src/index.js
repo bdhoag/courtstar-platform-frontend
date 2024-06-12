@@ -23,6 +23,8 @@ import AboutUs from './about-us/AboutUs';
 import PrivacyPolicy from './about-us/PrivacyPolicy';
 import CustomerTerm from './about-us/CustomerTerm';
 import PartnerTerm from './about-us/PartnerTerm';
+import RangeSlider from './centre/RangeSlider';
+
 
 export default function App() {
   const [loading, setLoading] = useState(true);
