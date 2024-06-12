@@ -125,7 +125,7 @@ function AddCentre(props) {
   const submit = async () => {
     console.log(centreForm);
 
-    await axiosInstance.post(`/courtstar/manager/create`, centreForm)
+    await axiosInstance.post(`/courtstar/centre/create`, centreForm)
       .then(res => {
         console.log(res.data);
         toast.success("Create Successfully!", {
