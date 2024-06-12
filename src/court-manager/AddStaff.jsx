@@ -2,7 +2,9 @@ import React from 'react';
 import InputText from '../components/InputText';
 import Dialog from '../components/Dialog';
 import Password from '../components/Password';
+import { useTranslation } from 'react-i18next';
 function AddStaff(props) {
+  const { t } = useTranslation();
   //Close ADD
   const handleClose = () => {
     props.setIsOpen();
@@ -14,21 +16,21 @@ function AddStaff(props) {
           <InputText
             id="firstName"
             name="firstName"
-            placeholder="Enter first name"
-            label="First Name"
+            placeholder={t('enterFirstName')}
+            label={t('firstName')}
           />
           <InputText
             id="lastName"
             name="lastName"
-            placeholder="Enter last name"
-            label="Last Name"
+            placeholder={t('enterLastName')}
+            label={t('lastName')}
           />
         </div>
         <div className="mb-4">
           <InputText
             id="email"
             name="email"
-            placeholder="Enter staff's email"
+            placeholder={t('enterStaffEmail')}
             label="Email"
           />
         </div>
@@ -36,16 +38,16 @@ function AddStaff(props) {
           <InputText
             id="phone"
             name="phone"
-            placeholder="Enter staff's phone"
-            label="Phone"
+            placeholder={t('enterStaffPhone')}
+            label={t('phone')}
           />
         </div>
         <div className="mb-4">
           <Password
             id="password"
             name="password"
-            placeholder="Enter staff's password"
-            label="Password"
+            placeholder={t('enterStaffPassword')}
+            label={t('password')}
             value={'staff'}
             onchange={null}
             evaluate={true}

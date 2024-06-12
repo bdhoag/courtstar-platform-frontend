@@ -3,7 +3,9 @@ import Dropdown from "../components/Dropdown"
 import PopupModal from "../components/PopupModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 const CheckIn = (props) => {
+  const { t } = useTranslation();
   //HANDLE  POPUP
   const [checkInPopup, setCheckInPopup] = useState(false);
   const handleCheckInPopup = () => {
@@ -36,15 +38,15 @@ const CheckIn = (props) => {
             <InputText
               id="name"
               name="name"
-              placeholder="Enter the user's name"
-              label="Name"
+              placeholder={t('enterUserName')}
+              label={t('fullName')}
             />
           </div>
           <div className="w-1/3">
             <InputText
               id="email"
               name="email"
-              placeholder="Enter the user's email"
+              placeholder={t('enterUserEmail')}
               label="Email"
             />
           </div>
@@ -52,17 +54,17 @@ const CheckIn = (props) => {
             <InputText
               id="phone"
               name="phone"
-              placeholder="Enter the user's phone number"
-              label="Phone number"
+              placeholder={t('enterUserPhone')}
+              label={t('phone')}
             />
           </div>
           <div className="w-2/12 flex flex-col gap-2 pr-3">
             <div className="text-gray-800 font-semibold">
-              Slot
+              {t('slot')}
             </div>
             <Dropdown
               items={optionDropdownSlot}
-              placeholder={'Select slot'}
+              placeholder={t('selectSlot')}
               onSelect={handleSelect}
               itemClassName='!px-4 !text-sm '
               buttonClassName='!px-3'
