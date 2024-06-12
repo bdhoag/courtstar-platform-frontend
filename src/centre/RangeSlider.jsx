@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { Box, Slider, TextField, Button, InputAdornment, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Slider, TextField, InputAdornment, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 
 const StyledTextField = styled(TextField)({
     width: '130px',
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: 'grey',
+            borderColor: '#d1d5db', // Màu viền bình thường
         },
         '&:hover fieldset': {
-            borderColor: 'orange',
+            borderColor: '#d1d5db', // Màu viền khi hover
         },
         '&.Mui-focused fieldset': {
-            borderColor: 'orange',
+            borderColor: '#9ca3af', // Màu viền khi focus
         },
     },
     '& .MuiInputBase-input': {
         paddingRight: '10px',
-        fontSize: '14px', // Thay đổi font-size ở đây
+        fontSize: '14px',
         '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
             '-webkit-appearance': 'none',
             margin: 0,
@@ -26,11 +26,15 @@ const StyledTextField = styled(TextField)({
             '-moz-appearance': 'textfield',
         },
     },
+    '& .MuiInputLabel-root': {
+        color: '#9ca3af', // Màu nhãn bình thường
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+        color: '#9ca3af', // Màu nhãn khi focus
+    },
 });
 
-
-
-const RangeSlider = ({ onApply, onChange }) => {
+const RangeSlider = (props) => {
     const [range, setRange] = useState([0, 500000]);
     const [minValue, setMinValue] = useState('');
     const [maxValue, setMaxValue] = useState('');
@@ -41,34 +45,20 @@ const RangeSlider = ({ onApply, onChange }) => {
 
     const handleSliderChange = (event, newValue) => {
         setRange(newValue);
-        onChange(newValue);
         setMinValue(newValue[0]);
         setMaxValue(newValue[1]);
-        
     };
 
     const handleMinInputChange = (event) => {
         const value = event.target.value === '' ? '' : Number(event.target.value);
         setMinValue(value);
         setRange([value, range[1]]);
-        
-        
     };
 
     const handleMaxInputChange = (event) => {
         const value = event.target.value === '' ? '' : Number(event.target.value);
         setMaxValue(value);
         setRange([range[0], value]);
-    };
-
-    const handleClear = () => {
-        setRange([0, 500000]);
-        setMinValue('');
-        setMaxValue('');
-    };
-
-    const handleApply = () => {
-        alert(`Applied range: ${range[0]} - ${range[1]}`);
     };
 
     const marks = [
@@ -78,9 +68,13 @@ const RangeSlider = ({ onApply, onChange }) => {
         },
         {
             value: 500000,
-            label: '5 trăm',
+            label: '500.000',
         },
     ];
+
+    useEffect(() => {
+        props.priceRange(minValue, maxValue);
+    }, [minValue, maxValue]);
 
     return (
         <Box sx={{ width: 300, padding: 2 }}>
@@ -119,7 +113,7 @@ const RangeSlider = ({ onApply, onChange }) => {
                         }}
                         InputProps={{
                             inputProps: { min: 0, max: 500000 },
-                            endAdornment: (minFocused && minVndVisible) && <InputAdornment position="end">vnd</InputAdornment>, // Chỉ hiển thị khi ô được focus và có giá trị
+                            endAdornment: (minFocused && minVndVisible) && <InputAdornment position="end">VND</InputAdornment>, // Chỉ hiển thị khi ô được focus và có giá trị
                         }}
                     />
                 </Box>
@@ -152,21 +146,13 @@ const RangeSlider = ({ onApply, onChange }) => {
                         }}
                         InputProps={{
                             inputProps: { min: 0, max: 500000 },
-                            endAdornment: (maxFocused && maxVndVisible) && <InputAdornment position="end">vnd</InputAdornment>, // Chỉ hiển thị khi ô được focus và có giá trị
+                            endAdornment: (maxFocused && maxVndVisible) && <InputAdornment position="end">VND</InputAdornment>, // Chỉ hiển thị khi ô được focus và có giá trị
                         }}
                     />
                 </Box>
-
-            </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2 }}>
-                <Button variant="outlined" onClick={handleClear} sx={{ marginRight: 1, color: '#fff', borderColor: '#ff0000', backgroundColor: '#ff0000', '&:hover': { backgroundColor: '#ff0000', borderColor: '#ff0000' } }}>Cancel</Button>
-
-                <Button variant="outlined" onClick={handleApply} sx={{ marginLeft: 1, color: '#fff', borderColor: '#2B5A50', backgroundColor: '#2B5A50', '&:hover': { backgroundColor: '#2B5A50', borderColor: '#2B5A50' } }}>Apply</Button>
-
             </Box>
         </Box>
     );
 };
 
 export default RangeSlider;
-
