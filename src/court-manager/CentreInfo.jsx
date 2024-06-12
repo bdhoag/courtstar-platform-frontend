@@ -6,7 +6,9 @@ import Pagination from "../components/Pagination";
 // import Rating from '../components/Rating';
 import Slider from '../components/Slider';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 function CentreInfo(props) {
+  const { t } = useTranslation();
 
   const centreDetail = props.centreDetail;
   const imgList = props.imgList;
@@ -48,10 +50,10 @@ function CentreInfo(props) {
                     alt="lock-close"
                   />
                   <div className="group-hover:hidden">
-                    Activated
+                    {t('activated')}
                   </div>
                   <div className="hidden group-hover:block">
-                    Close
+                    {t('close')}
                   </div>
                 </button>
                 :
@@ -70,10 +72,10 @@ function CentreInfo(props) {
                     alt="lock-close"
                   />
                   <div className="group-hover:hidden">
-                    Closed
+                    {t('closed')}
                   </div>
                   <div className="hidden group-hover:block">
-                    Active
+                    {t('activate')}
                   </div>
                 </button>
             }
@@ -100,7 +102,7 @@ function CentreInfo(props) {
                 <line x1="14" x2="14" y1="11" y2="17" />
               </svg>
               <div className="">
-                Delete
+                {t('delete')}
               </div>
             </button>
           </div>
@@ -112,7 +114,7 @@ function CentreInfo(props) {
             <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow flex flex-col gap-3">
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between text-lg font-semibold">
-                  Information
+                  {t('information')}
                   <button
                     className="flex justify-center items-center gap-2.5 text-white bg-primary-green rounded-md
                   text-base px-2 hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
@@ -131,22 +133,22 @@ function CentreInfo(props) {
                       <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                       <path d="m15 5 4 4" />
                     </svg>
-                    Edit
+                    {t('edit')}
                   </button>
                 </div>
                 <div className="px-2">
                   <div>
-                    <span className='font-semibold'>Address: </span>
+                    <span className='font-semibold'>{t('address')}: </span>
                     {centreDetail.address}
                   </div>
 
                   <div>
-                    <span className='font-semibold'>Open time: </span>
+                    <span className='font-semibold'>{t('openTime')}: </span>
                     {moment(centreDetail.openTime, 'HH:mm:ss').format('HH:mm')} - {moment(centreDetail.closeTime, 'HH:mm:ss').format('HH:mm')}
                   </div>
 
                   <div>
-                    <span className='font-semibold'>Price: </span>
+                    <span className='font-semibold'>{t('price')}: </span>
                     <span className='font-semibold text-rose-600'>
                       {centreDetail?.pricePerHour?.toLocaleString('de-DE')} VND/h
                     </span>
@@ -158,7 +160,7 @@ function CentreInfo(props) {
             <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow flex flex-col gap-3">
               <div className="flex justify-between text-lg font-semibold">
                 <div>
-                  <span className='font-semibold'>Courts: </span>
+                  <span className='font-semibold'>{t('numberOfCourt')}: </span>
                   {centreDetail.numberOfCourt}
                 </div>
                 <button
@@ -179,7 +181,7 @@ function CentreInfo(props) {
                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                     <path d="m15 5 4 4" />
                   </svg>
-                  Edit
+                  {t('edit')}
                 </button>
               </div>
               <div className="mx-auto">
@@ -193,7 +195,7 @@ function CentreInfo(props) {
                         {court.courtNo}.
                       </div>
                       <div className="">
-                        <span className='font-semibold'>Status: </span>
+                        <span className='font-semibold'>{t('status')}: </span>
                         <span className={court.status ? 'font-semibold text-primary-green' : 'font-semibold text-red-500'}>
                           {court.status ? 'Active' : 'Close'}
                         </span>
@@ -210,7 +212,7 @@ function CentreInfo(props) {
       </div>
 
       <div className="bg-white px-5 py-3 rounded-md">
-        <Pagination title='Feedbacks' listItem={apiFeedbacks} itemsPerPage={10} />
+        <Pagination title={t('feedbacks')} listItem={apiFeedbacks} itemsPerPage={10} />
       </div>
     </div>
   )

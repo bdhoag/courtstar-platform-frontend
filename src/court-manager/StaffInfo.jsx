@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import AddStaff from './AddStaff';
-function StaffInfo ()  {
+import { useTranslation } from 'react-i18next';
+function StaffInfo() {
+  const { t } = useTranslation();
   //HANDLE  POPUP
   const [addStaffPopup, setAddStaffPopup] = useState(false);
   const handleAddStaffPopup = () => {
@@ -11,36 +13,36 @@ function StaffInfo ()  {
   }
   return (
     <div className="w-[70rem] my-12">
-        <AddStaff
-          isOpen={addStaffPopup}
-          setIsOpen={handleAddStaffPopupClose}
-        />
+      <AddStaff
+        isOpen={addStaffPopup}
+        setIsOpen={handleAddStaffPopupClose}
+      />
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
-          Staff Information
+          {t('staffInformation')}
         </div>
         <button className="flex gap-2 px-3 py-2 bg-primary-green w-fit rounded-md text-white hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
-            onClick={handleAddStaffPopup}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus">
-              <path d="M5 12h14" /><path d="M12 5v14" />
-            </svg>
-            <div className="font-semibold">
-              Add Staff
-            </div>
-          </button>
+          onClick={handleAddStaffPopup}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-plus">
+            <path d="M5 12h14" /><path d="M12 5v14" />
+          </svg>
+          <div className="font-semibold">
+            {t('addStaff')}
+          </div>
+        </button>
 
       </div>
 
       <div className="bg-white rounded-xl mt-4">
         <div className="flex bg-primary-green text-white text-lg font-semibold rounded-t-lg divide-x-2">
           <div className="w-1/3 px-8 py-2 ">
-            Full name
+            {t('fullName')}
           </div>
           <div className="w-1/3 px-8 py-2 ">
             Email
           </div>
           <div className="w-1/6 px-8 py-2 ">
-            Phone
+            {t('phone')}
           </div>
           <div className="">
 
