@@ -58,7 +58,7 @@ export default function App() {
           <Route path="/PartnerTerm" element={<PartnerTerm />} />
           <Route path="/payment/result" element={<PaymentResult />} />
           <Route
-            path="/myCentre"
+            path="/myCentre/:id"
             element={
               <ManagerRoute>
                 <MyCentre />
