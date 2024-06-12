@@ -1,14 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import InputText from '../components/InputText';
 import Dialog from '../components/Dialog';
 import Password from '../components/Password';
 import { useTranslation } from 'react-i18next';
+import axiosInstance from "../config/axiosConfig";
+import { toast } from "react-toastify";
 function AddStaff(props) {
   const { t } = useTranslation();
   //Close ADD
   const handleClose = () => {
     props.setIsOpen();
   }
+
+
+  const [addStaff, setAddStaff] = useState({
+    centreId: props.id,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAddStaff(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+  const handleAddStaff = async () => {
+    await axiosInstance.post(`/courtstar/account/staff`, addStaff)
+      .then(res => {
+        toast.success("Add Staff Successfully!", {
+          toastId: 'add-staff-success'
+        });
+        handleClose();
+      })
+      .catch(error => {
+        toast.error(error.message, {
+          toastId: 'add-staff-error'
+        });
+      })
+      .finally();
+  }
+
+  const clearForm = () => {
+    setAddStaff({
+      centreId: props.id,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      password: ''
+    });
+  }
+
   const html = (
     <div className="">
       <div>
@@ -18,12 +65,16 @@ function AddStaff(props) {
             name="firstName"
             placeholder={t('enterFirstName')}
             label={t('firstName')}
+            value={addStaff.firstName}
+            onchange={handleChange}
           />
           <InputText
             id="lastName"
             name="lastName"
             placeholder={t('enterLastName')}
             label={t('lastName')}
+            value={addStaff.lastName}
+            onchange={handleChange}
           />
         </div>
         <div className="mb-4">
@@ -32,6 +83,8 @@ function AddStaff(props) {
             name="email"
             placeholder={t('enterStaffEmail')}
             label="Email"
+            value={addStaff.email}
+            onchange={handleChange}
           />
         </div>
         <div className="mb-4">
@@ -40,6 +93,8 @@ function AddStaff(props) {
             name="phone"
             placeholder={t('enterStaffPhone')}
             label={t('phone')}
+            value={addStaff.phone}
+            onchange={handleChange}
           />
         </div>
         <div className="mb-4">
@@ -48,8 +103,8 @@ function AddStaff(props) {
             name="password"
             placeholder={t('enterStaffPassword')}
             label={t('password')}
-            value={'staff'}
-            onchange={null}
+            value={addStaff.password}
+            onchange={handleChange}
             evaluate={true}
           />
         </div>
@@ -63,8 +118,9 @@ function AddStaff(props) {
         isOpen={props.isOpen}
         setIsOpen={handleClose}
         title='staff information'
+        submit={handleAddStaff}
+        clearForm={clearForm}
       />
-
     </div>
   );
 }

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import AddStaff from './AddStaff';
 import { useTranslation } from 'react-i18next';
+import { useParams } from "react-router-dom";
+
 function StaffInfo(props) {
   const { t } = useTranslation();
+  const { id } = useParams();
   //HANDLE  POPUP
   const [addStaffPopup, setAddStaffPopup] = useState(false);
   const handleAddStaffPopup = () => {
@@ -14,6 +17,7 @@ function StaffInfo(props) {
   return (
     <div className="w-[70rem] my-12">
       <AddStaff
+        id={id}
         isOpen={addStaffPopup}
         setIsOpen={handleAddStaffPopupClose}
       />
