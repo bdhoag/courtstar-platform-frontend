@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddStaff from './AddStaff';
 import { useTranslation } from 'react-i18next';
 import { useParams } from "react-router-dom";
+import axiosInstance from "../config/axiosConfig";
 
-function StaffInfo(props) {
+function StaffInfo() {
   const { t } = useTranslation();
   const { id } = useParams();
   //HANDLE  POPUP
@@ -14,12 +15,27 @@ function StaffInfo(props) {
   const handleAddStaffPopupClose = () => {
     setAddStaffPopup(false)
   }
+  const [staffInfo, setStaffInfo] = useState([]);
+  const loadStaffInfo = async () => {
+    try {
+      const res = await axiosInstance.get(`/courtstar/staff/centre/${id}`);
+      setStaffInfo(res.data.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    loadStaffInfo();
+  }, [id]);
+
   return (
     <div className="w-[70rem] my-12">
       <AddStaff
         id={id}
         isOpen={addStaffPopup}
         setIsOpen={handleAddStaffPopupClose}
+        loadStaffInfo={loadStaffInfo}
       />
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
@@ -53,7 +69,7 @@ function StaffInfo(props) {
           </div>
         </div>
         <div className="divide-y-2">
-          {props.staffList.map((staff) => (
+          {staffInfo.map((staff) => (
             <div
               key={staff.id}
               className="flex divide-x-2"
