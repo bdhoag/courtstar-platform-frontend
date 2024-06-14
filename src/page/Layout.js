@@ -10,10 +10,11 @@ const Layout = () => {
     <div className="relative">
 
       <Header />
-      <div className="min-h-20"></div>
+      <div className="min-h-20">
+        <ToastContainer draggable />
+      </div>
       <Outlet />
       <Footer />
-      <ToastContainer draggable/>
     </div>
   )
 };
