@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import banner from '../assets/images/banner.png';
 import Dropdown from '../components/Dropdown';
 import Button from '../components/Button';
@@ -34,18 +34,17 @@ const Banner = ({ onDistrictSelect }) => {
   ];
 
   const handleSelect = (item) => {
-    onDistrictSelect(item)
+    onDistrictSelect(item);
     if (item === t('findCourtNow')) {
-      onDistrictSelect(''); // Reset state when "findCourtNow" is selected
+      onDistrictSelect(''); 
     }
   };
 
   const handleFindClick = () => {
-    // if (selectedDistrict === t('findCourtNow')) {
-    //   onDistrictSelect(''); // Reset state when "findCourtNow" is selected
-    // } else {
-    //   onDistrictSelect(selectedDistrict);
-    // }
+    const centreListElement = document.getElementById('centre-list');
+    if (centreListElement) {
+      centreListElement.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -64,14 +63,14 @@ const Banner = ({ onDistrictSelect }) => {
             items={items}
             onSelect={handleSelect}
           />
-          {/* <Button
+          <Button
             label={t('find')}
             fullWidth
             fullRounded
             size='medium'
             className='bg-primary-green hover:bg-teal-900 text-white'
             onClick={handleFindClick}
-          /> */}
+          />
         </div>
       </div>
     </div>
