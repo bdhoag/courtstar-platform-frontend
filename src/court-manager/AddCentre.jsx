@@ -5,7 +5,6 @@ import { v4 } from "uuid";
 import InputText from '../components/InputText';
 import Dialog from '../components/Dialog';
 import Dropdown from '../components/Dropdown';
-// import arrow from '../assets/images/arrow.svg';
 import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
@@ -13,11 +12,36 @@ import { useTranslation } from 'react-i18next';
 
 function AddCentre(props) {
   const { t } = useTranslation();
+  const [districtSelect, setDistrictSelect] = useState('');
+  const [imgUrls, setImgUrls] = useState([]);
 
-  // CLOSE ADD CENTRE DIALOG
+  const handleSelectDistrict = (item) => {
+    setDistrictSelect(item);
+    setCentreForm(prevState => {
+        // List of known districts for comparison
+        const knownDistricts = districts.map(district => district.trim().toLowerCase());
+        const addressParts = prevState.address.split(',').map(part => part.trim());
+
+        // Check if the last part of the address matches any known district
+        const lastPart = addressParts[addressParts.length - 1].toLowerCase();
+        const isLastPartDistrict = knownDistricts.includes(lastPart);
+
+        // Remove the last part if it's a district
+        const updatedAddressParts = isLastPartDistrict ? addressParts.slice(0, -1) : addressParts;
+
+        const updatedAddress = updatedAddressParts.join(', ');
+
+        return {
+            ...prevState,
+            address: (updatedAddress ? updatedAddress + ", " : "") + item
+        };
+    });
+};
+
+
   const handleClose = () => {
     props.setIsOpen();
-  }
+  };
 
   const items = generate24Hours();
   function generate24Hours() {
@@ -41,6 +65,31 @@ function AddCentre(props) {
     images: []
   });
 
+  const districts = [
+    t('thuDucCity'),
+    t('district1'),
+    t('district3'),
+    t('district4'),
+    t('district5'),
+    t('district6'),
+    t('district7'),
+    t('district8'),
+    t('district10'),
+    t('district11'),
+    t('district12'),
+    t('binhTanDistrict'),
+    t('binhThanhDistrict'),
+    t('goVapDistrict'),
+    t('phuNhuanDistrict'),
+    t('tanBinhDistrict'),
+    t('tanPhuDistrict'),
+    t('nhaBeProvince'),
+    t('canGioProvince'),
+    t('cuChiProvince'),
+    t('hocMonProvince'),
+    t('binhChanhProvince'),
+  ];
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCentreForm(prevState => ({
@@ -62,21 +111,6 @@ function AddCentre(props) {
       closeTime: item
     }));
   };
-
-  // const handleImageChange = (e, index) => {
-  //   const { value } = e.target;
-  //   setCentreForm(prevState => {
-  //     const newImages = [...prevState.images];
-  //     newImages[index] = value;
-  //     return {
-  //       ...prevState,
-  //       images: newImages
-  //     };
-  //   });
-  // };
-
-  // Handle image upload
-  const [imgUrls, setImgUrls] = useState([]);
 
   const handleImageUpload = (selectedImg) => {
     if (selectedImg !== null) {
@@ -106,16 +140,7 @@ function AddCentre(props) {
       ...prevState,
       images: imgUrls.map(img => img.url)
     }));
-  }, [imgUrls]); // This effect runs whenever imgUrls changes
-
-  // Scroll handlers
-  // const scrollLeft = () => {
-  //   document.getElementById('image-scroll-container').scrollLeft -= 100;
-  // };
-
-  // const scrollRight = () => {
-  //   document.getElementById('image-scroll-container').scrollLeft += 100;
-  // };
+  }, [imgUrls]);
 
   const handleImageChange = (e) => {
     const selectedImg = e.target.files[0];
@@ -142,28 +167,8 @@ function AddCentre(props) {
       .finally();
   }
 
-
-  // //clear form
-  // const clearForm = () => {
-
-
-  //   setCentreForm({
-  //     name: '',
-  //     address: '',
-  //     openTime: '',
-  //     closeTime: '',
-  //     pricePerHour: '',
-  //     numberOfCourt: '',
-  //     paymentMethod: '',
-  //     approveDate: moment().format('yyyy-MM-DD'),
-  //     images: []
-  //   })
-  // }
-
   const clearForm = () => {
-    // Tạo một mảng các Promise để xóa các ảnh đã upload
     const deleteImagesPromises = imgUrls.map(img => deleteObject(img.ref));
-    // Sử dụng Promise.all để chờ tất cả các Promise xóa ảnh hoàn thành
     Promise.all(deleteImagesPromises)
       .then(() => {
         setImgUrls([]);
@@ -192,9 +197,6 @@ function AddCentre(props) {
         )}
       </div>
       <div className='flex gap-2 my-2 pt-1.5 border rounded-md bg-white overflow-hidden mx-auto relative'>
-        {/* <button onClick={scrollLeft} className="absolute top-0 left-0 h-full opacity-30 bg-slate-100 w-8 transition-all ease-in-out duration-300 hover:bg-gray-500">
-          <img src={arrow} alt="Scroll left" className='my-auto mx-auto' />
-        </button> */}
         <div
           id='image-scroll-container'
           className='flex gap-2 overflow-x-auto pb-1.5 px-2'
@@ -236,9 +238,6 @@ function AddCentre(props) {
             </div>
           ))}
         </div>
-        {/* <button onClick={scrollRight} className="absolute top-0  right-0 h-full opacity-30 bg-slate-100 w-8 transition-all ease-in-out duration-300 hover:bg-gray-500">
-          <img src={arrow} alt="Scroll right" className='my-auto mx-auto rotate-180' />
-        </button> */}
       </div>
       <div className='mx-auto'>
         <div className='mb-4'>
@@ -262,6 +261,14 @@ function AddCentre(props) {
           />
         </div>
         <div className='mb-4'>
+          <Dropdown
+            placeholder={t('selectTheDistrict')}
+            items={districts}
+            onSelect={handleSelectDistrict}
+            label={t('selectTheDistrict')}
+          />
+        </div>
+        <div className='mb-4'>
           <InputText
             id="numberOfCourt"
             name="numberOfCourt"
@@ -282,10 +289,10 @@ function AddCentre(props) {
           />
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className='flex gap-4'>
         <div className='basis-1/2'>
           <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2'>
-          {t('openTimes')}:
+            {t('openTimes')}:
           </div>
           <div className='flex gap-4 items-center'>
             <Dropdown
@@ -298,7 +305,7 @@ function AddCentre(props) {
         </div>
         <div className='basis-1/2'>
           <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2'>
-          {t('closeTime')}:
+            {t('closeTime')}:
           </div>
           <div className='flex gap-4 items-center'>
             <Dropdown
@@ -322,34 +329,7 @@ function AddCentre(props) {
           />
         </div>
       </div>
-      {/* <div className="bg-white mt-4 mx-auto">
-        <h2 className="text-3xl font-semibold mb-3 text-center">PAYMENT METHOD</h2>
-      </div>
-      <div>
-        <div>
-          <img src={paypal}
-            alt="Paypal"
-            className='h-auto mx-auto w-7/12 mb-3'
-          />
-        </div>
-        <div className='mb-4'>
-          <InputText
-            id="managerName"
-            name="managerName"
-            placeholder="Enter name of Manager"
-            label="Manager Name"
-          />
-        </div>
-        <div className=''>
-          <InputText
-            id="accountNumber"
-            name="accountNumber"
-            placeholder="Enter account number of Manager's Paypal Account"
-            label="Account number"
-          />
-        </div>
-      </div> */}
-    </div >
+    </div>
   );
 
   return (
