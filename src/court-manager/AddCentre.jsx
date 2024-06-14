@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { imageDb } from '../config/firebaseConfig';
 import { getDownloadURL, ref, uploadBytes, deleteObject } from "firebase/storage";
 import { v4 } from "uuid";
@@ -14,6 +14,7 @@ function AddCentre(props) {
   const { t } = useTranslation();
   const [districtSelect, setDistrictSelect] = useState('');
   const [imgUrls, setImgUrls] = useState([]);
+
 
   const handleSelectDistrict = (item) => {
     setDistrictSelect(item);
@@ -183,11 +184,42 @@ function AddCentre(props) {
           approveDate: moment().format('yyyy-MM-DD'),
           images: []
         });
+        // handleClearDropdown();
       })
       .catch(error => {
         console.error("Error deleting images: ", error);
       });
   }
+
+
+  // How to use Dropdown
+  // const dropdownRef = useRef();
+
+  // const listOfPaymentMethod = [
+  //   {
+  //     key: 1,
+  //     label: 'ZaloPay'
+  //   },
+  //   {
+  //     key: 2,
+  //     label: 'Momo'
+  //   },
+  //   {
+  //     key: 3,
+  //     label: 'Master'
+  //   }
+  // ];
+
+  // const handleSelectPaymentMethod = (item) => {
+  //   console.log(item);
+  // }
+
+
+  // const handleClearDropdown = () => {
+  //   if (dropdownRef.current) {
+  //     dropdownRef.current.clearFormDropdown();
+  //   }
+  // };
 
   const html = (
     <div>
@@ -319,6 +351,14 @@ function AddCentre(props) {
       </div>
       <div className="bg-white mt-4 mx-auto">
         <div className='mb-4'>
+          {/*
+          Dropdown demo how to use
+          <Dropdown
+            ref={dropdownRef}
+            items={listOfPaymentMethod}
+            placeholder={t('selectOpenTime')}
+            onSelect={handleSelectPaymentMethod}
+          /> */}
           <InputText
             id="paymentMethod"
             name="paymentMethod"
