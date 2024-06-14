@@ -14,31 +14,130 @@ function AddCentre(props) {
   const { t } = useTranslation();
   const [districtSelect, setDistrictSelect] = useState('');
   const [imgUrls, setImgUrls] = useState([]);
+  const dropdownRef = useRef();
+  const dropdownRef1 = useRef();
+  const dropdownRef2 = useRef();
+
+  const districts = [
+    {
+      key: 'thuDucCity',
+      label: t('thuDucCity')
+    },
+    {
+      key: 'district1',
+      label: t('district1')
+    },
+    {
+      key: 'district3',
+      label: t('district3')
+    },
+    {
+      key: 'district4',
+      label: t('district4')
+    },
+    {
+      key: 'district5',
+      label: t('district5')
+    },
+    {
+      key: 'district6',
+      label: t('district6')
+    },
+    {
+      key: 'district7',
+      label: t('district7')
+    },
+    {
+      key: 'district8',
+      label: t('district8')
+    },
+    {
+      key: 'district10',
+      label: t('district10')
+    },
+    {
+      key: 'district11',
+      label: t('district11')
+    },
+    {
+      key: 'district12',
+      label: t('district12')
+    },
+    {
+      key: 'binhTanDistrict',
+      label: t('binhTanDistrict')
+    },
+    {
+      key: 'binhThanhDistrict',
+      label: t('binhThanhDistrict')
+    },
+    {
+      key: 'goVapDistrict',
+      label: t('goVapDistrict')
+    },
+    {
+      key: 'phuNhuanDistrict',
+      label: t('phuNhuanDistrict')
+    },
+    {
+      key: 'tanBinhDistrict',
+      label: t('tanBinhDistrict')
+    },
+    {
+      key: 'tanPhuDistrict',
+      label: t('tanPhuDistrict')
+    },
+    {
+      key: 'nhaBeProvince',
+      label: t('nhaBeProvince')
+    },
+    {
+      key: 'canGioProvince',
+      label: t('canGioProvince')
+    },
+    {
+      key: 'cuChiProvince',
+      label: t('cuChiProvince')
+    },
+    {
+      key: 'hocMonProvince',
+      label: t('hocMonProvince')
+    },
+    {
+      key: 'binhChanhProvince',
+      label: t('binhChanhProvince')
+    }
+  ];
 
 
   const handleSelectDistrict = (item) => {
-    setDistrictSelect(item);
-    setCentreForm(prevState => {
-        // List of known districts for comparison
-        const knownDistricts = districts.map(district => district.trim().toLowerCase());
-        const addressParts = prevState.address.split(',').map(part => part.trim());
+    if (item) {
+      setDistrictSelect(item.key);
+      // setCentreForm(prevState => {
+      //   // List of known districts for comparison
+      //   const knownDistricts = districts.map(district => district);
+      //   const addressParts = prevState.address.split(',').map(part => part);
 
-        // Check if the last part of the address matches any known district
-        const lastPart = addressParts[addressParts.length - 1].toLowerCase();
-        const isLastPartDistrict = knownDistricts.includes(lastPart);
+      //   // Check if the last part of the address matches any known district
+      //   const lastPart = addressParts[addressParts.length - 1].toLowerCase();
+      //   const isLastPartDistrict = knownDistricts.includes(lastPart);
 
-        // Remove the last part if it's a district
-        const updatedAddressParts = isLastPartDistrict ? addressParts.slice(0, -1) : addressParts;
+      //   // Remove the last part if it's a district
+      //   const updatedAddressParts = isLastPartDistrict ? addressParts.slice(0, -1) : addressParts;
 
-        const updatedAddress = updatedAddressParts.join(', ');
+      //   const updatedAddress = updatedAddressParts.join(', ');
 
-        return {
-            ...prevState,
-            address: (updatedAddress ? updatedAddress + ", " : "") + item
-        };
-    });
-};
-
+      //   return {
+      //     ...prevState,
+      //     address: (updatedAddress ? updatedAddress + ", " : "") + item
+      //   };
+      // });
+      setCentreForm(prevState => ({
+        ...prevState,
+        district: item.key
+      }));
+    }
+  };
 
   const handleClose = () => {
     props.setIsOpen();
@@ -49,7 +148,7 @@ function AddCentre(props) {
     let hours = [];
     for (let i = 0; i < 24; i++) {
       let hour = i < 10 ? `0${i}:00` : `${i}:00`;
-      hours.push(hour);
+      hours.push({key: i, label:hour});
     }
     return hours;
   }
@@ -57,39 +156,16 @@ function AddCentre(props) {
   const [centreForm, setCentreForm] = useState({
     name: '',
     address: '',
+    district: '',
+    link: '',
     openTime: '',
     closeTime: '',
     pricePerHour: '',
-    numberOfCourt: '',
-    paymentMethod: '',
+    numberOfCourts: '',
+    description: '',
     approveDate: moment().format('yyyy-MM-DD'),
     images: []
   });
-
-  const districts = [
-    t('thuDucCity'),
-    t('district1'),
-    t('district3'),
-    t('district4'),
-    t('district5'),
-    t('district6'),
-    t('district7'),
-    t('district8'),
-    t('district10'),
-    t('district11'),
-    t('district12'),
-    t('binhTanDistrict'),
-    t('binhThanhDistrict'),
-    t('goVapDistrict'),
-    t('phuNhuanDistrict'),
-    t('tanBinhDistrict'),
-    t('tanPhuDistrict'),
-    t('nhaBeProvince'),
-    t('canGioProvince'),
-    t('cuChiProvince'),
-    t('hocMonProvince'),
-    t('binhChanhProvince'),
-  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -100,16 +176,18 @@ function AddCentre(props) {
   };
 
   const handleSelectOpenTime = (item) => {
+    if (item)
     setCentreForm(prevState => ({
       ...prevState,
-      openTime: item
+      openTime: item.label
     }));
   };
 
   const handleSelectCloseTime = (item) => {
+    if(item)
     setCentreForm(prevState => ({
       ...prevState,
-      closeTime: item
+      closeTime: item.label
     }));
   };
 
@@ -176,50 +254,34 @@ function AddCentre(props) {
         setCentreForm({
           name: '',
           address: '',
+          district: '',
+          link:'',
           openTime: '',
           closeTime: '',
           pricePerHour: '',
-          numberOfCourt: '',
-          paymentMethod: '',
+          numberOfCourts: '',
+          description: '',
           approveDate: moment().format('yyyy-MM-DD'),
           images: []
         });
-        // handleClearDropdown();
+        handleClearDropdown();
       })
       .catch(error => {
         console.error("Error deleting images: ", error);
       });
   }
 
-
-  // How to use Dropdown
-  // const dropdownRef = useRef();
-
-  // const listOfPaymentMethod = [
-  //   {
-  //     key: 1,
-  //     label: 'ZaloPay'
-  //   },
-  //   {
-  //     key: 2,
-  //     label: 'Momo'
-  //   },
-  //   {
-  //     key: 3,
-  //     label: 'Master'
-  //   }
-  // ];
-
-  // const handleSelectPaymentMethod = (item) => {
-  //   console.log(item);
-  // }
-
-
-  // const handleClearDropdown = () => {
-  //   if (dropdownRef.current) {
-  //     dropdownRef.current.clearFormDropdown();
-  //   }
-  // };
+  const handleClearDropdown = () => {
+    if (dropdownRef.current) {
+      dropdownRef.current.clearFormDropdown();
+    }
+    if (dropdownRef1.current) {
+      dropdownRef1.current.clearFormDropdown();
+    }
+    if (dropdownRef2.current) {
+      dropdownRef2.current.clearFormDropdown();
+    }
+  };
 
   const html = (
     <div>
@@ -294,19 +356,19 @@ function AddCentre(props) {
         </div>
         <div className='mb-4'>
           <Dropdown
-            placeholder={t('selectTheDistrict')}
+            ref={dropdownRef}
             items={districts}
+            placeholder={t('selectTheDistrict')}
             onSelect={handleSelectDistrict}
-            label={t('selectTheDistrict')}
           />
         </div>
         <div className='mb-4'>
           <InputText
-            id="numberOfCourt"
-            name="numberOfCourt"
+            id="numberOfCourts"
+            name="numberOfCourts"
             placeholder={t('enterNumberOfCourt')}
             label={t('numberOfCourt')}
-            value={centreForm.numberOfCourt}
+            value={centreForm.numberOfCourts}
             onchange={handleChange}
           />
         </div>
@@ -328,6 +390,7 @@ function AddCentre(props) {
           </div>
           <div className='flex gap-4 items-center'>
             <Dropdown
+              ref={dropdownRef1}
               placeholder={t('selectOpenTime')}
               items={items}
               onSelect={handleSelectOpenTime}
@@ -341,6 +404,7 @@ function AddCentre(props) {
           </div>
           <div className='flex gap-4 items-center'>
             <Dropdown
+              ref={dropdownRef2}
               placeholder={t('selectCloseTime')}
               items={items}
               onSelect={handleSelectCloseTime}
@@ -349,26 +413,11 @@ function AddCentre(props) {
           </div>
         </div>
       </div>
-      <div className="bg-white mt-4 mx-auto">
+      {/* <div className="bg-white mt-4 mx-auto">
         <div className='mb-4'>
-          {/*
-          Dropdown demo how to use
-          <Dropdown
-            ref={dropdownRef}
-            items={listOfPaymentMethod}
-            placeholder={t('selectOpenTime')}
-            onSelect={handleSelectPaymentMethod}
-          /> */}
-          <InputText
-            id="paymentMethod"
-            name="paymentMethod"
-            placeholder={t('enterPaymentMethod')}
-            label={t('paymentMethod')}
-            value={centreForm.paymentMethod}
-            onchange={handleChange}
-          />
+          thanh ngu
         </div>
-      </div>
+      </div> */}
     </div>
   );
 
