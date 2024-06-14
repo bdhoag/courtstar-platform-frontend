@@ -173,12 +173,12 @@ const Header = () => {
               <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                 to="/partnerRegister">{t('partnerRegister')}</Link>
               {
-                role?.includes('ADMIN') && isLogin &&
+                role && role==='ADMIN' && isLogin &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                   to="/admin">{t('myDashboard')}</Link>
               }
               {
-                (role?.includes('ADMIN') || role?.includes('MANAGER') || role?.includes('STAFF')) && isLogin &&
+                (role && (role==='STAFF' || role==='MANAGER')) && isLogin &&
                 <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
                   to="/myCentre/balance">{t('myCentre')}</Link>
               }

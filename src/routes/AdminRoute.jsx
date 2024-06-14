@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 const AdminRoute = ({ children }) => {
   const userRole = localStorage.getItem('role');
 
-  if (!userRole || !userRole.includes('ADMIN')) {
+  if (!userRole || !(userRole==="ADMIN")) {
     return <Navigate to="/" />;
   }
 
