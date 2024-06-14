@@ -7,9 +7,11 @@ import axiosInstance from '../config/axiosConfig';
 import DropdownHeader from '../components/DropdownHeader'
 import BellNotification from '../components/BellNotification';
 import { useTranslation } from 'react-i18next';
+import useAuth from '../hooks/useAuth';
 
 const Header = () => {
   const { t } = useTranslation();
+  const token = useAuth();
 
   //HANDLE LOGIN POPUP
   const [loginPopupOpen, setLoginPopupOpen] = useState(false);
@@ -46,44 +48,10 @@ const Header = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-
-    const introspect = async() => {
-      await axiosInstance.post(`/courtstar/auth/introspect`, token)
-      .then(res => {
-        if (res.data.data.success) {
-          refresh();
-        } else {
-          localStorage.clear();
-        }
-      })
-      .catch(error => {
-        console.log(error.message);
-        localStorage.clear();
-      })
-      .finally();
-    }
-
-    const refresh = async() => {
-      await axiosInstance.post(`/courtstar/auth/refresh`, token)
-      .then(res => {
-        const dataObj = res.data;
-        localStorage.setItem('token', dataObj.data.token);
-        localStorage.setItem('account_id', dataObj.data.account_id);
-        localStorage.setItem('role', dataObj.data.role);
-        setIsLogin(true);
-      })
-      .catch(error => {
-        console.log(error.message);
-      })
-      .finally();
-    }
-
     if (token) {
-      introspect();
+      setIsLogin(true);
     }
-
-  }, [])
+  }, [token])
 
   const [account, setAccount] = useState({
     firstName: "",
