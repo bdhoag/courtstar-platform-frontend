@@ -31,7 +31,7 @@ const Dialog = (props) => {
 
             <h2 className="text-3xl px-5 font-bold mb-3.5 text-center uppercase">{props.title}</h2>
 
-            <div className='flex-1 w-[440px] bg-white mx-auto h-auto overflow-y-auto overflow-x-hidden px-2 mb-3'>
+            <div className='flex-1 w-[1024px] bg-white mx-auto h-auto overflow-y-auto overflow-x-hidden px-2 mb-3'>
               {props.html}
             </div>
 
