@@ -99,7 +99,7 @@ const Centre = ({ selectedDistrict }) => {
                       className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'
                     >
                       <img
-                        src={centre.images[0].url}
+                        src={centre.images[0]?.url}
                         alt="demo centre"
                         className='w-2/5 h-56 object-cover object-center rounded-lg'
                       />
