@@ -167,6 +167,7 @@ const CheckIn = (props) => {
   useEffect(() => {
     if(data) {
       let id = parseInt(data.text);
+      console.log(id);
       if (apiCheckin.filter(booking => booking.id === id)[0]) handleCheckin(id);
       else {
         toast.warning('Nhầm sân rồi bạn ơi!', {

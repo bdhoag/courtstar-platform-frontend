@@ -78,7 +78,7 @@ const PaymentResult = () => {
           {bookingSchedule && centre && (
             <div className="mt-6">
               <div className='text-gray-500 text-sm text-center my-4'> We just sent the booking schedule to your email <br />
-                <span className='text-black font-bold'> {bookingSchedule.account.email}</span>
+                <span className='text-black font-bold'> {bookingSchedule.account ? bookingSchedule.account.email : bookingSchedule.guest.email}</span>
               </div>
               <h2 className="text-2xl font-bold mb-4 text-center">Booking Schedule</h2>
               <div className="mb-4 flex flex-col text-lg">
