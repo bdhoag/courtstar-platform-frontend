@@ -26,7 +26,7 @@ const Dropdown = forwardRef((props, ref) => {
   // Function to handle the selection of an item from the dropdown
   const handleSelectItem = (item) => {
     setSelectedItem(item.label); // Update selected item state
-    props.onSelect(item.key);    // Notify parent component about the selected item
+    props.onSelect(item);    // Notify parent component about the selected item
     setIsOpen(false);            // Close the dropdown after selection
   };
 
