@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import './assets/css/index.css';
-import './assets/css/scrollbar.css';
 import './config/i18n'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./page/Layout";
@@ -95,6 +93,3 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
