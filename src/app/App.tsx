@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom/client';
-import './config/i18n'
+import '../config/i18n'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./page/Layout";
-import NoPage from "./page/NoPage";
-import ScrollToTop from './components/ScrollToTop';
-import Home from './Home';
-import CentreBooking from './centre/CentreBooking';
-import PartnerRegister from './auth/PartnerRegister';
-import CustomerRegister from './auth/CustomerRegister';
-import MyCentre from './court-manager/MyCentre';
-import Admin from './admin/Admin';
-import Profile from './auth/Profile';
-import BookingHistory from './customer/BookingHistory';
-import SpinnerLoading from './components/SpinnerLoading';
-import ManagerRoute from './routes/ManagerRoute';
-import AdminRoute from './routes/AdminRoute';
-import CustomerRoute from './routes/CustomerRoute';
-import AboutUs from './about-us/AboutUs';
-import PrivacyPolicy from './about-us/PrivacyPolicy';
-import CustomerTerm from './about-us/CustomerTerm';
-import PartnerTerm from './about-us/PartnerTerm';
-import PaymentResult from './payment/PaymentResult';
+import Layout from "../page/Layout";
+import NoPage from "../page/NoPage";
+import ScrollToTop from '../components/ScrollToTop';
+import Home from '../Home';
+import CentreBooking from '../centre/CentreBooking';
+import PartnerRegister from '../auth/PartnerRegister';
+import CustomerRegister from '../auth/CustomerRegister';
+import MyCentre from '../court-manager/MyCentre';
+import Admin from '../admin/Admin';
+import Profile from '../auth/Profile';
+import BookingHistory from '../customer/BookingHistory';
+import SpinnerLoading from '../components/SpinnerLoading';
+import ManagerRoute from '../routes/ManagerRoute';
+import AdminRoute from '../routes/AdminRoute';
+import CustomerRoute from '../routes/CustomerRoute';
+import AboutUs from '../about-us/AboutUs';
+import PrivacyPolicy from '../about-us/PrivacyPolicy';
+import CustomerTerm from '../about-us/CustomerTerm';
+import PartnerTerm from '../about-us/PartnerTerm';
+import PaymentResult from '../payment/PaymentResult';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
