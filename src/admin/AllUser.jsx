@@ -1,5 +1,5 @@
 import Dropdown from "../components/Dropdown";
-import InputText from "../components/InputText";
+import InputText from "../components/input-text";
 const AllUser = () => {
 
   const items = ['Item 1', 'Item 2', 'Item 3'];

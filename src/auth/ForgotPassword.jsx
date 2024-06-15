@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import InputText from '../components/InputText';
+import InputText from '../components/input-text';
 import PopupModal from '../components/PopupModal';
 import ResetPassword from './ResetPassword';
 import axiosInstance from '../config/axiosConfig';

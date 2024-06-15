@@ -1,7 +1,7 @@
 import PopupModal from '../components/PopupModal';
 import React, { useEffect, useState } from 'react';
 import PinCode from '../components/PinCode';
-import Password from '../components/Password';
+import Password from '../components/password';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import moment from 'moment';

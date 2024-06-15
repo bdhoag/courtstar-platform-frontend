@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { imageDb } from '../config/firebaseConfig';
 import { getDownloadURL, ref, uploadBytes, deleteObject } from "firebase/storage";
 import { v4 } from "uuid";
-import InputText from '../components/InputText';
+import InputText from '../components/input-text';
 import Dialog from '../components/Dialog';
 import Dropdown from '../components/Dropdown';
 import moment from "moment";

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import eye from '../assets/images/eye.svg';
-import eyeoff from '../assets/images/hide-eye.svg';
+import eye from '../../assets/images/eye.svg';
+import eyeoff from '../../assets/images/hide-eye.svg';
+import { PasswordStrengthProps, PasswordProps } from './index'
 
-const PasswordStrength = ({ password, evaluate }) => {
-  const calculateScore = (password) => {
+const PasswordStrength: React.FC<PasswordStrengthProps> = ({ password, evaluate }) => {
+  const calculateScore = (password: string) => {
     let score = 0;
     if (!password) return score;
 
@@ -25,7 +26,7 @@ const PasswordStrength = ({ password, evaluate }) => {
   };
 
   const score = calculateScore(password);
-  const scoreParseBg = {
+  const scoreParseBg: { [key: number]: string } = {
     1: 'w-1/4 bg-red-600',
     2: 'w-2/4 bg-orange-500',
     3: 'w-3/4 bg-yellow-400',
@@ -33,32 +34,23 @@ const PasswordStrength = ({ password, evaluate }) => {
     5: 'bg-green-500',
     6: 'bg-green-500',
   }
+
   return (
     evaluate && <div className="relative px-1 w-full -mt-1">
       <div className={`h-1 rounded-full transition-all ease-in-out duration-300 ${scoreParseBg[score]}`} />
       <div className={`absolute pl-1.5 py-1 -top-10 right-2 bg-white z-10 font-normal text-gray-500 text-sm`}>
         {
-          score >=4 ? 'Very Strong' :
-          score >=3 ? 'Strong' :
-          score >=2 ? 'Average' :
-          score >=1 ? 'Weak' : ''
+          score >= 4 ? 'Very Strong' :
+            score >= 3 ? 'Strong' :
+              score >= 2 ? 'Average' :
+                score >= 1 ? 'Weak' : ''
         }
       </div>
     </div>
   );
 };
 
-const Password = (props) => {
-  /**
-   * ALL PROPS:
-   * id: string
-   * label: string
-   * name: string
-   * placeholder: string
-   * onchange: () => {}
-   * value: string
-   * evaluate: boolean
-   */
+const Password: React.FC<PasswordProps> = (props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = () => {
@@ -79,10 +71,10 @@ const Password = (props) => {
         >
           {
             showPassword
-            ?
-            (<img src={eyeoff} alt="eye-off"/>)
-            :
-            (<img src={eye} alt="eye" />)
+              ?
+              (<img src={eyeoff} alt="eye-off" />)
+              :
+              (<img src={eye} alt="eye" />)
           }
         </div>
       </div>
@@ -95,7 +87,7 @@ const Password = (props) => {
         onChange={props.onchange}
         value={props.value}
       />
-      <PasswordStrength password={props.value} evaluate={props.evaluate}/>
+      <PasswordStrength password={props.value} evaluate={props.evaluate} />
     </div>
   );
 };
