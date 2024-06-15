@@ -7,7 +7,7 @@ import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import Button from "../components/Button";
+import Button from "../components/button";
 import QrScanner from 'react-qr-scanner'
 import SpinnerLoading from "../components/SpinnerLoading";
 

@@ -3,7 +3,7 @@ import InputText from '../components/InputText';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import SpinnerLoading from '../components/SpinnerLoading';
-import Button from '../components/Button';
+import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
 
 function Profile() {
@@ -83,8 +83,8 @@ function Profile() {
   };
 
   return (
-    loading 
-    ? 
+    loading
+    ?
     <div className='h-[652px] flex items-center justify-center'>
       <SpinnerLoading
         height='80'

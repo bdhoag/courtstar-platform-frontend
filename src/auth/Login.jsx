@@ -7,7 +7,7 @@ import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import Password from '../components/Password';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/Button';
+import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
 
 function Login(props) {
@@ -117,7 +117,7 @@ function Login(props) {
           </div>
         </div>
         <div className='flex items-center justify-center'>
-          <Button 
+          <Button
             type='submit'
             label={t('logIn')}
             fullWidth

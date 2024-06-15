@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axiosInstance from '../config/axiosConfig';
 import InputText from '../components/InputText';
 import PopupModal from '../components/PopupModal';
-import Button from '../components/Button';
+import Button from '../components/button';
 
 const BookingForm = (props) => {
   const [loading, setLoading] = useState(false);
