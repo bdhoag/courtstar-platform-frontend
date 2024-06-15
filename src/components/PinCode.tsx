@@ -1,10 +1,15 @@
-// @ts-nocheck
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PinInput from 'react-pin-input';
 
-const PinCode = (props) => {
+interface PinCodeProps {
+  clear: boolean;
+  value: string;
+  onChange: (value: string) => void;
+  onComplete: (value: string) => void;
+}
 
-  const pinRef = useRef(null);
+const PinCode: React.FC<PinCodeProps> = (props) => {
+  const pinRef = useRef<any>(null); // Sử dụng useRef với kiểu any do PinInput không cung cấp kiểu tham chiếu chính xác
 
   useEffect(() => {
     if (props.clear && pinRef.current) {
@@ -19,7 +24,7 @@ const PinCode = (props) => {
       initialValue={props.value}
       onChange={(value, index) => props.onChange(value)}
       type="numeric"
-      inputMode="number"
+      inputMode="numeric"
       style={{
         padding: '18px',
         display: 'flex',
@@ -31,12 +36,12 @@ const PinCode = (props) => {
         borderWidth: '2px',
         borderRadius: '6px',
       }}
-      inputFocusStyle={{borderColor: '#6b7280'}}
+      inputFocusStyle={{ borderColor: '#6b7280' }}
       onComplete={props.onComplete}
       autoSelect={true}
       regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
     />
   );
-}
+};
 
 export default PinCode;

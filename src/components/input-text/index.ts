@@ -5,8 +5,8 @@ export interface InputTextProps {
   label?: string;
   name?: string;
   placeholder?: string;
-  onchange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value?: string;
+  onchange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
   disabled?: boolean;
   type?: 'text' | 'number';
 }

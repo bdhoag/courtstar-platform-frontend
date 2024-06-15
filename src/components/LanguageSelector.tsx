@@ -1,44 +1,42 @@
-// @ts-nocheck
 import React, { useState, useEffect, useRef } from 'react';
 import us from '../assets/images/US.svg';
 import vn from '../assets/images/VN.svg';
 import down from '../assets/images/chevron-down.svg';
 import { useTranslation } from 'react-i18next';
 
-const LanguageSelector = () => {
+interface LanguageSelectorProps {
+  // Không có props được truyền vào trong ví dụ này
+}
 
+const LanguageSelector: React.FC<LanguageSelectorProps> = () => {
   const { i18n } = useTranslation();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [lang, setLang] = useState(us);
-  const dropdownRef = useRef(null);
-
+  const [lang, setLang] = useState<string>(us); // Kiểu của state lang là string với giá trị ban đầu là us
+  const dropdownRef = useRef<HTMLDivElement>(null); // Kiểu của ref là HTMLDivElement
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleChoose = (lang) => {
-    let currentLang = "";
-    if (lang === us) currentLang="en";
-    else currentLang="vi";
+  const handleChoose = (lang: string) => {
+    const currentLang = lang === us ? 'en' : 'vi'; // Kiểm tra lang để thay đổi ngôn ngữ
     i18n.changeLanguage(currentLang);
-    localStorage.setItem("lang", currentLang);
+    localStorage.setItem('lang', currentLang);
     setLang(lang);
-    setIsOpen(!isOpen);
-  }
+    setIsOpen(false); // Đóng dropdown khi đã chọn xong
+  };
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    const curLang = localStorage.getItem("lang");
+    const curLang = localStorage.getItem('lang');
     if (curLang) {
-      if (curLang === "vi") setLang(vn);
-      else setLang(us);
+      setLang(curLang === 'vi' ? vn : us); // Thiết lập ngôn ngữ từ localStorage
     }
   }, []);
 
@@ -51,7 +49,7 @@ const LanguageSelector = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsOpen(false);
+      setIsOpen(false); // Đóng dropdown khi có sự kiện scroll
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -63,18 +61,13 @@ const LanguageSelector = () => {
 
   return (
     <div className="relative inline-flex" ref={dropdownRef}>
-      <button className="py-1 ps-1 pe-3 inline-flex items-center gap-x-2 font-semibold text-white w-28"
-        onClick={toggleMenu}>
-        <img className="w-5 h-auto rounded-full"
-          src={lang}
-          alt='current language'
-        />
-        <span className="font-medium truncate max-w-[7.5rem]">
-          {lang === us ? "US" : "VI"}
-        </span>
-        <img src={down}
-          className={isOpen ? 'rotate-180 w-4' : 'w-4'}
-          alt='chevron-down'/>
+      <button
+        className="py-1 ps-1 pe-3 inline-flex items-center gap-x-2 font-semibold text-white w-28"
+        onClick={toggleMenu}
+      >
+        <img className="w-5 h-auto rounded-full" src={lang} alt="current language" />
+        <span className="font-medium truncate max-w-[7.5rem]">{lang === us ? 'US' : 'VI'}</span>
+        <img src={down} className={isOpen ? 'rotate-180 w-4' : 'w-4'} alt="chevron-down" />
       </button>
 
       {isOpen && (
@@ -97,6 +90,6 @@ const LanguageSelector = () => {
       )}
     </div>
   );
-}
+};
 
 export default LanguageSelector;

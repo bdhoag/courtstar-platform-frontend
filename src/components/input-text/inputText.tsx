@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputTextProps } from './index';
 
 const InputText: React.FC<InputTextProps> = ({
@@ -11,7 +11,12 @@ const InputText: React.FC<InputTextProps> = ({
   disabled,
   type = 'text',
 }) => {
-  const [formattedValue, setFormattedValue] = useState(value);
+  const [formattedValue, setFormattedValue] = useState("");
+
+  useEffect(() => {
+    setFormattedValue(value);
+  }, [value])
+
 
   const formatNumber = (num: string) => {
     return num.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
