@@ -6,7 +6,7 @@ import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
 import axiosInstance from '../config/axiosConfig';
 import DropdownHeader from '../components/DropdownHeader'
-import BellNotification from '../components/BellNotification';
+import Bell from '../components/notification';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/useAuth';
 
@@ -75,19 +75,27 @@ const Header = () => {
   // Mock notifications for demonstration purposes
   const apiNotifications = [
     {
-      id: 1, message: "Your centre booking is about to begin",
-      time: "1 minute ago"
+      id: 1,
+      content: "Welcome to CourtStar!",
+      date: "1 month ago",
+      type: "registered",
+      status: true
     },
     {
-      id: 2, message: "There's a new centre needs approval",
-      time: "1 hour ago"
+      id: 2,
+      content: "There's a new centre needs approval",
+      date: "1 hour ago",
+      type: "request",
+      status: false
+    },
+    {
+      id: 3,
+      content: "There's a new booking",
+      date: "1 hour ago",
+      type: "booking",
+      status: false
     }
   ]
-
-  const handleNotificationClick = (notification) => {
-    console.log("Notification clicked:", notification);
-    // Mark the notification as read or handle the click as necessary
-  };
 
   return (
     <div className='font-Inter text-base overflow-x-hidden w-full shadow-lg fixed z-30'>
@@ -176,31 +184,10 @@ const Header = () => {
             {(isLogin === true) && (
               <div className="flex items-center gap-3">
                 <DropdownHeader userEmail={account.email} logout={logout} />
-                <BellNotification
-                  notifications={apiNotifications}
-                  onNotificationClick={handleNotificationClick}
+                <Bell
+                  notifications={apiNotifications.reverse()}
                 />
               </div>
-              // <div className='flex gap-8 items-center justify-between'>
-              //   <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
-              //     <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0">
-              //       <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-              //         to="/bookingHistory">Booking History</Link>
-              //       <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-              //         to="/profile">Profile</Link>
-              //     </div>
-              //   </div>
-              //   <div className="flex gap-4 items-center">
-              //     <button className='rounded-full w-8 h-8 hover:bg-gray-800 flex justify-center items-center transition-all duration-300 ease-in-out'>
-              //
-              //     </button>
-              //     <button className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
-              //       onClick={logout}
-              //     >
-              //       Log out
-              //     </button>
-              //   </div>
-              // </div>
             )}
 
           </div>
