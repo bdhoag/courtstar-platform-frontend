@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import InputText from '../components/InputText';
+import InputText from '../components/input-text';
 import Dialog from '../components/Dialog';
-import Password from '../components/Password';
+import Password from '../components/password';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";

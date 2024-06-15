@@ -1,4 +1,4 @@
-import InputText from "../components/InputText";
+import InputText from "../components/input-text";
 import Dropdown from "../components/Dropdown";
 import PopupModal from "../components/PopupModal";
 import { useState, useEffect } from "react";

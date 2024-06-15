@@ -1,11 +1,11 @@
 import google from '../assets/images/google.svg';
-import InputText from '../components/InputText';
+import InputText from '../components/input-text';
 import PopupModal from '../components/PopupModal';
 import React, { useEffect, useState } from 'react';
 import ForgotPassword from './ForgotPassword';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
-import Password from '../components/Password';
+import Password from '../components/password';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
