@@ -1,3 +1,4 @@
+// @ts-nocheck
 import google from '../assets/images/google.svg';
 import InputText from '../components/input-text';
 import PopupModal from '../components/PopupModal';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 // import { CKEditor } from '@ckeditor/ckeditor5-react';
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import centre from '../assets/images/demo-centre.png'
@@ -7,7 +8,7 @@ import PopupModal from '../components/PopupModal';
 
 function FeedbackForm(props) {
 
-    //CLOSE FEEDBACK POPUP 
+    //CLOSE FEEDBACK POPUP
     const handleClose = () => {
         props.setIsOpen();
     }

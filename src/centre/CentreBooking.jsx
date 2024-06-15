@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import mappin from '../assets/images/map-pin.svg';

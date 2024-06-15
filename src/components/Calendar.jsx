@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import Dropdown from './Dropdown'
 import moment from 'moment';
