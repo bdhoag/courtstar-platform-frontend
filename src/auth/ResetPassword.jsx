@@ -158,7 +158,7 @@ function ResetPassword(props) {
         </div>
 
         <PinCode
-          value={formData.otp.trim}
+          value={formData.otp.trim()}
           onChange={handleOtpChange}
           clear={clearPin}
           onComplete={handleOtpChange}
