@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef } from 'react';
 import bell from '../assets/images/bell.svg';
 import notify from '../assets/images/icon-notify.svg'

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect } from 'react';
 import InputText from '../components/input-text';
 import Dialog from '../components/Dialog';

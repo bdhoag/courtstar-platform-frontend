@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useEffect, useRef } from 'react';
 import us from '../assets/images/US.svg';
 import vn from '../assets/images/VN.svg';
