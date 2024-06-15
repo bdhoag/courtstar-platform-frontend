@@ -1,22 +1,8 @@
 import { useState, useEffect } from 'react';
-import SpinnerLoading from './SpinnerLoading';
+import SpinnerLoading from '../../components/SpinnerLoading';
+import {ButtonProps} from './index'
 
-export default function Button(props) {
-  /**
-   * ALL PROPS
-   * type: string
-   * label: string
-   * size: 'small' || 'medium' || 'large'
-   * fullWidth: boolean
-   * fullRounded: boolean
-   * className: string
-   * icon: svg
-   * iconClass: string
-   * loading: boolean
-   * loadingColor: string
-   * onClick: () => {}
-   */
-
+const Button = (props: ButtonProps): JSX.Element => {
   const [btnClass, setBtnClass] = useState('');
 
   useEffect(() => {
@@ -47,9 +33,7 @@ export default function Button(props) {
       ) : (
         <>
           {props.icon && (
-            <div
-              className={`${props.iconClass} w-5`}
-            >
+            <div className={`${props.iconClass} w-5`}>
               {props.icon}
             </div>
           )}
@@ -57,5 +41,7 @@ export default function Button(props) {
         </>
       )}
     </button>
-  )
-}
+  );
+};
+
+export default Button;

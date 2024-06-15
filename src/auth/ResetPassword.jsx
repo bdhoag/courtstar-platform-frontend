@@ -6,7 +6,7 @@ import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import SpinnerLoading from '../components/SpinnerLoading';
-import Button from '../components/Button';
+import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
 
 function ResetPassword(props) {

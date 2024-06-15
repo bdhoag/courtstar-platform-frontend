@@ -4,7 +4,7 @@ import PopupModal from '../components/PopupModal';
 import ResetPassword from './ResetPassword';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
-import Button from '../components/Button';
+import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
 
 function ForgotPassword(props) {

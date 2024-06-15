@@ -1,7 +1,7 @@
 import React from 'react';
 import banner from '../assets/images/banner.png';
 import Dropdown from '../components/Dropdown';
-import Button from '../components/Button';
+import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
 
 const Banner = ({ onDistrictSelect }) => {
@@ -36,7 +36,7 @@ const Banner = ({ onDistrictSelect }) => {
   const handleSelect = (item) => {
     onDistrictSelect(item);
     if (item === t('findCourtNow')) {
-      onDistrictSelect(''); 
+      onDistrictSelect('');
     }
   };
 
