@@ -35,7 +35,7 @@ const Bell: React.FC<NotificationProps> = ({ notifications }) => {
         className="relative rounded-full w-8 h-8 flex justify-center items-center transition-all duration-300 ease-in-out focus:outline-none hover:bg-gray-800"
       >
         <img src={bell} alt="bell" className="w-6 h-6" />
-        {notifications.length > 0 && notifications.some(notification => !notification.status) && (
+        {notifications && notifications.length > 0 && notifications.some(notification => !notification.status) && (
           <span className="absolute top-1 right-1 inline-flex items-center justify-center p-1 h-2 w-2 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full" />
         )}
       </button>
@@ -45,11 +45,11 @@ const Bell: React.FC<NotificationProps> = ({ notifications }) => {
           <div className={`mt-2.5 w-[400px] bg-white border border-gray-200 rounded-lg shadow-lg`}>
             <div className="p-3">
               <h4 className="text-lg font-semibold text-gray-700 text-center">Notifications</h4>
-              {notifications.length === 0 && (
+              {notifications?.length === 0 && (
                 <p className="text-gray-500">No new notifications</p>
               )}
               <div className="mt-2">
-                {notifications.map((notification) => (
+                {notifications?.map((notification) => (
                   <NotificationItem
                     key={notification.id}
                     notification={notification}

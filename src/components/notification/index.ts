@@ -14,7 +14,7 @@ export interface NotificationItemProps {
 }
 
 export interface NotificationProps {
-  notifications: Notification[];
+  notifications?: Notification[];
 }
 
 export default Bell;
