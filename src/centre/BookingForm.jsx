@@ -24,17 +24,10 @@ const BookingForm = (props) => {
     email: "",
     phone: "",
   });
-  const [paymentForm, setPaymentForm] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    amount: "",
-    description: ""
-  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setPaymentForm((prevForm) => ({
+    setBookingForm((prevForm) => ({
       ...prevForm,
       [name]: value,
     }));
@@ -42,22 +35,13 @@ const BookingForm = (props) => {
 
   useEffect(() => {
     if(account)
-    setPaymentForm({
-      fullName: (account.firstName + " " + account.lastName).trim(),
-      email: account.email,
-      phone: account.phone,
-      description: ""
-    });
+      setBookingForm((prevForm) => ({
+        ...prevForm,
+        fullName: (account.firstName + " " + account.lastName).trim(),
+        email: account.email,
+        phone: account.phone,
+      }));
   }, [account]);
-
-  useEffect(() => {
-    setBookingForm((prevForm) => ({
-      ...prevForm,
-      fullName: paymentForm.fullName,
-      email: paymentForm.email,
-      phone: paymentForm.phone,
-  }));
-  }, [paymentForm]);
 
   useEffect(() => {
     setBookingForm((prevForm) => ({
@@ -65,13 +49,6 @@ const BookingForm = (props) => {
         ...props.formCalendar,
     }));
 }, [props.formCalendar]);
-
-  useEffect(() => {
-    setPaymentForm((prevForm) => ({
-      ...prevForm,
-      amount: props.centre.pricePerHour,
-    }));
-  }, [props.centre]);
 
   const load = async () => {
     await axiosInstance.get(`/courtstar/account/myInfor`)
@@ -84,12 +61,11 @@ const BookingForm = (props) => {
       .finally();
   };
 
-  const handlePayment = async() => {
+  const booking = async() => {
     setLoading(true);
-    await axiosInstance.post(`/courtstar/payment/create-order`, paymentForm)
+    await axiosInstance.post(`/courtstar/booking`, bookingForm)
       .then(res => {
-        localStorage.setItem("bookingForm", JSON.stringify(bookingForm));
-        window.location.href = res.data.orderurl;
+        window.location.href = res.data.data.order_url;
       })
       .catch(error => {
         console.log(error.message);
@@ -103,9 +79,6 @@ const BookingForm = (props) => {
   useEffect(() => {
     console.log(bookingForm);
   }, [bookingForm]);
-  useEffect(() => {
-    console.log(paymentForm);
-  }, [paymentForm]);
 
   const html = (
     <div className='font-medium w-[440px] items-center gap-3'>
@@ -116,7 +89,7 @@ const BookingForm = (props) => {
           name="fullName"
           label="Full Name*"
           placeholder='Enter full name'
-          value={paymentForm.fullName || ""}
+          value={bookingForm.fullName || ""}
           onchange={handleChange}
           disabled={account?.firstName}
         />
@@ -127,7 +100,7 @@ const BookingForm = (props) => {
           name="phone"
           label="Phone*"
           placeholder='Enter phone number'
-          value={paymentForm.phone || ""}
+          value={bookingForm.phone || ""}
           onchange={handleChange}
           disabled={account?.phone}
         />
@@ -138,20 +111,13 @@ const BookingForm = (props) => {
           name="email"
           label="Email*"
           placeholder='Enter your email'
-          value={paymentForm.email || ""}
+          value={bookingForm.email || ""}
           onchange={handleChange}
           disabled={account?.email}
         />
       </div>
       <div className='mb-4'>
-        <InputText
-          label="Note"
-          id="description"
-          name="description"
-          placeholder='Note something'
-          value={paymentForm.description || ""}
-          onchange={handleChange}
-        />
+        Price: {props.centre.pricePerHour}
       </div>
       <div className='flex items-center justify-center'>
         <Button
@@ -161,7 +127,7 @@ const BookingForm = (props) => {
           size='medium'
           className='bg-primary-green hover:bg-teal-900 text-white'
           loading={loading}
-          onClick={handlePayment}
+          onClick={booking}
         />
       </div>
     </div>
@@ -173,10 +139,6 @@ const BookingForm = (props) => {
         isOpen={props.isOpen}
         setIsOpen={handleClose}
       />
-      {/* <CustPayment
-        isOpen={custPaymentPopup}
-        setIsOpen={handlePaymentPopupClose}
-      /> */}
     </div>
   )
 
