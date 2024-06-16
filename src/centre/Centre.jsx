@@ -23,9 +23,11 @@ const Centre = ({ selectedDistrict }) => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
     const load = async () => {
       setLoading(true);
-      await axiosInstance.get(`/courtstar/centre/getAllCentreActive`)
+      await axiosInstance.get(`/courtstar/centre/getAllCentreActive`, { signal })
         .then(res => {
           setCentreList(res.data.data.reverse());
           setFilteredCentreList(res.data.data);
@@ -38,6 +40,9 @@ const Centre = ({ selectedDistrict }) => {
         });
     };
     load();
+    return () => {
+      controller.abort();
+    }
   }, []);
 
   useEffect(() => {

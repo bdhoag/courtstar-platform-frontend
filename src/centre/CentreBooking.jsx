@@ -15,12 +15,14 @@ import moment from 'moment';
 const CentreBooking = () => {
 
   const { id } = useParams();
+  const controller = new AbortController();
+  const { signal } = controller;
   const [loading, setLoading] = useState(true);
   const [centre, setCentre] = useState({});
   const [formCalendar, setFormCalendar] = useState({});
 
   const load = useCallback(async () => {
-    await axiosInstance.get(`/courtstar/centre/getCentre/${id}`)
+    await axiosInstance.get(`/courtstar/centre/getCentre/${id}`, { signal })
       .then(res => {
         setCentre(res.data.data);
       })
@@ -36,6 +38,9 @@ const CentreBooking = () => {
 
   useEffect(() => {
     load();
+    return () => {
+      controller.abort();
+    }
   }, [load])
 
   //HANDLE BOOKING FORM POPUP

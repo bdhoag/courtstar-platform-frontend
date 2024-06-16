@@ -1,27 +1,48 @@
-import { useState, useEffect } from 'react';
+import { useRef, MouseEvent } from 'react';
 import SpinnerLoading from '../../components/SpinnerLoading';
-import {ButtonProps} from './index'
+import {ButtonProps} from './index';
+import './button.css';
 
 const Button = (props: ButtonProps): JSX.Element => {
-  const [btnClass, setBtnClass] = useState('');
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+      if (buttonRef.current) {
+          const button = buttonRef.current;
+          const ripple = document.createElement('span');
+          const rect = button.getBoundingClientRect();
+          const diameter = Math.max(rect.width, rect.height);
+          const radius = diameter / 2;
 
-  useEffect(() => {
-    const computedClass =
-      (props.className || '') +
-      (props.fullWidth ? ' !w-full ' : '') +
-      (props.fullRounded ? ' !rounded-full ' : '') +
-      (props.size === 'small' ? ' py-1 px-3 ' : props.size === 'medium' ? ' py-2.5 px-6 ' : props.size === 'large' ? ' py-3.5 px-8 ' : '') +
-      ' flex gap-3 items-center justify-center font-medium disabled:bg-opacity-90 disabled:pointer-events-none transition-all duration-300 ease-in-out rounded-md';
+          ripple.style.width = ripple.style.height = `${diameter}px`;
+          ripple.style.left = `${event.clientX - rect.left - radius}px`;
+          ripple.style.top = `${event.clientY - rect.top - radius}px`;
+          ripple.classList.add('ripple');
 
-    setBtnClass(computedClass);
-  }, [props.className, props.fullWidth, props.fullRounded, props.size]);
+          const prevRipple = button.querySelector('.ripple');
+          if (prevRipple) {
+              button.removeChild(prevRipple);
+          }
+
+          button.appendChild(ripple);
+          setTimeout(() => {
+              button.removeChild(ripple);
+          }, 500);
+
+          if(props.onClick) props.onClick();
+      }
+  };
+
+  const btnClass =  (props.fullWidth ? ' !w-full ' : ' ') +
+                    (props.fullRounded ? ' !rounded-full ' : ' ') +
+                    (props.size === 'small' ? ' py-1 px-3 ' : props.size === 'medium' ? ' py-2.5 px-6 ' : props.size === 'large' ? ' py-3.5 px-8 ' : '');
 
   return (
     <button
-      className={btnClass}
+      ref={buttonRef}
+      className={btnClass + props.className + ' relative overflow-hidden flex gap-3 items-center justify-center font-medium disabled:bg-opacity-90 disabled:pointer-events-none rounded-md transition-colors duration-300 ease-in-out '}
       type={props.type}
       disabled={props.loading}
-      onClick={props.onClick}
+      onClick={handleClick}
     >
       {props.loading ? (
         <SpinnerLoading

@@ -9,6 +9,8 @@ import SpinnerLoading from './SpinnerLoading';
 export default function Calendar(props) {
 
   const [centre, setCentre] = useState({});
+  const controller = new AbortController();
+  const { signal } = controller;
 
   const isEmptyObject = (obj) => Object.keys(obj).length === 0;
   const isDisable = (day, slot) => (
@@ -35,7 +37,7 @@ export default function Calendar(props) {
   };
 
   const loadCourt = async(centreId, courtNo) => {
-    await axiosInstance.get(`/courtstar/court/${centreId}/${courtNo}`)
+    await axiosInstance.get(`/courtstar/court/${centreId}/${courtNo}`, { signal })
       .then(res => {
         setCourt(res.data.data)
       })
@@ -64,6 +66,10 @@ export default function Calendar(props) {
         centreId: centre.id
       });
       loadCourt(centre.id, 1);
+    }
+
+    return () => {
+      controller.abort();
     }
   }, [centre])
 
