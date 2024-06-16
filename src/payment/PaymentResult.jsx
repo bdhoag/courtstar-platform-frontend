@@ -12,51 +12,48 @@ function useQuery() {
 const PaymentResult = () => {
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState(0);
-  const [bookingForm, setBookingForm] = useState();
-  const [bookingSchedule, setBookingSchedule] = useState();
+  // const [bookingForm, setBookingForm] = useState();
+  // const [bookingSchedule, setBookingSchedule] = useState();
   const query = useQuery();
   const status = query.get('status');
 
   useEffect(() => {
-    if (status === '1') {
-      setBookingForm(JSON.parse(localStorage.getItem('bookingForm')));
-    } else {
-      localStorage.removeItem("bookingForm");
+    if (status) {
       setLoading(false);
     }
     setResult(status);
   }, [status])
 
-  const [centre, setCentre] = useState();
+  // const [centre, setCentre] = useState();
 
-  useEffect(() => {
-    const load = async () => {
-      let centreId = bookingForm.centreId;
-      await axiosInstance.post(`/courtstar/booking`, bookingForm)
-        .then(bookingResponse => {
-          setBookingSchedule(bookingResponse.data.data);
-          localStorage.removeItem("bookingForm");
-          axiosInstance.get(`/courtstar/centre/getCentre/${centreId}`)
-            .then(centreResponse => {
-              setCentre(centreResponse.data.data);
-            })
-            .catch(error => {
-              console.log(error.message);
-            })
-            .finally(() => {
-            });
-        })
-        .catch(error => {
-          console.log(error.message);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-    if (bookingForm) {
-      load();
-    };
-  }, [bookingForm])
+  // useEffect(() => {
+  //   const load = async () => {
+  //     let centreId = bookingForm.centreId;
+  //     await axiosInstance.post(`/courtstar/booking`, bookingForm)
+  //       .then(bookingResponse => {
+  //         setBookingSchedule(bookingResponse.data.data);
+  //         localStorage.removeItem("bookingForm");
+  //         axiosInstance.get(`/courtstar/centre/getCentre/${centreId}`)
+  //           .then(centreResponse => {
+  //             setCentre(centreResponse.data.data);
+  //           })
+  //           .catch(error => {
+  //             console.log(error.message);
+  //           })
+  //           .finally(() => {
+  //           });
+  //       })
+  //       .catch(error => {
+  //         console.log(error.message);
+  //       })
+  //       .finally(() => {
+  //         setLoading(false);
+  //       });
+  //   }
+  //   if (bookingForm) {
+  //     load();
+  //   };
+  // }, [bookingForm])
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
@@ -76,7 +73,7 @@ const PaymentResult = () => {
               Payment fail!
             </div>
           )}
-          {bookingSchedule && centre && (
+          {/* {bookingSchedule && centre && (
             <div className="mt-6">
               <div className='text-gray-500 text-sm text-center my-4'> We just sent the booking schedule to your email <br />
                 <span className='text-black font-bold'> {bookingSchedule.account ? bookingSchedule.account.email : bookingSchedule.guest.email}</span>
@@ -107,7 +104,7 @@ const PaymentResult = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       )}
     </div>
