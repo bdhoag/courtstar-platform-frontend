@@ -7,6 +7,8 @@ import Button from '../components/button';
 
 const BookingForm = (props) => {
   const [loading, setLoading] = useState(false);
+  const controller = new AbortController();
+  const { signal } = controller;
 
   //CLOSE BOOKING MODAL
   const handleClose = () => {
@@ -16,6 +18,9 @@ const BookingForm = (props) => {
   useEffect(() => {
     if (localStorage.getItem('token'))
     load();
+    return () => {
+      controller.abort();
+    }
   }, []);
 
   const [account, setAccount] = useState();
@@ -51,7 +56,7 @@ const BookingForm = (props) => {
 }, [props.formCalendar]);
 
   const load = async () => {
-    await axiosInstance.get(`/courtstar/account/myInfor`)
+    await axiosInstance.get(`/courtstar/account/myInfor`, { signal })
       .then(res => {
         setAccount(res.data.data);
       })

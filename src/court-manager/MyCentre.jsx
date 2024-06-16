@@ -13,8 +13,10 @@ const MyCentre = () => {
   const [balanceDetail, setBalanceDetail] = useState();
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
     const load = async () => {
-      await axiosInstance.get(`/courtstar/centre/getAllCentresOfManager`)
+      await axiosInstance.get(`/courtstar/centre/getAllCentresOfManager`, { signal })
         .then(res => {
           setCentreList(res.data.data);
         })
@@ -31,7 +33,7 @@ const MyCentre = () => {
 
     const loadBalanceDetail = async () => {
       setLoading(true);
-      await axiosInstance.get(`/courtstar/manager/info`)
+      await axiosInstance.get(`/courtstar/manager/info`, { signal })
         .then(res => {
           setBalanceDetail(res.data.data);
         })
@@ -45,6 +47,10 @@ const MyCentre = () => {
         );
     }
     loadBalanceDetail();
+
+    return () => {
+      controller.abort();
+    }
   }, []);
 
   const handleChooseTabFromSidebar = (tab) => {
