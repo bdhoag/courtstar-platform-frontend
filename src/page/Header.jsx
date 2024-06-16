@@ -45,7 +45,10 @@ const Header = () => {
   const [role, setRole] = useState('');
   useEffect(() => {
     setRole(localStorage.getItem('role'));
-    if (isLogin) load();
+    if (isLogin) {
+      load();
+      loadNotification();
+    }
   }, [isLogin]);
 
   useEffect(() => {
@@ -61,11 +64,22 @@ const Header = () => {
     phone: "",
     role: ""
   });
+  const [notifications, setNotification] = useState();
 
   const load = async () => {
     await axiosInstance.get(`/courtstar/account/myInfor`)
       .then(res => {
         setAccount(res.data.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally();
+  };
+  const loadNotification = async () => {
+    await axiosInstance.get(`/courtstar/notification`)
+      .then(res => {
+        setNotification(res.data.data);
       })
       .catch(error => {
         console.log(error.message);
@@ -185,7 +199,7 @@ const Header = () => {
               <div className="flex items-center gap-3">
                 <DropdownHeader userEmail={account.email} logout={logout} />
                 <Bell
-                  notifications={apiNotifications.reverse()}
+                  notifications={notifications?.reverse()}
                 />
               </div>
             )}

@@ -115,5 +115,10 @@
   "slot":"Khung giờ",
   "enterStaffEmail":"Nhập email của nhân viên",
   "enterStaffPhone":"Nhập số điện thoại của nhân viên",
-  "enterStaffPassword":"Nhập mật khẩu của nhân viên"
+  "enterStaffPassword":"Nhập mật khẩu của nhân viên",
+  "OTHER_CONTENT": "Thông báo mới",
+  "ADD_CENTRE_CONTENT": "Có yêu cầu đăng sân mới từ đối tác",
+  "DENIED_CENTRE_CONTENT": "Sân của bạn đã bị từ chối",
+  "REGISTERED_CONTENT": "Chào mừng đến với Court Star!",
+  "BOOKING_CONTENT": "Có đơn hàng mới"
 }

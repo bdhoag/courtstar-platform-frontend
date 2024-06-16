@@ -73,9 +73,9 @@
   "checkYourEmail":"Check Your Email",
   "weSent": "We just sent a verification code to ",
   "enterDigit": "Enter the 6-digit code mentioned in the email!",
-  "enterNewPassword":"Enter your new password",  
-  "newPassword":"New Password",  
-  "enterConfirmNewPassword":"Confirm your new password",  
+  "enterNewPassword":"Enter your new password",
+  "newPassword":"New Password",
+  "enterConfirmNewPassword":"Confirm your new password",
   "confirmNewPassword":"Confirm New Password",
   "gotEmailYet":"Haven't got the email yet?",
   "resend":"Resend",
@@ -115,5 +115,10 @@
   "slot":"Slot",
   "enterStaffEmail":"Enter Staff's email",
   "enterStaffPhone":"Enter Staff's phone",
-  "enterStaffPassword":"Enter Staff's password"
+  "enterStaffPassword":"Enter Staff's password",
+  "OTHER_CONTENT": "Uncategorized notification",
+  "ADD_CENTRE_CONTENT": "There is a new centre need to approve from partner",
+  "DENIED_CENTRE_CONTENT": "Your centre was denied",
+  "REGISTERED_CONTENT": "Welcome to Court Star!",
+  "BOOKING_CONTENT": "There is a new booking"
 }
