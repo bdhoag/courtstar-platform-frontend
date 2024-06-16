@@ -86,30 +86,6 @@ const Header = () => {
       })
       .finally();
   };
-  // Mock notifications for demonstration purposes
-  const apiNotifications = [
-    {
-      id: 1,
-      content: "Welcome to CourtStar!",
-      date: "1 month ago",
-      type: "registered",
-      status: true
-    },
-    {
-      id: 2,
-      content: "There's a new centre needs approval",
-      date: "1 hour ago",
-      type: "request",
-      status: false
-    },
-    {
-      id: 3,
-      content: "There's a new booking",
-      date: "1 hour ago",
-      type: "booking",
-      status: false
-    }
-  ]
 
   return (
     <div className='font-Inter text-base overflow-x-hidden w-full shadow-lg fixed z-30'>
