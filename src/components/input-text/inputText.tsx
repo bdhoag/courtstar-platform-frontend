@@ -14,6 +14,10 @@ const InputText: React.FC<InputTextProps> = ({
   const [formattedValue, setFormattedValue] = useState("");
 
   useEffect(() => {
+    if (type === 'number'){
+      const numericValue = value.replace(/\D/g, '');
+      setFormattedValue(formatNumber(numericValue));
+    } else
     setFormattedValue(value);
   }, [value])
 
