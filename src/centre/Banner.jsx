@@ -9,29 +9,94 @@ const Banner = ({ onDistrictSelect }) => {
   const { t } = useTranslation();
 
   const items = [
-    t('findCourtNow'),
-    t('thuDucCity'),
-    t('district1'),
-    t('district3'),
-    t('district4'),
-    t('district5'),
-    t('district6'),
-    t('district7'),
-    t('district8'),
-    t('district10'),
-    t('district11'),
-    t('district12'),
-    t('binhTanDistrict'),
-    t('binhThanhDistrict'),
-    t('goVapDistrict'),
-    t('phuNhuanDistrict'),
-    t('tanBinhDistrict'),
-    t('tanPhuDistrict'),
-    t('nhaBeProvince'),
-    t('canGioProvince'),
-    t('cuChiProvince'),
-    t('hocMonProvince'),
-    t('binhChanhProvince'),
+    {
+      key: 'thuDucCity',
+      label: t('thuDucCity')
+    },
+    {
+      key: 'district1',
+      label: t('district1')
+    },
+    {
+      key: 'district3',
+      label: t('district3')
+    },
+    {
+      key: 'district4',
+      label: t('district4')
+    },
+    {
+      key: 'district5',
+      label: t('district5')
+    },
+    {
+      key: 'district6',
+      label: t('district6')
+    },
+    {
+      key: 'district7',
+      label: t('district7')
+    },
+    {
+      key: 'district8',
+      label: t('district8')
+    },
+    {
+      key: 'district10',
+      label: t('district10')
+    },
+    {
+      key: 'district11',
+      label: t('district11')
+    },
+    {
+      key: 'district12',
+      label: t('district12')
+    },
+    {
+      key: 'binhTanDistrict',
+      label: t('binhTanDistrict')
+    },
+    {
+      key: 'binhThanhDistrict',
+      label: t('binhThanhDistrict')
+    },
+    {
+      key: 'goVapDistrict',
+      label: t('goVapDistrict')
+    },
+    {
+      key: 'phuNhuanDistrict',
+      label: t('phuNhuanDistrict')
+    },
+    {
+      key: 'tanBinhDistrict',
+      label: t('tanBinhDistrict')
+    },
+    {
+      key: 'tanPhuDistrict',
+      label: t('tanPhuDistrict')
+    },
+    {
+      key: 'nhaBeProvince',
+      label: t('nhaBeProvince')
+    },
+    {
+      key: 'canGioProvince',
+      label: t('canGioProvince')
+    },
+    {
+      key: 'cuChiProvince',
+      label: t('cuChiProvince')
+    },
+    {
+      key: 'hocMonProvince',
+      label: t('hocMonProvince')
+    },
+    {
+      key: 'binhChanhProvince',
+      label: t('binhChanhProvince')
+    }
   ];
 
   const handleSelect = (item) => {
