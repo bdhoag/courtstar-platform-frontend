@@ -9,6 +9,7 @@ import DropdownHeader from '../components/DropdownHeader'
 import Bell from '../components/notification';
 import { useTranslation } from 'react-i18next';
 import useAuth from '../hooks/useAuth';
+import Button from '../components/button';
 
 const Header = () => {
   const { t } = useTranslation();
@@ -73,6 +74,7 @@ const Header = () => {
       })
       .catch(error => {
         console.log(error.message);
+        setIsLogin(false);
       })
       .finally();
   };
@@ -158,16 +160,24 @@ const Header = () => {
 
             {(isLogin === false) && (
               <div className="flex gap-4">
-                <button className='block border border-white rounded-lg py-2 px-6 text-white transition-all ease-in-out duration-300 hover:bg-gray-200 hover:text-primary-green font-medium cursor-pointer'
-                  onClick={handleLoginPopup}
-                >
-                  {t('logIn')}
-                </button>
-                <Link className='block rounded-lg py-2 px-6 bg-gray-700 hover:bg-gray-800 transition-all ease-in-out duration-300 font-medium text-gray-200 cursor-pointer'
-                  to="/customerRegister"
-                >
-                  {t('signUp')}
-                </Link>
+                <div>
+                  <Button
+                    label={t('logIn')}
+                    size='medium'
+                    fullWidth
+                    className='border-white border hover:bg-gray-200 text-white hover:text-primary-green'
+                    onClick={handleLoginPopup}
+                  />
+                </div>
+                <div>
+                  <Button
+                    label={t('signUp')}
+                    size='medium'
+                    fullWidth
+                    className='bg-gray-700 hover:bg-gray-800 text-gray-200 border border-gray-800'
+                    onClick={() => navigate('/customerRegister')}
+                  />
+                </div>
               </div>
             )}
 

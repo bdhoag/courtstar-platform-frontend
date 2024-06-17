@@ -127,8 +127,8 @@ const Centre = ({ selectedDistrict }) => {
                             {moment(centre.openTime, 'HH:mm:ss').format('HH:mm')} - {moment(centre.closeTime, 'HH:mm:ss').format('HH:mm')}
                           </div>
                           <div>
-                            <span className='font-semibold'>{t('numberOfCourt')}: </span>
-                            {centre.numberOfCourt}
+                            <span className='font-semibold'>{t('numberOfCourts')}: </span>
+                            {centre.numberOfCourts}
                           </div>
                         </div>
                         <div>

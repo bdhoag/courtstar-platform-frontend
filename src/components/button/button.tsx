@@ -34,14 +34,16 @@ const Button = (props: ButtonProps): JSX.Element => {
 
   const btnClass =  (props.fullWidth ? ' !w-full ' : ' ') +
                     (props.fullRounded ? ' !rounded-full ' : ' ') +
-                    (props.size === 'small' ? ' py-1 px-3 ' : props.size === 'medium' ? ' py-2.5 px-6 ' : props.size === 'large' ? ' py-3.5 px-8 ' : '');
+                    (props.size === 'small' ? ' !py-1 !px-3 '
+                      : props.size === 'medium' ? ' py-2.5 px-6 '
+                      : props.size === 'large' ? ' !py-3 !px-8 ' : '');
 
   return (
     <button
       ref={buttonRef}
-      className={btnClass + props.className + ' relative overflow-hidden flex gap-3 items-center justify-center font-medium disabled:bg-opacity-90 disabled:pointer-events-none rounded-md transition-colors duration-300 ease-in-out '}
+      className={btnClass + props.className + ' relative overflow-hidden flex gap-3 items-center justify-center font-medium disabled:bg-opacity-80 disabled:pointer-events-none rounded-md transition-colors duration-300 ease-in-out '}
       type={props.type}
-      disabled={props.loading}
+      disabled={props.loading || props.disabled}
       onClick={handleClick}
     >
       {props.loading ? (

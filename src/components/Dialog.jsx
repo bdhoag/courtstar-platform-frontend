@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import x from '../assets/images/x.svg';
+import Button from './button';
+import { useTranslation } from 'react-i18next';
 
 const Dialog = (props) => {
   /**
@@ -11,13 +13,23 @@ const Dialog = (props) => {
    * submit: () => {}
    */
 
+  const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
+
   const handleClose = () => {
     props.setIsOpen();
     props.clearForm();
   }
 
-  const handleSubmit = () => {
-    props.submit();
+  const handleSubmit = async() => {
+    setLoading(true);
+    try {
+      await props.submit();
+    } catch {
+      console.log("some bug");
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -42,24 +54,27 @@ const Dialog = (props) => {
             </div>
 
             <div className="bg-gray-200 rounded-b-xl pb-5 px-5 pt-3 -mx-5 font-semibold flex gap-6">
-              <div
-                className="flex justify-center items-center gap-2.5 text-white bg-primary-green w-1/2 py-2 rounded-md hover:bg-teal-900 ease-in-out duration-300 cursor-pointer"
+              <Button
+                label={t('upload')}
+                fullWidth
+                size='medium'
+                className='bg-primary-green hover:bg-teal-900 text-white'
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check"><path d="M20 6 9 17l-5-5" /></svg>
+                }
+                loading={loading}
                 onClick={handleSubmit}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check"><path d="M20 6 9 17l-5-5" /></svg>
-                <div className="">
-                  Upload
-                </div>
-              </div>
-              <div
-                className="flex justify-center bg-white gap-2.5 text-red-600 border-2 border-red-600 w-1/2 py-2 rounded-md hover:bg-red-600 hover:text-white ease-in-out duration-300 cursor-pointer"
+              />
+              <Button
+                label={t('discard')}
+                fullWidth
+                size='medium'
+                className='text-red-600 border-2 border-red-600 hover:bg-red-600 bg-white hover:text-white '
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
+                }
                 onClick={handleClose}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-                <div className="">
-                  Discard
-                </div>
-              </div>
+              />
             </div>
 
             <button className='absolute p-2 top-3 right-3 hover:bg-gray-200 rounded-full transition-all duration-300 ease-in-out'

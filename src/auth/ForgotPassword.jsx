@@ -64,7 +64,7 @@ function ForgotPassword(props) {
       <div className="text-gray-400 text-sm mb-5 text-center">
         {t('forgotPasswordNote')}
       </div>
-      <div>
+      <form onSubmit={handleCheckEmailPopup}>
         <div className='mb-4'>
           <InputText
             id="emailForget"
@@ -77,16 +77,16 @@ function ForgotPassword(props) {
         </div>
         <div>
           <Button
+            type='submit'
             label={t('sendCode')}
             fullWidth
             fullRounded
             size='medium'
             className='bg-primary-green hover:bg-teal-900 text-white'
             loading={loading}
-            onClick={handleCheckEmailPopup}
           />
         </div>
-      </div>
+      </form>
     </div>
   );
 
