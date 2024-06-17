@@ -238,7 +238,7 @@ function CentreInfo(props) {
               <div className="flex justify-between text-lg font-semibold">
                 <div>
                   <span className='font-semibold'>{t('numberOfCourt')}: </span>
-                  {centreDetail.numberOfCourt}
+                  {centreDetail.numberOfCourts}
                 </div>
                 <button
                   className="flex justify-center items-center text-primary-green  rounded-md
