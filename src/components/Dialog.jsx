@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import x from '../assets/images/x.svg';
 
 const Dialog = (props) => {
@@ -19,6 +19,12 @@ const Dialog = (props) => {
   const handleSubmit = () => {
     props.submit();
   }
+
+  useEffect(() => {
+    if (props.isOpen) {
+      props.clearForm();
+    }
+  }, [props.isOpen])
 
   return (
     <div className={props.isOpen === false ? 'hidden' : ''}>

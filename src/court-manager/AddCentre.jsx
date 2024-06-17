@@ -240,7 +240,6 @@ function AddCentre(props) {
         });
         setImgUrls([]);
         handleClose(res.data.data.id);
-        clearForm();
       })
       .catch(error => {
         console.log(error.message);
