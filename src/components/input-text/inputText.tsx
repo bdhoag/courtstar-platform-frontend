@@ -11,29 +11,30 @@ const InputText: React.FC<InputTextProps> = ({
   disabled,
   type = 'text',
 }) => {
-  const [formattedValue, setFormattedValue] = useState("");
+  const [formattedValue, setFormattedValue] = useState(value);
 
   useEffect(() => {
-    if (type === 'number'){
-      const numericValue = value.replace(/\D/g, '');
-      setFormattedValue(formatNumber(numericValue));
-    } else
     setFormattedValue(value);
   }, [value])
-
 
   const formatNumber = (num: string) => {
     return num.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    let formattedValue = value;
+
     if (type === 'number') {
-      const numericValue = value.replace(/\D/g, '');
-      setFormattedValue(formatNumber(numericValue));
-    } else {
-      setFormattedValue(value);
+      const numericValue = value.replace(/[^0-9]/g, '');
+
+      formattedValue = formatNumber(numericValue);
     }
+    await new Promise<void>((resolve) => {
+      setFormattedValue(formattedValue);
+      resolve();
+    });
+
     onchange(event);
   };
 

@@ -384,8 +384,8 @@ function AddCentre(props) {
           <InputText
             id="numberOfCourts"
             name="numberOfCourts"
-            placeholder={t('enterNumberOfCourt')}
-            label={t('numberOfCourt')}
+            placeholder={t('enterNumberOfCourts')}
+            label={t('numberOfCourts')}
             value={centreForm.numberOfCourts}
             onchange={handleChange}
           />

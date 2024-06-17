@@ -41,9 +41,11 @@ const CheckIn = (props) => {
 
   // Effect to load the check-in data when the component mounts or when the booking ID changes
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
     const loadCheckIn = async () => {
       try {
-        const res = await axiosInstance.get(`/courtstar/booking/${id}`);
+        const res = await axiosInstance.get(`/courtstar/booking/${id}`, { signal });
         setApiCheckin(res.data.data);
       } catch (error) {
         console.log(error.message);
@@ -51,6 +53,10 @@ const CheckIn = (props) => {
     };
 
     loadCheckIn();
+
+    return () => {
+      controller.abort();
+    }
   }, [id]);
 
   // Function to handle the check-in process

@@ -19,12 +19,14 @@ const Content = (props) => {
   const handleAddCentrePopup = props.handleAddCentrePopup;
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
     setLoading(true);
     if (id > 0) {
       const load = async () => {
         setImgList([]);
         setCentreDetail({});
-        await axiosInstance.get(`/courtstar/centre/getCentre/${id}`)
+        await axiosInstance.get(`/courtstar/centre/getCentre/${id}`, { signal })
           .then(res => {
             setCentreDetail(res.data.data);
             setImgList(res.data.data.images);
@@ -44,7 +46,7 @@ const Content = (props) => {
       load();
       const loadCheckIn = async () => {
         setLoading(true);
-        await axiosInstance.get(`/courtstar/booking/${id}`)
+        await axiosInstance.get(`/courtstar/booking/${id}`, { signal })
           .then(res => {
             setCheckIn(res.data.data);
           })
@@ -60,6 +62,10 @@ const Content = (props) => {
           );
       }
       loadCheckIn();
+    }
+
+    return () => {
+      controller.abort();
     }
   }, [id])
 

@@ -11,6 +11,7 @@ export interface ButtonProps {
   iconClass?: string;
   loading?: boolean;
   loadingColor?: string;
+  disabled?: boolean;
   onClick?: () => void;
 }
 

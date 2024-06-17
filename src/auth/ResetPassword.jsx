@@ -142,7 +142,8 @@ function ResetPassword(props) {
 
   // JSX for the popup modal content
   const html = (
-    <div className='w-[440px] flex flex-col gap-5'>
+    <form onSubmit={handleSubmit}
+      className='w-[440px] flex flex-col gap-5'>
       <div className="flex flex-col gap-2">
         <div className="text-4xl font-semibold text-center">
           {t('checkYourEmail')}
@@ -204,16 +205,16 @@ function ResetPassword(props) {
 
       <div className='flex items-center justify-center'>
         <Button
+          type='submit'
           label={t('confirm')}
           fullWidth
           fullRounded
           size='medium'
           className='bg-primary-green hover:bg-teal-900 text-white'
           loading={confirmLoading}
-          onClick={handleSubmit}
         />
       </div>
-    </div>
+    </form>
   );
 
   return (

@@ -37,7 +37,7 @@
   "priceRange": "Price Range",
   "address": "Address",
   "openTime": "Open Time",
-  "numberOfCourt": "Number Of Court",
+  "numberOfCourts": "Number Of Courts",
   "price": "Price",
   "centreDetail": "Centre Details",
   "termForCustomer": "Term For Customer",
@@ -87,7 +87,7 @@
   "centreName":"Centre Name",
   "enterCentreAddress":"Enter Address of Centre",
   "centreAddress":"Centre Address",
-  "enterNumberOfCourt":"Enter Number of Court",
+  "enterNumberOfCourts":"Enter Number of Courts",
   "enterPricePerHour":"Enter Price per Hour",
   "pricePerHour":"Price per Hour",
   "openTimes":"Open Time",
@@ -120,5 +120,8 @@
   "ADD_CENTRE_CONTENT": "There is a new centre need to approve from partner",
   "DENIED_CENTRE_CONTENT": "Your centre was denied",
   "REGISTERED_CONTENT": "Welcome to Court Star!",
-  "BOOKING_CONTENT": "There is a new booking"
+  "BOOKING_CONTENT": "There is a new booking",
+  "upload": "Upload",
+  "discard": "Discard",
+  "enterAddress": "Enter Address"
 }

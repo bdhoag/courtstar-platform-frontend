@@ -5,11 +5,13 @@ import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import Password from '../components/password';
 import { useTranslation } from 'react-i18next';
+import Button from '../components/button';
 
 function PartnerRegister() {
   const { t } = useTranslation();
   //HANDLE CHECK BOX PRIVACY
   const [isChecked, setIsChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
@@ -21,7 +23,8 @@ function PartnerRegister() {
     password: '',
     phone: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
+    address: ''
   });
 
   const handleChange = (event) => {
@@ -33,6 +36,7 @@ function PartnerRegister() {
   };
 
   const handleRegister = async () => {
+    setLoading(true);
     await axiosInstance.post(`/courtstar/account/partner`, formPartnerRegister)
       .then(res => {
         toast.success("Register successfully!", {
@@ -44,7 +48,11 @@ function PartnerRegister() {
           toastId: 'login-error'
         });
       })
-      .finally();
+      .finally(
+        () => {
+          setLoading(false);
+        }
+      );
   };
 
   return (
@@ -98,6 +106,16 @@ function PartnerRegister() {
                   onchange={handleChange}
                 />
               </div>
+              <div className='mb-4'>
+                <InputText
+                  id="address"
+                  name="address"
+                  placeholder={t('enterAddress')}
+                  label={t('address')}
+                  value={formPartnerRegister.address}
+                  onchange={handleChange}
+                />
+              </div>
               <div className='mb-6'>
                 <Password
                   id="password"
@@ -127,13 +145,18 @@ function PartnerRegister() {
                   className='underline'> {t('privacyPolicy')}</a></label>
               </div>
               <div className='flex items-center justify-center'>
-                <button
-                  className='bg-primary-green hover:bg-teal-900 disabled:bg-opacity-65 disabled:pointer-events-none text-white font-medium border rounded-full w-48 h-12 transition-all duration-300 ease-in-out'
-                  disabled={!isChecked}
-                  onClick={handleRegister}
-                >
-                  {t('signUp')}
-                </button>
+                <div className='w-52'>
+                  <Button
+                    label={t('signUp')}
+                    size='large'
+                    fullRounded
+                    fullWidth
+                    className='bg-primary-green hover:bg-teal-900 text-white'
+                    disabled={!isChecked}
+                    onClick={handleRegister}
+                    loading={loading}
+                  />
+                </div>
               </div>
               <div className='mt-10 text-sm text-center justify-center flex gap-1.5'>
                 <span>{t('alreadyHaveAnAccount')}?</span>
