@@ -26,12 +26,12 @@ const Dialog = (props) => {
         <div className='fixed z-40 top-0 left-0 h-screen w-screen bg-gray-900 opacity-40'>
         </div>
 
-        <div className='fixed z-50 top-0 left-0 h-screen w-screen flex justify-end items-center'>
-          <div className='relative animate-fade-in-right w-fit pt-3.5 px-5 rounded-xl shadow-2xl bg-white h-screen flex flex-col justify-between'>
+        <div className='fixed z-50 top-0 left-0 h-screen w-screen flex justify-center items-center'>
+          <div className='relative animate-fade-in-down w-fit pt-3.5 px-5 rounded-xl shadow-2xl bg-white h-screen flex flex-col justify-between'>
 
             <h2 className="text-3xl px-5 font-bold mb-3.5 text-center uppercase">{props.title}</h2>
 
-            <div className='flex-1 w-[1024px] bg-white mx-auto h-auto overflow-y-auto overflow-x-hidden px-2 mb-3'>
+            <div className='flex-1 w-[48rem] bg-white mx-auto h-auto overflow-y-auto overflow-x-hidden px-2 mb-3'>
               {props.html}
             </div>
 

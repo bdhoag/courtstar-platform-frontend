@@ -149,7 +149,7 @@ function AddCentre(props) {
     let hours = [];
     for (let i = 0; i < 24; i++) {
       let hour = i < 10 ? `0${i}:00` : `${i}:00`;
-      hours.push({key: i, label:hour});
+      hours.push({ key: i, label: hour });
     }
     return hours;
   }
@@ -178,18 +178,18 @@ function AddCentre(props) {
 
   const handleSelectOpenTime = (item) => {
     if (item)
-    setCentreForm(prevState => ({
-      ...prevState,
-      openTime: item.label
-    }));
+      setCentreForm(prevState => ({
+        ...prevState,
+        openTime: item.label
+      }));
   };
 
   const handleSelectCloseTime = (item) => {
-    if(item)
-    setCentreForm(prevState => ({
-      ...prevState,
-      closeTime: item.label
-    }));
+    if (item)
+      setCentreForm(prevState => ({
+        ...prevState,
+        closeTime: item.label
+      }));
   };
 
   const handleImageUpload = (selectedImg) => {
@@ -237,6 +237,8 @@ function AddCentre(props) {
           toastId: 'add-centre-success'
         });
         setImgUrls([]);
+        handleClose();
+        clearForm();
       })
       .catch(error => {
         console.log(error.message);
@@ -256,7 +258,7 @@ function AddCentre(props) {
           name: '',
           address: '',
           district: '',
-          link:'',
+          link: '',
           openTime: '',
           closeTime: '',
           pricePerHour: '',
@@ -287,9 +289,15 @@ function AddCentre(props) {
   const html = (
     <div>
       <div>
-        {imgUrls.length > 0 && (
+        {imgUrls.length > 0 ?
           <img src={imgUrls[0].url} alt="Centre" className='h-64 w-fit mx-auto rounded-xl' />
-        )}
+          :
+          <img
+            src='https://i0.wp.com/y20india.in/wp-content/plugins/ultimate-post/assets/img/ultp-fallback-img.png?w=840&ssl=1'
+            alt="dummy-img"
+            className="h-64 w-fit mx-auto rounded-xl"
+          />
+        }
       </div>
       <div className='flex gap-2 my-2 pt-1.5 border rounded-md bg-white overflow-hidden mx-auto relative'>
         <div
@@ -345,7 +353,7 @@ function AddCentre(props) {
             onchange={handleChange}
           />
         </div>
-        <div className='mb-4'>
+        <div className='mb-4 flex items-end gap-3'>
           <InputText
             id="address"
             name="address"
@@ -354,13 +362,21 @@ function AddCentre(props) {
             value={centreForm.address}
             onchange={handleChange}
           />
-        </div>
-        <div className='mb-4'>
           <Dropdown
             ref={dropdownRef}
             items={districts}
             placeholder={t('selectTheDistrict')}
             onSelect={handleSelectDistrict}
+          />
+        </div>
+        <div className="mb-4">
+          <InputText
+            id="link"
+            name="link"
+            placeholder={'Enter your centre map link'}
+            label={'Map link'}
+            value={centreForm.link}
+            onchange={handleChange}
           />
         </div>
         <div className='mb-4'>
