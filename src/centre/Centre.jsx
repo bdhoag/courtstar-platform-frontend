@@ -16,12 +16,6 @@ const Centre = ({ selectedDistrict }) => {
   const [minValue, setMinValue] = useState();
   const [maxValue, setMaxValue] = useState();
 
-  const extractDistrictFromAddress = (address) => {
-    const districtMatch = address.match(/(?:Quận\s(?:\d+|[A-Za-zÀ-ỹ]+(?:\s[A-Za-zÀ-ỹ]+)*)|Thành phố\s[A-Za-zÀ-ỹ]+(?:\s[A-Za-zÀ-ỹ]+)*|Huyện\s[A-Za-zÀ-ỹ]+(?:\s[A-Za-zÀ-ỹ]+)*)/i);
-    console.log("Matched District:", districtMatch ? districtMatch[0] : '');
-    return districtMatch ? districtMatch[0].trim() : '';
-  };
-
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller;
@@ -46,9 +40,14 @@ const Centre = ({ selectedDistrict }) => {
   }, []);
 
   useEffect(() => {
+    console.log('Selected District:', selectedDistrict); // Debug selectedDistrict
     let filteredList = centreList;
-    if (selectedDistrict) {
-      filteredList = filteredList.filter(centre => extractDistrictFromAddress(centre.address).toLowerCase() === selectedDistrict.toLowerCase());
+    if (selectedDistrict && typeof selectedDistrict === 'string') {
+      filteredList = filteredList.filter(centre => {
+        const district = centre.district;
+        console.log('Centre District:', district); // Debug extracted district
+        return district.toLowerCase() === selectedDistrict.toLowerCase();
+      });
     }
     if (minValue) {
       filteredList = filteredList.filter(centre => centre.pricePerHour >= parseFloat(minValue));
@@ -120,7 +119,7 @@ const Centre = ({ selectedDistrict }) => {
                         />
                         <div>
                           <span className='font-semibold'>{t('address')}: </span>
-                          {centre.address}
+                          {centre.address},{centre.district}
                         </div>
                         <div className='flex gap-3'>
                           <div>

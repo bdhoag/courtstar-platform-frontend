@@ -10,6 +10,10 @@ const Banner = ({ onDistrictSelect }) => {
 
   const items = [
     {
+      key: 'findCourtNow',
+      label: t('findCourtNow')
+    },
+    {
       key: 'thuDucCity',
       label: t('thuDucCity')
     },
@@ -99,9 +103,9 @@ const Banner = ({ onDistrictSelect }) => {
     }
   ];
 
-  const handleSelect = (item) => {
-    onDistrictSelect(item);
-    if (item === t('findCourtNow')) {
+  const handleSelect = (key) => {
+    onDistrictSelect(key);
+    if (key === 'findCourtNow') {
       onDistrictSelect('');
     }
   };
