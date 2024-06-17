@@ -16,6 +16,7 @@ const Centre = ({ selectedDistrict }) => {
   const [minValue, setMinValue] = useState();
   const [maxValue, setMaxValue] = useState();
   const [selectedRating, setSelectedRating] = useState(0);
+  const [isRatingFilterActive, setIsRatingFilterActive] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -59,8 +60,10 @@ const Centre = ({ selectedDistrict }) => {
     if (selectedRating > 0) {
       filteredList = filteredList.filter(centre => centre.rating >= selectedRating);
     }
-    filteredList.sort((a, b) => a.rating - b.rating);
-    
+    if (isRatingFilterActive) {
+      filteredList.sort((a, b) => a.rating - b.rating);
+    }
+
     setFilteredCentreList(filteredList);
   }, [selectedDistrict, minValue, maxValue,selectedRating, centreList]);
 
@@ -71,6 +74,7 @@ const Centre = ({ selectedDistrict }) => {
 
   const handleRatingChange = (rating) => {
     setSelectedRating(rating);
+    setIsRatingFilterActive(true);
     }
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
