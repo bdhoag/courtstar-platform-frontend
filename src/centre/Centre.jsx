@@ -15,6 +15,8 @@ const Centre = ({ selectedDistrict }) => {
   const [filteredCentreList, setFilteredCentreList] = useState([]);
   const [minValue, setMinValue] = useState();
   const [maxValue, setMaxValue] = useState();
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [isRatingFilterActive, setIsRatingFilterActive] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -55,14 +57,25 @@ const Centre = ({ selectedDistrict }) => {
     if (maxValue) {
       filteredList = filteredList.filter(centre => centre.pricePerHour <= parseFloat(maxValue));
     }
+    if (selectedRating > 0) {
+      filteredList = filteredList.filter(centre => centre.rating >= selectedRating);
+    }
+    if (isRatingFilterActive) {
+      filteredList.sort((a, b) => a.rating - b.rating);
+    }
+
     setFilteredCentreList(filteredList);
-  }, [selectedDistrict, minValue, maxValue, centreList]);
+  }, [selectedDistrict, minValue, maxValue,selectedRating, centreList]);
 
   const handlePriceChange = (min, max) => {
     setMaxValue(max);
     setMinValue(min);
   };
 
+  const handleRatingChange = (rating) => {
+    setSelectedRating(rating);
+    setIsRatingFilterActive(true);
+    }
   return (
     <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
@@ -82,7 +95,7 @@ const Centre = ({ selectedDistrict }) => {
                     <div className='font-bold text-2xl uppercase'>
                       {t('rating')}
                     </div>
-                    <Rating ratingWrapper='flex gap-1 p-5' value={5} editable={true} />
+                    <Rating ratingWrapper='flex gap-1 p-5' value={5} editable={true} onChange={handleRatingChange}/>
                   </div>
                   <div>
                     <div className='font-bold text-2xl uppercase'>
