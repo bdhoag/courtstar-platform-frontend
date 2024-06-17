@@ -26,9 +26,9 @@ const Dropdown = forwardRef((props, ref) => {
 
   // Function to handle the selection of an item from the dropdown
   const handleSelectItem = (item) => {
-    setSelectedItem(item); // Update selected item state to store the full item object
-    props.onSelect(item.key); // Pass the item's key to the parent component
-    setIsOpen(false); // Close the dropdown after selection
+    setSelectedItem(item.label); // Update selected item state
+    props.onSelect(item);    // Notify parent component about the selected item
+    setIsOpen(false);            // Close the dropdown after selection
   };
 
   // Effect to add and clean up event listener for clicks outside the dropdown
@@ -73,7 +73,7 @@ const Dropdown = forwardRef((props, ref) => {
       >
         {/* Display selected item label or placeholder */}
         <div className={`text-sm font-normal ${(selectedItem || props.initialValue) ? 'text-gray-800 font-semibold' : 'text-gray-400'}`}>
-          {selectedItem ? selectedItem.label : (props.initialValue || props.placeholder)}
+        {selectedItem || props.initialValue || props.placeholder}
         </div>
         {/* SVG for dropdown arrow, rotates when open */}
         <svg

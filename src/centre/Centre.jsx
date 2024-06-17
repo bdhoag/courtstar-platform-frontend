@@ -119,7 +119,7 @@ const Centre = ({ selectedDistrict }) => {
                         />
                         <div>
                           <span className='font-semibold'>{t('address')}: </span>
-                          {centre.address},{centre.district}
+                          {centre.address}, {t(centre.district)}
                         </div>
                         <div className='flex gap-3'>
                           <div>

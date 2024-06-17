@@ -103,9 +103,9 @@ const Banner = ({ onDistrictSelect }) => {
     }
   ];
 
-  const handleSelect = (key) => {
-    onDistrictSelect(key);
-    if (key === 'findCourtNow') {
+  const handleSelect = (item) => {
+    onDistrictSelect(item.key);
+    if (item.key === 'findCourtNow') {
       onDistrictSelect('');
     }
   };
