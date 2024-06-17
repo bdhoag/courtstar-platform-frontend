@@ -6,7 +6,7 @@ const Dropdown = forwardRef((props, ref) => {
   // State to manage whether the dropdown is open or closed
   const [isOpen, setIsOpen] = useState(false);
 
-  // State to manage the selected item
+  // State to manage the selected item (changed to store full item object)
   const [selectedItem, setSelectedItem] = useState(null);
 
   // Ref for the dropdown element to detect clicks outside
@@ -26,9 +26,9 @@ const Dropdown = forwardRef((props, ref) => {
 
   // Function to handle the selection of an item from the dropdown
   const handleSelectItem = (item) => {
-    setSelectedItem(item.label); // Update selected item state
-    props.onSelect(item);    // Notify parent component about the selected item
-    setIsOpen(false);            // Close the dropdown after selection
+    setSelectedItem(item); // Update selected item state to store the full item object
+    props.onSelect(item.key); // Pass the item's key to the parent component
+    setIsOpen(false); // Close the dropdown after selection
   };
 
   // Effect to add and clean up event listener for clicks outside the dropdown
@@ -47,8 +47,8 @@ const Dropdown = forwardRef((props, ref) => {
   // UseImperativeHandle to expose specific methods to parent component
   useImperativeHandle(ref, () => ({
     clearFormDropdown: () => {
-      setSelectedItem(null);   // Clear selected item state
-      props.onSelect(null);    // Notify parent component about the clear action
+      setSelectedItem(null); // Clear selected item state
+      props.onSelect(null); // Notify parent component about the clear action
     }
   }));
 
@@ -71,9 +71,9 @@ const Dropdown = forwardRef((props, ref) => {
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        {/* Display selected item or placeholder */}
+        {/* Display selected item label or placeholder */}
         <div className={`text-sm font-normal ${(selectedItem || props.initialValue) ? 'text-gray-800 font-semibold' : 'text-gray-400'}`}>
-          {selectedItem || props.initialValue || props.placeholder}
+          {selectedItem ? selectedItem.label : (props.initialValue || props.placeholder)}
         </div>
         {/* SVG for dropdown arrow, rotates when open */}
         <svg
