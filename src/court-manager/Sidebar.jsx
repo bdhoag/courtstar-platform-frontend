@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const Sidebar = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [centreIsSelected, setCentreIsSelected] = useState("balance");
+  const [tab, setTab] = useState();
 
   useEffect(() => {
     const url = window.location.href;
@@ -15,8 +17,12 @@ const Sidebar = (props) => {
     handleSelectTab(0);
   }, []);
 
-  const [centreIsSelected, setCentreIsSelected] = useState("balance");
-  const [tab, setTab] = useState();
+  useEffect(() => {
+    if (props.dataIsCentreId) {
+      setCentreIsSelected(props.dataIsCentreId)
+      handleDropdown(props.dataIsCentreId)
+    }
+  }, [props.dataIsCentreId])
 
   const handleDropdown = (centreId) => {
     navigate(`/myCentre/${centreId}`)

@@ -18,6 +18,7 @@ function AddCentre(props) {
   const dropdownRef = useRef();
   const dropdownRef1 = useRef();
   const dropdownRef2 = useRef();
+  const [idCentre, setIdCentre] = useState();
 
   const districts = [
     {
@@ -140,8 +141,9 @@ function AddCentre(props) {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = (value) => {
     props.setIsOpen();
+    props.dataIdCentre(value);
   };
 
   const items = generate24Hours();
@@ -237,7 +239,7 @@ function AddCentre(props) {
           toastId: 'add-centre-success'
         });
         setImgUrls([]);
-        handleClose();
+        handleClose(res.data.data.id);
         clearForm();
       })
       .catch(error => {
@@ -393,6 +395,7 @@ function AddCentre(props) {
           <InputText
             id="pricePerHour"
             name="pricePerHour"
+            type="number"
             placeholder={t('enterPricePerHour')}
             label={t('pricePerHour')}
             value={centreForm.pricePerHour}

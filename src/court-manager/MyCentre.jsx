@@ -11,6 +11,7 @@ const MyCentre = () => {
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState();
   const [balanceDetail, setBalanceDetail] = useState();
+  const [isCentreID, setIsCentreID] = useState();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -51,12 +52,16 @@ const MyCentre = () => {
     return () => {
       controller.abort();
     }
-  }, []);
+  }, [isCentreID]);
 
   const handleChooseTabFromSidebar = (tab) => {
     setTab(tab);
   }
 
+
+  const handleGetCentreID = (value) => {
+    setIsCentreID(value)
+  }
 
   //add centre handle
   const [addCentrePopup, setAddCentrePopup] = useState(false);
@@ -73,6 +78,7 @@ const MyCentre = () => {
       <AddCentre
         isOpen={addCentrePopup}
         setIsOpen={handleAddCentrePopupClose}
+        dataIdCentre={handleGetCentreID}
       />
       {loading
         ?
@@ -89,6 +95,7 @@ const MyCentre = () => {
             centreList={centreList}
             onDataTabSubmit={handleChooseTabFromSidebar}
             handleAddCentrePopup={handleAddCentrePopup}
+            dataIsCentreId={isCentreID}
           />
           <Content
             balanceDetail={balanceDetail}
