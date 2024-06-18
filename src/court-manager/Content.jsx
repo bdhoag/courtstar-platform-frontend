@@ -7,6 +7,7 @@ import CheckIn from './CheckIn';
 import CentreInfo from './CentreInfo';
 import MyBalance from './MyBalance';
 import { useParams } from 'react-router-dom';
+import moment from 'moment';
 
 const Content = (props) => {
 
@@ -73,191 +74,215 @@ const Content = (props) => {
   const apiFeedbacks = [
     {
       id: 1,
-      name: 'Huỳnh Đoàn Thanh Phong',
-      rating: 4,
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Anh Thanh khó tính',
+      rate: 1,
+      content: 'Sân cầu lông mà không có cháo lòng, -4 sao',
+      createDate: new Date().toISOString()
     },
     {
       id: 2,
-      name: 'Nguyen Thai Thanh',
-      rating: 3,
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta orci. Nullam bibendum convallis nunc, eget eleifend quam vehicula id. Praesent tempor urna a iaculis tincidunt. Fusce fermentum nunc et nulla malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Hoàng bú bóng',
+      rate: 5,
+      content: 'Chị staff mlem quá sốp ơi!',
+      createDate: moment().subtract(1, 'minutes').toISOString()
     },
     {
       id: 3,
-      name: 'thanh ngu',
-      rating: 3,
-      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Trần Thanh Hà',
+      rate: 3,
+      content: 'Dịch vụ tạm ổn.',
+      createDate: moment().subtract(3, 'hours').toISOString()
     },
     {
       id: 4,
-      name: 'phong ngu',
-      rating: 3,
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Lê Hoàng Nam',
+      rate: 4,
+      content: 'Sân chơi rất rộng rãi và thoáng mát.',
+      createDate: moment().subtract(4, 'days').toISOString()
     },
     {
       id: 5,
-      name: 'sang ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Phạm Minh Quang',
+      rate: 5,
+      content: 'Rất hài lòng với dịch vụ.',
+      createDate: moment().subtract(5, 'seconds').toISOString()
     },
     {
       id: 6,
-      name: 'phat ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Ngô Thanh Bình',
+      rate: 2,
+      content: 'Không gian hơi chật, cần cải thiện.',
+      createDate: moment().subtract(1, 'minutes').toISOString()
     },
     {
       id: 7,
-      name: 'alo ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Trần Thị Hồng',
+      rate: 4,
+      content: 'Chất lượng phục vụ tốt.',
+      createDate: moment().subtract(2, 'minutes').toISOString()
     },
     {
       id: 8,
-      name: 'hay di ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Lê Văn Long',
+      rate: 3,
+      content: 'Giá cả hợp lý.',
+      createDate: moment().subtract(3, 'minutes').toISOString()
     },
     {
       id: 9,
-      name: 'dung ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Phạm Văn Nam',
+      rate: 4,
+      content: 'Sân chơi rất sạch sẽ.',
+      createDate: moment().subtract(4, 'minutes').toISOString()
     },
     {
       id: 10,
-      name: 'ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Nguyễn Văn Bình',
+      rate: 5,
+      content: 'Sân chơi đẹp và rộng.',
+      createDate: moment().subtract(5, 'minutes').toISOString()
     },
     {
       id: 11,
-      name: 'buon ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Đinh Thị Mai',
+      rate: 2,
+      content: 'Cần cải thiện chất lượng dịch vụ.',
+      createDate: moment().subtract(1, 'hours').toISOString()
     },
     {
       id: 12,
-      name: 'ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Nguyễn Văn Tùng',
+      rate: 3,
+      content: 'Dịch vụ tạm ổn.',
+      createDate: moment().subtract(2, 'hours').toISOString()
     },
     {
       id: 13,
-      name: 'buon ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Lê Thị Hoa',
+      rate: 4,
+      content: 'Không gian rộng rãi.',
+      createDate: moment().subtract(3, 'hours').toISOString()
     },
     {
       id: 14,
-      name: 'ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Phạm Văn Hùng',
+      rate: 5,
+      content: 'Rất hài lòng.',
+      createDate: moment().subtract(4, 'hours').toISOString()
     },
     {
       id: 15,
-      name: 'buon ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Ngô Văn Thanh',
+      rate: 4,
+      content: 'Sân chơi tốt.',
+      createDate: moment().subtract(5, 'hours').toISOString()
     },
     {
       id: 16,
-      name: 'ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Lê Thị Bích',
+      rate: 3,
+      content: 'Dịch vụ tạm ổn.',
+      createDate: moment().subtract(1, 'days').toISOString()
     },
     {
       id: 17,
-      name: 'buon ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Nguyễn Thị Lan',
+      rate: 4,
+      content: 'Không gian sạch sẽ.',
+      createDate: moment().subtract(2, 'days').toISOString()
     },
     {
       id: 18,
-      name: 'ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Phạm Văn Minh',
+      rate: 5,
+      content: 'Sân chơi rộng và đẹp.',
+      createDate: moment().subtract(3, 'days').toISOString()
     },
     {
       id: 19,
-      name: 'buon ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Trần Văn Thắng',
+      rate: 3,
+      content: 'Giá cả hợp lý.',
+      createDate: moment().subtract(4, 'days').toISOString()
     },
     {
       id: 20,
-      name: 'ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Lê Thị Mai',
+      rate: 4,
+      content: 'Chất lượng phục vụ tốt.',
+      createDate: moment().subtract(5, 'days').toISOString()
     },
     {
       id: 21,
-      name: 'buon ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Nguyễn Văn Bình',
+      rate: 2,
+      content: 'Không gian hơi chật.',
+      createDate: moment().subtract(6, 'days').toISOString()
     },
     {
       id: 22,
-      name: 'thanh ngu',
-      rating: 3,
-      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Đinh Văn Minh',
+      rate: 3,
+      content: 'Dịch vụ tạm ổn.',
+      createDate: moment().subtract(7, 'days').toISOString()
     },
     {
       id: 23,
-      name: 'phong ngu',
-      rating: 3,
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Phạm Thị Hương',
+      rate: 4,
+      content: 'Sân chơi rất sạch sẽ.',
+      createDate: moment().subtract(8, 'days').toISOString()
     },
     {
       id: 24,
-      name: 'thanh ngu',
-      rating: 3,
-      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Nguyễn Thị Thanh',
+      rate: 5,
+      content: 'Rất hài lòng với dịch vụ.',
+      createDate: moment().subtract(9, 'days').toISOString()
     },
     {
       id: 25,
-      name: 'phong ngu',
-      rating: 3,
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Lê Văn Nam',
+      rate: 4,
+      content: 'Sân chơi rộng rãi và thoáng mát.',
+      createDate: moment().subtract(10, 'days').toISOString()
     },
     {
       id: 26,
-      name: 'thanh ngu',
-      rating: 3,
-      content: 'Lorem ipsum doalesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Trần Thị Bình',
+      rate: 3,
+      content: 'Giá cả hợp lý.',
+      createDate: moment().subtract(11, 'days').toISOString()
     },
     {
       id: 27,
-      name: 'phong ngu',
-      rating: 3,
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id diam eget nisl suscipit elementum ac vel justo. Etiam congue varius sem sit amet vehicula. Nunc non porta malesuada consequat. In ac sem ornare, consectetur neque ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Phạm Thị Hà',
+      rate: 4,
+      content: 'Chất lượng phục vụ tốt.',
+      createDate: moment().subtract(12, 'days').toISOString()
     },
     {
       id: 28,
-      name: 'ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Nguyễn Thị Hương',
+      rate: 5,
+      content: 'Sân chơi rất sạch sẽ.',
+      createDate: moment().subtract(13, 'days').toISOString()
     },
     {
       id: 29,
-      name: 'buon ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Đinh Thị Hoa',
+      rate: 3,
+      content: 'Dịch vụ tạm ổn.',
+      createDate: moment().subtract(14, 'days').toISOString()
     },
     {
       id: 30,
-      name: 'ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
-    },
-    {
-      id: 31,
-      name: 'buon ngu',
-      rating: 4,
-      content: ' ut, commodo sapien. Donec ut turpis nec erat tempor porttitor id id est. Morbi est erat, dignissim vel hendrerit non, scelerisque sit amet leo.'
+      fullName: 'Lê Văn Hùng',
+      rate: 4,
+      content: 'Sân chơi rộng rãi và thoáng mát.',
+      createDate: moment().subtract(15, 'days').toISOString()
     }
-  ]
+  ];
 
   return (
     <div className="flex-1 flex justify-center max-w-screen-1440 px-14 mx-auto">
