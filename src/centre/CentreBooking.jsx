@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import mappin from '../assets/images/map-pin.svg';
 import mail from '../assets/images/mail.svg';
-import Slider from '../components/Slider'
 import Rating from '../components/Rating';
 import Calendar from '../components/Calendar';
 import BookingForm from './BookingForm';
@@ -11,6 +10,7 @@ import SpinnerLoading from '../components/SpinnerLoading';
 import moment from 'moment';
 import Feedback from '../components/feedback';
 import Button from '../components/button';
+import XCarousel from '../components/carousel';
 
 const CentreBooking = () => {
 
@@ -328,7 +328,7 @@ const CentreBooking = () => {
               />
             </div>
             <div className='w-full flex items-center gap-8'>
-              {centre.images && <Slider imagesDemoList={centre.images} />}
+              {centre.images && <XCarousel images={centre.images} />}
               <div className='flex-1 h-full flex flex-col justify-evenly gap-6'>
 
                 <div className="rounded-lg shadow-gray-400 shadow-md">

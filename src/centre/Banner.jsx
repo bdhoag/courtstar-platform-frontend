@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import banner from '../assets/images/banner.png';
 import Dropdown from '../components/dropdown';
 import Button from '../components/button';
@@ -9,8 +9,8 @@ const Banner = ({ onDistrictSelect }) => {
 
   const items = [
     {
-      key: 'findCourtNow',
-      label: t('findCourtNow')
+      key: 'all',
+      label: t('all')
     },
     {
       key: 'thuDucCity',
@@ -104,7 +104,7 @@ const Banner = ({ onDistrictSelect }) => {
 
   const handleSelect = (item) => {
     onDistrictSelect(item.key);
-    if (item.key === 'findCourtNow') {
+    if (item.key === 'all') {
       onDistrictSelect('');
     }
   };

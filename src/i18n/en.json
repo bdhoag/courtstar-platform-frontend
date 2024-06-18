@@ -196,5 +196,6 @@
     "thirdPartyPersonalDataItem4": "Personal data from other sources.",
     "thirdPartyPersonalDataItem5": "Personal data collected by using third-party cookies.",
     "purposeForData":"PURPOSES FOR DATA PROCESSING",
-    "scopePermitted":"Within the scope permitted by you and/or to the extent that the law requires or allows,<b> CourtStar</b> may use your Personal Data for simultaneously one or more of the following purposes:"
+    "scopePermitted":"Within the scope permitted by you and/or to the extent that the law requires or allows,<b> CourtStar</b> may use your Personal Data for simultaneously one or more of the following purposes:",
+    "all": "All"
 }
