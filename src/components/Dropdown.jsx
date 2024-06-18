@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 
 // Use forwardRef to pass ref from parent component to child component

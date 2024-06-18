@@ -36,7 +36,8 @@ const Button = (props: ButtonProps): JSX.Element => {
                     (props.fullRounded ? ' !rounded-full ' : ' ') +
                     (props.size === 'small' ? ' !py-1 !px-3 '
                       : props.size === 'medium' ? ' py-2.5 px-6 '
-                      : props.size === 'large' ? ' !py-3 !px-8 ' : '');
+                      : props.size === 'large' ? ' !py-3 !px-8 '
+                      : props.size === 'mini' ? ' !py-1 !px-2 ' : '');
 
   return (
     <button
