@@ -19,7 +19,12 @@ const Rating: React.FC<RatingProps> = (props) => {
 
   const handleClick = (value: number) => {
     if (props.editable) {
-      setRatingValue(value);
+      if (value === ratingValue) {
+        setRatingValue(0);
+      }
+      else {
+        setRatingValue(value);
+      }
       if (props.onChange) {
         props.onChange(value);
       }
