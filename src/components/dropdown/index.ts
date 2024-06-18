@@ -1,17 +1,17 @@
 import Dropdown from "./dropdown";
 
 export interface Item {
+  key: any;
   label: string;
-  value: any;
 }
 
 export interface DropdownItemProps {
   item: {
+    key: any;
     label: string;
-    value: any;
   };
   isSelected: boolean;
-  onSelect: (item: { label: string; value: any }) => void;
+  onSelect: (item: { key: any; label: string  }) => void;
   className?: string;
 }
 
