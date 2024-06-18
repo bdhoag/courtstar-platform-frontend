@@ -1,88 +1,94 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const PrivacyPolicy = () => {
+    const { t } = useTranslation();
 
     return (
         <div className='font-Inter text-base overflow-x-hidden text-gray-800'>
             <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
-                <div className="max-w-screen-1440 1440:mx-auto mx-4 py-8 px-12 w-full flex flex-col gap-3">
+                <div className="max-w-screen-1440 mx-auto mx-4 py-8 px-12 w-full flex flex-col gap-3">
                     <div className="flex justify-between items-center">
-                        <h1 className='text-3xl font-bold font py-8'>PRIVACY POLICY</h1>
+                        <h1 className='text-3xl font-bold py-8'>{t('privacyPolicy')}</h1>
                     </div>
                     <table className='w-fit mx-4 py-8 px-12 flex flex-col gap-3 bg-slate-200'>
-                        <tr className="table-header text-left">
-                            <th>Quick view</th>
-                        </tr>
-                        <tr>
-                            <td><a href="#personal">1. Personal data we collect</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#provided">2. Third-part a personal data provided by customers</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#purpose">3. Purpose for data processing</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#sharing">4. Sharing personal data</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#international">5. INTERNATIONAL DATA TRANSFER</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#storage">6. DATA STORAGE AND PROCESSING TIME</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#rights">7. RIGHTS AND OBLIGATIONS OF CUSTOMERS</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#protection">8. DATA PROTECTION</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#cookies">9. COOKIES</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#updating">10. UPDATING THE DATA PROTECTION POLICY</a></td>
-                        </tr>
+                        <thead>
+                            <tr className="table-header text-left">
+                                <th>{t('quickView')}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#personal">1. {t('personalDataWeCollect')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#provided">2. {t('thirdPartyPersonalDataProvided')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#purpose">3. {t('purposeForDataProcessing')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#sharing">4. {t('sharingPersonalData')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#international">5. {t('internationalDataTransfer')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#storage">6. {t('dataStorageAndProcessingTime')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#rights">7. {t('rightsAndObligationsOfCustomers')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#protection">8. {t('dataProtection')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#cookies">9. {t('cookies')}</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#updating">10. {t('updatingDataProtectionPolicy')}</a></td>
+                            </tr>
+                        </tbody>
                     </table>
 
                     <div className="flex justify-between items-center">
                         <div className='text-3xl font-semibold py-5'>
-                            <h2 className='text-2xl font-semibold py-5'>Thank you for visiting the website. We respect and are committed to protecting your privacy. Please read the privacy policy below to better understand the commitments we make to respect and protect the rights of our visitors.  </h2>
-                            <h3 className='text-xl font-semibold py-6'> Overview</h3>
+                            <h2 className='text-2xl font-semibold py-5'>{t('thankYouForVisiting')}</h2>
+                            <h3 className='text-xl font-semibold py-6'>{t('overview')}</h3>
                             <h4 className='text-base font-normal'>
-                                <p className='pb-4'> As the Data Controller and/or Personal Data Processor (as defined in Decree No. 13/2023/NĐ-CP issued on April 17, 2023, effective from July 1, 2023 – referred to as "Decree 13"), this Data Protection Policy ("Policy") will outline how <b>CourtStar</b> processes the Data you provide to or is collected by <b>CourtStar</b>.</p>
-                                <p className='pb-4'> <b>"Data Processing"</b> means one or more activities affecting Personal Data, such as: collection, recording, analysis, verification, storage, editing, disclosure, combination, access, retrieval, recovery, encryption, decryption, copying, sharing, transmission, provision, transfer, deletion, destruction of Personal Data or other related actions.</p>
-                                <p className='pb-4'> <b>"Personal Data"</b> is information in the form of symbols, writing, numbers, images, sounds, or similar on an electronic environment linked to a specific individual or helps identify a specific individual. Personal Data includes basic personal data and sensitive personal data.</p>
+                                <p className='pb-4'>{t('overviewText1')}</p>
+                                <p className='pb-4'>{t('overviewText2')}</p>
+                                <p className='pb-4'>{t('overviewText3')}</p>
                             </h4>
-                            <p id='personal' className='text-xl font-semibold py-6'>1. PERSONAL DATA WE COLLECT</p>
-                            <p className='text-base font-normal'><b>CourtStar</b> collects various types of information related to the Services, including:</p>
-                            <p className='font-semibold text-lg py-6'>1.1 Personal Data</p>
-                            <p className='text-base font-normal font py-6'><b>CourtStar</b> collects data about how you use our services and products, such as the type of services you view or are interested in, or how frequently you use the services. We also collect Personal Data that you provide to us when you subscribe to marketing newsletters, complete a survey, or register an account to purchase our products/services. In doing so, we may ask for Personal Data such as your name, gender, date of birth, address, email address, phone number, or credit card details. Please note that credit card information is sensitive personal data as regulated by Decree 13.</p>
-                            <p className='font-semibold text-lg py-6'>1.2 Personal Data CourtStar collects automatically</p>
-                            <p className='text-base font-normal py-6'>Types of Personal Data that we may collect include, but are not limited to, the following information:</p>
-                            <p className='text-lg font-semibold py-6'>1.2.1. Contact Information</p>
-                            <p className='text-base font-normal py-6'>For example: email address, phone number.</p>
-                            <p className='text-lg font-semibold py-6'>1.2.2. Financial Information</p>
-                            <p className='text-base font-normal py-6'>For example: bank account number/debit card/credit card, account holder's name, type of payment card or account used... Please note that this information is sensitive personal data as defined in Decree 13.</p>
-                            <p className='text-lg font-semibold py-6'>1.2.3. Transaction Information</p>
-                            <p className='text-base font-normal py-6'>For example: detailed information about payments made by you (payment time, amount paid, refund details, refund amount) and purchase location, order number, service appointment date, warranty details, transaction status, and/or any information arising from the use of services provided by us...</p>
-                            <p className='text-lg font-semibold py-6'>1.2.4. Behavioral Information</p>
-                            <p className='text-base font-normal py-6'>Information about how you interact with services of CourtStar We collect information about how you use, such as the web pages you have visited, the services you have viewed, and the actions you have taken to interact. This information helps us understand how to improve our services.</p>
-                            <p className='text-lg font-semibold py-6'>1.2.5. Profile Information</p>
-                            <p className='text-base font-normal py-6'>For example: your username and password, details about your profile and purchase history with our services.</p>
-                            <p className='text-lg font-semibold py-6'>1.2.6. Marketing and Communication Information</p>
-                            <p className='text-base font-normal py-6'>For example: feedback on your level of interest when receiving surveys about promotional programs, media events from us...</p>
-                            <p id='provided' className='text-lg font-semibold py-6'>2. THIRD-PARTY PERSONAL DATA PROVIDED BY CUSTOMERS</p>
-                            <p className='text-base font-normal py-6'>When you provide us with Personal Data of other individuals besides yourself, you warrant and guarantee to us and hereby confirm that:</p>
+                            <p id='personal' className='text-xl font-semibold py-6'>1. {t('personalDataWeCollect')}</p>
+                            <p className='text-base font-normal'>{t('dataCollectionIntro')}</p>
+                            <p className='font-semibold text-lg py-6'>1.1 {t('personalData')}</p>
+                            <p className='text-base font-normal py-6'>{t('personalDataDetails')}</p>
+                            <p className='font-semibold text-lg py-6'>1.2 {t('personalDataCollectedAutomatically')}</p>
+                            <p className='text-base font-normal py-6'>{t('automaticDataCollectionIntro')}</p>
+                            <p className='text-lg font-semibold py-6'>1.2.1 {t('contactInformation')}</p>
+                            <p className='text-base font-normal py-6'>{t('contactInformationDetails')}</p>
+                            <p className='text-lg font-semibold py-6'>1.2.2 {t('financialInformation')}</p>
+                            <p className='text-base font-normal py-6'>{t('financialInformationDetails')}</p>
+                            <p className='text-lg font-semibold py-6'>1.2.3 {t('transactionInformation')}</p>
+                            <p className='text-base font-normal py-6'>{t('transactionInformationDetails')}</p>
+                            <p className='text-lg font-semibold py-6'>1.2.4 {t('behavioralInformation')}</p>
+                            <p className='text-base font-normal py-6'>{t('behavioralInformationDetails')}</p>
+                            <p className='text-lg font-semibold py-6'>1.2.5 {t('profileInformation')}</p>
+                            <p className='text-base font-normal py-6'>{t('profileInformationDetails')}</p>
+                            <p className='text-lg font-semibold py-6'>1.2.6 {t('marketingAndCommunicationInformation')}</p>
+                            <p className='text-base font-normal py-6'>{t('marketingAndCommunicationDetails')}</p>
+                            <p id='provided' className='text-lg font-semibold py-6'>2. {t('thirdPartyPersonalDataProvided')}</p>
+                            <p className='text-base font-normal py-6'>{t('thirdPartyPersonalDataIntro')}</p>
                             <ul className='font-normal text-base' style={{ paddingLeft: '50px', listStyleType: 'disc' }}>
-                                <li>Before disclosing that Personal Data to us, you have obtained the valid consent of the individuals whose Personal Data is being disclosed to us, to Process the Data in accordance with this Policy.</li>
-                                <li>Any Personal Data of individuals that you disclose is accurate and complete.</li>
-                                <li>You validly act on behalf of those individuals and you have valid authorization from those individuals to provide their Personal Data to us and for us to collect, use, disclose, and process these Personal Data for the Purposes set out in this Policy.</li>
-                                <li>This Policy has been made known to those individuals so that they are aware and agree to its entire content.</li>
-                                <li>If you do not meet any of the warranties and guarantees mentioned above, please do not provide us with Personal Data of that individual.</li>
+                                <li>{t('thirdPartyPersonalDataItem1')}</li>
+                                <li>{t('thirdPartyPersonalDataItem2')}</li>
+                                <li>{t('thirdPartyPersonalDataItem3')}</li>
+                                <li>{t('thirdPartyPersonalDataItem4')}</li>
+                                <li>{t('thirdPartyPersonalDataItem5')}</li>
                             </ul>
-                            <p id='purpose' className='text-lg font-semibold py-6'>3. PURPOSES FOR DATA PROCESSING</p>
-                            <p className='text-base font-normal py-6'>Within the scope permitted by you and/or to the extent that the law requires or allows,<b> CourtStar</b> may use your Personal Data for simultaneously one or more of the following purposes ("Purpose"):</p>
+                            <p id='purpose' className='text-lg font-semibold py-6'>3. {t('purposeForData')}</p>
+                            <p className='text-base font-normal py-6'>{t('scopePermitted')}</p>
                             <p className='font-semibold text-lg py-6'>3.1 Registration and Authentication</p>
                             <p className='text-base font-normal py-6'>We may Process your Data for the purpose of registration, verification, or authentication of your identity when we provide products/services to you and/or serve other purposes as required by law and this Policy.</p>
                             <p className='font-semibold text-lg py-6'>3.2 Relationship Management</p>
