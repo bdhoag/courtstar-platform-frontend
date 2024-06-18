@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Dropdown from './Dropdown'
+import Dropdown from './dropdown'
 import moment from 'moment';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';

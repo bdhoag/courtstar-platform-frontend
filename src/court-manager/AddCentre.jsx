@@ -4,7 +4,7 @@ import { getDownloadURL, ref, uploadBytes, deleteObject } from "firebase/storage
 import { v4 } from "uuid";
 import InputText from '../components/input-text';
 import Dialog from '../components/Dialog';
-import Dropdown from '../components/Dropdown';
+import Dropdown from '../components/dropdown';
 import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
