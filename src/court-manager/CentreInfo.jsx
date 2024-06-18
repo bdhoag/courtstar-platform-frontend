@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Slider from '../components/Slider';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../config/axiosConfig';
@@ -8,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/button';
 import Feedback from '../components/feedback';
 import EditCentre from './EditCentre';
+import XCarousel from '../components/carousel';
 
 function CentreInfo(props) {
   const { t } = useTranslation();
@@ -124,9 +124,7 @@ function CentreInfo(props) {
 
       <div className="flex justify-between gap-4">
         <div className="w-[44rem]">
-          <Slider
-            imagesDemoList={imgList}
-          />
+          <XCarousel images={centreDetail.images} />
         </div>
 
         <div className="flex-1 w-[410px] flex flex-col gap-3">
