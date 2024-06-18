@@ -21,7 +21,7 @@ const Dialog = (props) => {
     props.clearForm();
   }
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     setLoading(true);
     try {
       await props.submit();
@@ -32,11 +32,22 @@ const Dialog = (props) => {
     }
   }
 
+  if (props.clearForm)
+    useEffect(() => {
+      if (props.isOpen) {
+        props.clearForm();
+      }
+    }, [props.isOpen])
+
   useEffect(() => {
     if (props.isOpen) {
-      props.clearForm();
+      // Disable scrolling on the body
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Re-enable scrolling when the dialog is closed
+      document.body.style.overflow = 'unset';
     }
-  }, [props.isOpen])
+  }, [props.isOpen]);
 
   return (
     <div className={props.isOpen === false ? 'hidden' : ''}>

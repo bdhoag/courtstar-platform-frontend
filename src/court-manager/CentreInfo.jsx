@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/button';
 import Feedback from '../components/feedback';
+import EditCentre from './EditCentre';
 
 function CentreInfo(props) {
   const { t } = useTranslation();
@@ -94,8 +95,29 @@ function CentreInfo(props) {
     );
   }
 
+  //add centre handle
+  const [editCentreModal, setEditCentreModal] = useState(false);
+  const openEditCentreModal = () => {
+    setEditCentreModal(true);
+  }
+  const closeEditCentreModal = () => {
+    setEditCentreModal(false)
+  }
+
+  const handleGetCentreID = (value) => {
+    props.isCentreID(value)
+  }
+
   return (
     <div className="flex flex-col gap-2 py-2">
+      <EditCentre
+        isOpen={editCentreModal}
+        setIsOpen={closeEditCentreModal}
+        centreDetail={centreDetail}
+        imgList={imgList}
+        dataIdCentre={handleGetCentreID}
+      />
+
       <div className="text-2xl font-semibold py-3">
         {centreDetail.name}
       </div>
@@ -178,6 +200,7 @@ function CentreInfo(props) {
                   <button
                     className="flex justify-center items-center text-primary-green  rounded-md
                     px-2 hover:bg-primary-green hover:text-white ease-in-out duration-300 cursor-pointer"
+                    onClick={openEditCentreModal}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

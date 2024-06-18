@@ -18,6 +18,7 @@ const Content = (props) => {
   const [staffList, setStaffList] = useState([]);
   const [checkIn, setCheckIn] = useState([]);
   const handleAddCentrePopup = props.handleAddCentrePopup;
+  const [isCentreID, setIsCentreID] = useState();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -68,7 +69,7 @@ const Content = (props) => {
     return () => {
       controller.abort();
     }
-  }, [id])
+  }, [id, isCentreID])
 
 
   const apiFeedbacks = [
@@ -284,6 +285,10 @@ const Content = (props) => {
     }
   ];
 
+  const handleGetCentreID = (value) => {
+    setIsCentreID(value)
+  }
+
   return (
     <div className="flex-1 flex justify-center max-w-screen-1440 px-14 mx-auto">
 
@@ -316,6 +321,7 @@ const Content = (props) => {
                       centreDetail={centreDetail}
                       imgList={imgList}
                       apiFeedbacks={apiFeedbacks}
+                      isCentreID={handleGetCentreID}
                     />
                   )
                 }
