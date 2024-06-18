@@ -1,10 +1,10 @@
-// @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import Dropdown from './Dropdown'
 import moment from 'moment';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import SpinnerLoading from './SpinnerLoading';
+import Button from './button';
 
 export default function Calendar(props) {
 
@@ -209,15 +209,16 @@ export default function Calendar(props) {
                 </div>
               </div>
               <div className="flex gap-5">
-
-                <button className='w-full bg-primary-green p-2 rounded-md text-white hover:bg-teal-900 transition-all duration-300 ease-in-out font-semibold disabled:bg-opacity-65 disabled:pointer-events-none'
-                  onClick={() => props.handleButton(formCalendar)}
-                  disabled={!formCalendar.slotId}
-                >
-                  {typeOfCalendar === 'booking' ?
+                <Button
+                  label={typeOfCalendar === 'booking' ?
                     'Book now' : 'Check in'
                   }
-                </button>
+                  size='medium'
+                  fullWidth
+                  className='bg-primary-green hover:bg-teal-900 text-white'
+                  onClick={() => props.handleButton(formCalendar)}
+                  disabled={!formCalendar.slotId}
+                />
               </div>
             </div>
             <table className="w-full">

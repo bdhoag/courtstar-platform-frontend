@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../config/axiosConfig';
 import InputText from '../components/input-text';

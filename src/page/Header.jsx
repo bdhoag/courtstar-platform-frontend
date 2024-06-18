@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/images/logo.svg';
@@ -174,7 +173,7 @@ const Header = () => {
                     label={t('signUp')}
                     size='medium'
                     fullWidth
-                    className='bg-gray-700 hover:bg-gray-800 text-gray-200 border border-gray-800'
+                    className='bg-gray-700 hover:bg-gray-800 text-gray-200 border border-gray-700 hover:border-gray-800'
                     onClick={() => navigate('/customerRegister')}
                   />
                 </div>

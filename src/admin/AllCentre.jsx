@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Dropdown from "../components/Dropdown";
 import InputText from "../components/input-text";
 // import star from '../assets/images/star.svg';

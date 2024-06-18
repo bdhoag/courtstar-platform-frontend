@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState } from "react";
 import { imageDb } from './firebaseConfig';
 import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";

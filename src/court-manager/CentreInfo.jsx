@@ -292,7 +292,7 @@ function CentreInfo(props) {
         </div>
       </div>
 
-      <div className='flex-1 bg-white rounded-lg shadow-gray-400 shadow-md mt-3'>
+      <div id="top" className='flex-1 bg-white rounded-lg shadow-gray-400 shadow-md mt-3'>
         <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
           <span className='text-3xl font-medium'>Feedbacks</span>
         </div>

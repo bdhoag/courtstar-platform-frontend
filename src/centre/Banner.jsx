@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import banner from '../assets/images/banner.png';
 import Dropdown from '../components/Dropdown';
@@ -113,7 +112,14 @@ const Banner = ({ onDistrictSelect }) => {
   const handleFindClick = () => {
     const centreListElement = document.getElementById('centre-list');
     if (centreListElement) {
-      centreListElement.scrollIntoView({ behavior: 'smooth' });
+      const offset = 80;
+      const elementPosition = centreListElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 

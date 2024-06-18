@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import mappin from '../assets/images/map-pin.svg';
@@ -11,6 +10,7 @@ import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import moment from 'moment';
 import Feedback from '../components/feedback';
+import Button from '../components/button';
 
 const CentreBooking = () => {
 
@@ -57,6 +57,19 @@ const CentreBooking = () => {
     setFormCalendar(formCalendar);
   }
 
+  const handleBookClick = () => {
+    const bookElement = document.getElementById('book');
+    if (bookElement) {
+      const offset = 80;
+      const elementPosition = bookElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   //List of feedbacks to display in Feedbacks modal
   const apiFeedbacks = [
@@ -304,10 +317,15 @@ const CentreBooking = () => {
                   </div>
                 </div>
               </div>
-              <a href="#book" className="h-fit bg-primary-green py-2 rounded-md text-white font-semibold px-3 hover:bg-teal-900 transition-all duration-300 ease-in-out flex justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-calendar-plus"><path d="M8 2v4" /><path d="M16 2v4" /><path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" /><path d="M3 10h18" /><path d="M16 19h6" /><path d="M19 16v6" /></svg>
-                Book now
-              </a>
+              <Button
+                label='Book now'
+                size='medium'
+                className='bg-primary-green hover:bg-teal-900 text-white'
+                icon={
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-calendar-plus"><path d="M8 2v4" /><path d="M16 2v4" /><path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" /><path d="M3 10h18" /><path d="M16 19h6" /><path d="M19 16v6" /></svg>
+                }
+                onClick={handleBookClick}
+              />
             </div>
             <div className='w-full flex items-center gap-8'>
               {centre.images && <Slider imagesDemoList={centre.images} />}
@@ -325,9 +343,12 @@ const CentreBooking = () => {
                     <div className='font-medium mb-10'>
                       {centre.address}
                     </div>
-                    <button className='w-full bg-primary-green py-2 rounded-md text-white font-medium hover:bg-teal-900 transition-all duration-300 ease-in-out'>
-                      See on map
-                    </button>
+                    <Button
+                      label='See on map'
+                      size='medium'
+                      fullWidth
+                      className='bg-primary-green hover:bg-teal-900 text-white'
+                    />
                   </div>
                 </div>
                 <div className="rounded-lg shadow-gray-400 shadow-md bg-white p-8">
@@ -371,7 +392,7 @@ const CentreBooking = () => {
 
 
 
-            <div className='flex-1 bg-white rounded-lg shadow-gray-400 shadow-md'>
+            <div id="top" className='flex-1 bg-white rounded-lg shadow-gray-400 shadow-md'>
               <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
                 <span className='text-3xl font-medium'>Feedbacks</span>
               </div>

@@ -21,7 +21,7 @@ const Feedback: React.FC<FeedbackProps> = ({ listItem, itemsPerPage }) => {
   );
 
   return (
-    <div className="px-9 py-5" id="top">
+    <div className="px-9 py-5">
       {/* <div className="font-semibold text-xl mb-5">Feedback</div> */}
 
       <div className="flex gap-6 justify-start items-center ml-4">
@@ -53,7 +53,7 @@ const Feedback: React.FC<FeedbackProps> = ({ listItem, itemsPerPage }) => {
             rate={feedback.rate}
             createDate={feedback.createDate}
             content={feedback.content}
-        />
+          />
         ))}
       </div>
 

@@ -1,4 +1,3 @@
-// src/hooks/useAuth.js
 import { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import axiosInstance from '../config/axiosConfig';
