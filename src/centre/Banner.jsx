@@ -1,6 +1,6 @@
 import React from 'react';
 import banner from '../assets/images/banner.png';
-import Dropdown from '../components/Dropdown';
+import Dropdown from '../components/dropdown';
 import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
 

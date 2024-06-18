@@ -1,5 +1,5 @@
 import InputText from "../components/input-text";
-import Dropdown from "../components/Dropdown";
+import Dropdown from "../components/dropdown";
 import PopupModal from "../components/PopupModal";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";

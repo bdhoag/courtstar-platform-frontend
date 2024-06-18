@@ -1,4 +1,4 @@
-import Dropdown from "../components/Dropdown";
+import Dropdown from "../components/dropdown";
 import InputText from "../components/input-text";
 // import star from '../assets/images/star.svg';
 import Rating from "../components/Rating";

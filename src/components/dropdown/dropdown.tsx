@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle, Ref } from 'react';
+import { Item, DropdownProps, DropdownRef } from './index';
+import DropdownItem from './dropdownItem';
 
-// Use forwardRef to pass ref from parent component to child component
-const Dropdown = forwardRef((props, ref) => {
+const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
   // State to manage whether the dropdown is open or closed
   const [isOpen, setIsOpen] = useState(false);
 
   // State to manage the selected item (changed to store full item object)
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   // Ref for the dropdown element to detect clicks outside
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Function to toggle the dropdown open/close state
   const toggleDropdown = () => {
@@ -17,16 +18,16 @@ const Dropdown = forwardRef((props, ref) => {
   };
 
   // Function to handle clicks outside the dropdown to close it
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsOpen(false);
     }
   };
 
   // Function to handle the selection of an item from the dropdown
-  const handleSelectItem = (item) => {
+  const handleSelectItem = (item: Item) => {
     setSelectedItem(item.label); // Update selected item state
-    props.onSelect(item);    // Notify parent component about the selected item
+    props.onSelect(item);        // Notify parent component about the selected item
     setIsOpen(false);            // Close the dropdown after selection
   };
 
@@ -40,14 +41,14 @@ const Dropdown = forwardRef((props, ref) => {
 
   // Effect to update the selected item if the initial value changes
   useEffect(() => {
-    setSelectedItem(props.initialValue);
+    setSelectedItem(props.initialValue || null);
   }, [props.initialValue]);
 
   // UseImperativeHandle to expose specific methods to parent component
   useImperativeHandle(ref, () => ({
     clearFormDropdown: () => {
-      setSelectedItem(null); // Clear selected item state
-      props.onSelect(null); // Notify parent component about the clear action
+      setSelectedItem(null);    // Clear selected item state
+      props.onSelect(null);     // Notify parent component about the clear action
     }
   }));
 
@@ -57,11 +58,11 @@ const Dropdown = forwardRef((props, ref) => {
       ref={dropdownRef} // Attach the ref to the dropdown div
     >
       {/* Render the label if provided */}
-      {props.label &&
+      {props.label && (
         <div className='font-semibold mb-2'>
           {props.label}
         </div>
-      }
+      )}
 
       {/* Button to toggle the dropdown */}
       <button
@@ -72,7 +73,7 @@ const Dropdown = forwardRef((props, ref) => {
       >
         {/* Display selected item label or placeholder */}
         <div className={`text-sm font-normal ${(selectedItem || props.initialValue) ? 'text-gray-800 font-semibold' : 'text-gray-400'}`}>
-        {selectedItem || props.initialValue || props.placeholder}
+          {selectedItem || props.initialValue || props.placeholder}
         </div>
         {/* SVG for dropdown arrow, rotates when open */}
         <svg
@@ -99,15 +100,13 @@ const Dropdown = forwardRef((props, ref) => {
         >
           {/* Render dropdown items */}
           {props.items.map((item, index) => (
-            <li
+            <DropdownItem
               key={index}
-              className={`w-full py-2 px-6 rounded-lg hover:bg-gray-200 transition-all ease-in-out duration-300 cursor-pointer ${props.itemClassName}`}
-              onClick={() => handleSelectItem(item)}
-              role="option"
-              aria-selected={selectedItem === item}
-            >
-              {item.label}
-            </li>
+              item={item}
+              isSelected={selectedItem === item.label}
+              onSelect={handleSelectItem}
+              className={props.itemClassName}
+            />
           ))}
         </ul>
       )}
