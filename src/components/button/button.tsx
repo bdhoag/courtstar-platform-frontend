@@ -50,8 +50,8 @@ const Button = (props: ButtonProps): JSX.Element => {
       {props.loading ? (
         <SpinnerLoading
           type='button'
-          height='24'
-          width='24'
+          height={props.loadingHeight ? props.loadingHeight : '24'}
+          width={props.loadingWidth ? props.loadingWidth : '24'}
           color={props.loadingColor ? props.loadingColor : '#fff'}
         />
       ) : (
