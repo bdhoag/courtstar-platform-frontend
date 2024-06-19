@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import mappin from '../assets/images/map-pin.svg';
 import mail from '../assets/images/mail.svg';
 import Rating from '../components/Rating';
-import Calendar from '../components/Calendar';
+import Calendar from '../components/calendar';
 import BookingForm from './BookingForm';
 import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
