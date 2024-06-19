@@ -43,6 +43,10 @@ const RangeSlider = (props) => {
     const [minVndVisible, setMinVndVisible] = useState(false); // Trạng thái hiển thị vnd cho ô Min
     const [maxVndVisible, setMaxVndVisible] = useState(false); // Trạng thái hiển thị vnd cho ô Max
 
+    const formatNumber = (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    };
+
     const handleSliderChange = (event, newValue) => {
         setRange(newValue);
         setMinValue(newValue[0]);
@@ -50,13 +54,13 @@ const RangeSlider = (props) => {
     };
 
     const handleMinInputChange = (event) => {
-        const value = event.target.value === '' ? '' : Math.min(Number(event.target.value), 500000);
+        const value = event.target.value === '' ? '' : Math.min(Number(event.target.value.replace(/\./g, '')), 500000);
         setMinValue(value);
         setRange([value, range[1]]);
     };
 
     const handleMaxInputChange = (event) => {
-        const value = event.target.value === '' ? '' : Math.min(Number(event.target.value), 500000);
+        const value = event.target.value === '' ? '' : Math.min(Number(event.target.value.replace(/\./g, '')), 500000);
         setMaxValue(value);
         setRange([range[0], value]);
     };
@@ -100,8 +104,8 @@ const RangeSlider = (props) => {
                 <Box sx={{ marginInline: '10px' }}>
                     <StyledTextField
                         label={<Typography variant="body1" style={{ fontSize: '13px' }}>MIN</Typography>}
-                        type="number"
-                        value={minValue}
+                        type="text"
+                        value={minValue ? formatNumber(minValue) : ''}
                         onChange={handleMinInputChange}
                         onFocus={() => {
                             setMinFocused(true);
@@ -113,7 +117,11 @@ const RangeSlider = (props) => {
                         }}
                         InputProps={{
                             inputProps: { min: 0, max: 500000 },
-                            endAdornment: (minFocused && minVndVisible) && <InputAdornment position="end">VND</InputAdornment>, // Chỉ hiển thị khi ô được focus và có giá trị
+                            endAdornment: (minFocused && minVndVisible) && (
+                            <InputAdornment position="end">
+                                <Typography sx={{ fontSize: '10px' }}>VND</Typography>
+                                </InputAdornment>
+                            ), // Chỉ hiển thị khi ô được focus và có giá trị
                         }}
                     />
                 </Box>
@@ -133,8 +141,8 @@ const RangeSlider = (props) => {
                 <Box sx={{ marginInline: '10px' }}>
                     <StyledTextField
                         label={<Typography variant="body1" style={{ fontSize: '13px' }}>MAX</Typography>}
-                        type="number"
-                        value={maxValue}
+                        type="text"
+                        value={maxValue ? formatNumber(maxValue) : ''}
                         onChange={handleMaxInputChange}
                         onFocus={() => {
                             setMaxFocused(true);
@@ -146,7 +154,11 @@ const RangeSlider = (props) => {
                         }}
                         InputProps={{
                             inputProps: { min: 0, max: 500000 },
-                            endAdornment: (maxFocused && maxVndVisible) && <InputAdornment position="end">VND</InputAdornment>, // Chỉ hiển thị khi ô được focus và có giá trị
+                            endAdornment: (maxFocused && maxVndVisible) && (
+                            <InputAdornment position="end">
+                                <Typography sx={{ fontSize: '10px' }}>VND</Typography>
+                                </InputAdornment>
+                            ), // Chỉ hiển thị khi ô được focus và có giá trị
                         }}
                     />
                 </Box>

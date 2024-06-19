@@ -44,6 +44,7 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
 
   useEffect(() => {
     let filteredList = centreList;
+    setCurrentPage(1);
     if (selectedDistrict && typeof selectedDistrict === 'string') {
       filteredList = filteredList.filter(centre => centre.district.toLowerCase() === selectedDistrict.toLowerCase());
     }
@@ -66,6 +67,7 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
     setMaxValue(max);
     setMinValue(min);
   };
+  
 
   const handleRatingChange = (rating: number) => {
     setSelectedRating(rating);

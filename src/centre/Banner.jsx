@@ -10,7 +10,7 @@ const Banner = ({ onDistrictSelect }) => {
   const items = [
     {
       key: 'all',
-      label: t('all')
+      label: t('allCenTre')
     },
     {
       key: 'thuDucCity',
