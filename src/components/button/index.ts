@@ -13,6 +13,8 @@ export interface ButtonProps {
   loadingColor?: string;
   disabled?: boolean;
   onClick?: () => void;
+  loadingHeight?: string;
+  loadingWidth?: string;
 }
 
 export default Button;

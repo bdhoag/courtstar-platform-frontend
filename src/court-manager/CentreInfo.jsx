@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../config/axiosConfig';
@@ -14,9 +14,62 @@ function CentreInfo(props) {
   const navigate = useNavigate();
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [activateLoading, setActivateLoading] = useState(false);
+  const [activateCourt, setActivateCourt] = useState(false);
   const [centreDetail, setCentreDetail] = useState(props.centreDetail);
   const imgList = props.imgList;
   const apiFeedbacks = props.apiFeedbacks;
+  const controller = new AbortController();
+  const { signal } = controller;
+  const [isEditCourt, setIsEditCourt] = useState();
+  const [courtNo, setCourtNo] = useState();
+  const [listCourt, setListCourt] = useState([]);
+
+  useEffect(() => {
+    const loadCourt = async () => {
+      await axiosInstance.get(`/courtstar/court/${centreDetail.id}`, { signal })
+        .then(res => {
+          setListCourt(res.data.data.map(item => {
+            return { ...item, loading: false };
+          }));
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+        .finally(
+          () => {
+            // setLoading(false);
+          }
+        );
+    }
+    loadCourt();
+  }, [isEditCourt])
+
+  console.log(listCourt);
+
+  const editCourtStatus = async (courtNo, index) => {
+    setListCourt(prevListCourt => {
+      // Create a copy of the previous state array
+      const updatedListCourt = [...prevListCourt];
+
+      // Update the specific element's loading property
+      updatedListCourt[index] = { ...updatedListCourt[index], loading: true };
+
+      return updatedListCourt;
+    });
+    await axiosInstance.post(`/courtstar/court/${centreDetail.id}/${courtNo}`, { signal })
+      .then(res => {
+        setIsEditCourt(res.data.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(
+        () => {
+          setActivateCourt(false);
+        }
+      );
+  }
+
 
   const handleDisable = async (centreId) => {
     setActivateLoading(true);
@@ -38,10 +91,10 @@ function CentreInfo(props) {
         });
       })
       .finally(
-      () => {
-        setActivateLoading(false);
-      }
-    );
+        () => {
+          setActivateLoading(false);
+        }
+      );
   }
 
   const handleActive = async (centreId) => {
@@ -64,10 +117,10 @@ function CentreInfo(props) {
         });
       })
       .finally(
-      () => {
-        setActivateLoading(false);
-      }
-    );
+        () => {
+          setActivateLoading(false);
+        }
+      );
   }
 
   const handleDelete = async (centreId) => {
@@ -89,10 +142,10 @@ function CentreInfo(props) {
         });
       })
       .finally(
-      () => {
-        setDeleteLoading(false);
-      }
-    );
+        () => {
+          setDeleteLoading(false);
+        }
+      );
   }
 
   //add centre handle
@@ -139,7 +192,7 @@ function CentreInfo(props) {
                   size='medium'
                   className='bg-black text-white'
                   icon={
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lock-keyhole"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lock-keyhole"><circle cx="12" cy="16" r="1" /><rect x="3" y="10" width="18" height="12" rx="2" /><path d="M7 10V7a5 5 0 0 1 10 0v3" /></svg>
                   }
                   onClick={() => handleDisable(centreDetail.id)}
                   loading={activateLoading}
@@ -151,7 +204,7 @@ function CentreInfo(props) {
                   size='medium'
                   className='bg-primary-green hover:bg-teal-900 text-white'
                   icon={
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lock-keyhole-open"><circle cx="12" cy="16" r="1"/><rect width="18" height="12" x="3" y="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 9.33-2.5"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lock-keyhole-open"><circle cx="12" cy="16" r="1" /><rect width="18" height="12" x="3" y="10" rx="2" /><path d="M7 10V7a5 5 0 0 1 9.33-2.5" /></svg>
                   }
                   onClick={() => handleActive(centreDetail.id)}
                   loading={activateLoading}
@@ -243,7 +296,7 @@ function CentreInfo(props) {
                   <span className='font-semibold'>{t('numberOfCourts')}: </span>
                   {centreDetail.numberOfCourts}
                 </div>
-                <button
+                {/* <button
                   className="flex justify-center items-center text-primary-green  rounded-md
                     px-2 hover:bg-primary-green hover:text-white ease-in-out duration-300 cursor-pointer"
                 >
@@ -261,23 +314,79 @@ function CentreInfo(props) {
                     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                     <path d="m15 5 4 4" />
                   </svg>
-                </button>
+                </button> */}
               </div>
               <div className="mx-auto">
-                <div className="grid grid-cols-2 gap-x-10">
-                  {centreDetail.courts?.map((court) => (
+                <div className="grid grid-cols-2 gap-x-5">
+                  {listCourt.map((court, index) => (
                     <div
                       key={court.id}
-                      className="flex gap-1"
+                      className="flex items-center gap-1"
                     >
                       <div className="">
                         {court.courtNo}.
                       </div>
-                      <div className="">
-                        <span className='font-semibold'>{t('status')}: </span>
-                        <span className={court.status ? 'font-semibold text-primary-green' : 'font-semibold text-red-500'}>
-                          {court.status ? 'Active' : 'Close'}
-                        </span>
+                      <div className="flex justify-between gap-1 w-full items-center">
+                        <div className="flex gap-1 ">
+                          <div className='font-semibold'>{t('status')}:</div>
+                          <div className={court.status ? 'font-semibold text-primary-green' : 'font-semibold text-red-500'}>
+                            {court.status ? 'Active' : 'Close'}
+                          </div>
+                        </div>
+                        {
+                          court.status
+                            ?
+                            <Button
+                              className='p-1 hover:bg-slate-100'
+                              icon={
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="20" height="20"
+                                  viewBox="0 0 24 24" fill="none"
+                                  stroke="#000"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="lucide lucide-lock-keyhole"
+                                >
+                                  <circle cx="12" cy="16" r="1" />
+                                  <rect x="3" y="10" width="18" height="12" rx="2" />
+                                  <path d="M7 10V7a5 5 0 0 1 10 0v3" />
+                                </svg>
+                              }
+                              onClick={() => editCourtStatus(court.courtNo, index)}
+                              loading={court.loading}
+                              loadingColor="#2B5A50"
+                              loadingWidth="20"
+                              loadingHeight="20"
+                            />
+                            :
+                            <Button
+                              className='p-1 hover:bg-teal-50 '
+                              icon={
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="20" height="20"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="#2B5A50"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className="lucide lucide-lock-keyhole-open"
+                                >
+                                  <circle cx="12" cy="16" r="1" />
+                                  <rect width="18" height="12" x="3" y="10" rx="2" />
+                                  <path d="M7 10V7a5 5 0 0 1 9.33-2.5" />
+                                </svg>
+                              }
+                              onClick={() => editCourtStatus(court.courtNo, index)}
+                              loading={court.loading}
+                              loadingColor="#2B5A50"
+                              loadingWidth="20"
+                              loadingHeight="20"
+                            />
+                        }
                       </div>
                     </div>
                   ))}
