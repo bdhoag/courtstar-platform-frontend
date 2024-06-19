@@ -6,12 +6,9 @@ export interface Item {
 }
 
 export interface DropdownItemProps {
-  item: {
-    key: any;
-    label: string;
-  };
+  item: Item;
   isSelected: boolean;
-  onSelect: (item: { key: any; label: string  }) => void;
+  onSelect: (item: Item) => void;
   className?: string;
 }
 
