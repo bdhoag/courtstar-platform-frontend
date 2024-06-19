@@ -44,8 +44,6 @@ function CentreInfo(props) {
     loadCourt();
   }, [isEditCourt])
 
-  console.log(listCourt);
-
   const editCourtStatus = async (courtNo, index) => {
     setListCourt(prevListCourt => {
       // Create a copy of the previous state array
@@ -128,7 +126,6 @@ function CentreInfo(props) {
     await axiosInstance.post(`/courtstar/centre/delete/${centreId}`)
       .then(res => {
         if (res.data.data) {
-          console.log('delete');
           toast.success('Delete successfully', {
             toastId: 'delete-success'
           });
