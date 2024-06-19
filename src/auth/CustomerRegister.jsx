@@ -7,8 +7,10 @@ import { toast } from 'react-toastify';
 import Password from '../components/password';
 import { useTranslation } from 'react-i18next';
 import Button from '../components/button';
+import { useNavigate } from 'react-router-dom';
 
 function CustomerRegister() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
@@ -41,12 +43,26 @@ function CustomerRegister() {
     await axiosInstance.post(`/courtstar/account`, formCustomerRegister)
       .then(res => {
         toast.success("Register successfully!", {
-          toastId: 'login-success'
+          toastId: 'register-success'
         });
+        axiosInstance.post(`/courtstar/auth/token`, formCustomerRegister)
+          .then(res => {
+            const dataObj = res.data;
+            localStorage.setItem('token', dataObj.data.token);
+            localStorage.setItem('account_id', dataObj.data.account_id);
+            localStorage.setItem('role', dataObj.data.role);
+            navigate('/');
+          })
+          .catch(error => {
+          })
+          .finally(
+            () => {
+            }
+          );
       })
       .catch(error => {
         toast.error(error.message, {
-          toastId: 'login-error'
+          toastId: 'register-error'
         });
       })
       .finally(

@@ -66,7 +66,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
       </div>
       <div className="flex gap-5">
         <Button
-          label={typeOfCalendar === 'booking' ? 'Book now' : 'Check in'}
+          label={typeOfCalendar === 'booking' ? 'Book now' : 'Disable'}
           size='medium'
           fullWidth
           className='bg-primary-green hover:bg-teal-900 text-white'
