@@ -7,12 +7,13 @@ import axiosInstance from '../config/axiosConfig';
 import DropdownHeader from '../components/DropdownHeader'
 import Bell from '../components/notification';
 import { useTranslation } from 'react-i18next';
-import useAuth from '../hooks/useAuth';
+import { useAuth } from '../context/AuthContext';
 import Button from '../components/button';
 
-const Header = () => {
+const Header: React.FC = () => {
   const { t } = useTranslation();
-  const token = useAuth();
+  const { state, dispatch } = useAuth();
+  const { token, role, isLogin, account } = state;
 
   //HANDLE LOGIN POPUP
   const [loginPopupOpen, setLoginPopupOpen] = useState(false);
@@ -23,16 +24,13 @@ const Header = () => {
     setLoginPopupOpen(false);
   }
 
-  //HANDLE LOGIN ACTION
-  const [isLogin, setIsLogin] = useState(false);
-
   //HANDLE LOGOUT ACTION
   const navigate = useNavigate();
   const logout = async() => {
-    await axiosInstance.post(`/courtstar/auth/logout`, localStorage.getItem('token'))
+    await axiosInstance.post(`/courtstar/auth/logout`, { token })
       .then(res => {
         localStorage.clear();
-        setIsLogin(false);
+        dispatch({ type: 'LOGOUT' });
         navigate('/');
       })
       .catch(error => {
@@ -41,52 +39,24 @@ const Header = () => {
       .finally();
   };
 
-  //HANDLE ROLE
-  const [role, setRole] = useState('');
   useEffect(() => {
-    setRole(localStorage.getItem('role'));
+    const loadNotification = async () => {
+      await axiosInstance.get(`/courtstar/notification`)
+        .then(res => {
+          setNotification(res.data.data);
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+        .finally();
+    };
+
     if (isLogin) {
-      load();
       loadNotification();
     }
   }, [isLogin]);
 
-  useEffect(() => {
-    if (token) {
-      setIsLogin(true);
-    }
-  }, [token])
-
-  const [account, setAccount] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    role: ""
-  });
-  const [notifications, setNotification] = useState();
-
-  const load = async () => {
-    await axiosInstance.get(`/courtstar/account/myInfor`)
-      .then(res => {
-        setAccount(res.data.data);
-      })
-      .catch(error => {
-        console.log(error.message);
-        setIsLogin(false);
-      })
-      .finally();
-  };
-  const loadNotification = async () => {
-    await axiosInstance.get(`/courtstar/notification`)
-      .then(res => {
-        setNotification(res.data.data);
-      })
-      .catch(error => {
-        console.log(error.message);
-      })
-      .finally();
-  };
+  const [notifications, setNotification] = useState([]);
 
   return (
     <div className='font-Inter text-base overflow-x-hidden w-full shadow-lg fixed z-30'>
@@ -197,7 +167,6 @@ const Header = () => {
       <Login
         isOpen={loginPopupOpen}
         setIsOpen={handleLoginClose}
-        setIsLogin={setIsLogin}
       />
     </div>
   );

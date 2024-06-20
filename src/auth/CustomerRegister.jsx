@@ -8,11 +8,13 @@ import Password from '../components/password';
 import { useTranslation } from 'react-i18next';
 import Button from '../components/button';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function CustomerRegister() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
+  const { dispatch } = useAuth();
 
   //HANDLE CHECK BOX PRIVACY
   const [isChecked, setIsChecked] = useState(false);
@@ -49,8 +51,8 @@ function CustomerRegister() {
           .then(res => {
             const dataObj = res.data;
             localStorage.setItem('token', dataObj.data.token);
-            localStorage.setItem('account_id', dataObj.data.account_id);
             localStorage.setItem('role', dataObj.data.role);
+            dispatch({ type: 'LOGIN', payload: { token: dataObj.data.token, role: dataObj.data.role } });
             navigate('/');
           })
           .catch(error => {

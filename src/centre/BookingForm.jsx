@@ -3,26 +3,20 @@ import axiosInstance from '../config/axiosConfig';
 import InputText from '../components/input-text';
 import PopupModal from '../components/PopupModal';
 import Button from '../components/button';
+import { useAuth } from '../context/AuthContext';
 
 const BookingForm = (props) => {
   const [loading, setLoading] = useState(false);
   const controller = new AbortController();
   const { signal } = controller;
+  const { state } = useAuth();
+  const { account } = state;
 
   //CLOSE BOOKING MODAL
   const handleClose = () => {
     props.setIsOpen();
   }
-  //Function to load customer profile in input field
-  useEffect(() => {
-    if (localStorage.getItem('token'))
-    load();
-    return () => {
-      controller.abort();
-    }
-  }, []);
 
-  const [account, setAccount] = useState();
   const [bookingForm, setBookingForm] = useState({
     fullName: "",
     email: "",
@@ -53,17 +47,6 @@ const BookingForm = (props) => {
         ...props.formCalendar,
     }));
 }, [props.formCalendar]);
-
-  const load = async () => {
-    await axiosInstance.get(`/courtstar/account/myInfor`, { signal })
-      .then(res => {
-        setAccount(res.data.data);
-      })
-      .catch(error => {
-        console.log(error.message);
-      })
-      .finally();
-  };
 
   const booking = async() => {
     setLoading(true);
