@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import SpinnerLoading from '../components/SpinnerLoading';
 import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../context/AuthContext';
 
 function Profile() {
   const { t } = useTranslation();

@@ -24,6 +24,32 @@ const Header: React.FC = () => {
     setLoginPopupOpen(false);
   }
 
+  //HANDLE LOAD INFO
+  useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+    const load = async() => {
+      await axiosInstance.get('/courtstar/account/myInfor', { signal })
+        .then(res => {
+          dispatch({ type: 'SET_ACCOUNT', payload: res.data.data });
+        })
+        .catch(err => {
+          console.log(err.message);
+          localStorage.clear();
+          dispatch({ type: 'LOGOUT' });
+        })
+        .finally(()=>{
+        })
+    }
+
+    if (isLogin) {
+      load();
+    }
+    return () => {
+      controller.abort();
+    }
+  }, [])
+
   //HANDLE LOGOUT ACTION
   const navigate = useNavigate();
   const logout = async () => {

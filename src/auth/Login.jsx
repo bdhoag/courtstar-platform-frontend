@@ -56,6 +56,18 @@ function Login(props) {
         localStorage.setItem('token', dataObj.data.token);
         localStorage.setItem('role', dataObj.data.role);
         dispatch({ type: 'LOGIN', payload: { token: dataObj.data.token, role: dataObj.data.role } });
+
+        axiosInstance.get('/courtstar/account/myInfor')
+              .then(res => {
+                dispatch({ type: 'SET_ACCOUNT', payload: res.data.data });
+              })
+              .catch(err => {
+                console.log(err.message);
+                localStorage.clear();
+                dispatch({ type: 'LOGOUT' });
+              })
+              .finally(()=>{})
+              
         handleClose();
         navigate('/');
         toast.success(dataObj.message, {
