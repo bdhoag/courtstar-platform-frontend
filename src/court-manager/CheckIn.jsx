@@ -190,7 +190,7 @@ const handleSelectSlot = (item) => {
 };
 
   useEffect(() => {
-    if(data) {
+    if (data) {
       let id = parseInt(data.text);
       console.log(id);
       if (apiCheckin.filter(booking => booking.id === id)[0]) handleCheckin(id);
@@ -210,22 +210,28 @@ const handleSelectSlot = (item) => {
           Check in ({apiCheckin.length})
         </div>
         <div>
-          <Button
-            label={t('Check in')}
-            fullWidth
-            size='medium'
-            className='bg-primary-green hover:bg-teal-900 text-white'
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-qr-code"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
-            }
-            onClick={()=>{
-              setQrLoading(true);
-              setQrPopup(true);
-              setTimeout(() => {
-                setQrLoading(false);
-              }, 500);
-            }}
-          />
+          {apiCheckin.length
+            ?
+            <Button
+              label={t('Check in')}
+              fullWidth
+              size='medium'
+              className='bg-primary-green hover:bg-teal-900 text-white'
+              icon={
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-qr-code"><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></svg>
+              }
+              onClick={() => {
+                setQrLoading(true);
+                setQrPopup(true);
+                setTimeout(() => {
+                  setQrLoading(false);
+                }, 500);
+              }}
+            />
+            :
+            <></>
+          }
+
         </div>
       </div>
 
@@ -407,22 +413,22 @@ const handleSelectSlot = (item) => {
                   <div className="bg-white rounded-lg">
                     {
                       qrPopup && !qrLoading
-                      ?
-                      <QrScanner
-                        delay={300}
-                        style={previewStyle}
-                        onError={handleError}
-                        onScan={handleScan}
-                        className="w-full h-[500px]"
-                      />
-                      :
-                      <div className='w-[320px] h-[240px] flex items-center justify-center'>
-                        <SpinnerLoading
-                          height='80'
-                          width='80'
-                          color='#2B5A50'
+                        ?
+                        <QrScanner
+                          delay={300}
+                          style={previewStyle}
+                          onError={handleError}
+                          onScan={handleScan}
+                          className="w-full h-[500px]"
                         />
-                      </div>
+                        :
+                        <div className='w-[320px] h-[240px] flex items-center justify-center'>
+                          <SpinnerLoading
+                            height='80'
+                            width='80'
+                            color='#2B5A50'
+                          />
+                        </div>
                     }
                   </div>
                 </div>
@@ -441,8 +447,8 @@ const handleSelectSlot = (item) => {
               strokeLinecap="round"
               strokeLinejoin="round"
               className="lucide lucide-ticket-x">
-                <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="m9.5 14.5 5-5"/><path d="m9.5 9.5 5 5"/>
-              </svg>
+              <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /><path d="m9.5 14.5 5-5" /><path d="m9.5 9.5 5 5" />
+            </svg>
             There are no booking yet!
           </div>
       }
