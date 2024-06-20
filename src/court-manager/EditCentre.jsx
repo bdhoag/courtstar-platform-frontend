@@ -214,8 +214,14 @@ function EditCentre(props) {
   }, [imgUrls]);
 
   const handleImageChange = (e) => {
-    const selectedImg = e.target.files[0];
-    handleImageUpload(selectedImg);
+    if (imgUrls.length < 6) {
+      const selectedImg = e.target.files[0];
+      handleImageUpload(selectedImg);
+    } else {
+      toast.error('Only upload a maximum of 6 photos', {
+        toastId: 'Upload-photo-error'
+      });
+    }
   };
 
   const submit = async () => {
