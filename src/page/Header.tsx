@@ -26,10 +26,8 @@ const Header: React.FC = () => {
 
   //HANDLE LOAD INFO
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
     const load = async() => {
-      await axiosInstance.get('/courtstar/account/myInfor', { signal })
+      await axiosInstance.get('/courtstar/account/myInfor')
         .then(res => {
           dispatch({ type: 'SET_ACCOUNT', payload: res.data.data });
         })
@@ -45,10 +43,7 @@ const Header: React.FC = () => {
     if (isLogin) {
       load();
     }
-    return () => {
-      controller.abort();
-    }
-  }, [])
+  }, [isLogin])
 
   //HANDLE LOGOUT ACTION
   const navigate = useNavigate();
