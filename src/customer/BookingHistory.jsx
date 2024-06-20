@@ -59,66 +59,86 @@ const BookingHistory = () => {
           </div>
           <div className="flex gap-5 w-full bg-white rounded-2xl py-10">
             <div className="flex-1 flex flex-col gap-5 items-center">
-              {bookings.map((booking) => (
-                <div
-                  key={booking.id}
-                  className="bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7 max-w-5xl w-full"
-                >
-                  <img
-                    src={booking.centreImg || centrePlaceholder}
-                    alt={booking.centreName}
-                    className="min-w-80 max-w-80 h-56 rounded-lg object-cover object-center"
-                  />
-                  <div className="flex flex-col gap-3 w-full">
-                    <div className="font-semibold text-xl">
-                      {booking.centreName}
-                    </div>
-                    <div>
-                      <span className="font-semibold">Address: </span>
-                      {booking.centreAddress}
-                    </div>
-                    <div>
-                      <span className="font-semibold">Date: </span>
-                      {booking.date}
-                    </div>
-                    <div className="flex gap-3">
-                      <div>
-                        <span className="font-semibold">Time: </span>
-                        {moment(booking.slot.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(booking.slot.endTime, 'HH:mm:ss').format('HH:mm')}
+              {bookings.length
+                ?
+                <>{bookings.map((booking) => (
+                  <div
+                    key={booking.id}
+                    className="bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7 max-w-5xl w-full"
+                  >
+                    <img
+                      src={booking.centreImg || centrePlaceholder}
+                      alt={booking.centreName}
+                      className="min-w-80 max-w-80 h-56 rounded-lg object-cover object-center"
+                    />
+                    <div className="flex flex-col gap-3 w-full">
+                      <div className="font-semibold text-xl">
+                        {booking.centreName}
                       </div>
                       <div>
-                        <span className="font-semibold">Court number: </span>
-                        {booking.court.courtNo}
+                        <span className="font-semibold">Address: </span>
+                        {booking.centreAddress}
                       </div>
-                    </div>
-                    <div>
-                      <span className="font-semibold">Total price: </span>
-                      <span className="font-semibold text-rose-600">
-                        {booking.totalPrice.toLocaleString('vi-VN', {
-                          style: 'currency',
-                          currency: 'VND',
-                        })}
-                      </span>
-                    </div>
-                    <div className="flex justify-center items-center h-full">
-                      {booking.rate === 0 ? (
-                        <button
-                          className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300"
-                          onClick={() => handleFeedbackPopup(booking)}
-                        >
-                          Feedback
-                        </button>
-                      ) : (
-                        <Rating
-                          ratingWrapper="flex gap-1"
-                          value={booking.rate}
-                          editable={false}
-                        />
-                      )}
+                      <div>
+                        <span className="font-semibold">Date: </span>
+                        {booking.date}
+                      </div>
+                      <div className="flex gap-3">
+                        <div>
+                          <span className="font-semibold">Time: </span>
+                          {moment(booking.slot.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(booking.slot.endTime, 'HH:mm:ss').format('HH:mm')}
+                        </div>
+                        <div>
+                          <span className="font-semibold">Court number: </span>
+                          {booking.court.courtNo}
+                        </div>
+                      </div>
+                      <div>
+                        <span className="font-semibold">Total price: </span>
+                        <span className="font-semibold text-rose-600">
+                          {booking.totalPrice.toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND',
+                          })}
+                        </span>
+                      </div>
+                      <div className="flex justify-center items-center h-full">
+                        {booking.rate === 0 ? (
+                          <button
+                            className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300"
+                            onClick={() => handleFeedbackPopup(booking)}
+                          >
+                            Feedback
+                          </button>
+                        ) : (
+                          <Rating
+                            ratingWrapper="flex gap-1"
+                            value={booking.rate}
+                            editable={false}
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
+                ))}</>
+                :
+                <div className="flex flex-col items-center justify-center h-56 text-3xl text-primary">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="150" height="150"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-ticket-x">
+                    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" /><path d="m9.5 14.5 5-5" /><path d="m9.5 9.5 5 5" />
+                  </svg>
+                  You don't have any bookings yet!
                 </div>
-              ))}
+              }
+
             </div>
           </div>
         </div>
