@@ -54,7 +54,7 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
     if (maxValue) {
       filteredList = filteredList.filter(centre => centre.pricePerHour <= maxValue);
     }
-    if (selectedRating > 0) {
+    if (selectedRating !== 0) {
       filteredList = filteredList.filter(centre => centre.rating >= selectedRating);
     }
     if (isRatingFilterActive) {
@@ -68,10 +68,16 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
     setMinValue(min);
   };
   
+  
 
   const handleRatingChange = (rating: number) => {
-    setSelectedRating(rating);
-    setIsRatingFilterActive(true);
+    if (selectedRating === rating) {
+      setSelectedRating(0);
+      setIsRatingFilterActive(false);
+    } else {
+      setSelectedRating(rating);
+      setIsRatingFilterActive(true);
+    }
   };
 
   const handlePageChange = (page: number) => {
