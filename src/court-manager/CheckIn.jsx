@@ -1,21 +1,26 @@
 import InputText from "../components/input-text";
 import Dropdown from "../components/dropdown";
 import PopupModal from "../components/PopupModal";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { toast } from "react-toastify";
 import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import Button from "../components/button";
-import QrScanner from 'react-qr-scanner'
+import QrScanner from 'react-qr-scanner';
 import SpinnerLoading from "../components/SpinnerLoading";
 
 const CheckIn = (props) => {
+  const [optionDropdownDate, setOptionDropdownDate] = useState([]);
   const { t } = useTranslation();
   const { id } = useParams(); // Get the booking ID from the URL parameters
   const [apiCheckin, setApiCheckin] = useState(props.apiCheckin || []); // State to hold the check-in data from the API
   const [checkInPopup, setCheckInPopup] = useState(false); // State to control the visibility of the check-in popup
+  const [listSlot, setListSlot] = useState(apiCheckin.map(item => {
+    return item.slot.slotNo
+  }))
+console.log(listSlot);
   const [formCheckIn, setFormCheckIn] = useState({ // State to hold the form data for the check-in popup
     checkinId: '',
     startTime: '',
@@ -94,6 +99,8 @@ const CheckIn = (props) => {
       });
   };
 
+  console.log();
+
   // Function to handle the check-in process
   const handleUndoCheckin = async (checkInId) => {
     try {
@@ -124,25 +131,6 @@ const CheckIn = (props) => {
     setCheckInPopup(false);
   };
 
-  // Options for the slot dropdown
-  const optionDropdownSlot = [
-    '1 (7:00-8:00)', '2 (8:00-9:00)', '3 (9:00-10:00)', '4 (10:00-11:00)', '5 (11:00-12:00)', '6 (12:00-13:00)', '7 (13:00-14:00)', '8 (14:00-15:00)'
-  ];
-
-  // Function to handle slot selection
-  const handleSelectSlot = (item) => {
-    console.log(`Selected: ${item}`);
-  };
-
-  // Options for the date dropdown
-  const optionDropdownDate = [
-    '12/06', '13/06', '14/06', '15/06', '16/06', '17/06', '18/06', '19/06', '20/06', '21/06', '22/06', '23/06', '24/06', '25/06', '26/06', '27/06', '28/06', '29/06', '30/06', '01/07', '02/07', '03/07', '04/07', '05/07', '06/07', '07/07', '08/07', '09/07', '10/07', '11/07', '12/07', '13/07', '14/07', '15/07', '16/07', '17/07', '18/07', '19/07', '20/07'
-  ];
-
-  // Function to handle date selection
-  const handleSelectDate = (item) => {
-    console.log(`Selected: ${item}`);
-  };
 
 
   //HANDLE QR SCANNER
@@ -169,6 +157,37 @@ const CheckIn = (props) => {
     height: 240,
     width: 320,
   };
+  //Choose day 
+  useEffect(() => {
+    const currentDate = moment();
+
+    const next10Days = [];
+    for (let i = 0; i < 10; i++) {
+      const nextDate = moment(currentDate).add(i, 'days').format('DD/MM');
+      next10Days.push({ label: nextDate });
+    }
+
+    setOptionDropdownDate(next10Days);
+  }, []);
+
+  const handleSelectDate = (item) => {
+    console.log(`Selected: ${item.label}`);
+    
+  };
+
+   // Extract the slots from the apiCheckin data
+
+   const getUniqueSlots = (apiCheckin) => {
+    const slots = apiCheckin.map(checkin => parseInt(checkin.slot.slotNo, 10));
+    const uniqueSlots = [...new Set(slots)].sort((a, b) => a - b);
+    return uniqueSlots.map(slot => ({ label: slot.toString() }));
+  };
+const optionDropdownSlot = getUniqueSlots(apiCheckin);
+
+// Function to handle slot selection
+const handleSelectSlot = (item) => {
+  console.log(`Selected: ${item.label}`);
+};
 
   useEffect(() => {
     if(data) {
@@ -237,7 +256,7 @@ const CheckIn = (props) => {
                     label="Date"
                     items={optionDropdownDate}
                     onSelect={handleSelectDate}
-                    placeholder="Select date"
+                    placeholder={t('Select date')}
                   />
                 </div>
                 <div className="w-2/12">
