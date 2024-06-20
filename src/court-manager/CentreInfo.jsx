@@ -8,6 +8,7 @@ import Button from '../components/button';
 import Feedback from '../components/feedback';
 import EditCentre from './EditCentre';
 import XCarousel from '../components/carousel';
+import Calendar from '../components/calendar';
 
 function CentreInfo(props) {
   const { t } = useTranslation();
@@ -43,8 +44,6 @@ function CentreInfo(props) {
     }
     loadCourt();
   }, [isEditCourt])
-
-  console.log(listCourt);
 
   const editCourtStatus = async (courtNo, index) => {
     setListCourt(prevListCourt => {
@@ -128,7 +127,6 @@ function CentreInfo(props) {
     await axiosInstance.post(`/courtstar/centre/delete/${centreId}`)
       .then(res => {
         if (res.data.data) {
-          console.log('delete');
           toast.success('Delete successfully', {
             toastId: 'delete-success'
           });
@@ -162,7 +160,7 @@ function CentreInfo(props) {
   }
 
   return (
-    <div className="flex flex-col gap-2 py-2">
+    <div className="flex flex-1 flex-col gap-2 py-2">
       <EditCentre
         isOpen={editCentreModal}
         setIsOpen={closeEditCentreModal}
@@ -396,6 +394,21 @@ function CentreInfo(props) {
 
           </div>
 
+        </div>
+      </div>
+
+      <div id="manage" className='flex-1 rounded-lg shadow-gray-400 shadow-md'>
+        <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
+          <span className='text-3xl font-medium'>Manage</span>
+        </div>
+        <div className='bg-white rounded-b-lg p-8 pt-0'>
+          <div className="">
+            <Calendar
+              handleButton={()=>{}}
+              typeOfCalendar='manage'
+              centre={centreDetail}
+            />
+          </div>
         </div>
       </div>
 

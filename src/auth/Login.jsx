@@ -9,10 +9,12 @@ import Password from '../components/password';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/button';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../context/AuthContext';
 
 function Login(props) {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { dispatch } = useAuth();
 
   const [loading, setLoading] = useState(false);
 
@@ -52,11 +54,10 @@ function Login(props) {
       .then(res => {
         const dataObj = res.data;
         localStorage.setItem('token', dataObj.data.token);
-        localStorage.setItem('account_id', dataObj.data.account_id);
         localStorage.setItem('role', dataObj.data.role);
+        dispatch({ type: 'LOGIN', payload: { token: dataObj.data.token, role: dataObj.data.role } });
         handleClose();
         navigate('/');
-        props.setIsLogin(true);
         toast.success(dataObj.message, {
           toastId: 'login-success'
         });

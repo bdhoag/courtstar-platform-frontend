@@ -8,21 +8,11 @@ import { useTranslation } from 'react-i18next';
 
 function Profile() {
   const { t } = useTranslation();
+  const { state, dispatch } = useAuth();
+  const { account } = state;
 
   const [loading, setLoading] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
-
-  useEffect(() => {
-    load();
-  }, []);
-
-  const [account, setAccount] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    role: ""
-  });
 
   const [profileForm, setProfileForm] = useState({
     firstName: "",
@@ -48,31 +38,15 @@ function Profile() {
     });
   }, [account]);
 
-  const load = async () => {
-    setLoading(true);
-    await axiosInstance.get(`/courtstar/account/myInfor`)
-      .then(res => {
-        setAccount(res.data.data);
-      })
-      .catch(error => {
-        console.log(error.message);
-      })
-      .finally(
-        () => {
-          setLoading(false);
-        }
-      );
-  };
-
   const handleUpdate = async () => {
     setUpdateLoading(true);
     const { email, ...updateData } = profileForm;
     try {
-      await axiosInstance.put(`/courtstar/account/${localStorage.getItem('account_id')}`, updateData);
+      const res = await axiosInstance.put(`/courtstar/account`, updateData);
       toast.success("Profile updated successfully!", {
         toastId: 'update-success'
       });
-      setAccount(updateData); // Update account with new data
+      dispatch({ type: 'SET_ACCOUNT', payload: res.data.data });
     } catch (error) {
       toast.error(error.message, {
         toastId: 'update-error'

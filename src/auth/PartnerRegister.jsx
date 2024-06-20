@@ -6,9 +6,13 @@ import { toast } from 'react-toastify';
 import Password from '../components/password';
 import { useTranslation } from 'react-i18next';
 import Button from '../components/button';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function PartnerRegister() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { dispatch } = useAuth();
   //HANDLE CHECK BOX PRIVACY
   const [isChecked, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,12 +44,26 @@ function PartnerRegister() {
     await axiosInstance.post(`/courtstar/account/partner`, formPartnerRegister)
       .then(res => {
         toast.success("Register successfully!", {
-          toastId: 'login-success'
+          toastId: 'register-success'
         });
+        axiosInstance.post(`/courtstar/auth/token`, formPartnerRegister)
+          .then(res => {
+            const dataObj = res.data;
+            localStorage.setItem('token', dataObj.data.token);
+            localStorage.setItem('role', dataObj.data.role);
+            dispatch({ type: 'LOGIN', payload: { token: dataObj.data.token, role: dataObj.data.role } });
+            navigate('/myCentre/balance');
+          })
+          .catch(error => {
+          })
+          .finally(
+            () => {
+            }
+          );
       })
       .catch(error => {
         toast.error(error.message, {
-          toastId: 'login-error'
+          toastId: 'register-error'
         });
       })
       .finally(
