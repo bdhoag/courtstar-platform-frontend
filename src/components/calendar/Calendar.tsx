@@ -64,9 +64,8 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         setCourt(res.data.data)
       })
       .catch(error => {
-        toast.error(error.message, {
-          toastId: 'court-error'
-        });
+        console.log(error.message);
+        
       })
       .finally(
         () => {
