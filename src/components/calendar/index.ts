@@ -8,7 +8,7 @@ export interface Item {
 export interface CalendarProps {
   typeOfCalendar: 'booking' | 'manage';
   centre: any;
-  handleButton: () => void
+  handleButton: (formCalendar: any) => void
 }
 
 export interface CalendarHeaderProps {

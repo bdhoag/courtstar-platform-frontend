@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment';
-import { toast } from 'react-toastify';
 import { CalendarProps } from './index';
 import CalendarHeader from './CalendarHeader';
 import CalendarTable from './CalendarTable';
@@ -59,13 +58,13 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   };
 
   const loadCourt = async(centreId, courtNo) => {
+    setLoading(true);
     await axiosInstance.get(`/courtstar/court/${centreId}/${courtNo}`, { signal })
       .then(res => {
         setCourt(res.data.data)
       })
       .catch(error => {
         console.log(error.message);
-        
       })
       .finally(
         () => {
@@ -164,6 +163,22 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   }
   //END CHOOSE DAY SLOT
 
+
+  const handleButton = async(form: any) => {
+    if (props.typeOfCalendar === 'manage') {
+      setLoading(true);
+      try {
+        await props.handleButton(form);
+      } catch {}
+      finally {
+        loadCourt(centre.id, form.courtNo);
+      }
+    } else {
+      props.handleButton(form)
+    }
+  }
+
+
   useEffect(() => {
     console.log(formCalendar);
   }, [formCalendar]);
@@ -196,7 +211,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
               currentWeekIndex={currentWeekIndex}
               typeOfCalendar={typeOfCalendar}
               formCalendar={formCalendar}
-              handleButton={props.handleButton}
+              handleButton={handleButton}
               handleSelectCourt={handleSelectCourt}
               handleSelectWeek={handleSelectWeek}
               handleSelectYear={handleSelectYear}
