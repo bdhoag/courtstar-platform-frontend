@@ -13,7 +13,7 @@ const CentreCard: React.FC<{ centre: CentreProps }> = ({ centre }) => {
   return (
     <div className='bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7'>
       <img
-        src={centre.images[0]?.url}
+        src={centre.coreImg}
         alt={centre.name}
         className='w-2/5 h-56 object-cover object-center rounded-lg'
       />
@@ -23,7 +23,7 @@ const CentreCard: React.FC<{ centre: CentreProps }> = ({ centre }) => {
         </div>
         <Rating
           ratingWrapper='flex gap-1'
-          value={centre.rating}
+          value={centre.currentRate}
           editable={false}
         />
         <div>

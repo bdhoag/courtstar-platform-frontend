@@ -107,11 +107,11 @@ const CentreBooking = () => {
                   <div className='flex gap-2 my-3'>
                     <Rating
                       ratingWrapper='flex gap-1'
-                      value={centre.rating}
+                      value={centre.currentRate}
                       editable={false}
                     />
                     <div className='text-base'>
-                      ({feedbackList.length} feedbacks)
+                      ({feedbackList.length})
                     </div>
                   </div>
                 </div>
