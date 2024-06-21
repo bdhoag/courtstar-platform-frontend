@@ -275,5 +275,12 @@
     "forConsent":"CONSENT",
     "pleaseRead":"Please read this policy carefully and ensure that you have read, understood the entire content of the Policy, and agree, allowing us to Process your Data as regulated in this Policy.",
     "notAgree":"If you do not agree with any content in the Policy, please do not continue to access the website or provide/send Personal Data to us. You have the right to submit your feedback, complaints, and inquiries at the section “CONTACT US” for clarification.",
-    "allCenTre":"All Centre"
+    "allCenTre":"All Centre",
+    "topUp": "Top-up",
+    "withdraw": "Withdraw",
+    "billPayment": "Bill Payment",
+    "income": "Income",
+    "totalRevenue": "Total Revenue",
+    "amount": "Amount",
+    "enterAmount": "Enter amount"
 }
