@@ -3,7 +3,7 @@ import { DropdownItemProps } from './index';
 
 const DropdownItem: React.FC<DropdownItemProps> = ({ item, isSelected, onSelect, className }) => {
   return (
-    <li
+    <div
       className={`w-full py-2 px-6 rounded-lg hover:bg-gray-200 transition-all ease-in-out duration-300 cursor-pointer ${className} ${
         isSelected ? 'bg-gray-200' : ''
       }`}
@@ -12,7 +12,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ item, isSelected, onSelect,
       aria-selected={isSelected}
     >
       {item.label}
-    </li>
+    </div>
   );
 };
 
