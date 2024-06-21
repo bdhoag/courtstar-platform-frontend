@@ -69,6 +69,7 @@ function CentreInfo(props) {
       );
   }
 
+  console.log(centreDetail.description);
 
   const handleDisable = async (centreId) => {
     setActivateLoading(true);
@@ -297,6 +298,11 @@ function CentreInfo(props) {
                     <span className='font-semibold text-rose-600'>
                       {centreDetail?.pricePerHour?.toLocaleString('de-DE')} VND/h
                     </span>
+                  </div>
+                  <div>
+                    <span className='font-semibold'>{t('description')}: </span>
+                    <div dangerouslySetInnerHTML={{ __html: centreDetail.description }}>
+                    </div>
                   </div>
                 </div>
               </div>

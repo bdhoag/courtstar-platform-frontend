@@ -165,6 +165,11 @@ const CentreBooking = () => {
                       <span className='font-semibold'>Price: </span>
                       <span className='font-semibold text-rose-600'>{centre?.pricePerHour?.toLocaleString('de-DE')} VND/h</span>
                     </div>
+                    <div>
+                      <span className='font-semibold'>Description:</span>
+                      <div dangerouslySetInnerHTML={{ __html: centre.description }}>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
