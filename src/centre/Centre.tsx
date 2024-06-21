@@ -67,8 +67,6 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
     setMaxValue(max);
     setMinValue(min);
   };
-  
-  
 
   const handleRatingChange = (rating: number) => {
     if (selectedRating === rating) {
@@ -120,7 +118,25 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
                   />
                 </div>
               ) : (
-                <div>No centres found.</div>
+                    <div className='flex flex-col items-center justify-center h-96 text-3xl text-primary mx-auto'>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="250" height="250"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-search-x"
+                  >
+                    <path d="m13.5 8.5-5 5" />
+                    <path d="m8.5 8.5 5 5" />
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                  No centres found.
+                </div>
               )}
             </div>
           )}

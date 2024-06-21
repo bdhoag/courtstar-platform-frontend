@@ -236,8 +236,6 @@ function AddCentre(props) {
     }
   };
 
-  console.log(imgUrls);
-
   const submit = async () => {
     await axiosInstance.post(`/courtstar/centre/create`, centreForm)
       .then(res => {

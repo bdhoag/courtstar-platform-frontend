@@ -163,7 +163,7 @@ const Header: React.FC = () => {
                 (role && (role === 'STAFF' || role === 'MANAGER')) && isLogin &&
                 <Link
                   className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                  to="/myCentre/balance"
+                  to={role === 'STAFF'? "/myCentre/:id" :"/myCentre/balance"}
                 >
                   {t('myCentre')}
                 </Link>
