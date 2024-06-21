@@ -111,7 +111,7 @@ const CentreBooking = () => {
                       editable={false}
                     />
                     <div className='text-base'>
-                      (10 feedbacks)
+                      ({feedbackList.length} feedbacks)
                     </div>
                   </div>
                 </div>

@@ -24,9 +24,30 @@ const Header: React.FC = () => {
     setLoginPopupOpen(false);
   }
 
+  //HANDLE LOAD INFO
+  useEffect(() => {
+    const load = async() => {
+      await axiosInstance.get('/courtstar/account/myInfor')
+        .then(res => {
+          dispatch({ type: 'SET_ACCOUNT', payload: res.data.data });
+        })
+        .catch(err => {
+          console.log(err.message);
+          localStorage.clear();
+          dispatch({ type: 'LOGOUT' });
+        })
+        .finally(()=>{
+        })
+    }
+
+    if (isLogin) {
+      load();
+    }
+  }, [isLogin])
+
   //HANDLE LOGOUT ACTION
   const navigate = useNavigate();
-  const logout = async() => {
+  const logout = async () => {
     await axiosInstance.post(`/courtstar/auth/logout`, { token })
       .then(res => {
         localStorage.clear();
@@ -104,22 +125,50 @@ const Header: React.FC = () => {
 
           <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
             <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
-              <Link className="font-medium text-white transition-all ease-in-out duration-300"
-                to="/">{t('home')}</Link>
-              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/aboutUs">{t('aboutUs')}</Link>
-              <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                to="/partnerRegister">{t('partnerRegister')}</Link>
-              {
-                role && role==='ADMIN' && isLogin &&
-                <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                  to="/admin">{t('myDashboard')}</Link>
+
+              <Link
+                className="text-gray-200 font-medium hover:text-white hover:font-semibold transition-all ease-in-out duration-300"
+                to="/"
+              >
+                {t('home')}
+              </Link>
+
+              <Link
+                className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                to="/aboutUs"
+              >
+                {t('aboutUs')}
+              </Link>
+
+              {!(role === 'MANAGER' || role === 'ADMIN') &&
+                <Link
+                  className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                  to="/partnerRegister"
+                >
+                  {t('partnerRegister')}
+                </Link>
               }
+
               {
-                (role && (role==='STAFF' || role==='MANAGER')) && isLogin &&
-                <Link className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
-                  to="/myCentre/balance">{t('myCentre')}</Link>
+                role && role === 'ADMIN' && isLogin &&
+                <Link
+                  className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                  to="/admin"
+                >
+                  {t('myDashboard')}
+                </Link>
               }
+
+              {
+                (role && (role === 'STAFF' || role === 'MANAGER')) && isLogin &&
+                <Link
+                  className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                  to="/myCentre/balance"
+                >
+                  {t('myCentre')}
+                </Link>
+              }
+
             </div>
           </div>
 

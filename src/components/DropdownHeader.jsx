@@ -111,7 +111,7 @@ function Dropdown(props) {
             </svg>
             Booking history
           </Link>
-          <Link className='flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-100'
+          {/* <Link className='flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-100'
             to="/#"
             onClick={handleSelectItem}
           >
@@ -129,7 +129,7 @@ function Dropdown(props) {
               <circle cx="12" cy="12" r="3" />
             </svg>
             Setting
-          </Link>
+          </Link> */}
           <button className='flex w-full items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-100'
             onClick={props.logout}
           >

@@ -45,8 +45,6 @@ function CentreInfo(props) {
     loadCourt();
   }, [isEditCourt])
 
-  console.log(listCourt);
-
   const editCourtStatus = async (courtNo, index) => {
     setListCourt(prevListCourt => {
       // Create a copy of the previous state array
@@ -130,7 +128,6 @@ function CentreInfo(props) {
     await axiosInstance.post(`/courtstar/centre/delete/${centreId}`)
       .then(res => {
         if (res.data.data) {
-          console.log('delete');
           toast.success('Delete successfully', {
             toastId: 'delete-success'
           });
@@ -161,6 +158,20 @@ function CentreInfo(props) {
 
   const handleGetCentreID = (value) => {
     props.isCentreID(value)
+  }
+
+  const disableSlot = async(formCalendar) => {
+    // setLoading(true);
+    await axiosInstance.post(`/courtstar/slot/disable`, formCalendar)
+      .then(res => {
+        console.log(res.data.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(()=>{
+        // setLoading(false);
+      });
   }
 
   return (
@@ -413,7 +424,7 @@ function CentreInfo(props) {
         <div className='bg-white rounded-b-lg p-8 pt-0'>
           <div className="">
             <Calendar
-              handleButton={() => { }}
+              handleButton={disableSlot}
               typeOfCalendar='manage'
               centre={centreDetail}
             />

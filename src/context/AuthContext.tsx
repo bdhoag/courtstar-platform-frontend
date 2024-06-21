@@ -163,21 +163,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
               dispatch({ type: 'STOP_LOADING' });
             }
           );
-      } else if (state.token && !state.account.email) {
-        // Fetch account details if the token is still valid and account data is not loaded
-        dispatch({ type: 'START_LOADING' });
-        axiosInstance.get('/courtstar/account/myInfor')
-          .then(res => {
-            dispatch({ type: 'SET_ACCOUNT', payload: res.data.data });
-          })
-          .catch(err => {
-            console.log(err.message);
-            localStorage.clear();
-            dispatch({ type: 'LOGOUT' });
-          })
-          .finally(()=>{
-            dispatch({ type: 'STOP_LOADING' });
-          })
       }
     };
 
