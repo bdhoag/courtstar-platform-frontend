@@ -55,10 +55,10 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
       filteredList = filteredList.filter(centre => centre.pricePerHour <= maxValue);
     }
     if (selectedRating !== 0) {
-      filteredList = filteredList.filter(centre => centre.rating >= selectedRating);
+      filteredList = filteredList.filter(centre => centre.currentRate >= selectedRating);
     }
     if (isRatingFilterActive) {
-      filteredList.sort((a, b) => a.rating - b.rating);
+      filteredList.sort((a, b) => a.currentRate - b.currentRate);
     }
     setFilteredCentreList(filteredList);
   }, [selectedDistrict, minValue, maxValue, selectedRating, centreList, isRatingFilterActive]);
@@ -110,12 +110,16 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
                 <div className='w-full flex flex-col gap-5'>
                   <CentreList centres={currentCentres} />
 
-                  <Pagination
-                    totalItems={filteredCentreList.length}
-                    itemsPerPage={itemsPerPage}
-                    currentPage={currentPage}
-                    onPageChange={handlePageChange}
-                  />
+                  {
+                    filteredCentreList.length > itemsPerPage
+                    &&
+                    <Pagination
+                      totalItems={filteredCentreList.length}
+                      itemsPerPage={itemsPerPage}
+                      currentPage={currentPage}
+                      onPageChange={handlePageChange}
+                    />
+                  }
                 </div>
               ) : (
                     <div className='flex flex-col items-center justify-center h-96 text-3xl text-primary mx-auto'>

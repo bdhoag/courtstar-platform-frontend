@@ -1,9 +1,3 @@
-export interface Image {
-  id: number;
-  imageNo: number;
-  url: string;
-}
-
 export interface CentreProps {
   id: number;
   name: string;
@@ -13,8 +7,8 @@ export interface CentreProps {
   closeTime: string;
   pricePerHour: number;
   numberOfCourts: number;
-  images: Image[];
-  rating: number;
+  coreImg: string;
+  currentRate: number;
 }
 
 export interface CentreListProps {
