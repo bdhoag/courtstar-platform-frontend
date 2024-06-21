@@ -11,57 +11,40 @@ function useQuery() {
 const PaymentResult = () => {
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState(0);
-  // const [bookingForm, setBookingForm] = useState();
-  // const [bookingSchedule, setBookingSchedule] = useState();
+  const [bookingSchedule, setBookingSchedule] = useState();
   const query = useQuery();
   const status = query.get('status');
+  const transId = query.get('apptransid');
 
   useEffect(() => {
-    if (status) {
+    const load = async () => {
+      await axiosInstance.post(`/courtstar/payment/order-info`, transId)
+        .then(bookingResponse => {
+          setBookingSchedule(bookingResponse.data);
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+    if (status === '1') {
+      load();
+    } else {
       setLoading(false);
     }
     setResult(status);
   }, [status])
 
-  // const [centre, setCentre] = useState();
-
-  // useEffect(() => {
-  //   const load = async () => {
-  //     let centreId = bookingForm.centreId;
-  //     await axiosInstance.post(`/courtstar/booking`, bookingForm)
-  //       .then(bookingResponse => {
-  //         setBookingSchedule(bookingResponse.data.data);
-  //         localStorage.removeItem("bookingForm");
-  //         axiosInstance.get(`/courtstar/centre/getCentre/${centreId}`)
-  //           .then(centreResponse => {
-  //             setCentre(centreResponse.data.data);
-  //           })
-  //           .catch(error => {
-  //             console.log(error.message);
-  //           })
-  //           .finally(() => {
-  //           });
-  //       })
-  //       .catch(error => {
-  //         console.log(error.message);
-  //       })
-  //       .finally(() => {
-  //         setLoading(false);
-  //       });
-  //   }
-  //   if (bookingForm) {
-  //     load();
-  //   };
-  // }, [bookingForm])
-
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
+    <div className={`flex flex-col justify-center items-center min-h-[calc(100vh-350px)]`}>
       {loading ? (
         <div className="w-full h-[500px] flex justify-center items-center">
           <SpinnerLoading height="80" width="80" color="#2B5A50" />
         </div>
       ) : (
-        <div className="w-full max-w-xl bg-white shadow-lg rounded-lg p-6">
+        <div className="w-full max-w-xl bg-white shadow-lg rounded-lg p-6 m-10">
           {result === '1' ? (
             <div className="text-center text-green-500 text-xl font-bold flex justify-center">
               <img src={check} className='pr-3'></img>
@@ -72,17 +55,18 @@ const PaymentResult = () => {
               Payment fail!
             </div>
           )}
-          {/* {bookingSchedule && centre && (
+          {bookingSchedule && (
             <div className="mt-6">
               <div className='text-gray-500 text-sm text-center my-4'> We just sent the booking schedule to your email <br />
                 <span className='text-black font-bold'> {bookingSchedule.account ? bookingSchedule.account.email : bookingSchedule.guest.email}</span>
               </div>
               <h2 className="text-2xl font-bold mb-4 text-center">Booking Schedule</h2>
               <div className="mb-4 flex flex-col text-lg">
-                <p> <strong>Centre Name:</strong> {centre.name}</p>
-                <p> <strong>Centre Address:</strong> {centre.address}</p>
+                <p> <strong>Centre Name:</strong> {bookingSchedule.centreName}</p>
+                <p> <strong>Centre Address:</strong> {bookingSchedule.centreAddress}</p>
                 <p> <strong>Date:</strong> {bookingSchedule.date}</p>
-                <p> <strong>Total Price:</strong> ${bookingSchedule.totalPrice}</p>
+                <p> <strong>Total Price:</strong> {bookingSchedule.totalPrice.toLocaleString('de-DE')}
+                <span className='text-sm font-semibold text-gray-500'> VND</span></p>
                 <p> <strong>Status:</strong> {bookingSchedule.status ? 'Checked in' : 'Not yet'}</p>
               </div>
               <div className='flex'>
@@ -103,7 +87,7 @@ const PaymentResult = () => {
                 </div>
               </div>
             </div>
-          )} */}
+          )}
         </div>
       )}
     </div>
