@@ -56,7 +56,7 @@
   "enterPassword": "Enter your Password",
   "firstName": "First Name*",
   "lastName": "Last Name*",
-  "phone": "Phone*",
+  "phone": "Phone",
   "password": "Password*",
   "conditionPassword": "Use 8 or more characters with a mix of letters, numbers & symbols",
   "agreeToOur": "Agree to our",

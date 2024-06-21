@@ -24,7 +24,7 @@ const Content = (props) => {
     const controller = new AbortController();
     const { signal } = controller;
     setLoading(true);
-    if (id > 0) {
+    if (id >= 0) {
       const load = async () => {
         setImgList([]);
         setCentreDetail({});
