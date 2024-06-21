@@ -19,7 +19,7 @@ const Filters: React.FC<FiltersProps> = ({ handleRatingChange, handlePriceChange
         </div>
         <Rating
           ratingWrapper='flex gap-1 p-5'
-          value={5}
+          value={0}
           editable={true}
           onChange={handleRatingChange}
         />
