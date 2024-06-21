@@ -71,6 +71,7 @@ function CentreInfo(props) {
       );
   }
 
+  console.log(centreDetail.description);
 
   const handleDisable = async (centreId) => {
     setActivateLoading(true);
@@ -287,6 +288,11 @@ function CentreInfo(props) {
                       {centreDetail?.pricePerHour?.toLocaleString('de-DE')} VND/h
                     </span>
                   </div>
+                  <div>
+                    <span className='font-semibold'>{t('description')}: </span>
+                    <div dangerouslySetInnerHTML={{ __html: centreDetail.description }}>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -407,7 +413,7 @@ function CentreInfo(props) {
         <div className='bg-white rounded-b-lg p-8 pt-0'>
           <div className="">
             <Calendar
-              handleButton={()=>{}}
+              handleButton={() => { }}
               typeOfCalendar='manage'
               centre={centreDetail}
             />

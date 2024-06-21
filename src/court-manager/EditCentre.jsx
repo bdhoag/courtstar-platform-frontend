@@ -10,6 +10,8 @@ import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 function EditCentre(props) {
   const { t } = useTranslation();
@@ -393,6 +395,20 @@ function EditCentre(props) {
           </div>
         </div>
       </div>
+      {/* <div>
+        <div className="w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2">Description:</div>
+        <CKEditor
+          editor={ClassicEditor}
+          data={centreForm?.description}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setCentreForm(prevState => ({
+              ...prevState,
+              description: data
+            }))
+          }}
+        />
+      </div> */}
     </div>
   );
 
