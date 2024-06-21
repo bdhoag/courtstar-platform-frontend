@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import register from '../assets/images/register.png';
+import register from '../assets/images/register.jpg';
 import google from '../assets/images/google.svg';
 import InputText from '../components/input-text';
 import axiosInstance from '../config/axiosConfig';

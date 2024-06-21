@@ -94,7 +94,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
 
       {/* Dropdown menu */}
       {isOpen && (
-        <ul
+        <div
           className={`absolute ${props.dir === 'up' ? '-top-[216px]' : ''} w-full max-h-52 overflow-y-auto flex flex-col border border-gray-200 bg-white z-10 shadow-md rounded-lg mt-0.5`}
           role="listbox"
         >
@@ -108,7 +108,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
               className={props.itemClassName}
             />
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
