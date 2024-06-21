@@ -139,14 +139,23 @@ const CentreBooking = () => {
                     </div>
                     <div className='bg-white rounded-b-lg p-8'>
                       <div className='font-medium mb-10'>
-                        {centre.address}
+                        {centre.address}, {centre.district}
                       </div>
-                      <Button
+                      {/* <Button
                         label='See on map'
                         size='medium'
                         fullWidth
                         className='bg-primary-green hover:bg-teal-900 text-white'
-                      />
+                      /> */}
+                        <iframe
+                          src={`https://maps.google.com/maps?q=${centre.name}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                          width="500"
+                          height="300"
+                          style={{ border: 0 }}
+                          allowFullScreen=""
+                          loading="lazy"
+                          referrerPolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                   </div>
                   <div className="rounded-lg shadow-gray-400 shadow-md bg-white p-8">
