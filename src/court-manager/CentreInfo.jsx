@@ -9,9 +9,12 @@ import Feedback from '../components/feedback';
 import EditCentre from './EditCentre';
 import XCarousel from '../components/carousel';
 import Calendar from '../components/calendar';
+import { useAuth } from '../context/AuthContext';
 
 function CentreInfo(props) {
   const { t } = useTranslation();
+  const { state, dispatch } = useAuth();
+  const { role } = state;
   const navigate = useNavigate();
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [activateLoading, setActivateLoading] = useState(false);
@@ -69,6 +72,7 @@ function CentreInfo(props) {
       );
   }
 
+  console.log(centreDetail.description);
 
   const handleDisable = async (centreId) => {
     setActivateLoading(true);
@@ -159,7 +163,7 @@ function CentreInfo(props) {
     props.isCentreID(value)
   }
 
-  const disableSlot = async(formCalendar) => {
+  const disableSlot = async (formCalendar) => {
     // setLoading(true);
     await axiosInstance.post(`/courtstar/slot/disable`, formCalendar)
       .then(res => {
@@ -168,7 +172,7 @@ function CentreInfo(props) {
       .catch(error => {
         console.log(error.message);
       })
-      .finally(()=>{
+      .finally(() => {
         // setLoading(false);
       });
   }
@@ -182,9 +186,22 @@ function CentreInfo(props) {
         imgList={imgList}
         dataIdCentre={handleGetCentreID}
       />
-
-      <div className="text-2xl font-semibold py-3">
-        {centreDetail.name}
+      <div className="flex items-center justify-between py-3">
+        <div className="text-2xl font-semibold ">
+          {centreDetail.name}
+        </div>
+        <div className="font-semibold">
+          {centreDetail.status
+            ?
+            <div className="bg-primary-green text-white px-3 py-1 rounded-xl">
+              Opening
+            </div>
+            :
+            <div className="bg-red-500 text-white px-3 py-1 rounded-xl">
+              Closed
+            </div>
+          }
+        </div>
       </div>
 
       <div className="flex justify-between gap-4">
@@ -223,33 +240,36 @@ function CentreInfo(props) {
                 />
             }
 
-            <Button
-              label={t('delete')}
-              fullWidth
-              size='medium'
-              className='bg-red-600 hover:bg-red-800 text-white'
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24" height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-trash-2"
-                >
-                  <path d="M3 6h18" />
-                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                  <line x1="10" x2="10" y1="11" y2="17" />
-                  <line x1="14" x2="14" y1="11" y2="17" />
-                </svg>
-              }
-              onClick={() => handleDelete(centreDetail.id)}
-              loading={deleteLoading}
-            />
+            {role !== 'STAFF'
+              &&
+              <Button
+                label={t('delete')}
+                fullWidth
+                size='medium'
+                className='bg-red-600 hover:bg-red-800 text-white'
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-trash-2"
+                  >
+                    <path d="M3 6h18" />
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                    <line x1="10" x2="10" y1="11" y2="17" />
+                    <line x1="14" x2="14" y1="11" y2="17" />
+                  </svg>
+                }
+                onClick={() => handleDelete(centreDetail.id)}
+                loading={deleteLoading}
+              />
+            }
           </div>
 
           <div className='w-full h-0.5 bg-slate-600 rounded-full'>
@@ -260,26 +280,27 @@ function CentreInfo(props) {
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between text-lg font-semibold">
                   {t('information')}
-                  <button
-                    className="flex justify-center items-center text-primary-green  rounded-md
+                  {role !== 'STAFF' &&
+                    <button
+                      className="flex justify-center items-center text-primary-green  rounded-md
                     px-2 hover:bg-primary-green hover:text-white ease-in-out duration-300 cursor-pointer"
-                    onClick={openEditCentreModal}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18" height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-pencil"
+                      onClick={openEditCentreModal}
                     >
-                      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                      <path d="m15 5 4 4" />
-                    </svg>
-                  </button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="18" height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-pencil"
+                      >
+                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                        <path d="m15 5 4 4" />
+                      </svg>
+                    </button>}
                 </div>
                 <div className="px-2">
                   <div>
@@ -297,6 +318,11 @@ function CentreInfo(props) {
                     <span className='font-semibold text-rose-600'>
                       {centreDetail?.pricePerHour?.toLocaleString('de-DE')} VND/h
                     </span>
+                  </div>
+                  <div>
+                    <span className='font-semibold'>{t('description')}: </span>
+                    <div dangerouslySetInnerHTML={{ __html: centreDetail.description }}>
+                    </div>
                   </div>
                 </div>
               </div>

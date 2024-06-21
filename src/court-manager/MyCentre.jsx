@@ -4,9 +4,12 @@ import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import AddCentre from './AddCentre';
 import Content from './Content';
+import { useAuth } from '../context/AuthContext';
 
 const MyCentre = () => {
 
+  const { state, dispatch } = useAuth();
+  const { role } = state;
   const [centreList, setCentreList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState();
@@ -30,7 +33,21 @@ const MyCentre = () => {
           }
         );
     }
-    load();
+
+    const loadByStaff = async () => {
+      await axiosInstance.get(`/courtstar/centre/getCentreOfStaff`, { signal })
+        .then(res => {
+          setCentreList(res.data.data);
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+        .finally(
+          () => {
+            setLoading(false);
+          }
+        );
+    }
 
     const loadBalanceDetail = async () => {
       setLoading(true);
@@ -47,11 +64,18 @@ const MyCentre = () => {
           }
         );
     }
-    loadBalanceDetail();
+
+    if (role === 'MANAGER') {
+      load();
+      loadBalanceDetail();
+    }
+    else
+      loadByStaff();
 
     return () => {
       controller.abort();
     }
+
   }, [isCentreID]);
 
   const handleChooseTabFromSidebar = (tab) => {

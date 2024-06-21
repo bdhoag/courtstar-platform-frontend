@@ -9,6 +9,8 @@ import moment from "moment";
 import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 function AddCentre(props) {
   const { t } = useTranslation();
@@ -234,8 +236,6 @@ function AddCentre(props) {
     }
   };
 
-  console.log(imgUrls);
-
   const submit = async () => {
     await axiosInstance.post(`/courtstar/centre/create`, centreForm)
       .then(res => {
@@ -254,6 +254,8 @@ function AddCentre(props) {
       })
       .finally();
   }
+
+console.log(centreForm?.description);
 
   const clearForm = () => {
     const deleteImagesPromises = imgUrls.map(img => deleteObject(img.ref));
@@ -407,7 +409,7 @@ function AddCentre(props) {
           />
         </div>
       </div>
-      <div className='flex gap-4'>
+      <div className='flex gap-4 mb-3'>
         <div className='basis-1/2'>
           <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2'>
             {t('openTimes')}:
@@ -436,6 +438,20 @@ function AddCentre(props) {
             />
           </div>
         </div>
+      </div>
+      <div>
+        <div className="w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2">Description:</div>
+        <CKEditor
+          editor={ClassicEditor}
+          data={centreForm?.description}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setCentreForm(prevState => ({
+              ...prevState,
+              description: data
+            }))
+          }}
+        />
       </div>
       {/* <div className="bg-white mt-4 mx-auto">
         <div className='mb-4'>
