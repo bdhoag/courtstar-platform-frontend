@@ -273,5 +273,12 @@
     "forConsent":"SỰ ĐỒNG Ý",
     "pleaseRead":"Vui lòng đọc kỹ chính sách này và đảm bảo rằng bạn đã đọc, hiểu toàn bộ nội dung của Chính Sách và đồng ý, cho phép chúng tôi Xử Lý Dữ Liệu của Bạn theo quy định tại Chính Sách này.",
     "notAgree":"Nếu Bạn không đồng ý bất kì nội dung nào trong Chính Sách, vui lòng không tiếp tục truy cập website hoặc cung cấp/gửi Dữ Liệu Cá Nhân cho Chúng Tôi. Bạn có quyền gửi các phản hồi, khiếu nại, thắc mắc của mình tại phần “LIÊN HỆ VỚI CHÚNG TÔI” để được giải đáp.",
-    "allCenTre":"Tất cả sân"
+    "allCenTre":"Tất cả sân",
+    "topUp": "Nạp tiền",
+    "withdraw": "Rút tiền",
+    "billPayment": "Hóa đơn",
+    "income": "Thu nhập",
+    "totalRevenue": "Tổng doanh thu",
+    "amount": "Số tiền",
+    "enterAmount": "Nhập số tiền"
 }
