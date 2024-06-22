@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import InputText from '../components/input-text';
 import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
+import moment from 'moment-timezone';
 
 export default function MyBalance(props) {
 
@@ -15,6 +16,8 @@ export default function MyBalance(props) {
   const [loading, setLoading] = useState(false);
 
   const balanceDetail = props.balanceDetail;
+  const today = moment().tz("Asia/Bangkok").format('YYYY-MM-DD');
+  const yesterday = moment().tz("Asia/Bangkok").subtract(1, 'days').format('YYYY-MM-DD');
 
   const submit = async (event) => {
     event.preventDefault();
@@ -39,7 +42,7 @@ export default function MyBalance(props) {
   return (
     <div className='w-full bg-white my-6 rounded-lg'>
       <div className='w-full h-[20rem] rounded-t-lg bg-gradient-to-r from-emerald-50 to-[#408576] bg-opacity-40 relative
-      flex justify-between px-28'>
+      flex justify-between px-20'>
         <div className='w-full flex flex-col gap-10 justify-center'>
           <div>
             <div className='text-2xl font-semibold mb-2'>{t('myBalance')}</div>
@@ -52,12 +55,12 @@ export default function MyBalance(props) {
             </div>
           </div>
           <div className='flex gap-10'>
-            <div className='py-3 px-5 w-48 shadow-md rounded-lg bg-white font-semibold'>
+            <div className='py-3 px-5 w-56 shadow-md rounded-lg bg-white font-semibold'>
               <div className='flex justify-between items-center'>
-                <div>{t('income')}</div>
+                <div>{t('todayIncome')}</div>
                 <div className='text-xs text-teal-600'>
                   <Counter
-                    endNumber={20}
+                    endNumber={balanceDetail?.percent}
                     duration={1000}
                     postfix='%'
                     prefix='+'
@@ -66,17 +69,27 @@ export default function MyBalance(props) {
               </div>
               <div className='text-lg flex gap-0.5 font-bold'>
                 <Counter
-                  endNumber={800000}
+                  endNumber={balanceDetail?.todayIncome}
                   duration={1000}
                 />
                 <span className='text-[7px]'>VND</span>
               </div>
             </div>
-            <div className='py-3 px-5 w-48 shadow-md rounded-lg bg-white font-semibold'>
-              {t('totalRevenue')}
+            <div className='py-3 px-5 w-56 shadow-md rounded-lg bg-white font-semibold'>
+              {t('pending')}
               <div className='text-lg flex gap-0.5 font-bold'>
                 <Counter
-                  endNumber={1800000}
+                  endNumber={balanceDetail?.pending}
+                  duration={1000}
+                />
+                <span className='text-[7px]'>VND</span>
+              </div>
+            </div>
+            <div className='py-3 px-5 w-56 shadow-md rounded-lg bg-white font-semibold'>
+              {t('expectedRevenue')}
+              <div className='text-lg flex gap-0.5 font-bold'>
+                <Counter
+                  endNumber={balanceDetail?.totalRevenue}
                   duration={1000}
                 />
                 <span className='text-[7px]'>VND</span>
@@ -84,7 +97,7 @@ export default function MyBalance(props) {
             </div>
           </div>
         </div>
-        <div className='w-full p-10 flex flex-col gap-5 justify-center items-end'>
+        <div className='w-full py-10 flex flex-col gap-5 justify-center items-end'>
           <Button
             label={t('topUp')}
             size='large'

@@ -279,8 +279,9 @@
     "topUp": "Top-up",
     "withdraw": "Withdraw",
     "billPayment": "Bill Payment",
-    "income": "Income",
-    "totalRevenue": "Total Revenue",
+    "todayIncome": "Today Income",
+    "expectedRevenue": "Expected Revenue",
     "amount": "Amount",
-    "enterAmount": "Enter amount"
+    "enterAmount": "Enter amount",
+    "pending": "Pending"
 }
