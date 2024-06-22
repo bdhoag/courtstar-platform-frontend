@@ -69,6 +69,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     case 'LOGOUT':
       return {
         ...initialState,
+        role: "",
         isLogin: false,
       };
     case 'SET_ACCOUNT':

@@ -277,8 +277,9 @@
     "topUp": "Nạp tiền",
     "withdraw": "Rút tiền",
     "billPayment": "Hóa đơn",
-    "income": "Thu nhập",
-    "totalRevenue": "Tổng doanh thu",
+    "todayIncome": "Thu nhập hôm nay",
+    "expectedRevenue": "Doanh thu dự kiến",
     "amount": "Số tiền",
-    "enterAmount": "Nhập số tiền"
+    "enterAmount": "Nhập số tiền",
+    "pending": "Đang chờ"
 }
