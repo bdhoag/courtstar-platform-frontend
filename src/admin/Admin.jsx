@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
 import Dashboard from './Dashboard';
-import Sidebar from './Sidebar';
-import AllCentre from './AllCentre';
-import AllUser from './AllUser';
+import Sidebar from './layout/Sidebar';
+import AllCentre from './content/AllCentre';
+import AllUser from './all-user/AllUser';
+import Content from './layout/Content';
 
 const Admin = () => {
-  const [tab, setTab] = useState(1);
+  const [tab, setTab] = useState();
+  const [tabItem, setTabItem] = useState();
 
-  const handleChooseFormSideBar = (value) => {
+  const handleChooseTabFormSideBar = (value) => {
     setTab(value);
   };
 
+  const handleChooseTabItemFormSideBar = (value) => {
+    setTabItem(value);
+  }
+
   return (
     <div className='bg-gray-100 text-gray-800 flex'>
-      <Sidebar onDataSubmit={handleChooseFormSideBar}/>
-      <div className='flex-1'>
-        { (tab === 1) && (<Dashboard />)}
-        { (tab === 2) && (<AllCentre />)}
-        { (tab === 3) && (<AllUser />)}
-      </div>
+
+      <Sidebar
+        onDataTabSubmit={handleChooseTabFormSideBar}
+        onDataTabItemSubmit={handleChooseTabItemFormSideBar}
+      />
+
+      <Content
+        tab={tab}
+        tabItem={tabItem}
+      />
+
     </div>
   );
 }
