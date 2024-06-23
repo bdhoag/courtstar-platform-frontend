@@ -1,17 +1,30 @@
-import Dropdown from "../components/dropdown";
-import InputText from "../components/input-text";
-const AllUser = () => {
+import React from 'react'
+import Dropdown from "../../components/dropdown";
+import InputText from "../../components/input-text";
 
-  const items = ['Item 1', 'Item 2', 'Item 3'];
+type Props = {}
+
+const Customer = (props: Props) => {
+  const items = [
+    {
+      key: 1,
+      label: 'Item 1'
+    },
+    {
+      key: 2,
+      label: 'Item 2'
+    }
+  ];
 
   const handleSelect = (item) => {
     console.log(`Selected: ${item}`);
   };
+
   return (
     <div className="py-5 px-7">
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
-          All User
+          Customers
         </div>
       </div>
 
@@ -23,6 +36,8 @@ const AllUser = () => {
               name="name"
               placeholder="Enter the user's name"
               label="Name"
+              value=''
+              onchange={() => { }}
             />
           </div>
           <div className="w-1/3">
@@ -31,6 +46,8 @@ const AllUser = () => {
               name="email"
               placeholder="Enter the user's email"
               label="Email"
+              value=''
+              onchange={() => { }}
             />
           </div>
           <div className="w-1/5">
@@ -39,6 +56,8 @@ const AllUser = () => {
               name="phone"
               placeholder="Enter the user's phone number"
               label="Phone number"
+              value=''
+              onchange={() => { }}
             />
           </div>
           <div className="">
@@ -257,7 +276,7 @@ const AllUser = () => {
 
 
     </div>
-  );
+  )
 }
 
-export default AllUser;
+export default Customer
