@@ -280,6 +280,7 @@
     "withdraw": "Withdraw",
     "billPayment": "Bill Payment",
     "todayIncome": "Today Income",
+    "todayBookings": "Today Bookings",
     "expectedRevenue": "Expected Revenue",
     "amount": "Amount",
     "enterAmount": "Enter amount",
