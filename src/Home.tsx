@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Centre from './centre/Centre';
 import Banner from './centre/Banner';
 
-const Home = () => {
-  const [selectedDistrict, setSelectedDistrict] = useState('');
+const Home: React.FC = () => {
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('');
 
-  const handleDistrictSelect = (district) => {
+  const handleDistrictSelect = (district: string) => {
     setSelectedDistrict(district);
   };
 
