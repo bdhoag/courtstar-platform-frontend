@@ -141,12 +141,8 @@ const BookingHistory = () => {
                         </div>
                       </div>
                     ))}
-                    <Pagination
-                      totalItems={bookings.length}
-                      itemsPerPage={itemsPerPage}
-                      currentPage={currentPage}
-                      onPageChange={handlePageChange}
-                    />
+                    
+                    
                   </>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-56 text-3xl text-primary">
@@ -171,7 +167,16 @@ const BookingHistory = () => {
               </div>
             )}
           </div>
-        </div>
+                      { bookings.length > itemsPerPage
+                    &&
+                    <Pagination
+                      totalItems={bookings.length}
+                      itemsPerPage={itemsPerPage}
+                      currentPage={currentPage}
+                      onPageChange={handlePageChange}
+                    />
+                      }
+        </div>    
       </div>
     </div>
   );

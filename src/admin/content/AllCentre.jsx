@@ -14,6 +14,7 @@ import Calendar from "../../components/calendar";
 import { toast } from "react-toastify";
 import EditCentre from "./EditCentre";
 import Feedback from "../../components/feedback";
+import Pagination from "../../components/pagination";
 
 const AllCentre = () => {
 
@@ -21,7 +22,7 @@ const AllCentre = () => {
   const controller = new AbortController();
   const { signal } = controller;
   const items = ['Item 1', 'Item 2', 'Item 3'];
-  const [listCentre, setListCentre] = useState();
+  const [listCentre, setListCentre] = useState([]);
   const [loading, setLoading] = useState(true);
   const [centreDetail, setCentreDetail] = useState();
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -29,6 +30,8 @@ const AllCentre = () => {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [feedbackList, setFeedbackList] = useState([]);
   const [loadingFeedback, setLoadingFeedback] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
 
   const handleSelect = (item) => {
@@ -172,6 +175,14 @@ const AllCentre = () => {
   }
 
   console.log(centreDetail?.images);
+
+  const indexOfLastCentre = currentPage * itemsPerPage;
+  const indexOfFirstCentre = indexOfLastCentre - itemsPerPage;
+  const currentListCentres = listCentre.slice(indexOfFirstCentre, indexOfLastCentre);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
 
   const centreInfor = (
     <>
@@ -584,7 +595,7 @@ const AllCentre = () => {
               />
               :
               <>
-                {listCentre?.map(centre => (
+                {currentListCentres?.map(centre => (
                   <div
                     key={centre.id}
                     className="px-10 py-3 grid grid-cols-4 content-center gap-2 font-medium hover:bg-slate-100 cursor-pointer"
@@ -627,8 +638,15 @@ const AllCentre = () => {
             }
           </div>
         </div>
-
-
+                      { listCentre.length > itemsPerPage
+                    &&
+                    <Pagination
+                      totalItems={listCentre.length}
+                      itemsPerPage={itemsPerPage}
+                      currentPage={currentPage}
+                      onPageChange={handlePageChange}
+                    />
+                      }
       </div>
     </>
   );
