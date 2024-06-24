@@ -71,7 +71,7 @@ const Customer = (props: Props) => {
     <div className="py-5 px-7">
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
-          Customer
+          Customers
         </div>
       </div>
 
