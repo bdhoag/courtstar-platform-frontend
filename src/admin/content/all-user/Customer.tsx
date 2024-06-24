@@ -1,6 +1,6 @@
 import React from 'react'
-import Dropdown from "../../components/dropdown";
-import InputText from "../../components/input-text";
+import Dropdown from "../../../components/dropdown";
+import InputText from "../../../components/input-text";
 
 type Props = {}
 
