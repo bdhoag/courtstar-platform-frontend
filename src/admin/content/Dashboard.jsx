@@ -1,4 +1,4 @@
-import Counter from "../components/Counter";
+import Counter from "../../components/Counter";
 import Chart from 'react-apexcharts';
 import moment from 'moment';
 

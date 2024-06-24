@@ -184,7 +184,7 @@ const AllCentre = () => {
       /> */}
       {centreDetail &&
         <div
-          className="h-[calc(80vh)] w-[calc(65vw)] overflow-y-auto px-2 mx2"
+          className="h-[calc(80vh)] w-[calc(80vw)] overflow-y-auto px-2 mx2"
         >
           {/* <div className="flex items-center justify-between py-3">
             <div className="text-2xl font-semibold ">
@@ -350,18 +350,18 @@ const AllCentre = () => {
                       } */}
                       {(centreDetail?.deleted)
                         ?
-                        <div className="bg-red-500 text-white text-sm px-3 py-1 rounded-xl font-semibold">
+                        <div className="bg-red-500 text-white text-sm px-3 py-1 rounded-md font-semibold">
                           Deleted
                         </div>
                         :
                         <div className="font-semibold">
                           {centreDetail?.status
                             ?
-                            <div className="bg-primary-green text-white text-sm px-3 py-1 rounded-xl">
+                            <div className="bg-primary-green text-white text-sm px-3 py-1 rounded-md">
                               Opening
                             </div>
                             :
-                            <div className="bg-red-500 text-white px-3 text-sm py-1 rounded-xl">
+                            <div className="bg-black text-white px-3 text-sm py-1 rounded-md">
                               Closed
                             </div>
                           }

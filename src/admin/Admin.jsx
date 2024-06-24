@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import Dashboard from './Dashboard';
 import Sidebar from './layout/Sidebar';
-import AllCentre from './content/AllCentre';
-import AllUser from './all-user/AllUser';
 import Content from './layout/Content';
 
 const Admin = () => {
