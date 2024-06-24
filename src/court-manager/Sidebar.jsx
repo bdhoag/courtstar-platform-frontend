@@ -60,17 +60,33 @@ const Sidebar = (props) => {
             className=
             {
               centreIsSelected === "balance"
-                ? "py-1 font-bold text-lg px-3 rounded-md bg-primary-green text-white cursor-pointer scale-105 ease-in-out duration-300"
-                : "py-1 font-bold text-lg cursor-pointer hover:px-3 rounded-md hover:bg-primary-green hover:text-white hover:scale-105 ease-in-out duration-300"
+                ? "flex gap-2 items-center py-1 font-bold text-lg px-3 rounded-md bg-primary-green text-white cursor-pointer scale-105 ease-in-out duration-300"
+                : "flex gap-2 items-center py-1 font-bold text-lg cursor-pointer hover:px-3 rounded-md hover:bg-primary-green hover:text-white hover:scale-105 ease-in-out duration-300"
             }
           >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-dollar-sign"><circle cx="12" cy="12" r="10" /><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" /><path d="M12 18V6" /></svg>
             {t('myBalance')}
           </div>
         </div>
       }
       <div className="">
         <div className="flex justify-between items-center">
-          <div className="font-bold text-lg">
+          <div className="flex gap-2 font-bold text-lg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24" height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-layout-dashboard">
+              <rect width="7" height="9" x="3" y="3" rx="1" />
+              <rect width="7" height="5" x="14" y="3" rx="1" />
+              <rect width="7" height="9" x="14" y="12" rx="1" />
+              <rect width="7" height="5" x="3" y="16" rx="1" />
+            </svg>
             {t('myCentre')}
           </div>
           {!(role === 'STAFF') &&
@@ -109,9 +125,9 @@ const Sidebar = (props) => {
                     {
                       centreIsSelected === centre.id
                         ?
-                        'bg-primary-green text-white pl-3 py-1.5 rounded-md ease-in-out duration-300 font-semibold cursor-pointer'
+                        'bg-primary-green text-lg text-white pl-3 py-1 rounded-md ease-in-out duration-300 font-semibold cursor-pointer'
                         :
-                        'py-1.5 rounded-md hover:bg-primary-green hover:text-white truncate hover:pl-1.5 ease-in-out duration-300 font-semibold cursor-pointer'
+                        'py-1 rounded-md hover:bg-primary-green text-lg hover:text-white truncate hover:pl-1.5 ease-in-out duration-300 font-semibold cursor-pointer'
                     }
                     onClick={() => handleDropdown(centre.id)}
                   >
@@ -124,20 +140,48 @@ const Sidebar = (props) => {
                         onClick={() => handleSelectTab(1)}
                         className=
                         {tab === 1
-                          ? 'cursor-pointer rounded-md pl-3 bg-gray-800 text-white'
-                          : 'cursor-pointer rounded-md hover:pl-3 hover:bg-gray-800 hover:text-white ease-in-out duration-300'
+                          ? 'flex gap-2 items-center cursor-pointer rounded-md pl-3 py-1 bg-gray-800 text-white'
+                          : 'flex gap-2 items-center cursor-pointer rounded-md hover:pl-3 py-1 hover:bg-gray-800 hover:text-white ease-in-out duration-300'
                         }
                       >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18" height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-user"
+                        >
+                          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                          <circle cx="12" cy="7" r="4" />
+                        </svg>
                         {t('centreStaff')}
                       </div>
                       <div
                         onClick={() => handleSelectTab(2)}
                         className=
                         {tab === 2
-                          ? 'cursor-pointer rounded-md px-3 bg-gray-800 text-white'
-                          : 'cursor-pointer rounded-md hover:px-3 hover:bg-gray-800 hover:text-white ease-in-out duration-300'
+                          ? 'flex gap-2 items-center cursor-pointer py-1 rounded-md px-3 bg-gray-800 text-white'
+                          : 'flex gap-2 items-center cursor-pointer py-1 rounded-md hover:px-3 hover:bg-gray-800 hover:text-white ease-in-out duration-300'
                         }
                       >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20" height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          class="lucide lucide-ticket-check"
+                        >
+                          <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z" />
+                          <path d="m9 12 2 2 4-4" />
+                        </svg>
                         Check in
                       </div>
                     </div>
@@ -183,10 +227,11 @@ const Sidebar = (props) => {
                     onClick={() => handleSelectTab(2)}
                     className=
                     {tab === 2
-                      ? 'cursor-pointer rounded-md px-3 bg-gray-800 text-white'
-                      : 'cursor-pointer rounded-md hover:px-3 hover:bg-gray-800 hover:text-white ease-in-out duration-300'
+                      ? 'flex gap-2 cursor-pointer rounded-md px-3 bg-gray-800 text-white'
+                      : 'flex gap-2 cursor-pointer rounded-md hover:px-3 hover:bg-gray-800 hover:text-white ease-in-out duration-300'
                     }
                   >
+
                     Check in
                   </div>
                 </div>
