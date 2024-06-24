@@ -539,14 +539,15 @@ const AllCentre = () => {
         title={centreDetail?.name}
         centreInfo
       />
-      <div className="py-5 px-7">
+      <div id="top"
+      className="py-5 px-7">
         <div className="flex justify-between">
           <div className="text-3xl font-bold">
             All Centre
           </div>
         </div>
 
-        <div className="bg-white rounded-xl mt-5 shadow">
+        <div className="bg-white rounded-xl mt-5 shadow mb-10">
           <div className="px-10 pt-6 grid grid-cols-4 gap-x-1">
             <div className="">
               <InputText
