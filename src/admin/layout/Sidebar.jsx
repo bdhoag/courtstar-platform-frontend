@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = (props) => {
 
+  const { t } = useTranslation();
   const [selectTab, setSelectTab] = useState(1);
   const [selectTabItem, setSelectTabItem] = useState();
 
@@ -48,7 +50,7 @@ const Sidebar = (props) => {
           <path d="M17 12h-2l-2 5-2-10-2 5H7" />
         </svg>
         <div>
-          Dashboard
+          {t('dashboard')}
         </div>
       </div>
 
@@ -77,7 +79,7 @@ const Sidebar = (props) => {
           <rect width="7" height="9" x="14" y="12" rx="1" />
           <rect width="7" height="5" x="3" y="16" rx="1" />
         </svg>
-        All Centre
+        {t('allCenTre')}
       </div>
 
       <div className="">
@@ -106,7 +108,7 @@ const Sidebar = (props) => {
             <circle cx="12" cy="10" r="3" />
             <path d="M7 21v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2" />
           </svg>
-          Users
+          {t('allUser')}
         </div>
 
         {selectTab === 3 &&
@@ -133,7 +135,7 @@ const Sidebar = (props) => {
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
-              Centre Manager
+              {t('centreManager')}
             </div>
             <div className=
               {
@@ -157,7 +159,7 @@ const Sidebar = (props) => {
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
-              Centre Staff
+              {t('centreStaff')}
             </div>
             <div className=
               {
@@ -181,7 +183,7 @@ const Sidebar = (props) => {
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
-              Customer
+              {t('customer')}
             </div>
           </div>
         }
@@ -215,7 +217,7 @@ const Sidebar = (props) => {
           <circle cx="16" cy="9" r="2.9" />
           <circle cx="6" cy="5" r="3" />
         </svg>
-        Withdrawal Request
+        {t('withdrawalRequest')}
       </div>
 
       <div
@@ -246,7 +248,7 @@ const Sidebar = (props) => {
           <path d="M8 11h.01" />
           <path d="M8 16h.01" />
         </svg>
-        Post Centre Request
+        {t('postCentreRequest')}
       </div>
 
     </div>
