@@ -543,7 +543,7 @@ const AllCentre = () => {
       className="py-5 px-7">
         <div className="flex justify-between">
           <div className="text-3xl font-bold">
-            All Centre
+          {t('allCenTre')}
           </div>
         </div>
 
