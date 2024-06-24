@@ -226,9 +226,13 @@ function AddCentre(props) {
   }, [imgUrls]);
 
   const handleImageChange = (e) => {
-    if (imgUrls.length < 6) {
+    if (imgUrls.length < 6 && imgUrls.length > 0) {
       const selectedImg = e.target.files[0];
       handleImageUpload(selectedImg);
+    } else if (imgUrls.length === 0) {
+      toast.error('Must upload at least 1 photo', {
+        toastId: 'Upload-photo-error'
+      });
     } else {
       toast.error('Only upload a maximum of 6 photos', {
         toastId: 'Upload-photo-error'

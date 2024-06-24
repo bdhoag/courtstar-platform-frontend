@@ -19,7 +19,7 @@ function CentreInfo(props) {
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [activateLoading, setActivateLoading] = useState(false);
   const [activateCourt, setActivateCourt] = useState(false);
-  const [centreDetail, setCentreDetail] = useState(props.centreDetail);
+  const [centreDetail, setCentreDetail] = useState();
   const imgList = props.imgList;
   const apiFeedbacks = props.apiFeedbacks;
   const controller = new AbortController();
@@ -27,6 +27,12 @@ function CentreInfo(props) {
   const [isEditCourt, setIsEditCourt] = useState();
   const [courtNo, setCourtNo] = useState();
   const [listCourt, setListCourt] = useState([]);
+
+  useEffect(() => {
+    if(props.centreDetail) {
+      setCentreDetail(props.centreDetail);
+    }
+  }, [props.centreDetail])
 
   useEffect(() => {
     const loadCourt = async () => {
@@ -45,8 +51,8 @@ function CentreInfo(props) {
           }
         );
     }
-    loadCourt();
-  }, [isEditCourt])
+    if (centreDetail?.id) loadCourt();
+  }, [isEditCourt, centreDetail])
 
   const editCourtStatus = async (courtNo, index) => {
     setListCourt(prevListCourt => {
@@ -71,8 +77,6 @@ function CentreInfo(props) {
         }
       );
   }
-
-  console.log(centreDetail.description);
 
   const handleDisable = async (centreId) => {
     setActivateLoading(true);
@@ -178,6 +182,7 @@ function CentreInfo(props) {
   }
 
   return (
+    centreDetail &&
     <div className="flex flex-1 flex-col gap-2 py-2">
       <EditCentre
         isOpen={editCentreModal}
@@ -321,7 +326,7 @@ function CentreInfo(props) {
                   </div>
                   <div>
                     <span className='font-semibold'>{t('description')}: </span>
-                    <div dangerouslySetInnerHTML={{ __html: centreDetail.description }}>
+                    <div dangerouslySetInnerHTML={{ __html: centreDetail?.description }}>
                     </div>
                   </div>
                 </div>
