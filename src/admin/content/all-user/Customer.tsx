@@ -1,24 +1,71 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Dropdown from "../../../components/dropdown";
 import InputText from "../../../components/input-text";
+import axiosInstance from '../../../config/axiosConfig';
+import SpinnerLoading from '../../../components/SpinnerLoading';
+import { toast } from 'react-toastify';
 
 type Props = {}
 
 const Customer = (props: Props) => {
-  const items = [
-    {
-      key: 1,
-      label: 'Item 1'
-    },
-    {
-      key: 2,
-      label: 'Item 2'
-    }
-  ];
 
-  const handleSelect = (item) => {
-    console.log(`Selected: ${item}`);
-  };
+  const controller = new AbortController();
+  const { signal } = controller;
+  const [listCustomer, setListCustomer] = useState<any>();
+  const [loading, setLoading] = useState(true);
+
+  const load = async () => {
+    await axiosInstance.get(`/courtstar/customer`, { signal })
+      .then(res => {
+        setListCustomer(res.data.data.map(item => {
+          return { ...item, loading: false };
+        }));
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(
+        () => {
+          setLoading(false);
+        }
+      );
+  }
+
+  useEffect(() => {
+    load();
+  }, [])
+
+  console.log(listCustomer);
+
+  const deleteAccount = async (id, index) => {
+    setListCustomer(prevListCourt => {
+      // Create a copy of the previous state array
+      const updatedListCourt = [...prevListCourt];
+
+      // Update the specific element's loading property
+      updatedListCourt[index] = { ...updatedListCourt[index], loading: true };
+
+      return updatedListCourt;
+    });
+    await axiosInstance.post(`/courtstar/account/${id}`, { signal })
+      .then(res => {
+        console.log(res.data);
+        toast.success("Delete Successfully!", {
+          toastId: 'delete-customer-success'
+        });
+        load();
+      })
+      .catch(error => {
+        console.log(error.message);
+        toast.error(error.message, {
+          toastId: 'delete-customer-error'
+        });
+      })
+      .finally(
+        () => {
+        }
+      );
+  }
 
   return (
     <div className="py-5 px-7">
@@ -29,8 +76,8 @@ const Customer = (props: Props) => {
       </div>
 
       <div className="bg-white rounded-xl mt-5">
-        <div className="px-10 pt-6 flex gap-2">
-          <div className="w-1/4">
+        <div className="px-6 pt-6 grid grid-cols-12 gap-2">
+          <div className="col-span-4 ">
             <InputText
               id="name"
               name="name"
@@ -40,7 +87,7 @@ const Customer = (props: Props) => {
               onchange={() => { }}
             />
           </div>
-          <div className="w-1/3">
+          <div className="col-span-4 ">
             <InputText
               id="email"
               name="email"
@@ -50,7 +97,7 @@ const Customer = (props: Props) => {
               onchange={() => { }}
             />
           </div>
-          <div className="w-1/5">
+          <div className="col-span-3 ">
             <InputText
               id="phone"
               name="phone"
@@ -60,218 +107,102 @@ const Customer = (props: Props) => {
               onchange={() => { }}
             />
           </div>
-          <div className="">
-            <div className="font-semibold mb-2">Role</div>
-            <Dropdown
-              placeholder="Select role"
-              items={items}
-              onSelect={handleSelect}
-            />
+          <div className="col-span-1 ">
+
           </div>
-          <div className=""></div>
         </div>
-        <div className="divide-y-2 font-medium">
-          <div className="px-10 py-3 flex items-center gap-2 ">
-            <div className="w-1/4 pl-10 truncate">
-              Huỳnh Đoàn Thanh Phong
-            </div>
-            <div className="w-1/3 pl-14 truncate">
-              huynhdoanthanhphong@gmail.com
-            </div>
-            <div className="w-1/5 flex justify-center">
-              0987654321
-            </div>
-            <div className="flex justify-center items-center flex-1 ">
-              <div className="pl-9 font-semibold">
-                Customer
+        {loading
+          ?
+          <SpinnerLoading
+            height='80'
+            width='80'
+            color='#2B5A50'
+          />
+          :
+          <div className="divide-y-2 font-medium">
+            {listCustomer?.map((customer, index) => (
+              <div
+                key={customer.id}
+              >
+                <div
+                  className="px-6 py-3 grid grid-cols-12 gap-2 "
+                >
+                  <div className="col-span-4 content-center truncate ml-4">
+                    {customer.firstName} {customer.lastName}
+                  </div>
+                  <div className="col-span-4 content-center truncate ml-4">
+                    {customer.email}
+                  </div>
+                  <div className="col-span-3 content-center justify-self-center">
+                    {customer.phone}
+                  </div>
+                  <div className="col-span-1 content-center justify-self-center">
+                    {customer.loading
+                      ?
+                      <SpinnerLoading
+                        height='30'
+                        width='30'
+                        color='#2B5A50'
+                      />
+                      :
+                      <>
+                        {
+                          customer.deleted
+                            ?
+                            <div
+                              className='p-1.5 rounded-full text-red-500'
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20" height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-trash-2"
+                              >
+                                <path d="M3 6h18" />
+                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                <line x1="10" x2="10" y1="11" y2="17" />
+                                <line x1="14" x2="14" y1="11" y2="17" />
+                                <line x1="2" y1="2" x2="22" y2="22" />
+                              </svg>
+                            </div>
+                            :
+                            <div
+                              className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300"
+                              onClick={() => deleteAccount(customer.id, index)}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20" height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-trash-2"
+                              >
+                                <path d="M3 6h18" />
+                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                <line x1="10" x2="10" y1="11" y2="17" />
+                                <line x1="14" x2="14" y1="11" y2="17" />
+                              </svg>
+                            </div>
+                        }
+                      </>
+                    }
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-              </div>
-              <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-              </div>
-            </div>
+            ))}
           </div>
-
-          <div className="px-10 py-3 flex items-center gap-2 ">
-            <div className="w-1/4 pl-10 truncate">
-              Huỳnh Đoàn Thanh Phong
-            </div>
-            <div className="w-1/3 pl-14 truncate">
-              huynhdoanthanhphong@gmail.com
-            </div>
-            <div className="w-1/5 flex justify-center">
-              0987654321
-            </div>
-            <div className="flex justify-center items-center flex-1 ">
-              <div className="pl-9 font-semibold">
-                Customer
-              </div>
-            </div>
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-              </div>
-              <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-              </div>
-            </div>
-          </div>
-
-          <div className="px-10 py-3 flex items-center gap-2 ">
-            <div className="w-1/4 pl-10 truncate">
-              Huỳnh Đoàn Thanh Phong
-            </div>
-            <div className="w-1/3 pl-14 truncate">
-              huynhdoanthanhphong@gmail.com
-            </div>
-            <div className="w-1/5 flex justify-center">
-              0987654321
-            </div>
-            <div className="flex justify-center items-center flex-1 ">
-              <div className="pl-9 font-semibold">
-                Customer
-              </div>
-            </div>
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-              </div>
-              <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-              </div>
-            </div>
-          </div>
-
-          <div className="px-10 py-3 flex items-center gap-2 ">
-            <div className="w-1/4 pl-10 truncate">
-              Huỳnh Đoàn Thanh Phong
-            </div>
-            <div className="w-1/3 pl-14 truncate">
-              huynhdoanthanhphong@gmail.com
-            </div>
-            <div className="w-1/5 flex justify-center">
-              0987654321
-            </div>
-            <div className="flex justify-center items-center flex-1 ">
-              <div className="pl-9 font-semibold">
-                Customer
-              </div>
-            </div>
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-              </div>
-              <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-              </div>
-            </div>
-          </div>
-
-          <div className="px-10 py-3 flex items-center gap-2 ">
-            <div className="w-1/4 pl-10 truncate">
-              Huỳnh Đoàn Thanh Phong
-            </div>
-            <div className="w-1/3 pl-14 truncate">
-              huynhdoanthanhphong@gmail.com
-            </div>
-            <div className="w-1/5 flex justify-center">
-              0987654321
-            </div>
-            <div className="flex justify-center items-center flex-1 ">
-              <div className="pl-9 font-semibold">
-                Customer
-              </div>
-            </div>
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-              </div>
-              <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-              </div>
-            </div>
-          </div>
-
-          <div className="px-10 py-3 flex items-center gap-2 ">
-            <div className="w-1/4 pl-10 truncate">
-              Huỳnh Đoàn Thanh Phong
-            </div>
-            <div className="w-1/3 pl-14 truncate">
-              huynhdoanthanhphong@gmail.com
-            </div>
-            <div className="w-1/5 flex justify-center">
-              0987654321
-            </div>
-            <div className="flex justify-center items-center flex-1 ">
-              <div className="pl-9 font-semibold">
-                Customer
-              </div>
-            </div>
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-              </div>
-              <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-              </div>
-            </div>
-          </div>
-
-          <div className="px-10 py-3 flex items-center gap-2 ">
-            <div className="w-1/4 pl-10 truncate">
-              Huỳnh Đoàn Thanh Phong
-            </div>
-            <div className="w-1/3 pl-14 truncate">
-              huynhdoanthanhphong@gmail.com
-            </div>
-            <div className="w-1/5 flex justify-center">
-              0987654321
-            </div>
-            <div className="flex justify-center items-center flex-1 ">
-              <div className="pl-9 font-semibold">
-                Customer
-              </div>
-            </div>
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-              </div>
-              <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-              </div>
-            </div>
-          </div>
-
-          <div className="px-10 py-3 flex items-center gap-2 ">
-            <div className="w-1/4 pl-10 truncate">
-              Huỳnh Đoàn Thanh Phong
-            </div>
-            <div className="w-1/3 pl-14 truncate">
-              huynhdoanthanhphong@gmail.com
-            </div>
-            <div className="w-1/5 flex justify-center">
-              0987654321
-            </div>
-            <div className="flex justify-center items-center flex-1 ">
-              <div className="pl-9 font-semibold">
-                Customer
-              </div>
-            </div>
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-              </div>
-              <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        }
       </div>
 
 
