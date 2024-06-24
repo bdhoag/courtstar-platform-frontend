@@ -282,5 +282,11 @@
     "expectedRevenue": "Doanh thu dự kiến",
     "amount": "Số tiền",
     "enterAmount": "Nhập số tiền",
-    "pending": "Đang chờ"
+    "pending": "Đang chờ",
+    "dashboard": "Dashboard",
+    "allUser": "Tất cả người dùng",
+    "centreManager": "Quản lý",
+    "customer": "Khách hàng",
+    "withdrawalRequest": "Yêu cầu rút tiền",
+    "postCentreRequest": "Yêu cầu đăng sân"
 }

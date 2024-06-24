@@ -284,5 +284,11 @@
     "expectedRevenue": "Expected Revenue",
     "amount": "Amount",
     "enterAmount": "Enter amount",
-    "pending": "Pending"
+    "pending": "Pending",
+    "dashboard": "Dashboard",
+    "allUser": "All User",
+    "centreManager": "Centre Manager",
+    "customer": "Customer",
+    "withdrawalRequest" : "Withdrawal Request",
+    "postCentreRequest" : "Post Centre Request"
 }
