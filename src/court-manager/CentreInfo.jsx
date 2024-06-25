@@ -326,7 +326,7 @@ function CentreInfo(props) {
                 <div className="px-2">
                   <div>
                     <span className='font-semibold'>{t('address')}: </span>
-                    {centreDetail.address} {t(centreDetail.district)}
+                    {centreDetail.address}, {t(centreDetail.district)}
                   </div>
 
                   <div>

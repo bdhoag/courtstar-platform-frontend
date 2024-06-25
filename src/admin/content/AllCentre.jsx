@@ -42,7 +42,7 @@ const AllCentre = () => {
     const load = async () => {
       await axiosInstance.get(`/courtstar/centre/allCentre`, { signal })
         .then(res => {
-          setListCentre(res.data.data)
+          setListCentre(res.data.data.reverse())
         })
         .catch(error => {
           console.log(error.message);
