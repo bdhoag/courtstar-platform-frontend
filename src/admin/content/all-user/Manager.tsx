@@ -16,7 +16,7 @@ const Manager = (props: Props) => {
   const [loading, setLoading] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 10;
 
   const load = async () => {
     await axiosInstance.get(`/courtstar/manager`, { signal })
