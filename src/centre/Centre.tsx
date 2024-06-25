@@ -122,7 +122,7 @@ const Centre: React.FC<{ selectedDistrict: string }> = ({ selectedDistrict }) =>
                   }
                 </div>
               ) : (
-                    <div className='flex flex-col items-center justify-center h-96 text-3xl text-primary mx-auto'>
+                <div className='flex flex-col items-center justify-center h-96 text-3xl text-primary mx-auto'>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="250" height="250"

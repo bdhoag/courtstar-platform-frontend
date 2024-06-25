@@ -144,7 +144,7 @@ const Customer = (props: Props) => {
                   <div className="col-span-4 content-center truncate ml-4">
                     {customer.email}
                   </div>
-                  <div className="col-span-3 content-center justify-self-center">
+                  <div className="col-span-3 content-center  ml-4">
                     {customer.phone}
                   </div>
                   <div className="col-span-1 content-center justify-self-center">

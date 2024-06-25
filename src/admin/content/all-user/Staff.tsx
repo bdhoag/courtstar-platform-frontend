@@ -145,7 +145,7 @@ const Staff = (props: Props) => {
                   <div className="col-span-4 content-center truncate ml-4">
                     {manager.account.email}
                   </div>
-                  <div className="col-span-3 content-center justify-self-center">
+                  <div className="col-span-3 content-center ml-4">
                     {manager.account.phone}
                   </div>
                   <div className="col-span-1 content-center justify-self-center">
