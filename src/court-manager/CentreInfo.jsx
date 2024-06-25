@@ -242,6 +242,7 @@ function CentreInfo(props) {
                   }
                   onClick={() => handleDisable(centreDetail.id)}
                   loading={activateLoading}
+                  disabled={!centreDetail.approveDate}
                 />
                 :
                 <Button
@@ -254,6 +255,7 @@ function CentreInfo(props) {
                   }
                   onClick={() => handleActive(centreDetail.id)}
                   loading={activateLoading}
+                  disabled={!centreDetail.approveDate}
                 />
             }
 
@@ -285,6 +287,7 @@ function CentreInfo(props) {
                 }
                 onClick={() => handleDelete(centreDetail.id)}
                 loading={deleteLoading}
+                disabled={!centreDetail.approveDate}
               />
             }
           </div>
@@ -302,6 +305,7 @@ function CentreInfo(props) {
                       className="flex justify-center items-center text-primary-green  rounded-md
                     px-2 hover:bg-primary-green hover:text-white ease-in-out duration-300 cursor-pointer"
                       onClick={openEditCentreModal}
+                      disabled={!centreDetail.approveDate}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -322,7 +326,7 @@ function CentreInfo(props) {
                 <div className="px-2">
                   <div>
                     <span className='font-semibold'>{t('address')}: </span>
-                    {centreDetail.address}
+                    {centreDetail.address} {t(centreDetail.district)}
                   </div>
 
                   <div>
@@ -414,6 +418,7 @@ function CentreInfo(props) {
                               loadingColor="#2B5A50"
                               loadingWidth="20"
                               loadingHeight="20"
+                              disabled={!centreDetail.approveDate}
                             />
                             :
                             <Button
