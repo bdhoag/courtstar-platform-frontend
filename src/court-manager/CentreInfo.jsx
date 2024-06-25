@@ -29,7 +29,7 @@ function CentreInfo(props) {
   const [listCourt, setListCourt] = useState([]);
 
   useEffect(() => {
-    if(props.centreDetail) {
+    if (props.centreDetail) {
       setCentreDetail(props.centreDetail);
     }
   }, [props.centreDetail])
@@ -196,16 +196,28 @@ function CentreInfo(props) {
           {centreDetail.name}
         </div>
         <div className="font-semibold">
-          {centreDetail.status
+          {centreDetail.approveDate
             ?
-            <div className="bg-primary-green text-white px-3 py-1 rounded-xl">
-              Opening
-            </div>
+            <>
+              {centreDetail.status
+                ?
+                <div className="bg-primary-green text-white px-3 py-1 rounded-xl">
+                  Opening
+                </div>
+                :
+                <div className="bg-red-500 text-white px-3 py-1 rounded-xl">
+                  Closed
+                </div>
+              }
+            </>
             :
-            <div className="bg-red-500 text-white px-3 py-1 rounded-xl">
-              Closed
-            </div>
+            <>
+              <div className="bg-red-500 text-white px-3 py-1 rounded-xl">
+                Pending
+              </div>
+            </>
           }
+
         </div>
       </div>
 
