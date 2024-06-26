@@ -534,76 +534,89 @@ const AllCentre = () => {
         isOpen={isOpenModal}
         setIsOpen={() => {
           setIsOpenModal(false);
+          setCentreDetail();
         }}
         html={centreInfor}
         title={centreDetail?.name}
         centreInfo
       />
       <div id="top"
-      className="py-5 px-7">
+        className="py-5 px-7">
         <div className="flex justify-between">
           <div className="text-3xl font-bold">
-          {t('allCenTre')}
+            {t('allCenTre')}
           </div>
         </div>
-
-        <div className="bg-white rounded-xl mt-5 shadow mb-10">
-          <div className="px-10 pt-6 grid grid-cols-4 gap-x-1">
-            <div className="">
-              <InputText
-                id="name"
-                name="name"
-                placeholder="Enter name of centre"
-                label="Name"
-              />
-            </div>
-            <div className="">
-              <div className="font-semibold mb-2">District</div>
-              <Dropdown
-                placeholder="Select district"
-                items={items}
-                onSelect={handleSelect}
-                buttonClassName='!px-3'
-              />
-            </div>
-
-            <div className="">
-              <div className="font-semibold mb-2">Feedback</div>
-              <Dropdown
-                placeholder="Rating star"
-                items={items}
-                onSelect={handleSelect}
-              />
-            </div>
-            <div className="">
-              <div className="font-semibold mb-2">Status</div>
-              <Dropdown
-                placeholder="Select status"
-                items={items}
-                onSelect={handleSelect}
-                buttonClassName='!px-3'
-              />
-            </div>
+        {loading
+          ?
+          <div className="h-[500px] flex items-center justify-center">
+            <SpinnerLoading
+              height='80'
+              width='80'
+              color='#2B5A50'
+            />
           </div>
-          <div className="divide-y-2 mt-2">
+          :
+          <>
+            <div className="bg-white rounded-xl mt-5 shadow mb-10">
+              <div className="px-10 pt-6 grid grid-cols-5 gap-x-1">
+                <div className="">
+                  <InputText
+                    id="name"
+                    name="name"
+                    placeholder="Enter name of centre"
+                    label="Name"
+                  />
+                </div>
+                <div className="">
+                  <InputText
+                    id="email"
+                    name="email"
+                    placeholder="Enter email of manager"
+                    label="Email"
+                  />
+                </div>
+                <div className="">
+                  <div className="font-semibold mb-2">District</div>
+                  <Dropdown
+                    placeholder="Select district"
+                    items={items}
+                    onSelect={handleSelect}
+                    buttonClassName='!px-3'
+                  />
+                </div>
 
-            {loading
-              ?
-              <SpinnerLoading
-                height='80'
-                width='80'
-                color='#2B5A50'
-              />
-              :
-              <>
+                <div className="">
+                  <div className="font-semibold mb-2">Feedback</div>
+                  <Dropdown
+                    placeholder="Rating star"
+                    items={items}
+                    onSelect={handleSelect}
+                  />
+                </div>
+                <div className="">
+                  <div className="font-semibold mb-2">Status</div>
+                  <Dropdown
+                    placeholder="Select status"
+                    items={items}
+                    onSelect={handleSelect}
+                    buttonClassName='!px-3'
+                  />
+                </div>
+              </div>
+              <div className="divide-y-2 mt-2">
+
                 {currentListCentres?.map(centre => (
                   <div
                     key={centre.id}
-                    className="px-10 py-3 grid grid-cols-4 content-center gap-2 font-medium hover:bg-slate-100 cursor-pointer"
+                    className="px-10 py-3 grid grid-cols-5 content-center gap-2 font-medium hover:bg-slate-100 cursor-pointer"
                     onClick={() => openCentreDetail(centre.id)}
                   >
                     <div className="ml-5 truncate">
                       {centre.name}
+                    </div>
+                    <div className="ml-5 truncate">
+                      {centre.managerEmail}
                     </div>
                     <div className="ml-5 truncate">
                       {t(centre.district)}
@@ -635,19 +648,19 @@ const AllCentre = () => {
                   </div> */}
                   </div>
                 ))}
-              </>
-            }
-          </div>
-        </div>
-                      { listCentre.length > itemsPerPage
-                    &&
-                    <Pagination
-                      totalItems={listCentre.length}
-                      itemsPerPage={itemsPerPage}
-                      currentPage={currentPage}
-                      onPageChange={handlePageChange}
-                    />
-                      }
+              </div>
+            </div>
+          </>
+        }
+        {listCentre.length > itemsPerPage
+          &&
+          <Pagination
+            totalItems={listCentre.length}
+            itemsPerPage={itemsPerPage}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        }
       </div>
     </>
   );

@@ -98,11 +98,11 @@ const PostCentre = (props: Props) => {
     <>
       {centreDetail &&
         <div
-          className="h-[calc(75vh)] w-[calc(80vw)]"
+          className="w-[calc(80vw)]"
         >
 
           <div className="flex justify-between gap-4">
-            <div className="w-[44rem]">
+            <div className="w-1/2">
               <XCarousel images={centreDetail?.images} />
             </div>
 
@@ -208,11 +208,13 @@ const PostCentre = (props: Props) => {
 
         {loading
           ?
-          <SpinnerLoading
-            height='80'
-            width='80'
-            color='#2B5A50'
-          />
+          <div className="h-[500px] flex items-center justify-center">
+            <SpinnerLoading
+              height='80'
+              width='80'
+              color='#2B5A50'
+            />
+          </div>
           :
           <>
             {
@@ -243,7 +245,7 @@ const PostCentre = (props: Props) => {
                   </div>
                 </div >
                 :
-                <div className='flex flex-col items-center justify-center h-96 text-3xl text-primary mx-auto'>
+                <div className='flex flex-col items-center justify-center h-[500px] text-3xl text-primary mx-auto'>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="250" height="250"

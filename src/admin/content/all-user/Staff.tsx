@@ -87,50 +87,53 @@ const Staff = (props: Props) => {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl mt-5">
-        <div className="px-6 pt-6 grid grid-cols-12 gap-2">
-          <div className="col-span-4 ">
-            <InputText
-              id="name"
-              name="name"
-              placeholder="Enter the user's name"
-              label="Name"
-              value=''
-              onchange={() => { }}
-            />
-          </div>
-          <div className="col-span-4 ">
-            <InputText
-              id="email"
-              name="email"
-              placeholder="Enter the user's email"
-              label="Email"
-              value=''
-              onchange={() => { }}
-            />
-          </div>
-          <div className="col-span-3 ">
-            <InputText
-              id="phone"
-              name="phone"
-              placeholder="Enter the user's phone number"
-              label="Phone number"
-              value=''
-              onchange={() => { }}
-            />
-          </div>
-          <div className="col-span-1 ">
-
-          </div>
-        </div>
-        {loading
-          ?
+      {loading
+        ?
+        <div className="h-[500px] flex items-center justify-center">
           <SpinnerLoading
             height='80'
             width='80'
             color='#2B5A50'
           />
-          :
+        </div>
+        :
+        <div className="bg-white rounded-xl mt-5">
+          <div className="px-6 pt-6 grid grid-cols-12 gap-2">
+            <div className="col-span-4 ">
+              <InputText
+                id="name"
+                name="name"
+                placeholder="Enter the user's name"
+                label="Name"
+                value=''
+                onchange={() => { }}
+              />
+            </div>
+            <div className="col-span-4 ">
+              <InputText
+                id="email"
+                name="email"
+                placeholder="Enter the user's email"
+                label="Email"
+                value=''
+                onchange={() => { }}
+              />
+            </div>
+            <div className="col-span-3 ">
+              <InputText
+                id="phone"
+                name="phone"
+                placeholder="Enter the user's phone number"
+                label="Phone number"
+                value=''
+                onchange={() => { }}
+              />
+            </div>
+            <div className="col-span-1 ">
+
+            </div>
+          </div>
+
           <div className="divide-y-2 font-medium">
             {currentListStaff?.map((manager, index) => (
               <div
@@ -214,17 +217,17 @@ const Staff = (props: Props) => {
               </div>
             ))}
           </div>
-        }
-      </div>
-                  { listStaff.length > itemsPerPage
-                    &&
-                    <Pagination
-                      totalItems={listStaff.length}
-                      itemsPerPage={itemsPerPage}
-                      currentPage={currentPage}
-                      onPageChange={handlePageChange}
-                    />
-                      }
+        </div>
+      }
+      {listStaff.length > itemsPerPage
+        &&
+        <Pagination
+          totalItems={listStaff.length}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      }
 
     </div>
   )
