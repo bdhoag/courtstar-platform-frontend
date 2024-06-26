@@ -290,5 +290,7 @@
     "withdrawalRequest": "Yêu cầu rút tiền",
     "postCentreRequest": "Yêu cầu đăng sân",
     "description": "Điểm nổi bật",
+    "cancelBooking": "Hủy đặt sân",
+    "canceled": "Đã hủy",
     "deny": "Từ chối"
 }

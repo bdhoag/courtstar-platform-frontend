@@ -292,5 +292,7 @@
     "withdrawalRequest" : "Withdrawal Request",
     "postCentreRequest" : "Post Centre Request",
     "description": "Description",
+    "cancelBooking": "Cancel booking",
+    "canceled": "Canceled",
     "deny" :  "Deny"
 }
