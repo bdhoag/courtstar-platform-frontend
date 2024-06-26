@@ -124,17 +124,18 @@ const Dashboard = () => {
       <div className="text-3xl font-semibold">
         Dashboard
       </div>
-      <div className="bg-white rounded-2xl py-3 px-5 flex flex-col gap-5">
-
-        {loading
-          ?
+      {loading
+        ?
+        <div className="h-[500px] flex items-center justify-center">
           <SpinnerLoading
             height='80'
             width='80'
             color='#2B5A50'
           />
-          :
-          <>
+        </div>
+        :
+        <>
+          <div className="bg-white rounded-2xl py-3 px-5 flex flex-col gap-5">
             <div className="flex justify-between items-center font-semibold">
               <div className="text-lg">
                 Overview
@@ -193,9 +194,9 @@ const Dashboard = () => {
                 series={overviewSeries}
               />
             </div>
-          </>
-        }
-      </div>
+          </div>
+        </>
+      }
     </div>
   );
 }

@@ -293,5 +293,6 @@
     "postCentreRequest" : "Post Centre Request",
     "description": "Description",
     "cancelBooking": "Cancel booking",
-    "canceled": "Canceled"
+    "canceled": "Canceled",
+    "deny" :  "Deny"
 }

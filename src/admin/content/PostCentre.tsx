@@ -98,11 +98,11 @@ const PostCentre = (props: Props) => {
     <>
       {centreDetail &&
         <div
-          className="h-[calc(75vh)] w-[calc(80vw)]"
+          className="w-[calc(80vw)]"
         >
 
           <div className="flex justify-between gap-4">
-            <div className="w-[44rem]">
+            <div className="w-1/2">
               <XCarousel images={centreDetail?.images} />
             </div>
 
@@ -208,23 +208,23 @@ const PostCentre = (props: Props) => {
 
         {loading
           ?
-          <SpinnerLoading
-            height='80'
-            width='80'
-            color='#2B5A50'
-          />
+          <div className="h-[500px] flex items-center justify-center">
+            <SpinnerLoading
+              height='80'
+              width='80'
+              color='#2B5A50'
+            />
+          </div>
           :
           <>
             {
               listCentrePending.length
                 ?
-                <div className="bg-white rounded-xl shadow mt-5">
-
-                  <div className="divide-y-2">
+                  <div className="mt-2">
                     {listCentrePending?.map((centre) => (
                       <div
                         key={centre.id}
-                        className="grid grid-cols-3 py-3 px-10 font-medium hover:bg-slate-100 cursor-pointer"
+                        className="grid grid-cols-3 py-3 px-10 mt-1 bg-white rounded-lg shadow-sm ease-in-out duration-300 font-medium hover:bg-teal-50 hover:px-8 cursor-pointer"
                         onClick={() => openCentreDetail(centre.id)}
                       >
                         <div className="self-center font-semibold">
@@ -234,16 +234,15 @@ const PostCentre = (props: Props) => {
                           {centre.managerEmail}
                         </div>
                         <div className="w-fit justify-self-end">
-                          <div className="bg-red-500 text-white text-sm px-3 py-0.5 rounded-md">
+                          <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-rose-500 rounded-md">
                             Pending
                           </div>
                         </div>
                       </div>
                     ))}
-                  </div>
                 </div >
                 :
-                <div className='flex flex-col items-center justify-center h-96 text-3xl text-primary mx-auto'>
+                <div className='flex flex-col items-center justify-center h-[500px] text-3xl text-primary mx-auto'>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="250" height="250"
