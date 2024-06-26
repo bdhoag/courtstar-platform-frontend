@@ -72,7 +72,7 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
         aria-expanded={isOpen}
       >
         {/* Display selected item label or placeholder */}
-        <div className={`text-sm font-normal ${(selectedItem || props.initialValue) ? 'text-gray-800 font-semibold' : 'text-gray-400'}`}>
+        <div className={`text-sm font-normal truncate ${(selectedItem || props.initialValue) ? 'text-gray-800 font-semibold' : 'text-gray-400'}`}>
           {selectedItem || props.initialValue || props.placeholder}
         </div>
         {/* SVG for dropdown arrow, rotates when open */}

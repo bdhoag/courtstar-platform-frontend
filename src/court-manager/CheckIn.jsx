@@ -20,7 +20,7 @@ const CheckIn = (props) => {
   const [listSlot, setListSlot] = useState(apiCheckin.map(item => {
     return item.slot.slotNo
   }))
-console.log(listSlot);
+  console.log(listSlot);
   const [formCheckIn, setFormCheckIn] = useState({ // State to hold the form data for the check-in popup
     checkinId: '',
     startTime: '',
@@ -157,7 +157,7 @@ console.log(listSlot);
     height: 240,
     width: 320,
   };
-  //Choose day 
+  //Choose day
   useEffect(() => {
     const currentDate = moment();
 
@@ -172,22 +172,22 @@ console.log(listSlot);
 
   const handleSelectDate = (item) => {
     console.log(`Selected: ${item.label}`);
-    
+
   };
 
-   // Extract the slots from the apiCheckin data
+  // Extract the slots from the apiCheckin data
 
-   const getUniqueSlots = (apiCheckin) => {
+  const getUniqueSlots = (apiCheckin) => {
     const slots = apiCheckin.map(checkin => parseInt(checkin.slot.slotNo, 10));
     const uniqueSlots = [...new Set(slots)].sort((a, b) => a - b);
     return uniqueSlots.map(slot => ({ label: slot.toString() }));
   };
-const optionDropdownSlot = getUniqueSlots(apiCheckin);
+  const optionDropdownSlot = getUniqueSlots(apiCheckin);
 
-// Function to handle slot selection
-const handleSelectSlot = (item) => {
-  console.log(`Selected: ${item.label}`);
-};
+  // Function to handle slot selection
+  const handleSelectSlot = (item) => {
+    console.log(`Selected: ${item.label}`);
+  };
 
   useEffect(() => {
     if (data) {
@@ -239,9 +239,9 @@ const handleSelectSlot = (item) => {
         apiCheckin.length
           ?
           <>
-            <div className="bg-white rounded-xl mt-4">
-              <div className="px-10 pt-6 flex justify-between gap-1">
-                <div className="w-3/12">
+            <div className="mt-4">
+              <div className="px-10 py-4 grid grid-cols-12 gap-2 bg-white shadow rounded-xl ">
+                <div className="col-span-3">
                   <InputText
                     id="name"
                     name="name"
@@ -249,7 +249,7 @@ const handleSelectSlot = (item) => {
                     label={t('fullName')}
                   />
                 </div>
-                <div className="w-3/12">
+                <div className="col-span-3">
                   <InputText
                     id="email"
                     name="email"
@@ -257,7 +257,7 @@ const handleSelectSlot = (item) => {
                     label="Email"
                   />
                 </div>
-                <div className="w-2/12">
+                <div className="col-span-2">
                   <Dropdown
                     label="Date"
                     items={optionDropdownDate}
@@ -265,7 +265,7 @@ const handleSelectSlot = (item) => {
                     placeholder={t('Select date')}
                   />
                 </div>
-                <div className="w-2/12">
+                <div className="col-span-2">
                   <InputText
                     id="phone"
                     name="phone"
@@ -273,7 +273,7 @@ const handleSelectSlot = (item) => {
                     label={t('phone')}
                   />
                 </div>
-                <div className="w-2/12 pr-3">
+                <div className="col-span-2 pr-3">
                   <Dropdown
                     label={t('slot')}
                     items={optionDropdownSlot}
@@ -283,38 +283,46 @@ const handleSelectSlot = (item) => {
                     buttonClassName="!px-3"
                   />
                 </div>
-                <div className="w-9"></div>
               </div>
-              <div className="divide-y-2">
+              <div className="mt-2 font-medium">
                 {apiCheckin.map((checkin) => (
-                  <div key={checkin.id} className="px-10 py-3 flex items-center justify-between">
-                    <div className="w-3/12 px-3 truncate">
+                  <div
+                    key={checkin.id}
+                    className={checkin?.status
+                      ? "bg-slate-200 px-10 py-1 grid grid-cols-12 gap-2 hover:px-8 cursor-pointer mt-2 rounded-lg ease-in-out duration-300"
+                      : "bg-white px-10 py-1 grid grid-cols-12 gap-2 hover:bg-teal-50 hover:px-8 cursor-pointer mt-2 rounded-lg shadow ease-in-out duration-300"}
+                    onClick={
+                      () => handleCheckInPopup(checkin.id, checkin?.slot?.startTime, checkin?.slot?.endTime, checkin?.slot?.slotNo,
+                        checkin?.totalPrice, checkin?.status)
+                    }
+                  >
+                    <div className="col-span-3 px-3 flex items-center truncate">
                       {checkin?.account?.firstName} {checkin?.account?.lastName}
                       {checkin?.guest?.fullName}
                     </div>
-                    <div className="w-3/12 px-3 truncate">
+                    <div className="col-span-3 px-3 flex items-center truncate">
                       {checkin?.account?.email}
                       {checkin?.guest?.email}
                     </div>
-                    <div className="w-2/12 flex justify-center">
+                    <div className="col-span-2 flex items-center justify-center">
                       {moment(checkin?.date, 'yyyy-MM-DD').format('DD/MM')}
                     </div>
-                    <div className="w-2/12 flex justify-center">
+                    <div className="col-span-2 flex items-center justify-center">
                       {checkin?.account?.phone}
                       {checkin?.guest?.phone}
                     </div>
-                    <div className="w-2/12 flex flex-col justify-center items-center font-semibold">
+                    <div className="col-span-2 flex flex-col justify-center items-center font-semibold">
                       {checkin?.slot?.slotNo}
                       <div className="text-sm font-normal">
                         ({moment(checkin?.slot?.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(checkin?.slot?.endTime, 'HH:mm:ss').format('HH:mm')})
                       </div>
                     </div>
-                    <button
+                    {/* <button
                       onClick={
                         () => handleCheckInPopup(checkin.id, checkin?.slot?.startTime, checkin?.slot?.endTime, checkin?.slot?.slotNo,
                           checkin?.totalPrice, checkin?.status)
                       }
-                      className="p-2 rounded-full bg-slate-100 hover:bg-primary-green hover:text-white ease-in-out duration-200"
+                      className="w-fit h-fit p-2 rounded-full bg-slate-100 hover:bg-primary-green hover:text-white ease-in-out duration-200"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -343,7 +351,7 @@ const handleSelectSlot = (item) => {
                           </>
                         )}
                       </svg>
-                    </button>
+                    </button> */}
                   </div>
                 ))}
               </div>
