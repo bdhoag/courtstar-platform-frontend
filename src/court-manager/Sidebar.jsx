@@ -127,7 +127,7 @@ const Sidebar = (props) => {
                         ?
                         'bg-primary-green text-lg text-white pl-3 py-1 rounded-md ease-in-out duration-300 font-semibold cursor-pointer'
                         :
-                        'py-1 rounded-md hover:bg-primary-green text-lg hover:text-white truncate hover:pl-1.5 ease-in-out duration-300 font-semibold cursor-pointer'
+                        'py-1 rounded-md hover:bg-primary-green text-lg hover:text-white truncate hover:truncate hover:px-1.5 ease-in-out duration-300 font-semibold cursor-pointer'
                     }
                     onClick={() => handleDropdown(centre.id)}
                   >
