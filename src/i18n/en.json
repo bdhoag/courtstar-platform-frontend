@@ -291,5 +291,6 @@
     "customer": "Customer",
     "withdrawalRequest" : "Withdrawal Request",
     "postCentreRequest" : "Post Centre Request",
-    "description": "Description"
+    "description": "Description",
+    "deny" :  "Deny"
 }
