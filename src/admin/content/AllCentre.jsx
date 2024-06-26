@@ -558,8 +558,8 @@ const AllCentre = () => {
           </div>
           :
           <>
-            <div className="bg-white rounded-xl mt-5 shadow mb-10">
-              <div className="px-10 pt-6 grid grid-cols-5 gap-x-1">
+            <div className="mt-5 mb-10">
+              <div className="px-10 bg-white py-4 grid grid-cols-5 gap-x-1 rounded-xl shadow">
                 <div className="">
                   <InputText
                     id="name"
@@ -604,12 +604,12 @@ const AllCentre = () => {
                   />
                 </div>
               </div>
-              <div className="divide-y-2 mt-2">
 
+              <div className="mt-2">
                 {currentListCentres?.map(centre => (
                   <div
                     key={centre.id}
-                    className="px-10 py-3 grid grid-cols-5 content-center gap-2 font-medium hover:bg-slate-100 cursor-pointer"
+                    className="bg-white px-10 py-3 grid grid-cols-5 content-center gap-2 font-medium hover:bg-teal-50 hover:px-8 cursor-pointer mt-1 rounded-lg shadow-sm ease-in-out duration-300"
                     onClick={() => openCentreDetail(centre.id)}
                   >
                     <div className="ml-5 truncate">

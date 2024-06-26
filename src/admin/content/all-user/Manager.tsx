@@ -101,9 +101,8 @@ const Manager = (props: Props) => {
           {listManager.length
             ?
             <>
-              <div className="bg-white rounded-xl mt-5">
-
-                <div className="px-6 pt-6 grid grid-cols-12 gap-2">
+              <div className="mt-5">
+                <div className="px-10 py-4 grid grid-cols-12 gap-2 bg-white rounded-xl ">
                   <div className="col-span-4 ">
                     <InputText
                       id="name"
@@ -139,13 +138,13 @@ const Manager = (props: Props) => {
                   </div>
                 </div>
 
-                <div className="divide-y-2 font-medium">
+                <div className="mt-2 font-medium">
                   {currentListManager?.map((manager, index) => (
                     <div
                       key={manager.account.id}
                     >
                       <div
-                        className="px-6 py-3 grid grid-cols-12 gap-2 "
+                        className="bg-white px-10 py-3 mt-1 rounded-lg grid grid-cols-12 gap-2 "
                       >
                         <div className="col-span-4 content-center truncate ml-4">
                           {manager.account.firstName} {manager.account.lastName}
