@@ -21,7 +21,114 @@ const AllCentre = () => {
   const { t } = useTranslation();
   const controller = new AbortController();
   const { signal } = controller;
-  const items = ['Item 1', 'Item 2', 'Item 3'];
+  const items = [
+    {
+      key: 'all',
+      label: t('allCenTre')
+    },
+    {
+      key: 'thuDucCity',
+      label: t('thuDucCity')
+    },
+    {
+      key: 'district1',
+      label: t('district1')
+    },
+    {
+      key: 'district3',
+      label: t('district3')
+    },
+    {
+      key: 'district4',
+      label: t('district4')
+    },
+    {
+      key: 'district5',
+      label: t('district5')
+    },
+    {
+      key: 'district6',
+      label: t('district6')
+    },
+    {
+      key: 'district7',
+      label: t('district7')
+    },
+    {
+      key: 'district8',
+      label: t('district8')
+    },
+    {
+      key: 'district10',
+      label: t('district10')
+    },
+    {
+      key: 'district11',
+      label: t('district11')
+    },
+    {
+      key: 'district12',
+      label: t('district12')
+    },
+    {
+      key: 'binhTanDistrict',
+      label: t('binhTanDistrict')
+    },
+    {
+      key: 'binhThanhDistrict',
+      label: t('binhThanhDistrict')
+    },
+    {
+      key: 'goVapDistrict',
+      label: t('goVapDistrict')
+    },
+    {
+      key: 'phuNhuanDistrict',
+      label: t('phuNhuanDistrict')
+    },
+    {
+      key: 'tanBinhDistrict',
+      label: t('tanBinhDistrict')
+    },
+    {
+      key: 'tanPhuDistrict',
+      label: t('tanPhuDistrict')
+    },
+    {
+      key: 'nhaBeProvince',
+      label: t('nhaBeProvince')
+    },
+    {
+      key: 'canGioProvince',
+      label: t('canGioProvince')
+    },
+    {
+      key: 'cuChiProvince',
+      label: t('cuChiProvince')
+    },
+    {
+      key: 'hocMonProvince',
+      label: t('hocMonProvince')
+    },
+    {
+      key: 'binhChanhProvince',
+      label: t('binhChanhProvince')
+    }
+  ];
+
+  const ratingItems = [
+    { key: 'all', label: 'All Rating' },
+    { key: '1', label: '1 Star' },
+    { key: '2', label: '2 Stars' },
+    { key: '3', label: '3 Stars' },
+    { key: '4', label: '4 Stars' },
+    { key: '5', label: '5 Stars' },
+  ];
+  const deleteItems = [
+    { key: 'all', label: 'All Status' },
+    { key: 'true', label: 'Unavailable' },
+    { ket: 'false', label: 'Available' }
+  ];
   const [listCentre, setListCentre] = useState([]);
   const [loading, setLoading] = useState(true);
   const [centreDetail, setCentreDetail] = useState();
@@ -33,7 +140,12 @@ const AllCentre = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-
+  const [filteredCentres, setFilteredCentres] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
+  const [emailFilter, setEmailFilter] = useState('');
+  const [districtFilter, setDistrictFilter] = useState('');
+  const [ratingFilter, setRatingFilter] = useState('');
+  const [deleteFilter, setDeleteFilter] = useState('');
   const handleSelect = (item) => {
     console.log(`Selected: ${item}`);
   };
@@ -42,7 +154,8 @@ const AllCentre = () => {
     const load = async () => {
       await axiosInstance.get(`/courtstar/centre/allCentre`, { signal })
         .then(res => {
-          setListCentre(res.data.data.reverse())
+          setListCentre(res.data.data.reverse());
+          setFilteredCentres(res.data.data);
         })
         .catch(error => {
           console.log(error.message);
@@ -55,6 +168,47 @@ const AllCentre = () => {
     }
     load();
   }, [])
+
+  const handleSelectDistrict = (item) => {
+    setDistrictFilter(item.key);
+  };
+
+  const handleSelectRating = (item) => {
+    setRatingFilter(item.key);
+  };
+  const handleSelectDelete = (item) => {
+    setDeleteFilter(item.key);
+  };
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let updatedCentres = listCentre;
+
+      if (nameFilter) {
+        updatedCentres = updatedCentres.filter(centre => centre.name.toLowerCase().includes(nameFilter.toLowerCase()));
+      }
+
+      if (emailFilter) {
+        updatedCentres = updatedCentres.filter(centre => centre.managerEmail.toLowerCase().includes(emailFilter.toLowerCase()));
+      }
+
+      if (districtFilter && districtFilter !== 'all') {
+        updatedCentres = updatedCentres.filter(centre => centre.district === districtFilter);
+      }
+
+      if (ratingFilter && ratingFilter !== 'all') {
+        updatedCentres = updatedCentres.filter(centre => centre.currentRate === parseInt(ratingFilter));
+      }
+      if (deleteFilter !== 'all') {
+        updatedCentres = updatedCentres.filter(centre => centre.deleted === Boolean(deleteFilter));
+      }
+
+      setFilteredCentres(updatedCentres);
+    };
+
+    applyFilters();
+  }, [nameFilter, emailFilter, districtFilter, ratingFilter, deleteFilter, listCentre]);
+
 
   // const loadFeedback = async (id) => {
   //   setLoadingFeedback(true);
@@ -178,7 +332,7 @@ const AllCentre = () => {
 
   const indexOfLastCentre = currentPage * itemsPerPage;
   const indexOfFirstCentre = indexOfLastCentre - itemsPerPage;
-  const currentListCentres = listCentre.slice(indexOfFirstCentre, indexOfLastCentre);
+  const currentListCentres = filteredCentres.slice(indexOfFirstCentre, indexOfLastCentre);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -562,18 +716,18 @@ const AllCentre = () => {
               <div className="px-10 bg-white py-4 grid grid-cols-5 gap-x-1 rounded-xl shadow">
                 <div className="">
                   <InputText
-                    id="name"
-                    name="name"
                     placeholder="Enter name of centre"
                     label="Name"
+                    value={nameFilter}
+                    onchange={(e) => setNameFilter(e.target.value)}
                   />
                 </div>
                 <div className="">
                   <InputText
-                    id="email"
-                    name="email"
                     placeholder="Enter email of manager"
                     label="Email"
+                    value={emailFilter}
+                    onchange={(e) => setEmailFilter(e.target.value)}
                   />
                 </div>
                 <div className="">
@@ -581,7 +735,7 @@ const AllCentre = () => {
                   <Dropdown
                     placeholder="Select district"
                     items={items}
-                    onSelect={handleSelect}
+                    onSelect={handleSelectDistrict}
                     buttonClassName='!px-3'
                   />
                 </div>
@@ -590,16 +744,17 @@ const AllCentre = () => {
                   <div className="font-semibold mb-2">Feedback</div>
                   <Dropdown
                     placeholder="Rating star"
-                    items={items}
-                    onSelect={handleSelect}
+                    items={ratingItems}
+                    onSelect={handleSelectRating}
+                    buttonClassName='!px-3'
                   />
                 </div>
                 <div className="">
                   <div className="font-semibold mb-2">Status</div>
                   <Dropdown
                     placeholder="Select status"
-                    items={items}
-                    onSelect={handleSelect}
+                    items={deleteItems}
+                    onSelect={handleSelectDelete}
                     buttonClassName='!px-3'
                   />
                 </div>
