@@ -135,7 +135,7 @@ const Sidebar = (props) => {
                   </div>
 
                   {centreIsSelected === centre.id && (
-                    <div className="flex flex-col gap-1 pl-5 mt-1 animate-fade-in-down transition-all ease-in-out duration-300">
+                    <div className="flex flex-col gap-1 pl-5 mt-1 font-medium animate-fade-in-down transition-all ease-in-out duration-300">
                       <div
                         onClick={() => handleSelectTab(1)}
                         className=

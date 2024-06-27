@@ -69,8 +69,8 @@ function StaffInfo() {
       {
         staffInfo.length
           ?
-          <div className="bg-white rounded-xl mt-4">
-            <div className="flex bg-primary-green text-white text-lg font-semibold rounded-t-lg divide-x-2">
+          <div className="mt-4">
+            <div className="flex bg-white rounded-xl shadow-lg text-lg font-semibold rounded-t-lg">
               <div className="w-1/3 px-8 py-2 ">
                 {t('fullName')}
               </div>
@@ -84,11 +84,11 @@ function StaffInfo() {
 
               </div>
             </div>
-            <div className="divide-y-2">
+            <div className="mt-2">
               {staffInfo.map((staff) => (
                 <div
                   key={staff.id}
-                  className="flex divide-x-2"
+                  className="flex bg-white shadow font-medium py-1.5 rounded-xl"
                 >
                   <div className="w-1/3 px-8 truncate py-2">
                     {staff.account.firstName} {staff.account.lastName}

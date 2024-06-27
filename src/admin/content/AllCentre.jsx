@@ -652,10 +652,10 @@ const AllCentre = () => {
             </div>
           </>
         }
-        {listCentre.length > itemsPerPage
+        {filteredCentres.length > itemsPerPage
           &&
           <Pagination
-            totalItems={listCentre.length}
+            totalItems={filteredCentres.length}
             itemsPerPage={itemsPerPage}
             currentPage={currentPage}
             onPageChange={handlePageChange}
