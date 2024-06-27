@@ -144,7 +144,7 @@ const Manager = (props: Props) => {
                       key={manager.account.id}
                     >
                       <div
-                        className="bg-white px-10 py-3 mt-1 rounded-lg grid grid-cols-12 gap-2 "
+                        className="bg-white px-10 py-1.5 mt-1 rounded-lg grid grid-cols-12 gap-2 "
                       >
                         <div className="col-span-4 content-center truncate ml-4">
                           {manager.account.firstName} {manager.account.lastName}

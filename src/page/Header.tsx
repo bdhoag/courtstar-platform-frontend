@@ -124,7 +124,7 @@ const Header: React.FC = () => {
           </div>
 
           <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
-            <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5">
+            <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5 font-medium">
 
               <Link
                 className="text-gray-200 font-medium hover:text-white hover:font-semibold transition-all ease-in-out duration-300"
