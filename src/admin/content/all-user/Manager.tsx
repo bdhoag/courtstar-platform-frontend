@@ -253,10 +253,10 @@ const Manager = () => {
                 </div>
               </div>
 
-              {listManager.length > itemsPerPage
+              {filteredManager.length > itemsPerPage
                 &&
                 <Pagination
-                  totalItems={listManager.length}
+                  totalItems={filteredManager.length}
                   itemsPerPage={itemsPerPage}
                   currentPage={currentPage}
                   onPageChange={handlePageChange}

@@ -6,9 +6,8 @@ import SpinnerLoading from '../../../components/SpinnerLoading';
 import { toast } from 'react-toastify';
 import Pagination from '../../../components/pagination';
 
-type Props = {}
 
-const Staff = (props: Props) => {
+const Staff = () => {
 
   const controller = new AbortController();
   const { signal } = controller;
@@ -16,7 +15,37 @@ const Staff = (props: Props) => {
   const [loading, setLoading] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 10;
+
+  const [filteredStaff, setFilteredStaff] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
+  const [emailFilter, setEmailFilter] = useState('');
+  const [phoneFilter, setPhoneFilter] = useState('');
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let updatedStaff = listStaff;
+
+      if (nameFilter) {
+        updatedStaff = updatedStaff.filter(staff =>
+          staff.account.firstName.toLowerCase().includes(nameFilter.toLowerCase()) ||
+          staff.account.lastName.toLowerCase().includes(nameFilter.toLowerCase())
+        );
+      }
+
+      if (emailFilter) {
+        updatedStaff = updatedStaff.filter(staff => staff.account.email.toLowerCase().includes(emailFilter.toLowerCase()));
+      }
+
+      if (phoneFilter) {
+        updatedStaff = updatedStaff.filter(staff => staff.account.phone.toLowerCase().includes(phoneFilter.toLowerCase()));
+      }
+
+      setFilteredStaff(updatedStaff);
+    };
+
+    applyFilters();
+  }, [nameFilter, emailFilter, phoneFilter, listStaff]);
 
   const load = async () => {
     await axiosInstance.get(`/courtstar/staff`, { signal })
@@ -24,6 +53,7 @@ const Staff = (props: Props) => {
         setListStaff(res.data.data.map(item => {
           return { ...item, loading: false };
         }));
+        setFilteredStaff(res.data.data);
       })
       .catch(error => {
         console.log(error.message);
@@ -77,7 +107,7 @@ const Staff = (props: Props) => {
 
   const indexOfLastStaff = currentPage * itemsPerPage;
   const indexOfFirstStaff = indexOfLastStaff - itemsPerPage;
-  const currentListStaff = listStaff.slice(indexOfFirstStaff, indexOfLastStaff);
+  const currentListStaff: any = filteredStaff.slice(indexOfFirstStaff, indexOfLastStaff);
 
   return (
     <div className="py-5 px-7">
@@ -108,8 +138,8 @@ const Staff = (props: Props) => {
                     name="name"
                     placeholder="Enter the user's name"
                     label="Name"
-                    value=''
-                    onchange={() => { }}
+                    value={nameFilter}
+                    onchange={(e) => setNameFilter(e.target.value)}
                   />
                 </div>
                 <div className="col-span-4 ">
@@ -118,8 +148,8 @@ const Staff = (props: Props) => {
                     name="email"
                     placeholder="Enter the user's email"
                     label="Email"
-                    value=''
-                    onchange={() => { }}
+                    value={emailFilter}
+                    onchange={(e) => setEmailFilter(e.target.value)}
                   />
                 </div>
                 <div className="col-span-3 ">
@@ -128,8 +158,8 @@ const Staff = (props: Props) => {
                     name="phone"
                     placeholder="Enter the user's phone number"
                     label="Phone number"
-                    value=''
-                    onchange={() => { }}
+                    value={phoneFilter}
+                    onchange={(e) => setPhoneFilter(e.target.value)}
                   />
                 </div>
                 <div className="col-span-1 ">
@@ -138,24 +168,24 @@ const Staff = (props: Props) => {
               </div>
 
               <div className="mt-2 font-medium">
-                {currentListStaff?.map((manager, index) => (
+                {currentListStaff?.map((staff, index) => (
                   <div
-                    key={manager.account.id}
+                    key={staff.account.id}
                   >
                     <div
                       className="bg-white px-10 py-1.5 mt-1 rounded-lg grid grid-cols-12 gap-2"
                     >
                       <div className="col-span-4 content-center truncate ml-4">
-                        {manager.account.firstName} {manager.account.lastName}
+                        {staff.account.firstName} {staff.account.lastName}
                       </div>
                       <div className="col-span-4 content-center truncate ml-4">
-                        {manager.account.email}
+                        {staff.account.email}
                       </div>
                       <div className="col-span-3 content-center ml-4">
-                        {manager.account.phone}
+                        {staff.account.phone}
                       </div>
                       <div className="col-span-1 content-center justify-self-center">
-                        {manager.loading
+                        {staff.loading
                           ?
                           <SpinnerLoading
                             height='30'
@@ -165,7 +195,7 @@ const Staff = (props: Props) => {
                           :
                           <>
                             {
-                              manager.account.deleted
+                              staff.account.deleted
                                 ?
                                 <div
                                   className='p-1.5 rounded-full text-red-500'
@@ -192,7 +222,7 @@ const Staff = (props: Props) => {
                                 :
                                 <div
                                   className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300"
-                                  onClick={() => deleteManager(manager.account.id, index)}
+                                  onClick={() => deleteManager(staff.account.id, index)}
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
