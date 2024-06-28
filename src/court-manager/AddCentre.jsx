@@ -299,63 +299,67 @@ function AddCentre(props) {
   };
 
   const html = (
-    <div>
-      <div>
-        {imgUrls.length > 0 ?
-          <img src={imgUrls[0].url} alt="Centre" className='h-64 w-fit mx-auto rounded-xl' />
-          :
-          <img
-            src='https://i0.wp.com/y20india.in/wp-content/plugins/ultimate-post/assets/img/ultp-fallback-img.png?w=840&ssl=1'
-            alt="dummy-img"
-            className="h-64 w-fit mx-auto rounded-xl"
-          />
-        }
-      </div>
-      <div className='flex gap-2 my-2 pt-1.5 border rounded-md bg-white overflow-hidden mx-auto relative'>
-        <div
-          id='image-scroll-container'
-          className='flex gap-2 overflow-x-auto pb-1.5 px-2'
-        >
-          <div
-            className='flex justify-center items-center border rounded-lg cursor-pointer h-16 min-w-24 px-7'
-            onClick={() => document.getElementById('image-upload-input').click()}
-          >
-            <span className='text-4xl font-bold'>+</span>
-          </div>
-          <input
-            id='image-upload-input'
-            type="file"
-            onChange={handleImageChange}
-            className='hidden'
-          />
-          {imgUrls.map((img, index) => (
-            <div key={index} className="image-container relative">
+    <>
+      <div className="flex justify-between gap-4">
+        <div className="w-[44rem]">
+          <div>
+            {imgUrls.length > 0 ?
+              <img src={imgUrls[0].url} alt="Centre" className='h-64 w-fit mx-auto rounded-xl' />
+              :
               <img
-                src={img.url}
-                alt={`Court ${index + 1}`}
-                className='min-w-24 max-w-24 h-16 rounded-lg object-cover object-center '
+                src='https://i0.wp.com/y20india.in/wp-content/plugins/ultimate-post/assets/img/ultp-fallback-img.png?w=840&ssl=1'
+                alt="dummy-img"
+                className="h-64 w-fit mx-auto rounded-xl"
               />
-              <svg
-                onClick={() => handleDeleteImage(img.ref, img.url)}
-                xmlns="http://www.w3.org/2000/svg"
-                width="20" height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor" s
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-circle-x absolute right-1 top-1 bg-white rounded-full cursor-pointer hover:scale-110 ease-in-out duration-200">
-                <circle cx="12" cy="12" r="10" />
-                <path d="m15 9-6 6" />
-                <path d="m9 9 6 6" />
-              </svg>
+            }
+          </div>
+          <div className='flex gap-2 my-2 pt-1.5 border rounded-md bg-white overflow-hidden mx-auto relative'>
+            <div
+              id='image-scroll-container'
+              className='flex gap-2 overflow-x-auto pb-1.5 px-2'
+            >
+              <div
+                className='flex justify-center items-center border rounded-lg cursor-pointer h-16 min-w-24 px-7'
+                onClick={() => document.getElementById('image-upload-input').click()}
+              >
+                <span className='text-4xl font-bold'>+</span>
+              </div>
+              <input
+                id='image-upload-input'
+                type="file"
+                onChange={handleImageChange}
+                className='hidden'
+              />
+              {imgUrls.map((img, index) => (
+                <div key={index} className="image-container relative">
+                  <img
+                    src={img.url}
+                    alt={`Court ${index + 1}`}
+                    className='min-w-24 max-w-24 h-16 rounded-lg object-cover object-center '
+                  />
+                  <svg
+                    onClick={() => handleDeleteImage(img.ref, img.url)}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor" s
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-circle-x absolute right-1 top-1 bg-white rounded-full cursor-pointer hover:scale-110 ease-in-out duration-200">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m15 9-6 6" />
+                    <path d="m9 9 6 6" />
+                  </svg>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-      <div className='mx-auto'>
-        <div className='mb-4'>
+
+
+        <div className="flex-1 w-[36rem] flex flex-col gap-3">
           <InputText
             id="name"
             name="name"
@@ -364,75 +368,66 @@ function AddCentre(props) {
             value={centreForm.name}
             onchange={handleChange}
           />
-        </div>
-        <div className='mb-4 flex items-end gap-3'>
-          <InputText
-            id="address"
-            name="address"
-            placeholder={t('enterCentreAddress')}
-            label={t('centreAddress')}
-            value={centreForm.address}
-            onchange={handleChange}
-          />
-          <Dropdown
-            ref={dropdownRef}
-            items={districts}
-            placeholder={t('selectTheDistrict')}
-            onSelect={handleSelectDistrict}
-          />
-        </div>
-        <div className='mb-4'>
-          <InputText
-            id="numberOfCourts"
-            name="numberOfCourts"
-            placeholder={t('enterNumberOfCourts')}
-            label={t('numberOfCourts')}
-            value={centreForm.numberOfCourts}
-            onchange={handleChange}
-          />
-        </div>
-        <div className='mb-3'>
-          <InputText
-            id="pricePerHour"
-            name="pricePerHour"
-            type="number"
-            placeholder={t('enterPricePerHour')}
-            label={t('pricePerHour')}
-            value={centreForm.pricePerHour}
-            onchange={handleChange}
-          />
-        </div>
-      </div>
-      <div className='flex gap-4 mb-3'>
-        <div className='basis-1/2'>
-          <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2'>
-            {t('openTimes')}:
+          <div className='grid grid-cols-6 gap-x-3'>
+            <div className="col-span-4">
+              <InputText
+                id="address"
+                name="address"
+                placeholder={t('enterCentreAddress')}
+                label={t('centreAddress')}
+                value={centreForm.address}
+                onchange={handleChange}
+              />
+            </div>
+            <div className="col-span-2 content-end">
+              <Dropdown
+                ref={dropdownRef}
+                items={districts}
+                placeholder={t('selectTheDistrict')}
+                onSelect={handleSelectDistrict}
+              />
+            </div>
           </div>
-          <div className='flex gap-4 items-center'>
+          <div className='flex gap-3'>
+            <InputText
+              id="pricePerHour"
+              name="pricePerHour"
+              type="number"
+              placeholder={t('enterPricePerHour')}
+              label={t('pricePerHour')}
+              value={centreForm.pricePerHour}
+              onchange={handleChange}
+            />
+            <InputText
+              id="numberOfCourts"
+              name="numberOfCourts"
+              placeholder={t('enterNumberOfCourts')}
+              label={t('numberOfCourts')}
+              value={centreForm.numberOfCourts}
+              onchange={handleChange}
+            />
+          </div>
+          <div className='flex gap-4 mb-3'>
             <Dropdown
               ref={dropdownRef1}
               placeholder={t('selectOpenTime')}
               items={items}
               onSelect={handleSelectOpenTime}
               dir='up'
+              label={t('openTimes') + ':'}
             />
-          </div>
-        </div>
-        <div className='basis-1/2'>
-          <div className='w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2'>
-            {t('closeTime')}:
-          </div>
-          <div className='flex gap-4 items-center'>
             <Dropdown
               ref={dropdownRef2}
               placeholder={t('selectCloseTime')}
               items={items}
               onSelect={handleSelectCloseTime}
               dir='up'
+              label={t('closeTime') + ":"}
             />
           </div>
         </div>
       </div>
+
       <div>
         <div className="w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2">Description:</div>
         <CKEditor
@@ -447,12 +442,7 @@ function AddCentre(props) {
           }}
         />
       </div>
-      {/* <div className="bg-white mt-4 mx-auto">
-        <div className='mb-4'>
-          thanh ngu
-        </div>
-      </div> */}
-    </div>
+    </>
   );
 
   return (

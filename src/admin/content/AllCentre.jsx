@@ -12,7 +12,6 @@ import XCarousel from "../../components/carousel";
 import moment from "moment";
 import Calendar from "../../components/calendar";
 import { toast } from "react-toastify";
-import EditCentre from "./EditCentre";
 import Feedback from "../../components/feedback";
 import Pagination from "../../components/pagination";
 
@@ -210,21 +209,6 @@ const AllCentre = () => {
   }, [nameFilter, emailFilter, districtFilter, ratingFilter, deleteFilter, listCentre]);
 
 
-  // const loadFeedback = async (id) => {
-  //   setLoadingFeedback(true);
-  //   await axiosInstance.get(`/courtstar/feedback/${id}`)
-  //     .then(res => {
-  //       setFeedbackList(res.data.data);
-  //       console.log(res.data.data);
-  //     })
-  //     .catch(error => {
-  //       console.log(error.message);
-  //     })
-  //     .finally(() => {
-  //       setLoadingFeedback(false);
-  //     })
-  // }
-
   const openCentreDetail = async (id) => {
     let centreClone = listCentre.filter(
       (centre) => centre.id === id
@@ -340,179 +324,21 @@ const AllCentre = () => {
 
   const centreInfor = (
     <>
-      {/* <EditCentre
-        isOpen={editCentreModal}
-        setIsOpen={closeEditCentreModal}
-        centreDetail={centreDetail}
-        imgList={centreDetail?.images}
-      // dataIdCentre={handleGetCentreID}
-      /> */}
       {centreDetail &&
         <div
-          className="h-[calc(80vh)] w-[calc(80vw)] overflow-y-auto px-2 mx2"
+          className="h-[calc(80vh)] w-[calc(80vw)] overflow-y-auto px-2 mx-2"
         >
-          {/* <div className="flex items-center justify-between py-3">
-            <div className="text-2xl font-semibold ">
-              {centreDetail?.name}
-            </div>
-            {(centreDetail?.deleted)
-              ?
-              <div className="bg-red-500 text-white px-3 py-1 rounded-xl font-semibold">
-                Deleted
-              </div>
-              :
-              <div className="font-semibold">
-                {centreDetail?.status
-                  ?
-                  <div className="bg-primary-green text-white px-3 py-1 rounded-xl">
-                    Opening
-                  </div>
-                  :
-                  <div className="bg-red-500 text-white px-3 py-1 rounded-xl">
-                    Closed
-                  </div>
-                }
-              </div>
-            }
-
-          </div> */}
-
           <div className="flex justify-between gap-4">
             <div className="w-[44rem]">
               <XCarousel images={centreDetail?.images} />
             </div>
 
             <div className="flex-1 w-[410px] flex flex-col gap-3">
-
-              {/* <div className="flex gap-3 font-semibold">
-                {centreDetail?.deleted
-                  ?
-                  <div className="bg-red-800 py-2.5 text-lg text-white w-full flex items-center justify-center rounded-md">
-                    Deleted
-                  </div>
-                  :
-                  <>
-                    {
-                      centreDetail?.status
-                        ?
-                        <>
-                          <Button
-                            label={t('close')}
-                            fullWidth
-                            size='medium'
-                            className='bg-black text-white'
-                            icon={
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lock-keyhole"><circle cx="12" cy="16" r="1" /><rect x="3" y="10" width="18" height="12" rx="2" /><path d="M7 10V7a5 5 0 0 1 10 0v3" /></svg>
-                            }
-                            onClick={() => handleDisable(centreDetail.id)}
-                            loading={activateLoading}
-                          />
-
-                          <Button
-                            label={t('delete')}
-                            fullWidth
-                            size='medium'
-                            className='bg-red-600 hover:bg-red-800 text-white'
-                            icon={
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="lucide lucide-trash-2"
-                              >
-                                <path d="M3 6h18" />
-                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                                <line x1="10" x2="10" y1="11" y2="17" />
-                                <line x1="14" x2="14" y1="11" y2="17" />
-                              </svg>
-                            }
-                            onClick={() => handleDelete(centreDetail.id)}
-                            loading={deleteLoading}
-                          />
-                        </>
-                        :
-                        <>
-                          <Button
-                            label={t('activate')}
-                            fullWidth
-                            size='medium'
-                            className='bg-primary-green hover:bg-teal-900 text-white'
-                            icon={
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lock-keyhole-open"><circle cx="12" cy="16" r="1" /><rect width="18" height="12" x="3" y="10" rx="2" /><path d="M7 10V7a5 5 0 0 1 9.33-2.5" /></svg>
-                            }
-                            onClick={() => handleActive(centreDetail.id)}
-                            loading={activateLoading}
-                          />
-                          <Button
-                            label={t('delete')}
-                            fullWidth
-                            size='medium'
-                            className='bg-red-600 hover:bg-red-800 text-white'
-                            icon={
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="lucide lucide-trash-2"
-                              >
-                                <path d="M3 6h18" />
-                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                                <line x1="10" x2="10" y1="11" y2="17" />
-                                <line x1="14" x2="14" y1="11" y2="17" />
-                              </svg>
-                            }
-                            onClick={() => handleDelete(centreDetail.id)}
-                            loading={deleteLoading}
-                          />
-                        </>
-                    }
-                  </>
-                }
-
-              </div>
-
-              <div className='w-full h-0.5 bg-slate-600 rounded-full'>
-              </div> */}
-
               <div className="flex flex-col gap-3">
                 <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow flex flex-col gap-3">
                   <div className="flex flex-col gap-1.5">
                     <div className="flex justify-between text-lg font-semibold">
                       {t('information')}
-                      {/* {!(centreDetail?.deleted) &&
-                        <button
-                          className="flex justify-center items-center text-primary-green  rounded-md
-                          px-2 hover:bg-primary-green hover:text-white ease-in-out duration-300 cursor-pointer"
-                          onClick={openEditCentreModal}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="18" height="18"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-pencil"
-                          >
-                            <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                            <path d="m15 5 4 4" />
-                          </svg>
-                        </button>
-                      } */}
                       {(centreDetail?.deleted)
                         ?
                         <div className="bg-red-500 text-white text-sm px-3 py-1 rounded-md font-semibold">
@@ -587,64 +413,6 @@ const AllCentre = () => {
                                 {court.status ? 'Active' : 'Close'}
                               </div>
                             </div>
-                            {/* {!(centreDetail?.deleted) &&
-                              <>
-                                {
-                                  court.status
-                                    ?
-                                    <Button
-                                      className='p-1 hover:bg-slate-100'
-                                      icon={
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          width="20" height="20"
-                                          viewBox="0 0 24 24" fill="none"
-                                          stroke="#000"
-                                          strokeWidth="2"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          className="lucide lucide-lock-keyhole"
-                                        >
-                                          <circle cx="12" cy="16" r="1" />
-                                          <rect x="3" y="10" width="18" height="12" rx="2" />
-                                          <path d="M7 10V7a5 5 0 0 1 10 0v3" />
-                                        </svg>
-                                      }
-                                      onClick={() => editCourtStatus(court.courtNo, index)}
-                                      loading={court.loading}
-                                      loadingColor="#2B5A50"
-                                      loadingWidth="20"
-                                      loadingHeight="20"
-                                    />
-                                    :
-                                    <Button
-                                      className='p-1 hover:bg-teal-50 '
-                                      icon={
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          width="20" height="20"
-                                          viewBox="0 0 24 24"
-                                          fill="none"
-                                          stroke="#2B5A50"
-                                          strokeWidth="2"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                          className="lucide lucide-lock-keyhole-open"
-                                        >
-                                          <circle cx="12" cy="16" r="1" />
-                                          <rect width="18" height="12" x="3" y="10" rx="2" />
-                                          <path d="M7 10V7a5 5 0 0 1 9.33-2.5" />
-                                        </svg>
-                                      }
-                                      onClick={() => editCourtStatus(court.courtNo, index)}
-                                      loading={court.loading}
-                                      loadingColor="#2B5A50"
-                                      loadingWidth="20"
-                                      loadingHeight="20"
-                                    />
-                                }
-                              </>
-                            } */}
                           </div>
                         </div>
                       ))}
@@ -761,48 +529,66 @@ const AllCentre = () => {
               </div>
 
               <div className="mt-2">
-                {currentListCentres?.map(centre => (
-                  <div
-                    key={centre.id}
-                    className="bg-white px-10 py-3 grid grid-cols-5 content-center gap-2 font-medium hover:bg-teal-50 hover:px-8 cursor-pointer mt-1 rounded-lg shadow-sm ease-in-out duration-300"
-                    onClick={() => openCentreDetail(centre.id)}
-                  >
-                    <div className="ml-5 truncate">
-                      {centre.name}
-                    </div>
-                    <div className="ml-5 truncate">
-                      {centre.managerEmail}
-                    </div>
-                    <div className="ml-5 truncate">
-                      {t(centre.district)}
-                    </div>
-                    <div className="mx-auto">
-                      <Rating
-                        ratingWrapper='flex gap-1'
-                        value={centre.currentRate}
-                        editable={false}
-                      />
-                    </div>
-                    {centre.deleted === true
-                      ?
-                      <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-rose-500 rounded-md">
-                        Unavailable
+                {filteredCentres.length
+                  ?
+                  <>
+                    {currentListCentres?.map(centre => (
+                      <div
+                        key={centre.id}
+                        className="bg-white px-10 py-3 grid grid-cols-5 content-center gap-2 font-medium hover:bg-teal-50 hover:px-8 cursor-pointer mt-1 rounded-lg shadow-sm ease-in-out duration-300"
+                        onClick={() => openCentreDetail(centre.id)}
+                      >
+                        <div className="ml-5 truncate">
+                          {centre.name}
+                        </div>
+                        <div className="ml-5 truncate">
+                          {centre.managerEmail}
+                        </div>
+                        <div className="ml-5 truncate">
+                          {t(centre.district)}
+                        </div>
+                        <div className="mx-auto">
+                          <Rating
+                            ratingWrapper='flex gap-1'
+                            value={centre.currentRate}
+                            editable={false}
+                          />
+                        </div>
+                        {centre.deleted === true
+                          ?
+                          <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-rose-500 rounded-md">
+                            Unavailable
+                          </div>
+                          :
+                          <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-primary-green rounded-md">
+                            Available
+                          </div>
+                        }
                       </div>
-                      :
-                      <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-primary-green rounded-md">
-                        Available
-                      </div>
-                    }
-                    {/* <div className="flex flex-1 items-center justify-end gap-3">
-                    <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
-                    </div>
-                    <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
-                    </div>
-                  </div> */}
+                    ))}
+                  </>
+                  :
+                  <div className='flex flex-col items-center justify-center h-[500px] text-3xl text-primary mx-auto'>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="250" height="250"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-search-x"
+                    >
+                      <path d="m13.5 8.5-5 5" />
+                      <path d="m8.5 8.5 5 5" />
+                      <circle cx="11" cy="11" r="8" />
+                      <path d="m21 21-4.3-4.3" />
+                    </svg>
+                    No centre found.
                   </div>
-                ))}
+                }
+
               </div>
             </div>
           </>
