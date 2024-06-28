@@ -31,6 +31,10 @@ const Dropdown = forwardRef<DropdownRef, DropdownProps>((props, ref) => {
     setIsOpen(false);            // Close the dropdown after selection
   };
 
+  useEffect(() => {
+    if(!props.placeholder) setSelectedItem(props.items[0].label || null)
+  }, [props.items]);
+
   // Effect to add and clean up event listener for clicks outside the dropdown
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);

@@ -49,7 +49,6 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   const [court, setCourt] = useState<any>({});
   const handleSelectCourt = (item) => {
     setLoading(true);
-    console.log(`Selected: ${item.key} ${item.label}`);
     setFormCalendar({
       courtNo: item.key,
       centreId: centre.id
@@ -84,7 +83,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         courtNo: items[0].key,
         centreId: centre.id
       });
-      loadCourt(centre.id, 1);
+      loadCourt(centre.id, items[0].key);
     }
 
     return () => {
@@ -179,13 +178,6 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   }
 
 
-  useEffect(() => {
-    console.log(formCalendar);
-  }, [formCalendar]);
-
-  useEffect(() => {
-    console.log(court);
-  }, [court]);
 
   return (
     <div className=''>

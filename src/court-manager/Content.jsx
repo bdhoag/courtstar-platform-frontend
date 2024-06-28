@@ -17,7 +17,6 @@ const Content = (props) => {
   const [staffList, setStaffList] = useState([]);
   const [checkIn, setCheckIn] = useState([]);
   const handleAddCentrePopup = props.handleAddCentrePopup;
-  const [isCentreID, setIsCentreID] = useState();
   const [feedbackList, setFeedbackList] = useState([]);
 
   useEffect(() => {
@@ -36,7 +35,6 @@ const Content = (props) => {
             axiosInstance.get(`/courtstar/feedback/${id}`)
               .then(res => {
                 setFeedbackList(res.data.data);
-                console.log(res.data.data);
               })
               .catch(error => {
                 console.log(error.message);
@@ -80,10 +78,12 @@ const Content = (props) => {
     return () => {
       controller.abort();
     }
-  }, [id, isCentreID])
+  }, [id])
 
-  const handleGetCentreID = (value) => {
-    setIsCentreID(value)
+  const getDataCentre = (value) => {
+    if (value) {
+      setCentreDetail(value);
+    }
   }
 
   return (
@@ -118,7 +118,7 @@ const Content = (props) => {
                       centreDetail={centreDetail}
                       imgList={imgList}
                       apiFeedbacks={feedbackList}
-                      isCentreID={handleGetCentreID}
+                      dataCenterOnSubmit={getDataCentre}
                     />
                   )
                 }
