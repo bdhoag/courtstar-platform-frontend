@@ -143,9 +143,9 @@ const AllCentre = () => {
   const [filteredCentres, setFilteredCentres] = useState([]);
   const [nameFilter, setNameFilter] = useState('');
   const [emailFilter, setEmailFilter] = useState('');
-  const [districtFilter, setDistrictFilter] = useState('');
-  const [ratingFilter, setRatingFilter] = useState('');
-  const [deleteFilter, setDeleteFilter] = useState('');
+  const [districtFilter, setDistrictFilter] = useState('all');
+  const [ratingFilter, setRatingFilter] = useState('all');
+  const [deleteFilter, setDeleteFilter] = useState('all');
   const handleSelect = (item) => {
     console.log(`Selected: ${item}`);
   };
@@ -733,7 +733,7 @@ const AllCentre = () => {
                 <div className="">
                   <div className="font-semibold mb-2">District</div>
                   <Dropdown
-                    placeholder="Select district"
+                    placeholder="Select District"
                     items={items}
                     onSelect={handleSelectDistrict}
                     buttonClassName='!px-3'
@@ -743,7 +743,7 @@ const AllCentre = () => {
                 <div className="">
                   <div className="font-semibold mb-2">Feedback</div>
                   <Dropdown
-                    placeholder="Rating star"
+                    placeholder="Select Rating"
                     items={ratingItems}
                     onSelect={handleSelectRating}
                     buttonClassName='!px-3'
@@ -752,7 +752,7 @@ const AllCentre = () => {
                 <div className="">
                   <div className="font-semibold mb-2">Status</div>
                   <Dropdown
-                    placeholder="Select status"
+                    placeholder="Select Status"
                     items={deleteItems}
                     onSelect={handleSelectDelete}
                     buttonClassName='!px-3'
