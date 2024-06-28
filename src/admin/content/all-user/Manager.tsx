@@ -6,9 +6,8 @@ import SpinnerLoading from '../../../components/SpinnerLoading';
 import { toast } from 'react-toastify';
 import Pagination from '../../../components/pagination';
 
-type Props = {}
 
-const Manager = (props: Props) => {
+const Manager = () => {
 
   const controller = new AbortController();
   const { signal } = controller;
@@ -18,12 +17,43 @@ const Manager = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
+  const [filteredManager, setFilteredManager] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
+  const [emailFilter, setEmailFilter] = useState('');
+  const [phoneFilter, setPhoneFilter] = useState('');
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let updatedManager = listManager;
+
+      if (nameFilter) {
+        updatedManager = updatedManager.filter(manager =>
+          manager.account.firstName.toLowerCase().includes(nameFilter.toLowerCase()) ||
+          manager.account.lastName.toLowerCase().includes(nameFilter.toLowerCase())
+        );
+      }
+
+      if (emailFilter) {
+        updatedManager = updatedManager.filter(manager => manager.account.email.toLowerCase().includes(emailFilter.toLowerCase()));
+      }
+
+      if (phoneFilter) {
+        updatedManager = updatedManager.filter(manager => manager.account.phone.toLowerCase().includes(phoneFilter.toLowerCase()));
+      }
+
+      setFilteredManager(updatedManager);
+    };
+
+    applyFilters();
+  }, [nameFilter, emailFilter, phoneFilter, listManager]);
+
   const load = async () => {
     await axiosInstance.get(`/courtstar/manager`, { signal })
       .then(res => {
         setListManager(res.data.data.map(item => {
           return { ...item, loading: false };
         }));
+        setFilteredManager(res.data.data);
       })
       .catch(error => {
         console.log(error.message);
@@ -78,7 +108,7 @@ const Manager = (props: Props) => {
 
   const indexOfLastManager = currentPage * itemsPerPage;
   const indexOfFirstManager = indexOfLastManager - itemsPerPage;
-  const currentListManager = listManager.slice(indexOfFirstManager, indexOfLastManager);
+  const currentListManager: any = filteredManager.slice(indexOfFirstManager, indexOfLastManager);
 
   return (
     <div className="py-5 px-7">
@@ -109,8 +139,8 @@ const Manager = (props: Props) => {
                       name="name"
                       placeholder="Enter the user's name"
                       label="Name"
-                      value=''
-                      onchange={() => { }}
+                      value={nameFilter}
+                      onchange={(e) => setNameFilter(e.target.value)}
                     />
                   </div>
                   <div className="col-span-4 ">
@@ -119,8 +149,8 @@ const Manager = (props: Props) => {
                       name="email"
                       placeholder="Enter the user's email"
                       label="Email"
-                      value=''
-                      onchange={() => { }}
+                      value={emailFilter}
+                      onchange={(e) => setEmailFilter(e.target.value)}
                     />
                   </div>
                   <div className="col-span-3 ">
@@ -129,8 +159,8 @@ const Manager = (props: Props) => {
                       name="phone"
                       placeholder="Enter the user's phone number"
                       label="Phone number"
-                      value=''
-                      onchange={() => { }}
+                      value={phoneFilter}
+                      onchange={(e) => setPhoneFilter(e.target.value)}
                     />
                   </div>
                   <div className="col-span-1 ">
@@ -139,7 +169,7 @@ const Manager = (props: Props) => {
                 </div>
 
                 <div className="mt-2 font-medium">
-                  {currentListManager?.map((manager, index) => (
+                  {currentListManager.map((manager, index) => (
                     <div
                       key={manager.account.id}
                     >
