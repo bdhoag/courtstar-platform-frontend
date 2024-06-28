@@ -5,12 +5,60 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../config/axiosConfig";
 import SpinnerLoading from "../../components/SpinnerLoading";
 
+const latestDay = Array.from({ length: 10 }, (_, index) =>
+  moment().subtract(9 - index, 'days').format("YYYY-MM-DD")
+);
+
+const getArrays = (Obj, isMoney) => {
+  let arrays = [];
+  latestDay.forEach(e => {
+    if (Obj[e]) {
+      if (isMoney) arrays.push(Obj[e] * 0.05/1000);
+      else arrays.push(Obj[e]);
+    } else {
+      arrays.push(0);
+    }
+  });
+  return arrays;
+}
+
+const getRateArrays = (Obj) => {
+  let arrays = [];
+  for (let index = 0; index < latestDay.length; index++) {
+    if (index === 0) {
+      arrays.push(0);
+      continue;
+    }
+    const e1 = latestDay[index];
+    const e2 = latestDay[index - 1];
+    if (Obj[e1] && Obj[e2]) {
+      arrays.push((Obj[e1] - Obj[e2])/Obj[e2]);
+    } else if(Obj[e1]) {
+      arrays.push(1);
+    } else if(Obj[e2]) {
+      arrays.push(-1);
+    }
+    else {
+      arrays.push(0);
+    }
+  }
+  return arrays;
+}
+
 const Dashboard = () => {
 
   const controller = new AbortController();
   const { signal } = controller;
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
+  const [chartData, setChartData] = useState(
+    {
+      users: [],
+      centres: [],
+      revenues: [],
+      rate: [],
+    }
+  );
 
   const load = async () => {
     await axiosInstance.get(`/courtstar/admin/platform`, { signal })
@@ -31,51 +79,60 @@ const Dashboard = () => {
     load();
   }, [])
 
-  console.log(data);
+  useEffect(() => {
+    if (data)
+    setChartData(
+      ((prev) => ({
+        ...prev,
+        users: getArrays(data.users),
+        centres: getArrays(data.centres),
+        revenues: getArrays(data.revenues, true),
+        rates: getRateArrays(data.revenues)
+      }))
+    )
+  }, [data])
 
-  const revenueData = Array.from({ length: 12 }, () =>
-    Math.floor(Math.random() * 20 + 40)
-  );
-  const centreData = Array.from({ length: 12 }, () =>
-    Math.floor(Math.random() * 5 + 15)
-  );
-  const userData = Array.from({ length: 12 }, () =>
-    Math.floor(Math.random() * 17 + 25)
-  );
-
-  const overviewSeries = [
+  const revenueSeries = [
     {
       name: 'Revenue',
       color: '#2B5A50',
-      data: revenueData,
+      data: chartData.revenues,
+      type: "bar",
     },
     {
-      name: 'User Registration',
-      color: '#2563eb',
-      data: userData,
-    },
-    {
-      name: 'Centre Registration',
-      color: '#9ca3af',
-      data: centreData,
+      name: 'Profit growth',
+      color: '#dc2626',
+      data: chartData.rates,
+      type: "line",
     },
   ];
 
-  const overviewOptions = {
+  const revenueOptions = {
     chart: {
-      type: "line",
-      fontFamily: 'Inter'
+      fontFamily: 'Inter',
+      animations: {
+        enabled: true,
+        easing: 'easeinout',
+        speed: 800,
+        animateGradually: {
+            enabled: true,
+            delay: 150
+        },
+        dynamicAnimation: {
+            enabled: true,
+            speed: 350
+        }
+      }
     },
     stroke: {
-      width: [2.5, 2, 2],
-      curve: ['straight', 'smooth', 'smooth'],
-      dashArray: [0, 0, 5]
+      width: [0, 2],
+      curve: ['smooth', 'straight'],
     },
     tooltip: {
       x: {
         show: true,
         formatter: function (val) {
-          return moment().subtract(11 - val, 'months').format('MMM YYYY');
+          return moment().subtract(10 - val, 'days').format('MMM DD');
         }
       },
       y: [
@@ -86,7 +143,93 @@ const Dashboard = () => {
             }
           },
           formatter: function (val) {
-            return "$" + val + "M"
+            return val + "K" + " VND"
+          }
+        },
+        {
+          title: {
+            formatter: function (val, a) {
+              return val + ":"
+            }
+          },
+          formatter: function (val) {
+            return Math.round(val*100) + "%"
+          }
+        },
+      ]
+    },
+    xaxis: {
+      categories: Array.from({ length: 10 }, (_, index) =>
+        moment().subtract(9 - index, 'days').format('MMM DD')
+      )
+    },
+    yaxis: {
+      labels: {
+        formatter: function (val) {
+          return Math.round(val);
+        },
+      }
+    },
+    plotOptions: {
+      bar: {
+        columnWidth: '30%'
+      }
+    },
+  };
+
+  const overviewSeries = [
+    {
+      name: 'User Registration',
+      color: '#2563eb',
+      data: chartData.users,
+      type: "line"
+    },
+    {
+      name: 'Centre Registration',
+      color: '#9ca3af',
+      data: chartData.centres,
+      type: "line"
+    },
+  ];
+
+  const overviewOptions = {
+    chart: {
+      fontFamily: 'Inter',
+      animations: {
+        enabled: true,
+        easing: 'easeinout',
+        speed: 800,
+        animateGradually: {
+            enabled: true,
+            delay: 150
+        },
+        dynamicAnimation: {
+            enabled: true,
+            speed: 350
+        }
+      }
+    },
+    stroke: {
+      width: [3, 3],
+      curve: ['smooth', 'smooth'],
+      dashArray: [0, 0]
+    },
+    tooltip: {
+      x: {
+        show: true,
+        formatter: function (val) {
+          return moment().subtract(10 - val, 'days').format('MMM DD');
+        }
+      },
+      y: [
+        {
+          title: {
+            formatter: function (val) {
+              return val + ":"
+            }
+          },
+          formatter: function (val) {
+            return val
           }
         },
         {
@@ -96,24 +239,14 @@ const Dashboard = () => {
             }
           },
           formatter: function (val) {
-            return val + "K"
-          }
-        },
-        {
-          title: {
-            formatter: function (val) {
-              return val + ":"
-            }
-          },
-          formatter: function (val) {
-            return val + "K"
+            return val
           }
         }
       ]
     },
     xaxis: {
-      categories: Array.from({ length: 12 }, (_, index) =>
-        moment().subtract(11 - index, 'months').format('MMM YYYY')
+      categories: Array.from({ length: 10 }, (_, index) =>
+        moment().subtract(9 - index, 'days').format('MMM DD')
       )
     }
   };
@@ -163,7 +296,7 @@ const Dashboard = () => {
                 <Counter
                   endNumber={data?.totalRevenue}
                   duration={1000}
-                  prefix="$ "
+                  postfix=" VND"
                 />
               </div>
               <div className="p-4 border rounded-xl text-2xl font-semibold w-full">
@@ -186,7 +319,13 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div>
+            <div className="flex flex-col gap-5 w-full">
+              <Chart
+                height="350"
+                width="100%"
+                options={revenueOptions}
+                series={revenueSeries}
+              />
               <Chart
                 height="350"
                 width="100%"
