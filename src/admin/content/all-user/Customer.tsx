@@ -6,16 +6,45 @@ import SpinnerLoading from '../../../components/SpinnerLoading';
 import { toast } from 'react-toastify';
 import Pagination from '../../../components/pagination';
 
-type Props = {}
 
-const Customer = (props: Props) => {
+const Customer = () => {
 
   const controller = new AbortController();
   const { signal } = controller;
   const [listCustomer, setListCustomer] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 2;
+  const itemsPerPage = 10;
+
+  const [filteredCustomer, setFilteredCustomer] = useState([]);
+  const [nameFilter, setNameFilter] = useState('');
+  const [emailFilter, setEmailFilter] = useState('');
+  const [phoneFilter, setPhoneFilter] = useState('');
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let updatedCustomer = listCustomer;
+
+      if (nameFilter) {
+        updatedCustomer = updatedCustomer.filter(customer =>
+          customer.firstName.toLowerCase().includes(nameFilter.toLowerCase()) ||
+          customer.lastName.toLowerCase().includes(nameFilter.toLowerCase())
+        );
+      }
+
+      if (emailFilter) {
+        updatedCustomer = updatedCustomer.filter(customer => customer.email.toLowerCase().includes(emailFilter.toLowerCase()));
+      }
+
+      if (phoneFilter) {
+        updatedCustomer = updatedCustomer.filter(customer => customer.phone?.toLowerCase().includes(phoneFilter.toLowerCase()));
+      }
+
+      setFilteredCustomer(updatedCustomer);
+    };
+
+    applyFilters();
+  }, [nameFilter, emailFilter, phoneFilter, listCustomer]);
 
   const load = async () => {
     await axiosInstance.get(`/courtstar/customer`, { signal })
@@ -23,6 +52,7 @@ const Customer = (props: Props) => {
         setListCustomer(res.data.data.map(item => {
           return { ...item, loading: false };
         }));
+        setFilteredCustomer(res.data.data);
       })
       .catch(error => {
         console.log(error.message);
@@ -76,7 +106,7 @@ const Customer = (props: Props) => {
 
   const indexOfLastCustomer = currentPage * itemsPerPage;
   const indexOfFirstCustomer = indexOfLastCustomer - itemsPerPage;
-  const currentListCustomer = listCustomer.slice(indexOfFirstCustomer, indexOfLastCustomer);
+  const currentListCustomer: any = filteredCustomer.slice(indexOfFirstCustomer, indexOfLastCustomer);
 
   return (
     <div className="py-5 px-7">
@@ -106,8 +136,8 @@ const Customer = (props: Props) => {
                     name="name"
                     placeholder="Enter the user's name"
                     label="Name"
-                    value=''
-                    onchange={() => { }}
+                    value={nameFilter}
+                    onchange={(e) => setNameFilter(e.target.value)}
                   />
                 </div>
                 <div className="col-span-4 ">
@@ -116,8 +146,8 @@ const Customer = (props: Props) => {
                     name="email"
                     placeholder="Enter the user's email"
                     label="Email"
-                    value=''
-                    onchange={() => { }}
+                    value={emailFilter}
+                    onchange={(e) => setEmailFilter(e.target.value)}
                   />
                 </div>
                 <div className="col-span-3 ">
@@ -126,8 +156,8 @@ const Customer = (props: Props) => {
                     name="phone"
                     placeholder="Enter the user's phone number"
                     label="Phone number"
-                    value=''
-                    onchange={() => { }}
+                    value={phoneFilter}
+                    onchange={(e) => setPhoneFilter(e.target.value)}
                   />
                 </div>
                 <div className="col-span-1 ">
