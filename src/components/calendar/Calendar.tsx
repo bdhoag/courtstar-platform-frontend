@@ -5,9 +5,10 @@ import CalendarHeader from './CalendarHeader';
 import CalendarTable from './CalendarTable';
 import SpinnerLoading from '../SpinnerLoading';
 import axiosInstance from '../../config/axiosConfig';
+import { useTranslation } from 'react-i18next';
 
 const Calendar: React.FC<CalendarProps> = (props) => {
-
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   const typeOfCalendar = props.typeOfCalendar;
@@ -76,7 +77,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     if (!isEmptyObject(centre)) {
       const items = centre.courts?.map((court) => ({
         key: court.courtNo,
-        label: `Court ${court.courtNo}`
+        label: `${t('court')} ${court.courtNo}`
       }));
       setCourtItems(items);
       setFormCalendar({
@@ -129,7 +130,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   const weekItems = weeks.map((week, index) => (
     {
       key: index,
-      label: `${week[0]} to ${week[6]}`
+      label: `${week[0]} ${t('to')} ${week[6]}`
     }
   ));
   const [selectedWeek, setSelectedWeek] = useState(weeks[0]);

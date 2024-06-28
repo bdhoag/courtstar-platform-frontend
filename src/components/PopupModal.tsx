@@ -34,7 +34,7 @@ const PopupModal: React.FC<PopupModalProps> = ({ isOpen, html, setIsOpen, centre
 
         <div className='fixed z-50 top-0 left-0 h-screen w-screen flex justify-center items-center'>
           {centreInfo ?
-            <div className='animate-fade-in-down w-fit px-10 pb-10 rounded-3xl shadow-2xl bg-white max-h-screen overflow-y-auto overflow-x-hidden'>
+            <div className='animate-fade-in-down w-fit px-10 pb-5 rounded-3xl shadow-2xl bg-white max-h-screen overflow-y-auto overflow-x-hidden'>
               <div className="flex py-3 -mr-5">
                 <div className="text-2xl flex-1 flex justify-center items-center font-semibold ">
                   {title}

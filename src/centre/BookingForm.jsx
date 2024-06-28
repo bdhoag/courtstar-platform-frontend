@@ -4,8 +4,10 @@ import InputText from '../components/input-text';
 import PopupModal from '../components/PopupModal';
 import Button from '../components/button';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const BookingForm = (props) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const controller = new AbortController();
   const { signal } = controller;
@@ -32,7 +34,7 @@ const BookingForm = (props) => {
   };
 
   useEffect(() => {
-    if(account)
+    if (account)
       setBookingForm((prevForm) => ({
         ...prevForm,
         fullName: (account.firstName + " " + account.lastName).trim(),
@@ -43,12 +45,12 @@ const BookingForm = (props) => {
 
   useEffect(() => {
     setBookingForm((prevForm) => ({
-        ...prevForm,
-        ...props.formCalendar,
+      ...prevForm,
+      ...props.formCalendar,
     }));
-}, [props.formCalendar]);
+  }, [props.formCalendar]);
 
-  const booking = async() => {
+  const booking = async () => {
     setLoading(true);
     await axiosInstance.post(`/courtstar/booking`, bookingForm)
       .then(res => {
@@ -57,7 +59,7 @@ const BookingForm = (props) => {
       .catch(error => {
         console.log(error.message);
       })
-      .finally(()=>{
+      .finally(() => {
         setLoading(false);
         handleClose();
       });
@@ -68,47 +70,41 @@ const BookingForm = (props) => {
   }, [bookingForm]);
 
   const html = (
-    <div className='font-medium w-[440px] items-center gap-3'>
-      <h2 className='font-bold text-4xl text-center mb-3'>Booking</h2>
-      <div className='mb-2'>
-        <InputText
-          id="fullName"
-          name="fullName"
-          label="Full Name*"
-          placeholder='Enter full name'
-          value={bookingForm.fullName || ""}
-          onchange={handleChange}
-          disabled={account?.firstName}
-        />
+    <div className='font-medium w-[440px] items-center flex flex-col gap-3'>
+      <InputText
+        id="fullName"
+        name="fullName"
+        label={`${t('fullName')}*`}
+        placeholder='Enter full name'
+        value={bookingForm.fullName || ""}
+        onchange={handleChange}
+        disabled={account?.firstName}
+      />
+      <InputText
+        id="phone"
+        name="phone"
+        label={`${t('phone')}*`}
+        placeholder='Enter phone number'
+        value={bookingForm.phone || ""}
+        onchange={handleChange}
+        disabled={account?.phone}
+      />
+      <InputText
+        id="email"
+        name="email"
+        label="Email*"
+        placeholder='Enter your email'
+        value={bookingForm.email || ""}
+        onchange={handleChange}
+        disabled={account?.email}
+      />
+      <div className='py-3 flex justify-center items-center gap-1 font-semibold'>
+        {t('price')}:
+        <span className='text-rose-600'> {props?.centre?.pricePerHour?.toLocaleString('de-DE')} VND/h</span>
       </div>
-      <div className='mb-2'>
-        <InputText
-          id="phone"
-          name="phone"
-          label="Phone*"
-          placeholder='Enter phone number'
-          value={bookingForm.phone || ""}
-          onchange={handleChange}
-          disabled={account?.phone}
-        />
-      </div>
-      <div className='mb-2'>
-        <InputText
-          id="email"
-          name="email"
-          label="Email*"
-          placeholder='Enter your email'
-          value={bookingForm.email || ""}
-          onchange={handleChange}
-          disabled={account?.email}
-        />
-      </div>
-      <div className='mb-4'>
-        Price: {props.centre.pricePerHour}
-      </div>
-      <div className='flex items-center justify-center'>
+      <div className='flex items-center justify-center w-full'>
         <Button
-          label='Confirm'
+          label={t('confirm')}
           fullWidth
           fullRounded
           size='medium'
@@ -125,6 +121,8 @@ const BookingForm = (props) => {
         html={html}
         isOpen={props.isOpen}
         setIsOpen={handleClose}
+        centreInfo
+        title={t('booking')}
       />
     </div>
   )
