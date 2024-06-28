@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import Button from "../components/button";
 import QrScanner from 'react-qr-scanner';
 import SpinnerLoading from "../components/SpinnerLoading";
+import Pagination from "../components/pagination";
 
 const CheckIn = (props) => {
   const [optionDropdownDate, setOptionDropdownDate] = useState([]);
@@ -17,10 +18,11 @@ const CheckIn = (props) => {
   const { id } = useParams(); // Get the booking ID from the URL parameters
   const [apiCheckin, setApiCheckin] = useState(props.apiCheckin || []); // State to hold the check-in data from the API
   const [checkInPopup, setCheckInPopup] = useState(false); // State to control the visibility of the check-in popup
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
   const [listSlot, setListSlot] = useState(apiCheckin.map(item => {
     return item.slot.slotNo
   }))
-  console.log(listSlot);
   const [formCheckIn, setFormCheckIn] = useState({ // State to hold the form data for the check-in popup
     checkinId: '',
     startTime: '',
@@ -29,6 +31,12 @@ const CheckIn = (props) => {
     totalPrice: '',
     status: ''
   });
+  const [filteredCheckins, setFilteredCheckins] = useState([]);
+  const [filterName, setFilterName] = useState('');
+  const [filterEmail, setFilterEmail] = useState('');
+  const [filterDate, setFilterDate] = useState('');
+  const [filterPhone, setFilterPhone] = useState('');
+  const [filterSlot, setFilterSlot] = useState('');
 
   // Function to open the check-in popup with the specified check-in details
   const handleCheckInPopup = (checkinId, startTime, endTime, slotNo, totalPrice, status) => {
@@ -161,7 +169,7 @@ const CheckIn = (props) => {
   useEffect(() => {
     const currentDate = moment();
 
-    const next10Days = [];
+    const next10Days = [{ label: 'All Date' }];
     for (let i = 0; i < 10; i++) {
       const nextDate = moment(currentDate).add(i, 'days').format('DD/MM');
       next10Days.push({ label: nextDate });
@@ -172,7 +180,7 @@ const CheckIn = (props) => {
 
   const handleSelectDate = (item) => {
     console.log(`Selected: ${item.label}`);
-
+    setFilterDate(item.label);
   };
 
   // Extract the slots from the apiCheckin data
@@ -180,13 +188,14 @@ const CheckIn = (props) => {
   const getUniqueSlots = (apiCheckin) => {
     const slots = apiCheckin.map(checkin => parseInt(checkin.slot.slotNo, 10));
     const uniqueSlots = [...new Set(slots)].sort((a, b) => a - b);
-    return uniqueSlots.map(slot => ({ label: slot.toString() }));
+    return [{ label: 'All Slot' }, ...uniqueSlots.map(slot => ({ label: slot.toString() }))];
   };
   const optionDropdownSlot = getUniqueSlots(apiCheckin);
 
   // Function to handle slot selection
   const handleSelectSlot = (item) => {
     console.log(`Selected: ${item.label}`);
+    setFilterSlot(item.label);
   };
 
   useEffect(() => {
@@ -203,6 +212,54 @@ const CheckIn = (props) => {
     }
   }, [data])
 
+  useEffect(() => {
+    const applyFilters = () => {
+      let updatedCheckins = [...apiCheckin];
+  
+      if (filterName) {
+        updatedCheckins = updatedCheckins.filter(checkin => {
+          const fullName = `${checkin?.account?.firstName || ''} ${checkin?.account?.lastName || ''} ${checkin?.guest?.fullName || ''}`.toLowerCase();
+          return fullName.includes(filterName.toLowerCase());
+        });
+      }
+  
+      if (filterEmail) {
+        updatedCheckins = updatedCheckins.filter(checkin => {
+          const email = (checkin?.account?.email || checkin?.guest?.email || '').toLowerCase();
+          return email.includes(filterEmail.toLowerCase());
+        });
+      }
+  
+      if (filterPhone) {
+        updatedCheckins = updatedCheckins.filter(checkin => {
+          const phone = (checkin?.account?.phone || checkin?.guest?.phone || '').toLowerCase();
+          return phone.includes(filterPhone.toLowerCase());
+        });
+      }
+  
+      if (filterDate && filterDate !== 'All Date') {
+        updatedCheckins = updatedCheckins.filter(checkin => moment(checkin.date, 'yyyy-MM-DD').format('DD/MM') === filterDate);
+      }
+  
+      if (filterSlot && filterSlot !== 'All Slot') {
+        updatedCheckins = updatedCheckins.filter(checkin => checkin.slot.slotNo === parseInt(filterSlot));
+      }
+      
+      // Sort the checkins to move checked-in ones to the bottom
+      updatedCheckins.sort((a, b) => a.status - b.status);
+      setFilteredCheckins(updatedCheckins);
+    };
+  
+    applyFilters();
+  }, [filterName, filterEmail, filterPhone, filterDate, filterSlot, apiCheckin]);
+
+  const indexOfLastApiCheckins = currentPage * itemsPerPage;
+  const indexOfFirstApiCheckins = indexOfLastApiCheckins- itemsPerPage;
+  const currentListApiCheckins = filteredCheckins.slice(indexOfFirstApiCheckins, indexOfLastApiCheckins);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
   return (
     <div className="w-[70rem] my-12">
       <div className="flex justify-between items-center">
@@ -243,16 +300,16 @@ const CheckIn = (props) => {
               <div className="px-10 py-4 grid grid-cols-12 gap-2 bg-white shadow rounded-xl ">
                 <div className="col-span-3">
                   <InputText
-                    id="name"
-                    name="name"
                     placeholder={t('enterUserName')}
                     label={t('fullName')}
+                    value={filterName}
+                    onchange={(e) => setFilterName(e.target.value)}  
                   />
                 </div>
                 <div className="col-span-3">
                   <InputText
-                    id="email"
-                    name="email"
+                    value={filterEmail}
+                    onchange={(e) => setFilterEmail(e.target.value)}
                     placeholder={t('enterUserEmail')}
                     label="Email"
                   />
@@ -267,8 +324,8 @@ const CheckIn = (props) => {
                 </div>
                 <div className="col-span-2">
                   <InputText
-                    id="phone"
-                    name="phone"
+                    onchange={(e) => setFilterPhone(e.target.value)}
+                    value={filterPhone}
                     placeholder={t('enterUserPhone')}
                     label={t('phone')}
                   />
@@ -285,7 +342,7 @@ const CheckIn = (props) => {
                 </div>
               </div>
               <div className="mt-2 font-medium">
-                {apiCheckin.map((checkin) => (
+                {currentListApiCheckins.map((checkin) => (
                   <div
                     key={checkin.id}
                     className={checkin?.status
@@ -459,6 +516,15 @@ const CheckIn = (props) => {
             </svg>
             There are no booking yet!
           </div>
+      }
+      {filteredCheckins.length > itemsPerPage
+        &&
+        <Pagination
+          totalItems={filteredCheckins.length}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       }
 
     </div>
