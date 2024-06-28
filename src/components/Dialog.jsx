@@ -68,11 +68,11 @@ const Dialog = (props) => {
         </div>
 
         <div className='fixed z-50 top-0 left-0 h-screen w-screen flex justify-center items-center'>
-          <div className='relative animate-fade-in-down w-fit pt-3.5 px-5 rounded-xl shadow-2xl bg-white h-screen flex flex-col justify-between'>
+          <div className='relative animate-fade-in-down w-fit pt-3.5 px-5 rounded-xl shadow-2xl bg-white h-[95vh] flex flex-col justify-between'>
 
             <h2 className="text-3xl px-5 font-bold mb-3.5 text-center">{props.title}</h2>
 
-            <div className={`flex-1 ${props.centreInfo ? '' : 'w-[48rem]'} bg-white mx-auto h-auto overflow-y-auto overflow-x-hidden px-2 mb-3`}>
+            <div className={`flex-1  bg-white mx-auto h-auto overflow-y-auto overflow-x-hidden px-2 mb-3`}>
               {props.html}
             </div>
 
