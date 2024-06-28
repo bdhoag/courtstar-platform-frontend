@@ -153,7 +153,7 @@ const PostCentre = (props: Props) => {
                     </div>
                   </div>
                   <div className="mx-auto">
-                    <div className="grid grid-cols-2 gap-x-5">
+                    <div className="grid grid-cols-2 gap-x-20">
                       {centreDetail?.courts?.map((court) => (
                         <div
                           key={court.id}
