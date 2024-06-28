@@ -4,12 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from "react-router-dom";
 import axiosInstance from "../config/axiosConfig";
 import Button from '../components/button';
+import Pagination from '../components/pagination';
 
 function StaffInfo() {
   const controller = new AbortController();
   const { signal } = controller;
   const { t } = useTranslation();
   const { id } = useParams();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
   //HANDLE  POPUP
   const [addStaffPopup, setAddStaffPopup] = useState(false);
   const handleAddStaffPopup = () => {
@@ -35,6 +38,13 @@ function StaffInfo() {
       controller.abort();
     }
   }, [id]);
+  const indexOfLastStaff = currentPage * itemsPerPage;
+  const indexOfFirstStaff = indexOfLastStaff- itemsPerPage;
+  const currentListStaff = staffInfo.slice(indexOfFirstStaff, indexOfLastStaff);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
 
   return (
     <div className="w-[70rem] my-12">
@@ -85,7 +95,7 @@ function StaffInfo() {
               </div>
             </div>
             <div className="mt-2">
-              {staffInfo.map((staff) => (
+              {currentListStaff.map((staff) => (
                 <div
                   key={staff.id}
                   className="flex bg-white shadow font-medium py-1.5 rounded-xl"
@@ -131,7 +141,15 @@ function StaffInfo() {
             There are no staffs yet!
           </div>
       }
-
+    {staffInfo.length > itemsPerPage
+        &&
+        <Pagination
+          totalItems={staffInfo.length}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      }
 
     </div>
   );
