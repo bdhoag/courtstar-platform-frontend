@@ -35,6 +35,12 @@ function CentreInfo(props) {
   }, [props.centreDetail])
 
   useEffect(() => {
+    if (centreDetail) {
+      props.dataCenterOnSubmit(centreDetail);
+    }
+  }, [centreDetail])
+
+  useEffect(() => {
     const loadCourt = async () => {
       await axiosInstance.get(`/courtstar/court/${centreDetail.id}`, { signal })
         .then(res => {
@@ -54,6 +60,19 @@ function CentreInfo(props) {
     if (centreDetail?.id) loadCourt();
   }, [isEditCourt, centreDetail])
 
+  const loadCalendar = async () => {
+    await axiosInstance.get(`/courtstar/centre/getCentre/${centreDetail.id}`, { signal })
+      .then(res => {
+        setCentreDetail(res.data.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(
+
+      );
+  }
+
   const editCourtStatus = async (courtNo, index) => {
     setListCourt(prevListCourt => {
       // Create a copy of the previous state array
@@ -67,6 +86,7 @@ function CentreInfo(props) {
     await axiosInstance.post(`/courtstar/court/${centreDetail.id}/${courtNo}`, { signal })
       .then(res => {
         setIsEditCourt(res.data.data);
+        loadCalendar();
       })
       .catch(error => {
         console.log(error.message);
@@ -163,9 +183,6 @@ function CentreInfo(props) {
     setEditCentreModal(false)
   }
 
-  const handleGetCentreID = (value) => {
-    props.isCentreID(value)
-  }
 
   const disableSlot = async (formCalendar) => {
     // setLoading(true);
@@ -189,7 +206,6 @@ function CentreInfo(props) {
         setIsOpen={closeEditCentreModal}
         centreDetail={centreDetail}
         imgList={imgList}
-        dataIdCentre={handleGetCentreID}
       />
       <div className="flex items-center justify-between py-3">
         <div className="text-2xl font-semibold ">

@@ -47,8 +47,6 @@ const Sidebar = (props) => {
     props.onDataTabSubmit(value);
   }
 
-  console.log(typeof (props.centreList));
-
   return (
     <div className="bg-white w-1/6 flex flex-col gap-3 px-5 py-3 min-h-screen">
 

@@ -260,8 +260,6 @@ function AddCentre(props) {
       .finally();
   }
 
-  console.log(centreForm?.description);
-
   const clearForm = () => {
     const deleteImagesPromises = imgUrls.map(img => deleteObject(img.ref));
     Promise.all(deleteImagesPromises)
@@ -313,7 +311,7 @@ function AddCentre(props) {
               />
             }
           </div>
-          <div className='flex gap-2 my-2 pt-1.5 border rounded-md bg-white overflow-hidden mx-auto relative'>
+          <div className='flex gap-2 mt-3 pt-1.5 border rounded-md bg-white overflow-hidden mx-auto relative'>
             <div
               id='image-scroll-container'
               className='flex gap-2 overflow-x-auto pb-1.5 px-2'
@@ -407,7 +405,7 @@ function AddCentre(props) {
               onchange={handleChange}
             />
           </div>
-          <div className='flex gap-4 mb-3'>
+          <div className='flex gap-4'>
             <Dropdown
               ref={dropdownRef1}
               placeholder={t('selectOpenTime')}
@@ -428,7 +426,7 @@ function AddCentre(props) {
         </div>
       </div>
 
-      <div>
+      <div className="mt-3">
         <div className="w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2">Description:</div>
         <CKEditor
           editor={ClassicEditor}
