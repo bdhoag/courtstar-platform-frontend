@@ -529,7 +529,7 @@ const AllCentre = () => {
               </div>
 
               <div className="mt-2">
-                {filteredCentres.length
+                {currentListCentres.length
                   ?
                   <>
                     {currentListCentres?.map(centre => (
