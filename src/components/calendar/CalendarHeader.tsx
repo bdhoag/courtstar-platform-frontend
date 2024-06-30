@@ -2,6 +2,7 @@ import React from 'react';
 import Dropdown from '../dropdown';
 import Button from '../button';
 import { CalendarHeaderProps } from './index';
+import { useTranslation } from 'react-i18next';
 
 const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   yearItems,
@@ -17,6 +18,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   formCalendar,
   handleButton,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="header flex justify-between items-center py-2">
       <div className="flex gap-4">
@@ -66,7 +68,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
       </div>
       <div className="flex gap-5">
         <Button
-          label={typeOfCalendar === 'booking' ? 'Book now' : 'Disable'}
+          label={typeOfCalendar === 'booking' ? t('booking')  : 'Disable'}
           size='medium'
           fullWidth
           className='bg-primary-green hover:bg-teal-900 text-white'
