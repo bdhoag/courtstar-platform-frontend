@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AddStaff from './AddStaff';
+import EditStaff from './EditStaff'; // Import EditStaff
 import { useTranslation } from 'react-i18next';
 import { useParams } from "react-router-dom";
 import axiosInstance from "../config/axiosConfig";
@@ -13,14 +14,27 @@ function StaffInfo() {
   const { id } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  //HANDLE  POPUP
+
+  //HANDLE POPUP
   const [addStaffPopup, setAddStaffPopup] = useState(false);
   const handleAddStaffPopup = () => {
     setAddStaffPopup(true);
-  }
+  };
   const handleAddStaffPopupClose = () => {
-    setAddStaffPopup(false)
-  }
+    setAddStaffPopup(false);
+  };
+
+  // HANDLE EDIT STAFF POPUP
+  const [editStaffPopup, setEditStaffPopup] = useState(false);
+  const [selectedStaffId, setSelectedStaffId] = useState();
+  const handleEditStaffPopup = (staffId) => {
+    setSelectedStaffId(staffId);
+    setEditStaffPopup(true);
+  };
+  const handleEditStaffPopupClose = () => {
+    setEditStaffPopup(false);
+  };
+
   const [staffInfo, setStaffInfo] = useState([]);
   const loadStaffInfo = async () => {
     try {
@@ -36,15 +50,16 @@ function StaffInfo() {
 
     return () => {
       controller.abort();
-    }
+    };
   }, [id]);
+
   const indexOfLastStaff = currentPage * itemsPerPage;
-  const indexOfFirstStaff = indexOfLastStaff- itemsPerPage;
+  const indexOfFirstStaff = indexOfLastStaff - itemsPerPage;
   const currentListStaff = staffInfo.slice(indexOfFirstStaff, indexOfLastStaff);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-  }
+  };
 
   return (
     <div className="w-[70rem] my-12">
@@ -52,6 +67,12 @@ function StaffInfo() {
         id={id}
         isOpen={addStaffPopup}
         setIsOpen={handleAddStaffPopupClose}
+        loadStaffInfo={loadStaffInfo}
+      />
+      <EditStaff
+        isOpen={editStaffPopup}
+        setIsOpen={handleEditStaffPopupClose}
+        staffId={selectedStaffId}
         loadStaffInfo={loadStaffInfo}
       />
       <div className="flex justify-between items-center">
@@ -72,14 +93,11 @@ function StaffInfo() {
             onClick={handleAddStaffPopup}
           />
         </div>
-
       </div>
-
 
       {
         staffInfo.length
-          ?
-          <div className="mt-4">
+          ? <div className="mt-4">
             <div className="flex bg-white rounded-xl shadow-lg text-lg font-semibold rounded-t-lg">
               <div className="w-1/3 px-8 py-2 ">
                 {t('fullName')}
@@ -91,7 +109,6 @@ function StaffInfo() {
                 {t('phone')}
               </div>
               <div className="">
-
               </div>
             </div>
             <div className="mt-2">
@@ -110,7 +127,9 @@ function StaffInfo() {
                     {staff.account.phone}
                   </div>
                   <div className="flex flex-1 items-center justify-center gap-8">
-                    <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300">
+                    <div className="p-1.5 rounded-full hover:bg-emerald-900 hover:text-white cursor-pointer ease-in-out duration-300"
+                      onClick={() => handleEditStaffPopup(staff.id)}
+                    >
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
                     </div>
                     <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
@@ -120,10 +139,8 @@ function StaffInfo() {
                 </div>
               ))}
             </div>
-
           </div>
-          :
-          <div className="flex flex-col items-center justify-center h-96 text-3xl text-primary">
+          : <div className="flex flex-col items-center justify-center h-96 text-3xl text-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="300" height="300"
@@ -141,8 +158,7 @@ function StaffInfo() {
             There are no staffs yet!
           </div>
       }
-    {staffInfo.length > itemsPerPage
-        &&
+      {staffInfo.length > itemsPerPage &&
         <Pagination
           totalItems={staffInfo.length}
           itemsPerPage={itemsPerPage}
@@ -150,7 +166,6 @@ function StaffInfo() {
           onPageChange={handlePageChange}
         />
       }
-
     </div>
   );
 }
