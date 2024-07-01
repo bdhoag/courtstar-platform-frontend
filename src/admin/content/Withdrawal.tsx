@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import axiosInstance from '../../config/axiosConfig'
+// import React, { useEffect, useState } from 'react'
+// import axiosInstance from '../../config/axiosConfig'
 
-type Props = {}
-
-const Withdrawal = (props: Props) => {
+const Withdrawal = () => {
   return (
     <div>Withdrawal</div>
   )

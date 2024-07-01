@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle, Ref } from 'react';
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import { Item, DropdownProps, DropdownRef } from './index';
 import DropdownItem from './dropdownItem';
 

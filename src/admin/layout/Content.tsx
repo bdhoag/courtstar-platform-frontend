@@ -1,4 +1,3 @@
-import React from 'react'
 import Dashboard from '../content/Dashboard';
 import AllCentre from '../content/AllCentre';
 import AllUser from '../content/all-user/AllUser';

@@ -49,7 +49,7 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const logout = async () => {
     await axiosInstance.post(`/courtstar/auth/logout`, { token })
-      .then(res => {
+      .then(() => {
         localStorage.clear();
         dispatch({ type: 'LOGOUT' });
         navigate('/');
