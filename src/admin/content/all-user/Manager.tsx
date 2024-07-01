@@ -233,24 +233,24 @@ const Manager = () => {
                   ))}
                 </>
               ) : (
-                <div className="flex flex-col items-center justify-center h-96 text-3xl text-primary">
+                <div className='flex flex-col items-center justify-center h-[500px] text-3xl text-primary mx-auto'>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="300"
-                    height="300"
+                    width="250" height="250"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="2"
+                    strokeWidth="1"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-users-round"
+                    className="lucide lucide-search-x"
                   >
-                    <path d="M18 21a8 8 0 0 0-16 0" />
-                    <circle cx="10" cy="8" r="5" />
-                    <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
+                    <path d="m13.5 8.5-5 5" />
+                    <path d="m8.5 8.5 5 5" />
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
                   </svg>
-                  There are no managers yet!
+                  No manager found.
                 </div>
               )}
             </div>
