@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Dropdown from "../../../components/dropdown";
+import { useEffect, useState } from 'react'
+// import Dropdown from "../../../components/dropdown";
 import InputText from "../../../components/input-text";
 import axiosInstance from '../../../config/axiosConfig';
 import SpinnerLoading from '../../../components/SpinnerLoading';
@@ -268,5 +268,3 @@ const Customer = () => {
 };
 
 export default Customer
-
-

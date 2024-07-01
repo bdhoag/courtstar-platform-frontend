@@ -72,7 +72,7 @@ const PaymentResult: React.FC = () => {
   const cancelBooking = async() => {
     setCancelLoading(true);
     await axiosInstance.post(`/courtstar/payment/refund`, cancelBookingForm)
-        .then(res => {
+        .then(() => {
           setBookingSchedule((prev: BookingSchedule | null) => {
             if (!prev) {
                 return null;

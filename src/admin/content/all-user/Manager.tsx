@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import Dropdown from "../../../components/dropdown";
+import { useEffect, useState } from 'react'
+// import Dropdown from "../../../components/dropdown";
 import InputText from "../../../components/input-text";
 import axiosInstance from '../../../config/axiosConfig';
 import SpinnerLoading from '../../../components/SpinnerLoading';
@@ -13,7 +13,7 @@ const Manager = () => {
   const { signal } = controller;
   const [listManager, setListManager] = useState<any>([]);
   const [loading, setLoading] = useState(true);
-  const [loadingDelete, setLoadingDelete] = useState(false);
+  // const [loadingDelete, setLoadingDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -96,9 +96,9 @@ const Manager = () => {
         });
       })
       .finally(
-        () => {
-          setLoadingDelete(false);
-        }
+        // () => {
+        //   setLoadingDelete(false);
+        // }
       );
   }
 
@@ -268,5 +268,3 @@ const Manager = () => {
 };
 
 export default Manager
-
-
