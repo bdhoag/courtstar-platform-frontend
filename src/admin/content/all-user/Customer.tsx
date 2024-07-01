@@ -113,9 +113,9 @@ const Customer = () => {
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
           Customers
-          </div>
+        </div>
       </div>
-  
+
       {loading ? (
         <div className="h-[500px] flex items-center justify-center">
           <SpinnerLoading height="80" width="80" color="#2B5A50" />
@@ -156,7 +156,7 @@ const Customer = () => {
               </div>
               <div className="col-span-1 "></div>
             </div>
-  
+
             <div className="mt-2 font-medium">
               {currentListCustomer.length ? (
                 <>
@@ -166,13 +166,13 @@ const Customer = () => {
                       className="bg-white px-10 py-3 grid grid-cols-12 content-center gap-2 font-medium hover:bg-teal-50 hover:px-8 cursor-pointer mt-1 rounded-lg shadow-sm ease-in-out duration-300"
                     >
                       <div className="col-span-4 content-center truncate ml-4">
-                      {customer.firstName} {customer.lastName}
+                        {customer.firstName} {customer.lastName}
                       </div>
                       <div className="col-span-4 content-center truncate ml-4">
-                      {customer.email}
+                        {customer.email}
                       </div>
                       <div className="col-span-3 content-center ml-4">
-                      {customer.phone}
+                        {customer.phone}
                       </div>
                       <div className="mx-auto col-span-1">
                         {customer.loading ? (
@@ -236,19 +236,17 @@ const Customer = () => {
                 <div className='flex flex-col items-center justify-center h-[500px] text-3xl text-primary mx-auto'>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="250" height="250"
+                    width="300" height="300"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="1"
+                    strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-search-x"
-                  >
-                    <path d="m13.5 8.5-5 5" />
-                    <path d="m8.5 8.5 5 5" />
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.3-4.3" />
+                    className="lucide lucide-users-round">
+                    <path d="M18 21a8 8 0 0 0-16 0" />
+                    <circle cx="10" cy="8" r="5" />
+                    <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
                   </svg>
                   No customer found.
                 </div>
@@ -267,8 +265,8 @@ const Customer = () => {
       )}
     </div>
   );
-  };
-  
-  export default Customer
+};
+
+export default Customer
 
 
