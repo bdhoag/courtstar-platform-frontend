@@ -411,7 +411,6 @@ function AddCentre(props) {
               placeholder={t('selectOpenTime')}
               items={items}
               onSelect={handleSelectOpenTime}
-              dir='up'
               label={t('openTimes') + ':'}
             />
             <Dropdown
@@ -419,7 +418,6 @@ function AddCentre(props) {
               placeholder={t('selectCloseTime')}
               items={items}
               onSelect={handleSelectCloseTime}
-              dir='up'
               label={t('closeTime') + ":"}
             />
           </div>
