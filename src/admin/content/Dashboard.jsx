@@ -33,8 +33,6 @@ const getRateArrays = (Obj) => {
     const e2 = latestDay[index - 1];
     if (Obj[e1] && Obj[e2]) {
       arrays.push((Obj[e1] - Obj[e2])/Obj[e2]);
-    } else if(Obj[e1]) {
-      arrays.push(1);
     } else if(Obj[e2]) {
       arrays.push(-1);
     }

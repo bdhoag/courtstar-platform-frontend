@@ -3,9 +3,6 @@ import { useLocation } from 'react-router-dom';
 import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import check from '../assets/images/circle-check.svg';
-import Button from '../components/button';
-import { useTranslation } from 'react-i18next';
-import moment from 'moment';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -33,24 +30,17 @@ interface BookingSchedule {
 
 const PaymentResult: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [cancelLoading, setCancelLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [bookingSchedule, setBookingSchedule] = useState<BookingSchedule | null>(null);
-  const [cancelBookingForm, setCancelBookingForm] = useState<any>({});
   const query = useQuery();
   const status = query.get('status');
   const appTransId = query.get('apptransid');
-  const { t } = useTranslation();
 
   useEffect(() => {
     const load = async () => {
       await axiosInstance.post(`/courtstar/payment/order-info`, { appTransId })
         .then(bookingResponse => {
           setBookingSchedule(bookingResponse.data);
-          setCancelBookingForm({
-            bookingId: bookingResponse.data.id,
-            description: "Refund"
-          });
         })
         .catch(error => {
           console.log(error.message);
@@ -68,28 +58,6 @@ const PaymentResult: React.FC = () => {
 
     setResult(status);
   }, [status, appTransId]);
-
-  const cancelBooking = async() => {
-    setCancelLoading(true);
-    await axiosInstance.post(`/courtstar/payment/refund`, cancelBookingForm)
-        .then(() => {
-          setBookingSchedule((prev: BookingSchedule | null) => {
-            if (!prev) {
-                return null;
-            }
-            return {
-                ...prev,
-                success: false
-            };
-          });
-        })
-        .catch(error => {
-          console.log(error.message);
-        })
-        .finally(() => {
-          setCancelLoading(false);
-        });
-  }
 
   return (
     <div className="flex flex-col justify-center items-center min-h-[calc(100vh-350px)]">
@@ -166,21 +134,6 @@ const PaymentResult: React.FC = () => {
                 </div>
               </div>
             </div>
-            {
-              (moment(bookingSchedule.date).isAfter(moment().format('YYYY-MM-DD')) || !bookingSchedule.success )
-              &&
-              <div>
-                <Button
-                  label={bookingSchedule.success ? t('cancelBooking') : t('canceled')}
-                  fullWidth
-                  size='medium'
-                  className='bg-red-600 hover:bg-red-700 text-white'
-                  loading={cancelLoading}
-                  onClick={cancelBooking}
-                  disabled={!bookingSchedule.success}
-                />
-              </div>
-            }
             </>
           )}
         </div>
