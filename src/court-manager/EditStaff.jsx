@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
 import { Popper } from "@mui/material";
 import PopupModal from "../components/PopupModal";
+import Button from "../components/button";
 
 function EditStaff(props) {
     const { t } = useTranslation();
@@ -59,14 +60,22 @@ function EditStaff(props) {
     }
 
     const html = (
-        <div className="flex flex-col gap-3 w-80 h-60">
+        <div className="flex flex-col gap-4 p-3 w-80 overflow-y-auto">
             <Dropdown
                 ref={dropdownRef}
                 items={centres}
                 placeholder={t('selectCentre')}
                 onSelect={handleSelectCentre}
                 label={'Centre:'}
-                className='overflow-y'
+                className=''
+            />
+            <Button
+                onClick={submit}
+                label={t('Submit')}
+                fullWidth
+                fullRounded
+                size='medium'
+                className='bg-primary-green hover:bg-teal-900 text-white'
             />
         </div>
     );
@@ -76,7 +85,6 @@ function EditStaff(props) {
             <PopupModal
                 html={html}
                 isOpen={props.isOpen}
-                submit={submit}
                 setIsOpen={handleClose}
                 title={'Move Staff'}
                 centreInfo
