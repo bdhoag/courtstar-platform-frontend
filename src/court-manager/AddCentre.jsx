@@ -366,7 +366,7 @@ function AddCentre(props) {
             value={centreForm.name}
             onchange={handleChange}
           />
-          <div className='grid grid-cols-6 gap-x-3'>
+          <div className='grid grid-cols-7 gap-x-3'>
             <div className="col-span-4">
               <InputText
                 id="address"
@@ -377,7 +377,7 @@ function AddCentre(props) {
                 onchange={handleChange}
               />
             </div>
-            <div className="col-span-2 content-end">
+            <div className="col-span-3 content-end">
               <Dropdown
                 ref={dropdownRef}
                 items={districts}
@@ -412,7 +412,7 @@ function AddCentre(props) {
               items={items}
               onSelect={handleSelectOpenTime}
               dir='up'
-              label={t('openTimes') + ':'}
+              label={t('openTimes')}
             />
             <Dropdown
               ref={dropdownRef2}
@@ -420,14 +420,14 @@ function AddCentre(props) {
               items={items}
               onSelect={handleSelectCloseTime}
               dir='up'
-              label={t('closeTime') + ":"}
+              label={t('closeTime')}
             />
           </div>
         </div>
       </div>
 
       <div className="mt-3">
-        <div className="w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2">Description:</div>
+        <div className="w-full flex flex-col gap-2 text-gray-800 font-semibold mb-2">{t('Description')}:</div>
         <CKEditor
           editor={ClassicEditor}
           data={centreForm?.description}

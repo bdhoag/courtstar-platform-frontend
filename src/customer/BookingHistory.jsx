@@ -73,7 +73,7 @@ const BookingHistory = () => {
           <div className="font-bold text-3xl uppercase text-start w-full pb-5 pl-2">
             Booking History
           </div>
-          <div className="flex gap-5 w-full bg-white rounded-2xl py-10 min-h-[50px]"> 
+          <div className="flex gap-5 w-full  rounded-2xl py-10 min-h-[50px]"> 
             {loading ? (
               <SpinnerLoading type="page" height="80" width="80" color='#2B5A50'/>
             ) : (
