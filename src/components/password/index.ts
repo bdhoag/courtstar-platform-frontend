@@ -1,8 +1,8 @@
 import Password from "./password";
 
 export interface PasswordStrengthProps {
-  password: string;
-  evaluate: boolean;
+  password: string | undefined;
+  evaluate: boolean | undefined;
 }
 
 export interface PasswordProps {

@@ -413,6 +413,7 @@ function AddCentre(props) {
               onSelect={handleSelectOpenTime}
               dir='up'
               label={t('openTimes')}
+
             />
             <Dropdown
               ref={dropdownRef2}

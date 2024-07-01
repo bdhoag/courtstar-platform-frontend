@@ -4,7 +4,7 @@ import eyeoff from '../../assets/images/hide-eye.svg';
 import { PasswordStrengthProps, PasswordProps } from './index'
 
 const PasswordStrength: React.FC<PasswordStrengthProps> = ({ password, evaluate }) => {
-  const calculateScore = (password: string) => {
+  const calculateScore = (password: string | undefined) => {
     let score = 0;
     if (!password) return score;
 

@@ -12,7 +12,7 @@ function StaffInfo() {
   const { t } = useTranslation();
   const { id } = useParams();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 10;
   //HANDLE  POPUP
   const [addStaffPopup, setAddStaffPopup] = useState(false);
   const handleAddStaffPopup = () => {
@@ -98,7 +98,7 @@ function StaffInfo() {
               {currentListStaff.map((staff) => (
                 <div
                   key={staff.id}
-                  className="flex bg-white shadow font-medium py-1.5 rounded-xl"
+                  className="flex bg-white shadow font-medium py-1.5 rounded-xl mt-1"
                 >
                   <div className="w-1/3 px-8 truncate py-2">
                     {staff.account.firstName} {staff.account.lastName}

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axiosInstance from '../../config/axiosConfig';
-import PopupModal from '../../components/PopupModal';
 import XCarousel from '../../components/carousel';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -8,9 +7,7 @@ import Dialog from '../../components/Dialog';
 import { toast } from 'react-toastify';
 import SpinnerLoading from '../../components/SpinnerLoading';
 
-type Props = {}
-
-const PostCentre = (props: Props) => {
+const PostCentre = () => {
   const controller = new AbortController();
   const { signal } = controller;
   const { t } = useTranslation();
