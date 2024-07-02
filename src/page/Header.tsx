@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import logo from '../assets/images/logo.svg';
+import logo from '/logo.svg';
 import LanguageSelector from '../components/LanguageSelector';
 import Login from '../auth/Login';
 import axiosInstance from '../config/axiosConfig';
@@ -84,10 +84,10 @@ const Header: React.FC = () => {
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-primary-green">
         <nav className="max-w-screen-1440 1440:mx-auto mx-4 w-full sm:flex sm:items-center sm:justify-between">
 
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-center justify-between basis-1/4">
+            <div className='py-2'>
               <img src={logo}
-                className="w-20 h-20"
+                className="h-16"
                 alt='logo' />
             </div>
             <div className="sm:hidden">
@@ -123,18 +123,20 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          <div className="hidden overflow-hidden transition-all duration-300 grow sm:block">
-            <div className="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:mt-0 sm:ps-5 font-medium">
+          <div className="hidden sm:flex justify-center overflow-hidden transition-all duration-200 grow text-lg">
+            <div className="flex flex-col gap-10 sm:flex-row sm:items-center sm:mt-0 font-medium">
 
               <Link
-                className="text-gray-200 font-medium hover:text-white hover:font-semibold transition-all ease-in-out duration-300"
+                className="text-gray-200 font-medium hover:text-white transition-all ease-in-out duration-200
+                cursor-pointer py-1 relative after:sm:absolute after:sm:bottom-0 after:sm:left-0 after:sm:bg-white after:sm:h-0.5 after:sm:w-0 hover:after:sm:w-full after:sm:transition-all after:sm:ease-in-out after:sm:duration-200 after:sm:rounded-md"
                 to="/"
               >
                 {t('home')}
               </Link>
 
               <Link
-                className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                className="text-gray-200 font-medium hover:text-white transition-all ease-in-out duration-200
+                cursor-pointer py-1 relative after:sm:absolute after:sm:bottom-0 after:sm:left-0 after:sm:bg-white after:sm:h-0.5 after:sm:w-0 hover:after:sm:w-full after:sm:transition-all after:sm:ease-in-out after:sm:duration-200 after:sm:rounded-md"
                 to="/aboutUs"
               >
                 {t('aboutUs')}
@@ -142,7 +144,8 @@ const Header: React.FC = () => {
 
               {!(role === 'MANAGER' || role === 'ADMIN') &&
                 <Link
-                  className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                  className="text-gray-200 font-medium hover:text-white transition-all ease-in-out duration-200
+                cursor-pointer py-1 relative after:sm:absolute after:sm:bottom-0 after:sm:left-0 after:sm:bg-white after:sm:h-0.5 after:sm:w-0 hover:after:sm:w-full after:sm:transition-all after:sm:ease-in-out after:sm:duration-200 after:sm:rounded-md"
                   to="/partnerRegister"
                 >
                   {t('partnerRegister')}
@@ -152,7 +155,8 @@ const Header: React.FC = () => {
               {
                 role && role === 'ADMIN' && isLogin &&
                 <Link
-                  className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                  className="text-gray-200 font-medium hover:text-white transition-all ease-in-out duration-200
+                cursor-pointer py-1 relative after:sm:absolute after:sm:bottom-0 after:sm:left-0 after:sm:bg-white after:sm:h-0.5 after:sm:w-0 hover:after:sm:w-full after:sm:transition-all after:sm:ease-in-out after:sm:duration-200 after:sm:rounded-md"
                   to="/admin"
                 >
                   {t('myDashboard')}
@@ -162,7 +166,8 @@ const Header: React.FC = () => {
               {
                 (role && (role === 'STAFF' || role === 'MANAGER')) && isLogin &&
                 <Link
-                  className="text-gray-200 hover:text-white transition-all ease-in-out duration-300"
+                  className="text-gray-200 font-medium hover:text-white transition-all ease-in-out duration-200
+                cursor-pointer py-1 relative after:sm:absolute after:sm:bottom-0 after:sm:left-0 after:sm:bg-white after:sm:h-0.5 after:sm:w-0 hover:after:sm:w-full after:sm:transition-all after:sm:ease-in-out after:sm:duration-200 after:sm:rounded-md"
                   to={role === 'STAFF'? "/myCentre/:id" :"/myCentre/balance"}
                 >
                   {t('myCentre')}
@@ -172,7 +177,7 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex">
+          <div className="flex basis-1/4 justify-end">
 
             <LanguageSelector />
 
