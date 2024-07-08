@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../config/axiosConfig';
-import centrePlaceholder from '../assets/images/demo-centre.png';
 import FeedbackForm from './FeedbackForm';
 import Rating from '../components/Rating';
 import moment from 'moment';
@@ -33,7 +32,7 @@ const BookingHistory = () => {
     } catch (error) {
       console.error('Error fetching booking data:', error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -68,17 +67,17 @@ const BookingHistory = () => {
         onFeedbackSubmitted={fetchBookings} // Pass the fetchBookings function as a callback
       />
       <div className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-gray-100">
-        <div id='top' 
+        <div id='top'
         className="max-w-screen-1440 1440:mx-auto mx-4 py-10 px-12 w-full flex flex-col gap-4 items-center justify-between">
           <div className="font-bold text-3xl uppercase text-start w-full pb-5 pl-2">
             Booking History
           </div>
-          <div className="flex gap-5 w-full  rounded-2xl py-10 min-h-[50px]"> 
+          <div className="flex gap-5 w-full  rounded-2xl py-10 min-h-[50px]">
             {loading ? (
               <SpinnerLoading type="page" height="80" width="80" color='#2B5A50'/>
             ) : (
               <div className="flex-1 flex flex-col gap-5 items-center">
-                {currentBookings.length 
+                {currentBookings.length
                 ? (
                   <>
                     {currentBookings.map((booking) => (
@@ -141,8 +140,8 @@ const BookingHistory = () => {
                         </div>
                       </div>
                     ))}
-                    
-                    
+
+
                   </>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-56 text-3xl text-primary">
@@ -176,7 +175,7 @@ const BookingHistory = () => {
                       onPageChange={handlePageChange}
                     />
                       }
-        </div>    
+        </div>
       </div>
     </div>
   );
