@@ -1,17 +1,16 @@
-// @ts-nocheck
-import React, { useEffect, useRef, useState } from "react";
-import { imageDb } from '../config/firebaseConfig';
+import { useEffect, useRef, useState } from "react";
 import { getDownloadURL, ref, uploadBytes, deleteObject } from "firebase/storage";
 import { v4 } from "uuid";
-import InputText from '../components/input-text';
-import Dialog from '../components/Dialog';
-import Dropdown from '../components/dropdown';
 import moment from "moment";
-import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { imageDb } from "../../../config/firebaseConfig";
+import axiosInstance from "../../../config/axiosConfig";
+import InputText from "../../../components/input-text";
+import Dropdown from "../../../components/dropdown";
+import Dialog from "../../../components/Dialog";
 
 function EditCentre(props) {
   const { t } = useTranslation();
@@ -21,7 +20,6 @@ function EditCentre(props) {
   const dropdownRef = useRef();
   const dropdownRef1 = useRef();
   const dropdownRef2 = useRef();
-  const [idCentre, setIdCentre] = useState();
 
   const districts = [
     {
@@ -124,7 +122,7 @@ function EditCentre(props) {
     }
   };
 
-  const handleClose = (value) => {
+  const handleClose = () => {
     props.setIsOpen();
   };
 

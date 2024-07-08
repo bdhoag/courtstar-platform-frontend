@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import Dropdown from '../components/dropdown';
-import Dialog from '../components/Dialog';
-import axiosInstance from "../config/axiosConfig";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
-import { Popper } from "@mui/material";
-import PopupModal from "../components/PopupModal";
-import Button from "../components/button";
+import axiosInstance from "../../../../config/axiosConfig";
+import Dropdown from "../../../../components/dropdown";
+import Button from "../../../../components/button";
+import PopupModal from "../../../../components/PopupModal";
 
 function EditStaff(props) {
     const { t } = useTranslation();

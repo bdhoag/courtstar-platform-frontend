@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import axiosInstance from '../config/axiosConfig';
-import SpinnerLoading from '../components/SpinnerLoading';
-import StaffInfo from './StaffInfo';
-import CheckIn from './CheckIn';
-import CentreInfo from './CentreInfo';
-import MyBalance from './MyBalance';
+import { useEffect, useState } from 'react';
+import axiosInstance from '../../config/axiosConfig';
+import SpinnerLoading from '../../components/SpinnerLoading';
 import { useParams } from 'react-router-dom';
-import moment from 'moment';
+import MyBalance from '../content/balance/MyBalance';
+import CentreInfo from '../content/centre/CentreInfo';
+import StaffInfo from '../content/centre/staff/StaffInfo';
+import CheckIn from '../content/centre/check-in/CheckIn';
 
 const Content = (props) => {
 

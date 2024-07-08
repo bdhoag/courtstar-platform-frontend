@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import InputText from '../components/input-text';
-import Dialog from '../components/Dialog';
-import Password from '../components/password';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import axiosInstance from "../config/axiosConfig";
 import { toast } from "react-toastify";
+import axiosInstance from '../../../../config/axiosConfig';
+import InputText from '../../../../components/input-text';
+import Password from '../../../../components/password';
+import Dialog from '../../../../components/Dialog';
 
 function AddStaff({ isOpen, setIsOpen, id, loadStaffInfo }) {
   const { t } = useTranslation();
