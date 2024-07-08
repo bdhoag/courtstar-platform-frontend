@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
-import axiosInstance from '../config/axiosConfig';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/button';
-import Feedback from '../components/feedback';
+import { useAuth } from '../../../context/AuthContext';
+import axiosInstance from '../../../config/axiosConfig';
 import EditCentre from './EditCentre';
-import XCarousel from '../components/carousel';
-import Calendar from '../components/calendar';
-import { useAuth } from '../context/AuthContext';
-import SpinnerLoading from '../components/SpinnerLoading';
+import XCarousel from '../../../components/carousel';
+import Button from '../../../components/button';
+import SpinnerLoading from '../../../components/SpinnerLoading';
+import Calendar from '../../../components/calendar';
+import Feedback from '../../../components/feedback';
 
 function CentreInfo(props) {
   const { t } = useTranslation();

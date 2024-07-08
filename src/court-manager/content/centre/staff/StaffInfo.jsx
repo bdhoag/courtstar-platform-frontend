@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddStaff from './AddStaff';
 import EditStaff from './EditStaff'; // Import EditStaff
 import { useTranslation } from 'react-i18next';
 import { useParams } from "react-router-dom";
-import axiosInstance from "../config/axiosConfig";
-import Button from '../components/button';
-import Pagination from '../components/pagination';
-import SpinnerLoading from '../components/SpinnerLoading'; // Import SpinnerLoading
+import axiosInstance from '../../../../config/axiosConfig';
+import Button from '../../../../components/button';
+import SpinnerLoading from '../../../../components/SpinnerLoading';
+import Pagination from '../../../../components/pagination';
 
 function StaffInfo() {
   const controller = new AbortController();

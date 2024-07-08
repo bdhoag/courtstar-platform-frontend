@@ -1,16 +1,16 @@
-import InputText from "../components/input-text";
-import Dropdown from "../components/dropdown";
-import PopupModal from "../components/PopupModal";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import moment from "moment";
-import axiosInstance from "../config/axiosConfig";
 import { useParams } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import Button from "../components/button";
 import QrScanner from 'react-qr-scanner';
-import SpinnerLoading from "../components/SpinnerLoading";
-import Pagination from "../components/pagination";
+import axiosInstance from "../../../../config/axiosConfig";
+import Button from "../../../../components/button";
+import InputText from "../../../../components/input-text";
+import Dropdown from "../../../../components/dropdown";
+import PopupModal from "../../../../components/PopupModal";
+import SpinnerLoading from "../../../../components/SpinnerLoading";
+import Pagination from "../../../../components/pagination";
 
 const CheckIn = (props) => {
   const [optionDropdownDate, setOptionDropdownDate] = useState([]);
@@ -215,41 +215,41 @@ const CheckIn = (props) => {
   useEffect(() => {
     const applyFilters = () => {
       let updatedCheckins = [...apiCheckin];
-  
+
       if (filterName) {
         updatedCheckins = updatedCheckins.filter(checkin => {
           const fullName = `${checkin?.account?.firstName || ''} ${checkin?.account?.lastName || ''} ${checkin?.guest?.fullName || ''}`.toLowerCase();
           return fullName.includes(filterName.toLowerCase());
         });
       }
-  
+
       if (filterEmail) {
         updatedCheckins = updatedCheckins.filter(checkin => {
           const email = (checkin?.account?.email || checkin?.guest?.email || '').toLowerCase();
           return email.includes(filterEmail.toLowerCase());
         });
       }
-  
+
       if (filterPhone) {
         updatedCheckins = updatedCheckins.filter(checkin => {
           const phone = (checkin?.account?.phone || checkin?.guest?.phone || '').toLowerCase();
           return phone.includes(filterPhone.toLowerCase());
         });
       }
-  
+
       if (filterDate && filterDate !== 'All Date') {
         updatedCheckins = updatedCheckins.filter(checkin => moment(checkin.date, 'yyyy-MM-DD').format('DD/MM') === filterDate);
       }
-  
+
       if (filterSlot && filterSlot !== 'All Slot') {
         updatedCheckins = updatedCheckins.filter(checkin => checkin.slot.slotNo === parseInt(filterSlot));
       }
-      
+
       // Sort the checkins to move checked-in ones to the bottom
       updatedCheckins.sort((a, b) => a.status - b.status);
       setFilteredCheckins(updatedCheckins);
     };
-  
+
     applyFilters();
   }, [filterName, filterEmail, filterPhone, filterDate, filterSlot, apiCheckin]);
 
@@ -303,7 +303,7 @@ const CheckIn = (props) => {
                     placeholder={t('enterUserName')}
                     label={t('fullName')}
                     value={filterName}
-                    onchange={(e) => setFilterName(e.target.value)}  
+                    onchange={(e) => setFilterName(e.target.value)}
                   />
                 </div>
                 <div className="col-span-3">
@@ -374,41 +374,6 @@ const CheckIn = (props) => {
                         ({moment(checkin?.slot?.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(checkin?.slot?.endTime, 'HH:mm:ss').format('HH:mm')})
                       </div>
                     </div>
-                    {/* <button
-                      onClick={
-                        () => handleCheckInPopup(checkin.id, checkin?.slot?.startTime, checkin?.slot?.endTime, checkin?.slot?.slotNo,
-                          checkin?.totalPrice, checkin?.status)
-                      }
-                      className="w-fit h-fit p-2 rounded-full bg-slate-100 hover:bg-primary-green hover:text-white ease-in-out duration-200"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className={checkin?.status ? "lucide lucide-undo-2" : "lucide lucide-calendar-check"}
-                      >
-                        {checkin?.status ? (
-                          <>
-                            <path d="M9 14 4 9l5-5" />
-                            <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />
-                          </>
-                        ) : (
-                          <>
-                            <path d="M8 2v4" />
-                            <path d="M16 2v4" />
-                            <rect width="18" height="18" x="3" y="4" rx="2" />
-                            <path d="M3 10h18" />
-                            <path d="m9 16 2 2 4-4" />
-                          </>
-                        )}
-                      </svg>
-                    </button> */}
                   </div>
                 ))}
               </div>
