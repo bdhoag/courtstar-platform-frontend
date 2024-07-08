@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../config/axiosConfig';
-import centre from '../assets/images/demo-centre.png';
 import Rating from '../components/Rating';
 import PopupModal from '../components/PopupModal';
 import { toast } from "react-toastify";
