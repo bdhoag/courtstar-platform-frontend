@@ -4,6 +4,10 @@ import { useTranslation } from "react-i18next";
 import SpinnerLoading from "../../components/SpinnerLoading";
 import Button from "../../components/button";
 import moment from "moment";
+import axios from "axios";
+import { toast } from "react-toastify";
+import Dropdown from "../../components/dropdown";
+import InputText from "../../components/input-text";
 
 const Withdrawal = () => {
 
@@ -12,12 +16,38 @@ const Withdrawal = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [requestList, setRequestList] = useState<any>();
-
+  const [loadingAcceptBtn, setLoadingAcceptBtn] = useState(false);
+  const [withdrawal, setWithdrawal] = useState({
+    nameBanking: '',
+    numberBanking: '',
+    amount: ''
+  });
+  const [nameFilter, setNameFilter] = useState('');
+  const items = [
+    {
+      key: 'all',
+      label: t('allCenTre')
+    },
+    {
+      key: 'thuDucCity',
+      label: t('thuDucCity')
+    },
+    {
+      key: 'district1',
+      label: t('district1')
+    },
+    {
+      key: 'district3',
+      label: t('district3')
+    }
+  ];
 
   const load = async () => {
     await axiosInstance.get(`/courtstar/transfer-money/all`, { signal })
       .then(res => {
-        setRequestList(res.data.data)
+        setRequestList(res.data.data.map(item => {
+          return { ...item, loading: false };
+        }));
       })
       .catch(error => {
         console.log(error.message);
@@ -29,12 +59,49 @@ const Withdrawal = () => {
       );
   }
 
+  const handleAcceptRequest = async (request: any, index) => {
+    let req = {
+      nameBanking: request.nameBanking,
+      numberBanking: request.numberBanking,
+      amount: request.amount
+    }
+    setRequestList(prevListRequest => {
+      // Create a copy of the previous state array
+      const updatedListRequest = [...prevListRequest];
+
+      // Update the specific element's loading property
+      updatedListRequest[index] = { ...updatedListRequest[index], loading: true };
+
+      return updatedListRequest;
+    });
+
+    await axiosInstance.post(`/courtstar/transfer-money/authenticate-withdrawal-order/${request.id}`, req)
+      .then(res => {
+        toast.success('Accept withdrawal!', {
+          toastId: 'accept-withdrawal-success'
+        });
+        if (res.data.data) {
+          load();
+        }
+      })
+      .catch(error => {
+        toast.error(error.message, {
+          toastId: 'accept-withdrawal-unsuccess'
+        });
+      })
+      .finally(
+        () => {
+        }
+      );
+  }
+
   useEffect(() => {
     load();
   }, [])
 
-  console.log(requestList);
-
+  const handleSelectItem = (item) => {
+    return item
+  };
 
   return (
     <div
@@ -58,36 +125,81 @@ const Withdrawal = () => {
           {
             requestList && (requestList.length > 0)
               ?
-              <div className="mt-2">
-                {requestList?.map((request) => (
+              <div className="mt-5 mb-10">
+                <div className="px-10 bg-white py-4 grid grid-cols-6 gap-x-1 rounded-xl shadow">
+                  <div className="">
+                    <InputText
+                      placeholder="Enter name of centre"
+                      label="Name"
+                      value={nameFilter}
+                      onchange={(e) => setNameFilter(e.target.value)}
+                    />
+                  </div>
+                  <div className="">
+                    <InputText
+                      placeholder="Enter name of centre"
+                      label="Name"
+                      value={nameFilter}
+                      onchange={(e) => setNameFilter(e.target.value)}
+                    />
+                  </div>
+                  <div className="">
+                    <InputText
+                      placeholder="Enter name of centre"
+                      label="Name"
+                      value={nameFilter}
+                      onchange={(e) => setNameFilter(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="">
+                    <InputText
+                      placeholder="Enter name of centre"
+                      label="Name"
+                      value={nameFilter}
+                      onchange={(e) => setNameFilter(e.target.value)}
+                    />
+                  </div>
+                  <div className="">
+                    <div className="font-semibold mb-2">Status</div>
+                    <Dropdown
+                      placeholder="Select District"
+                      items={items}
+                      onSelect={handleSelectItem}
+                      buttonClassName='!px-3'
+                    />
+                  </div>
+                </div>
+                {requestList?.map((request, index) => (
                   <div
                     key={request.id}
                     className=
-                    {`grid grid-cols-6 py-3 px-10 mt-1 rounded-lg shadow-sm ease-in-out duration-300 font-medium
+                    {`grid grid-cols-6 py-3 px-10 mt-2 rounded-lg shadow-sm ease-in-out duration-300 font-medium
                     ${request.status ? 'bg-teal-50' : !request.dateAuthenticate ? 'bg-white' : 'bg-red-100'} `}
                   // onClick={() => openrequestDetail(request.id)}
                   >
-                    <div className="self-center font-semibold">
+                    <div className="self-center font-semibold ml-5 truncate">
                       {request.managerEmail}
                     </div>
-                    <div className="self-center">
+                    <div className="self-center ml-5 truncate">
                       {request.amount}
                     </div>
-                    <div className="self-center">
+                    <div className="self-center ml-5 truncate">
                       {request.nameBanking}
                     </div>
-                    <div className="self-center">
+                    <div className="self-center ml-5 truncate">
                       {request.numberBanking}
                     </div>
-                    <div className="self-center">
-                      NGUYEN THAI THANH
+                    <div className="self-center ml-5 truncate">
+                      {request.cardHolderName}
                     </div>
                     {!(request.dateAuthenticate)
                       ?
                       <div className="flex justify-end gap-3 items-center">
                         <Button
                           className="text-center text-primary-green text-xs font-semibold px-2 py-1 border-primary-green border-2 rounded hover:bg-primary-green hover:text-white"
-                          icon={<svg
+                          icon=
+                          {<svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="20" height="20"
                             viewBox="0 0 24 24" fill="none"
@@ -99,6 +211,11 @@ const Withdrawal = () => {
                           >
                             <path d="M20 6 9 17l-5-5" />
                           </svg>}
+                          onClick={() => handleAcceptRequest(request, index)}
+                          loadingColor='#2b5a50'
+                          loading={request.loading}
+                          loadingHeight='20'
+                          loadingWidth='20'
                         />
                         <Button
                           className="text-center text-red-500 text-xs font-semibold px-2 py-1 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white"
