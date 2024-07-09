@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import SpinnerLoading from "../../components/SpinnerLoading";
 import Button from "../../components/button";
 import moment from "moment";
-import axios from "axios";
 import { toast } from "react-toastify";
 import Dropdown from "../../components/dropdown";
 import InputText from "../../components/input-text";
@@ -16,12 +15,6 @@ const Withdrawal = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [requestList, setRequestList] = useState<any>();
-  const [loadingAcceptBtn, setLoadingAcceptBtn] = useState(false);
-  const [withdrawal, setWithdrawal] = useState({
-    nameBanking: '',
-    numberBanking: '',
-    amount: ''
-  });
   const [nameFilter, setNameFilter] = useState('');
   const items = [
     {
