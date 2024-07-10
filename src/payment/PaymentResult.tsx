@@ -73,67 +73,81 @@ const PaymentResult: React.FC = () => {
               Payment success!
             </div>
           ) : (
-            <div className="text-center text-red-500 text-xl font-semibold">
-              Payment fail!
+            <div className='divide-y divide-slate-700'>
+              <div className="text-center text-red-500 text-3xl font-semibold mb-4">
+                Payment fail!
+              </div>
+              <div className="text-gray-500 text-md text-center mb-4 pt-4">
+                Your payment was not successfully proceed.<br />
+                Please contact our customer support.
+              </div>
+              <div>
+                <h2 className="text-lg font-bold mt-4">Why did it fail?</h2>
+                <ol>
+                  <li>Payment is overdue.</li>
+                  <li>Cancel payment.</li>
+                  <li>Invalid card's information.</li>
+                </ol>
+              </div>
             </div>
           )}
           {bookingSchedule && (
             <>
-            <div className="mt-6">
-              <div className="text-gray-500 text-sm text-center my-4">
-                We just sent the booking schedule to your email
-                <br />
-                <span className="text-black font-bold">
-                  {bookingSchedule.account ? bookingSchedule.account.email : bookingSchedule.guest?.email}
-                </span>
-              </div>
-              <h2 className="text-2xl font-bold mb-4 text-center">Booking Schedule</h2>
-              <div className="mb-4 flex flex-col text-lg">
-                <p>
-                  <strong>Centre Name:</strong> {bookingSchedule.centreName}
-                </p>
-                <p>
-                  <strong>Centre Address:</strong> {bookingSchedule.centreAddress}
-                </p>
-                <p>
-                  <strong>Date:</strong> {bookingSchedule.date}
-                </p>
-                <p>
-                  <strong>Total Price:</strong> {bookingSchedule.totalPrice.toLocaleString('de-DE')}
-                  <span className="text-sm font-semibold text-gray-500"> VND</span>
-                </p>
-                <p>
-                  <strong>Status:</strong> {bookingSchedule.status ? 'Checked in' : 'Not yet'}
-                </p>
-              </div>
-              <div className="flex">
-                <div className="mb-4 basis-1/2 grid justify-items-center">
-                  <p className="text-xl font-semibold">Slot:</p>
-                  <ul className="list-disc list-inside">
-                    <li className="text-lg">
-                      <strong>Slot No:</strong> {bookingSchedule.slot.slotNo}
-                    </li>
-                    <li className="text-lg">
-                      <strong>Start Time:</strong> {bookingSchedule.slot.startTime}
-                    </li>
-                    <li className="text-lg">
-                      <strong>End Time:</strong> {bookingSchedule.slot.endTime}
-                    </li>
-                  </ul>
+              <div className="mt-6">
+                <div className="text-gray-500 text-sm text-center my-4">
+                  We just sent the booking schedule to your email
+                  <br />
+                  <span className="text-black font-bold">
+                    {bookingSchedule.account ? bookingSchedule.account.email : bookingSchedule.guest?.email}
+                  </span>
                 </div>
-                <div className="mb-4 basis-1/2 grid justify-items-center">
-                  <p className="text-xl font-semibold">Court:</p>
-                  <ul className="list-disc list-inside">
-                    <li className="text-lg">
-                      <strong>Court No:</strong> {bookingSchedule.court.courtNo}
-                    </li>
-                    <li className="text-lg">
-                      <strong>Status:</strong> {bookingSchedule.court.status ? 'Available' : 'Not Available'}
-                    </li>
-                  </ul>
+                <h2 className="text-2xl font-bold mb-4 text-center">Booking Schedule</h2>
+                <div className="mb-4 flex flex-col text-lg">
+                  <p>
+                    <strong>Centre Name:</strong> {bookingSchedule.centreName}
+                  </p>
+                  <p>
+                    <strong>Centre Address:</strong> {bookingSchedule.centreAddress}
+                  </p>
+                  <p>
+                    <strong>Date:</strong> {bookingSchedule.date}
+                  </p>
+                  <p>
+                    <strong>Total Price:</strong> {bookingSchedule.totalPrice.toLocaleString('de-DE')}
+                    <span className="text-sm font-semibold text-gray-500"> VND</span>
+                  </p>
+                  <p>
+                    <strong>Status:</strong> {bookingSchedule.status ? 'Checked in' : 'Not yet'}
+                  </p>
+                </div>
+                <div className="flex">
+                  <div className="mb-4 basis-1/2 grid justify-items-center">
+                    <p className="text-xl font-semibold">Slot:</p>
+                    <ul className="list-disc list-inside">
+                      <li className="text-lg">
+                        <strong>Slot No:</strong> {bookingSchedule.slot.slotNo}
+                      </li>
+                      <li className="text-lg">
+                        <strong>Start Time:</strong> {bookingSchedule.slot.startTime}
+                      </li>
+                      <li className="text-lg">
+                        <strong>End Time:</strong> {bookingSchedule.slot.endTime}
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="mb-4 basis-1/2 grid justify-items-center">
+                    <p className="text-xl font-semibold">Court:</p>
+                    <ul className="list-disc list-inside">
+                      <li className="text-lg">
+                        <strong>Court No:</strong> {bookingSchedule.court.courtNo}
+                      </li>
+                      <li className="text-lg">
+                        <strong>Status:</strong> {bookingSchedule.court.status ? 'Available' : 'Not Available'}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
             </>
           )}
         </div>
