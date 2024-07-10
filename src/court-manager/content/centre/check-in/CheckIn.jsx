@@ -20,9 +20,12 @@ const CheckIn = (props) => {
   const [checkInPopup, setCheckInPopup] = useState(false); // State to control the visibility of the check-in popup
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
-  const [listSlot, setListSlot] = useState(apiCheckin.map(item => {
-    return item.slot.slotNo
-  }))
+  const [listSlot, setListSlot] = useState(() => {
+    const slotNumbers = apiCheckin.flatMap(item => (
+      item.slots.map(slot => slot.slotNo)
+    ));
+    return slotNumbers;
+  });
   const [formCheckIn, setFormCheckIn] = useState({ // State to hold the form data for the check-in popup
     checkinId: '',
     startTime: '',
@@ -186,9 +189,18 @@ const CheckIn = (props) => {
   // Extract the slots from the apiCheckin data
 
   const getUniqueSlots = (apiCheckin) => {
-    const slots = apiCheckin.map(checkin => parseInt(checkin.slot.slotNo, 10));
+    const slots = apiCheckin.flatMap(checkin =>
+      checkin.slots.map(slot => parseInt(slot.slotNo, 10))
+    );
+
     const uniqueSlots = [...new Set(slots)].sort((a, b) => a - b);
-    return [{ label: 'All Slot' }, ...uniqueSlots.map(slot => ({ label: slot.toString() }))];
+
+    const formattedSlots = [
+      { label: 'All Slot' },
+      ...uniqueSlots.map(slot => ({ label: slot.toString() }))
+    ];
+
+    return formattedSlots;
   };
   const optionDropdownSlot = getUniqueSlots(apiCheckin);
 
@@ -369,10 +381,10 @@ const CheckIn = (props) => {
                       {checkin?.guest?.phone}
                     </div>
                     <div className="col-span-2 flex flex-col justify-center items-center font-semibold">
-                      {checkin?.slot?.slotNo}
-                      <div className="text-sm font-normal">
+                      {checkin.slots.map((slot, index) => slot.slotNo + (index === checkin.slots.length - 1 ? "" : ", "))}
+                      {/* <div className="text-sm font-normal">
                         ({moment(checkin?.slot?.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(checkin?.slot?.endTime, 'HH:mm:ss').format('HH:mm')})
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 ))}

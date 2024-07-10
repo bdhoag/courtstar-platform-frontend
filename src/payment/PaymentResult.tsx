@@ -3,9 +3,16 @@ import { useLocation } from 'react-router-dom';
 import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import check from '../assets/images/circle-check.svg';
+import moment from 'moment';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
+}
+
+interface Slot {
+  slotNo: number;
+  startTime: string;
+  endTime: string;
 }
 
 interface BookingSchedule {
@@ -16,11 +23,7 @@ interface BookingSchedule {
   date: string;
   totalPrice: number;
   status: boolean;
-  slot: {
-    slotNo: number;
-    startTime: string;
-    endTime: string;
-  };
+  slots: Slot[];
   court: {
     courtNo: number;
     status: boolean;
@@ -106,32 +109,24 @@ const PaymentResult: React.FC = () => {
                   <strong>Status:</strong> {bookingSchedule.status ? 'Checked in' : 'Not yet'}
                 </p>
               </div>
-              <div className="flex">
-                <div className="mb-4 basis-1/2 grid justify-items-center">
+              <div className="flex flex-col justify-start">
+                <div className="mb-4">
+                  <p className="text-xl font-semibold">Court No: {bookingSchedule.court.courtNo}</p>
+                </div>
+                <div>
                   <p className="text-xl font-semibold">Slot:</p>
-                  <ul className="list-disc list-inside">
-                    <li className="text-lg">
-                      <strong>Slot No:</strong> {bookingSchedule.slot.slotNo}
-                    </li>
-                    <li className="text-lg">
-                      <strong>Start Time:</strong> {bookingSchedule.slot.startTime}
-                    </li>
-                    <li className="text-lg">
-                      <strong>End Time:</strong> {bookingSchedule.slot.endTime}
-                    </li>
-                  </ul>
+                  {bookingSchedule.slots.map((slot, index) => (
+                  <div key={index} className="mb-4">
+                    <ul className="list-disc list-inside">
+                      <li className="text-lg">
+                        <strong>Slot No:</strong> {slot.slotNo + " "}
+                        ({moment(slot.startTime, "hh:mm:ss").format("H:mm")} - {moment(slot.endTime, "hh:mm:ss").format("H:mm")})
+                      </li>
+                    </ul>
+                  </div>
+                ))}
                 </div>
-                <div className="mb-4 basis-1/2 grid justify-items-center">
-                  <p className="text-xl font-semibold">Court:</p>
-                  <ul className="list-disc list-inside">
-                    <li className="text-lg">
-                      <strong>Court No:</strong> {bookingSchedule.court.courtNo}
-                    </li>
-                    <li className="text-lg">
-                      <strong>Status:</strong> {bookingSchedule.court.status ? 'Available' : 'Not Available'}
-                    </li>
-                  </ul>
-                </div>
+
               </div>
             </div>
             </>
