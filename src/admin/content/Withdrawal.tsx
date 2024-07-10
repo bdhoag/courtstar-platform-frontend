@@ -53,11 +53,6 @@ const Withdrawal = () => {
   }
 
   const handleAcceptRequest = async (request: any, index) => {
-    let req = {
-      nameBanking: request.nameBanking,
-      numberBanking: request.numberBanking,
-      amount: request.amount
-    }
     setRequestList(prevListRequest => {
       // Create a copy of the previous state array
       const updatedListRequest = [...prevListRequest];
@@ -68,9 +63,9 @@ const Withdrawal = () => {
       return updatedListRequest;
     });
 
-    await axiosInstance.post(`/courtstar/transfer-money/authenticate-withdrawal-order/${request.id}`, req)
+    await axiosInstance.post(`/courtstar/transfer-money/authenticate-withdrawal-order/${request.id}`)
       .then(res => {
-        toast.success('Accept withdrawal!', {
+        toast.success('Accepted withdrawal!', {
           toastId: 'accept-withdrawal-success'
         });
         if (res.data.data) {
@@ -80,6 +75,37 @@ const Withdrawal = () => {
       .catch(error => {
         toast.error(error.message, {
           toastId: 'accept-withdrawal-unsuccess'
+        });
+      })
+      .finally(
+        () => {
+        }
+      );
+  }
+
+  const handleDenyRequest = async (request: any, index) => {
+    setRequestList(prevListRequest => {
+      // Create a copy of the previous state array
+      const updatedListRequest = [...prevListRequest];
+
+      // Update the specific element's loading property
+      updatedListRequest[index] = { ...updatedListRequest[index], loading: true };
+
+      return updatedListRequest;
+    });
+
+    await axiosInstance.post(`/courtstar/transfer-money/authenticate-deny-withdrawal-order/${request.id}`)
+      .then(res => {
+        toast.success('Denied withdrawal!', {
+          toastId: 'deny-withdrawal-success'
+        });
+        if (res.data.data) {
+          load();
+        }
+      })
+      .catch(error => {
+        toast.error(error.message, {
+          toastId: 'deny-withdrawal-unsuccess'
         });
       })
       .finally(
@@ -188,47 +214,60 @@ const Withdrawal = () => {
                     </div>
                     {!(request.dateAuthenticate)
                       ?
-                      <div className="flex justify-end gap-3 items-center">
-                        <Button
-                          className="text-center text-primary-green text-xs font-semibold px-2 py-1 border-primary-green border-2 rounded hover:bg-primary-green hover:text-white"
-                          icon=
-                          {<svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20" height="20"
-                            viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-check"
-                          >
-                            <path d="M20 6 9 17l-5-5" />
-                          </svg>}
-                          onClick={() => handleAcceptRequest(request, index)}
-                          loadingColor='#2b5a50'
-                          loading={request.loading}
-                          loadingHeight='20'
-                          loadingWidth='20'
-                        />
-                        <Button
-                          className="text-center text-red-500 text-xs font-semibold px-2 py-1 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white"
-                          icon={<svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="20" height="20"
-                            viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor"
-                            strokeWidth="3"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-x"
-                          >
-                            <path d="M18 6 6 18" />
-                            <path d="m6 6 12 12" />
-                          </svg>}
-                        />
-                      </div>
+                      <>
+                        {
+                          request.loading
+                            ?
+                            <div className="py-1 px-2 flex justify-end items-center">
+                              <SpinnerLoading
+                                height='20'
+                                width='20'
+                                color='#2B5A50'
+                              />
+                            </div>
+                            :
+                            <>
+                              <div className="flex justify-end gap-3 items-center">
+                                <Button
+                                  className="text-center text-primary-green text-xs font-semibold px-2 py-1 border-primary-green border-2 rounded hover:bg-primary-green hover:text-white"
+                                  icon=
+                                  {<svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-check"
+                                  >
+                                    <path d="M20 6 9 17l-5-5" />
+                                  </svg>}
+                                  onClick={() => handleAcceptRequest(request, index)}
+                                />
+                                <Button
+                                  className="text-center text-red-500 text-xs font-semibold px-2 py-1 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white"
+                                  icon={<svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20" height="20"
+                                    viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-x"
+                                  >
+                                    <path d="M18 6 6 18" />
+                                    <path d="m6 6 12 12" />
+                                  </svg>}
+                                  onClick={() => handleDenyRequest(request, index)}
+                                />
+                              </div>
+                            </>
+                        }
+                      </>
                       :
-                      <div className="flex justify-end">
+                      <div className="flex justify-end py-1">
                         {moment(request.dateAuthenticate).format('yyyy-MM-DD')}
                       </div>
                     }
