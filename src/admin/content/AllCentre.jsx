@@ -312,8 +312,6 @@ const AllCentre = () => {
     setEditCentreModal(false)
   }
 
-  console.log(centreDetail?.images);
-
   const indexOfLastCentre = currentPage * itemsPerPage;
   const indexOfFirstCentre = indexOfLastCentre - itemsPerPage;
   const currentListCentres = filteredCentres.slice(indexOfFirstCentre, indexOfLastCentre);
@@ -322,7 +320,7 @@ const AllCentre = () => {
     setCurrentPage(pageNumber);
   }
 
-  const centreInfor = (
+  const centreInfo = (
     <>
       {centreDetail &&
         <div
@@ -458,7 +456,7 @@ const AllCentre = () => {
           setIsOpenModal(false);
           setCentreDetail();
         }}
-        html={centreInfor}
+        html={centreInfo}
         title={centreDetail?.name}
         centreInfo
       />
