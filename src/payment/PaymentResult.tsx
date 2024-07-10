@@ -76,8 +76,22 @@ const PaymentResult: React.FC = () => {
               Payment success!
             </div>
           ) : (
-            <div className="text-center text-red-500 text-xl font-semibold">
-              Payment fail!
+            <div className='divide-y divide-slate-700'>
+              <div className="text-center text-red-500 text-3xl font-semibold mb-4">
+                Payment fail!
+              </div>
+              <div className="text-gray-500 text-md text-center mb-4 pt-4">
+                Your payment was not successfully proceed.<br />
+                Please contact our customer support.
+              </div>
+              <div>
+                <h2 className="text-lg font-bold mt-4">Why did it fail?</h2>
+                <ol>
+                  <li>Payment is overdue.</li>
+                  <li>Cancel payment.</li>
+                  <li>Invalid card's information.</li>
+                </ol>
+              </div>
             </div>
           )}
           {bookingSchedule && (
@@ -126,9 +140,7 @@ const PaymentResult: React.FC = () => {
                   </div>
                 ))}
                 </div>
-
               </div>
-            </div>
             </>
           )}
         </div>
