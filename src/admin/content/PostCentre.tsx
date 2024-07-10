@@ -99,7 +99,7 @@ const PostCentre = () => {
         >
 
           <div className="flex justify-between gap-4">
-            <div className="w-1/2">
+            <div className="">
               <XCarousel images={centreDetail?.images} />
             </div>
 
