@@ -5,8 +5,8 @@ interface PopupModalProps {
   isOpen: boolean;
   html: React.ReactNode; // Kiểu của props html là ReactNode
   setIsOpen: () => void; // setIsOpen là một hàm không nhận tham số và không trả về gì
-  centreInfo: boolean;
-  title: String;
+  centreInfo?: boolean;
+  title?: String;
 }
 
 const PopupModal: React.FC<PopupModalProps> = ({ isOpen, html, setIsOpen, centreInfo, title }) => {
