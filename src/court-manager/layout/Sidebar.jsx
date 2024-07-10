@@ -123,7 +123,7 @@ const Sidebar = (props) => {
                     {
                       centreIsSelected === centre.id
                         ?
-                        'bg-primary-green text-lg text-white pl-3 py-1 rounded-md ease-in-out duration-300 font-semibold cursor-pointer'
+                        'bg-primary-green text-lg text-white pl-3 pr-1 py-1 rounded-md ease-in-out duration-300 font-semibold cursor-pointer'
                         :
                         'py-1 rounded-md hover:bg-primary-green text-lg hover:text-white truncate hover:truncate hover:px-1.5 ease-in-out duration-300 font-semibold cursor-pointer'
                     }
@@ -197,7 +197,7 @@ const Sidebar = (props) => {
                 {
                   centreIsSelected === props.centreList.id
                     ?
-                    'bg-primary-green text-white pl-3 py-1.5 rounded-md ease-in-out duration-300 font-semibold cursor-pointer'
+                    'bg-primary-green text-white pl-3 pr-1 py-1.5 rounded-md ease-in-out duration-300 font-semibold cursor-pointer'
                     :
                     'py-1.5 rounded-md hover:bg-primary-green hover:text-white truncate hover:pl-1.5 ease-in-out duration-300 font-semibold cursor-pointer'
                 }

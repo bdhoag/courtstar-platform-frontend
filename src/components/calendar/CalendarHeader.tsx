@@ -68,12 +68,12 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
       </div>
       <div className="flex gap-5">
         <Button
-          label={typeOfCalendar === 'booking' ? t('booking')  : 'Disable'}
+          label={typeOfCalendar === 'booking' ? t('booking') : 'Disable'}
           size='medium'
           fullWidth
           className='bg-primary-green hover:bg-teal-900 text-white'
           onClick={() => handleButton(formCalendar)}
-          disabled={!formCalendar.slotId}
+          disabled={!formCalendar.slotIds || formCalendar.slotIds?.length === 0}
         />
       </div>
     </div>
