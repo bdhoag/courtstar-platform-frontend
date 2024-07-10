@@ -63,7 +63,7 @@ function FeedbackForm(props) {
                 </div>
                 <div className="text-center mb-3">
                     <img
-                        src={props?.booking?.centreImg || centre}
+                        src={props?.booking?.centreImg}
                         alt={props?.booking?.centreName}
                         className="mx-auto object-cover object-center min-w-72 max-w-72 h-44 rounded-lg mb-3"
                     />
