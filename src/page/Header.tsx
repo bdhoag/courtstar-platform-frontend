@@ -84,7 +84,7 @@ const Header: React.FC = () => {
       <header className="flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-primary-green">
         <nav className="max-w-screen-1440 1440:mx-auto mx-4 w-full sm:flex sm:items-center sm:justify-between">
 
-          <div className="flex items-center justify-between basis-1/4">
+          <div className="flex items-center justify-between min-w-[416px]">
             <div className='py-2'>
               <img src={logo}
                 className="h-16"
@@ -188,7 +188,7 @@ const Header: React.FC = () => {
                     label={t('logIn')}
                     size='medium'
                     fullWidth
-                    className='border-white border hover:bg-gray-200 text-white hover:text-primary-green'
+                    className='border-white border hover:bg-gray-200 text-white hover:text-primary-green min-w-36 max-w-36 min-h-[46px] max-h-[46px]'
                     onClick={handleLoginPopup}
                   />
                 </div>
@@ -197,7 +197,7 @@ const Header: React.FC = () => {
                     label={t('signUp')}
                     size='medium'
                     fullWidth
-                    className='bg-gray-700 hover:bg-gray-800 text-gray-200 border border-gray-700 hover:border-gray-800'
+                    className='bg-gray-700 hover:bg-gray-800 text-gray-200 border border-gray-700 hover:border-gray-800 min-w-36 max-w-36 min-h-[46px] max-h-[46px]'
                     onClick={() => navigate('/customerRegister')}
                   />
                 </div>
