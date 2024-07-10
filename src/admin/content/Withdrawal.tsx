@@ -7,6 +7,7 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import Dropdown from "../../components/dropdown";
 import InputText from "../../components/input-text";
+import PopupModal from "../../components/PopupModal";
 
 const Withdrawal = () => {
 
@@ -16,6 +17,9 @@ const Withdrawal = () => {
   const [loading, setLoading] = useState(true);
   const [requestList, setRequestList] = useState<any>();
   const [nameFilter, setNameFilter] = useState('');
+  const [requestDetail, setRequestDetail] = useState<any>();
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const items = [
     {
       key: 'all',
@@ -53,13 +57,113 @@ const Withdrawal = () => {
       setLoading(false);
     }
   };
-  const handleAcceptRequest = async (request, index) => {
-    setRequestList(prevListRequest => {
-      const updatedListRequest = [...prevListRequest];
-      updatedListRequest[index] = { ...updatedListRequest[index], loading: true };
-      return updatedListRequest;
-    });
 
+  const handleOpenRequestDetail = (request) => {
+    setRequestDetail(request);
+    setIsOpenModal(true);
+  }
+
+  const requestInfo = (
+    <div className="text-black w-96">
+      <div className="">
+        <span className="font-semibold">Manager's email:</span> {requestDetail?.managerEmail}
+      </div>
+      <div className="">
+        <span className="font-semibold">Created date:</span> {moment(requestDetail?.dateCreateWithdrawalOrder).format('yyyy-MM-DD')}
+      </div>
+      <div className="">
+        {requestDetail?.dateAuthenticate
+          &&
+          <>
+            <span className="font-semibold">Response date:</span> {moment(requestDetail?.dateAuthenticate).format('yyyy-MM-DD')}
+          </>
+        }
+      </div>
+      <div className="">
+        <span className="font-semibold">Card holder name:</span> {requestDetail?.cardHolderName}
+      </div>
+
+      <div className="">
+        <span className="font-semibold">Bank name:</span> {requestDetail?.nameBanking}
+      </div>
+      <div className="">
+        <span className="font-semibold">Bank account number:</span> {requestDetail?.numberBanking}
+      </div>
+      {!requestDetail?.dateAuthenticate
+        ?
+        <>
+          {!requestDetail?.loading
+            ?
+            <div className="mt-2 flex gap-1 w-full">
+              <Button
+                className="text-center text-primary-green text-xs font-semibold w-full py-1 border-primary-green border-2 rounded hover:bg-primary-green hover:text-white"
+                icon={<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20" height="20"
+                  viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-check"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>}
+                label='Accept'
+                onClick={() => handleAcceptRequest(requestDetail)}
+              />
+              <Button
+                className="text-center text-red-500 text-xs font-semibold w-full py-1 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white"
+                icon={<svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20" height="20"
+                  viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-x"
+                >
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </svg>}
+                label='Deny'
+                onClick={() => handleDenyRequest(requestDetail)}
+              />
+            </div>
+            :
+            <div className="mx-auto mt-2">
+              <SpinnerLoading
+                width="24"
+                height="24"
+                color="#2b5a50"
+              />
+            </div>
+          }
+        </>
+        :
+        <>
+          {requestDetail?.status
+            ?
+            <div className="text-center py-1 mt-2 text-white bg-primary-green font-semibold rounded">
+              Accepted
+            </div>
+            :
+            <div className="text-center py-1 mt-2 text-white bg-rose-500 font-semibold rounded">
+              Denied
+            </div>
+          }
+        </>
+      }
+    </div>
+  )
+
+
+  const handleAcceptRequest = async (request) => {
+    setRequestDetail((prev) => ({
+      ...prev,
+      loading: true
+    }))
     try {
       const res = await axiosInstance.post(`/courtstar/transfer-money/authenticate-withdrawal-order/${request.id}`);
       toast.success('Accepted withdrawal!', {
@@ -67,6 +171,7 @@ const Withdrawal = () => {
       });
       if (res.data.data) {
         load();
+        setIsOpenModal(false);
       }
     } catch (error: any) {
       toast.error(error.message, {
@@ -75,13 +180,11 @@ const Withdrawal = () => {
     }
   }
 
-  const handleDenyRequest = async (request, index) => {
-    setRequestList(prevListRequest => {
-      const updatedListRequest = [...prevListRequest];
-      updatedListRequest[index] = { ...updatedListRequest[index], loading: true };
-      return updatedListRequest;
-    });
-
+  const handleDenyRequest = async (request) => {
+    setRequestDetail((prev) => ({
+      ...prev,
+      loading: true
+    }))
     try {
       const res = await axiosInstance.post(`/courtstar/transfer-money/authenticate-deny-withdrawal-order/${request.id}`);
       toast.success('Denied withdrawal!', {
@@ -89,6 +192,7 @@ const Withdrawal = () => {
       });
       if (res.data.data) {
         load();
+        setIsOpenModal(false);
       }
     } catch (error: any) {
       toast.error(error.message, {
@@ -107,6 +211,16 @@ const Withdrawal = () => {
 
   return (
     <div className='py-7 px-7'>
+      <PopupModal
+        isOpen={isOpenModal}
+        setIsOpen={() => {
+          setIsOpenModal(false);
+          setRequestDetail(null);
+        }}
+        html={requestInfo}
+        title='Request Detail'
+        centreInfo
+      />
       <div className="text-3xl font-bold">
         Withdrawal Request
       </div>
@@ -118,7 +232,7 @@ const Withdrawal = () => {
         : <>
           {requestList && requestList.length > 0
             ? <div className="mt-5 mb-10">
-              {/* <div className="px-10 bg-white py-4 grid grid-cols-6 gap-x-1 rounded-xl shadow">
+              <div className="px-10 bg-white py-4 grid grid-cols-6 gap-x-1 rounded-xl shadow">
                 <div className="">
                   <InputText
                     placeholder="Enter name of centre"
@@ -161,29 +275,50 @@ const Withdrawal = () => {
                     buttonClassName='!px-3'
                   />
                 </div>
-              </div> */}
+              </div>
               {requestList.map((request, index) => (
                 <div
                   key={request.id}
-                  className={`grid grid-cols-6 py-3 px-10 mt-2 rounded-lg shadow-sm ease-in-out duration-300 font-medium
-                        ${request.status ? 'bg-teal-100' : !request.dateAuthenticate ? 'bg-white' : 'bg-red-100'}`}
+                  className={`grid grid-cols-4 py-3 px-10 mt-2 rounded-lg shadow ease-in-out duration-300 font-medium
+                        ${!request.dateAuthenticate ? 'bg-white' : 'bg-slate-50'}
+                        hover:hover:px-8 cursor-pointer`}
+                  onClick={() => handleOpenRequestDetail(request)}
                 >
                   <div className="self-center font-semibold ml-5 truncate">
                     {request.managerEmail}
                   </div>
-                  <div className="self-center ml-5 truncate">
+                  <div className="self-center text-center truncate">
                     {request.amount}
                   </div>
-                  <div className="self-center ml-5 truncate">
+                  <div className="self-center text-center truncate">
+                    {moment(request.dateCreateWithdrawalOrder).format('yyyy-MM-DD')}
+                  </div>
+
+                  {request.status ?
+                    <div className="text-xs mx-auto py-1 px-2 text-white bg-primary-green w-fit font-semibold rounded">
+                      Accepted
+                    </div>
+                    : !request.dateAuthenticate ?
+                      <div className="text-xs mx-auto py-1 px-2 text-white bg-yellow-400 w-fit font-semibold rounded">
+                        Pending
+                      </div>
+                      :
+                      <div className="text-xs mx-auto py-1 px-2 text-white bg-rose-500 w-fit font-semibold rounded">
+                        Denied
+                      </div>
+                  }
+
+
+                  {/* <div className="self-center ml-5 truncate">
                     {request.nameBanking}
                   </div>
                   <div className="self-center ml-5 truncate">
                     {request.numberBanking}
                   </div>
                   <div className="self-center ml-5 truncate">
-                    {request.cardHolderName}
-                  </div>
-                  {!(request.dateAuthenticate)
+                    {request.cardHolderName} lasd
+                  </div> */}
+                  {/* {!(request.dateAuthenticate)
                     ? <>
                       {request.loading
                         ? <div className="py-1 px-2 flex justify-end items-center">
@@ -227,7 +362,8 @@ const Withdrawal = () => {
                     </>
                     : <div className="flex justify-end py-1">
                       {moment(request.dateAuthenticate).format('yyyy-MM-DD')}
-                    </div>}
+                    </div>
+                  } */}
                 </div>
               ))}
             </div>

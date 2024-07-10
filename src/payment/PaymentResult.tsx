@@ -3,9 +3,16 @@ import { useLocation } from 'react-router-dom';
 import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import check from '../assets/images/circle-check.svg';
+import moment from 'moment';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
+}
+
+interface Slot {
+  slotNo: number;
+  startTime: string;
+  endTime: string;
 }
 
 interface BookingSchedule {
@@ -16,11 +23,7 @@ interface BookingSchedule {
   date: string;
   totalPrice: number;
   status: boolean;
-  slot: {
-    slotNo: number;
-    startTime: string;
-    endTime: string;
-  };
+  slots: Slot[];
   court: {
     courtNo: number;
     status: boolean;
@@ -93,59 +96,49 @@ const PaymentResult: React.FC = () => {
           )}
           {bookingSchedule && (
             <>
-              <div className="mt-6">
-                <div className="text-gray-500 text-sm text-center my-4">
-                  We just sent the booking schedule to your email
-                  <br />
-                  <span className="text-black font-bold">
-                    {bookingSchedule.account ? bookingSchedule.account.email : bookingSchedule.guest?.email}
-                  </span>
+            <div className="mt-6">
+              <div className="text-gray-500 text-sm text-center my-4">
+                We just sent the booking schedule to your email
+                <br />
+                <span className="text-black font-bold">
+                  {bookingSchedule.account ? bookingSchedule.account.email : bookingSchedule.guest?.email}
+                </span>
+              </div>
+              <h2 className="text-2xl font-bold mb-4 text-center">Booking Schedule</h2>
+              <div className="mb-4 flex flex-col text-lg">
+                <p>
+                  <strong>Centre Name:</strong> {bookingSchedule.centreName}
+                </p>
+                <p>
+                  <strong>Centre Address:</strong> {bookingSchedule.centreAddress}
+                </p>
+                <p>
+                  <strong>Date:</strong> {bookingSchedule.date}
+                </p>
+                <p>
+                  <strong>Total Price:</strong> {bookingSchedule.totalPrice.toLocaleString('de-DE')}
+                  <span className="text-sm font-semibold text-gray-500"> VND</span>
+                </p>
+                <p>
+                  <strong>Status:</strong> {bookingSchedule.status ? 'Checked in' : 'Not yet'}
+                </p>
+              </div>
+              <div className="flex flex-col justify-start">
+                <div className="mb-4">
+                  <p className="text-xl font-semibold">Court No: {bookingSchedule.court.courtNo}</p>
                 </div>
-                <h2 className="text-2xl font-bold mb-4 text-center">Booking Schedule</h2>
-                <div className="mb-4 flex flex-col text-lg">
-                  <p>
-                    <strong>Centre Name:</strong> {bookingSchedule.centreName}
-                  </p>
-                  <p>
-                    <strong>Centre Address:</strong> {bookingSchedule.centreAddress}
-                  </p>
-                  <p>
-                    <strong>Date:</strong> {bookingSchedule.date}
-                  </p>
-                  <p>
-                    <strong>Total Price:</strong> {bookingSchedule.totalPrice.toLocaleString('de-DE')}
-                    <span className="text-sm font-semibold text-gray-500"> VND</span>
-                  </p>
-                  <p>
-                    <strong>Status:</strong> {bookingSchedule.status ? 'Checked in' : 'Not yet'}
-                  </p>
-                </div>
-                <div className="flex">
-                  <div className="mb-4 basis-1/2 grid justify-items-center">
-                    <p className="text-xl font-semibold">Slot:</p>
+                <div>
+                  <p className="text-xl font-semibold">Slot:</p>
+                  {bookingSchedule.slots.map((slot, index) => (
+                  <div key={index} className="mb-4">
                     <ul className="list-disc list-inside">
                       <li className="text-lg">
-                        <strong>Slot No:</strong> {bookingSchedule.slot.slotNo}
-                      </li>
-                      <li className="text-lg">
-                        <strong>Start Time:</strong> {bookingSchedule.slot.startTime}
-                      </li>
-                      <li className="text-lg">
-                        <strong>End Time:</strong> {bookingSchedule.slot.endTime}
+                        <strong>Slot No:</strong> {slot.slotNo + " "}
+                        ({moment(slot.startTime, "hh:mm:ss").format("H:mm")} - {moment(slot.endTime, "hh:mm:ss").format("H:mm")})
                       </li>
                     </ul>
                   </div>
-                  <div className="mb-4 basis-1/2 grid justify-items-center">
-                    <p className="text-xl font-semibold">Court:</p>
-                    <ul className="list-disc list-inside">
-                      <li className="text-lg">
-                        <strong>Court No:</strong> {bookingSchedule.court.courtNo}
-                      </li>
-                      <li className="text-lg">
-                        <strong>Status:</strong> {bookingSchedule.court.status ? 'Available' : 'Not Available'}
-                      </li>
-                    </ul>
-                  </div>
+                ))}
                 </div>
               </div>
             </>
