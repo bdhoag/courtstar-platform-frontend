@@ -187,7 +187,6 @@
   "profileInformationDetails": "For example: age, gender, preferences, and interests.",
   "marketingAndCommunicationInformation": "Marketing and Communication Information",
   "marketingAndCommunicationDetails": "For example: preferences in receiving marketing information from CourtStar and communication preferences.",
-  "thirdPartyPersonalDataProvided": "Third-party personal data provided by customers",
   "thirdPartyPersonalDataIntro": "We may also collect information about you from third parties that you have consented to or if it is necessary to provide services to you. This data includes, but is not limited to:",
   "thirdPartyPersonalDataItem1": "Personal data you have provided to our service partners.",
   "thirdPartyPersonalDataItem2": "Personal data available on social networks.",
@@ -307,5 +306,56 @@
   "Friday": "Friday",
   "Saturday": "Saturday",
   "Sunday": "Sunday",
-  "Description": "Description"
+  "Description": "Description",
+  "basicTerms": [
+    "You are responsible for any activity that occurs under your user account.",
+    "You must not spam features on our website.",
+    "You must not steal our ideas or trademarks.",
+    "You must comply with our terms of booking"
+  ],
+  "generalConditions": [
+    "We reserve the right to terminate our service for any reason, without notice at any time.",
+    "Your continued use of this app will constitute your acceptance of such changes or modifications, what constitutes a material change will be determined at our sole discretion, in good faith and using common sense and reasonable judgment.",
+    "We reserve the right to refuse service to anyone for any reasonable judgment.",
+    "When you use the services of any court you have booked, you must comply with the rules of that court as well as on our site.",
+    "The yard price we display has been checked by us against the quality of that yard, so you can rest assured that you will experience the service at the right price."
+  ],
+  "prohibitedActivities": [
+    "Systematically retrieve data or other content from the app to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.",
+    "Circumvent, disable, or otherwise interfere with security-related features of the App, including features that prevent or restrict the use or copying of any Content or enforce limitations on the use of the app and/or the Content contained therein.",
+    "Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.",
+    "Make improper use of our support services or submit false reports of abuse or misconduct.",
+    "Interfere with, disrupt, or create an undue burden on the app or the networks or services connected to the app.",
+    "Attempt to impersonate another user or person or use the username of another user.",
+    "Use any information obtained from the app in order to harass, abuse, or harm another person.",
+    "Decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the app.",
+    "Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Marketplace Offerings to you.",
+    "Copy or adapt the app software, including but not limited to Flash, PHP, HTML, JavaScript, or other code."
+  ],
+  "refundPolicy": [
+    "Once you have booked the court and paid successfully, you are not allowed to cancel the court for any reason. If you cancel, you will not receive a refund of the money you paid.",
+    "In case your booked court is canceled by Court Manager for reasons related to court repair or from a partner, you will receive a 100% refund of the amount you paid." 
+  ],
+  "basicTermsPartner": [
+    "All partners who want to cooperate with us must have a clear and transparent business license.",
+    "Court must have clear addresses and good quality.",
+    "Partners must accept all of our terms."
+  ],
+  "uploadCondition": [
+    "We require you to provide full yard information such as center name, center address, district, Price Per Hour, Number of Courts, Open and Close Time, authentic image of the Court, Court description.",
+    "Once you have successfully posted your Centre, our system will check and authenticate it. After successful authentication, your Centre will be displayed on our web."
+  ],
+  "moneySharing": [
+    "Our policy is based on the current market price, We will earn 5% on each booking that the customer makes.",
+    "The price we charge is the most reasonable on the market, we will not accept any cases that want to negotiate on price."
+  ],
+  "withdrawPolicy": [
+    "For Court Manager money on our web, you can request to withdraw money at any time. We require that you enter Name of Banking, Number of Banking, Amount of Money, Name of Cardholder correctly.",
+    "Our refund policy will appear within 2 to 3 days. We hope that Court Managers will wait until the money is in their account after making a request. If you do not receive it after 2 to 3 days, please contact email Courtstar.se@gmail.com so we can provide timely support."
+  ],
+  "prohibitedActPartner": [
+    "Court Manager must not post false information about the court you want to cooperate with on our website.",
+    "There must be no money scams against our customers.",
+    "Do not collect information about courts on our system without CourtStar's consent"
+  ]
 }
