@@ -31,9 +31,9 @@ export default function MyBalance(props) {
 
     :
 
-      <div className='w-full bg-white my-6 rounded-lg'>
-        <div className='w-full h-[20rem] rounded-t-lg bg-gradient-to-r from-emerald-50 to-[#408576] bg-opacity-40 relative
-        flex justify-between px-20'>
+      <div className='w-full my-6 rounded-lg'>
+        <div className='w-full h-[20rem] rounded-lg bg-gradient-to-r from-emerald-50 to-[#408576] bg-opacity-40 relative
+        flex justify-between px-20 shadow-lg'>
           <div className='w-full flex flex-col gap-10 justify-center'>
 
             <div className='flex justify-between items-center'>
