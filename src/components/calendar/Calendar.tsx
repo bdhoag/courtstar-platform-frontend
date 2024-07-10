@@ -160,7 +160,10 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       let slotIds = Array.isArray(prevForm.slotIds) ? prevForm.slotIds : [];
       if (slotIds.length && prevForm.date !== moment(day, "MM/DD").format("YYYY-MM-DD")) {
         slotIds = [];
-        toast.warning('You can only choose slots for one day.')
+        if (typeOfCalendar === 'manage')
+          toast.warning('You can only disable slots for one day at a time!')
+        else
+          toast.warning('You can only choose slots for one day!')
       }
       const slotIdIndex = slotIds.indexOf(slot.id);
 
