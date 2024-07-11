@@ -39,7 +39,7 @@
   "openTime": "Open Time",
   "numberOfCourts": "Number of Courts",
   "price": "Price",
-  "centreDetail": "Centre Details",
+  "viewDetail": "View Detail",
   "termForCustomer": "Term For Customer",
   "termForPartner": "Term For Partner",
   "privacyPolicy": "Privacy Policy",
@@ -104,7 +104,8 @@
   "information": "Information",
   "edit": "Edit",
   "status": "Status",
-  "feedbacks": "Feedbacks",
+  "feedbacks": "feedbacks",
+  "feedback": "feedback",
   "staffInformation": "Staff Information",
   "addStaff": "Add Staff",
   "fullName": "Full Name",
@@ -334,7 +335,7 @@
   ],
   "refundPolicy": [
     "Once you have booked the court and paid successfully, you are not allowed to cancel the court for any reason. If you cancel, you will not receive a refund of the money you paid.",
-    "In case your booked court is canceled by Court Manager for reasons related to court repair or from a partner, you will receive a 100% refund of the amount you paid." 
+    "In case your booked court is canceled by Court Manager for reasons related to court repair or from a partner, you will receive a 100% refund of the amount you paid."
   ],
   "basicTermsPartner": [
     "All partners who want to cooperate with us must have a clear and transparent business license.",
@@ -357,5 +358,6 @@
     "Court Manager must not post false information about the court you want to cooperate with on our website.",
     "There must be no money scams against our customers.",
     "Do not collect information about courts on our system without CourtStar's consent"
-  ]
+  ],
+  "reset": "Reset"
 }

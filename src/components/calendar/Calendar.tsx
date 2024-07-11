@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment';
-import { CalendarProps } from './index';
+import { CalendarProps, BookingDetail } from './index';
 import CalendarHeader from './CalendarHeader';
 import CalendarTable from './CalendarTable';
 import SpinnerLoading from '../SpinnerLoading';
 import axiosInstance from '../../config/axiosConfig';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
 
 const Calendar: React.FC<CalendarProps> = (props) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
   const typeOfCalendar = props.typeOfCalendar;
-  const [formCalendar, setFormCalendar] = useState<any>({
-    slotIds: [],
-    courtNo: "",
-    date: "",
-    centreId: ""
-  });
+  const [formCalendar, setFormCalendar] = useState<BookingDetail[] | undefined>([]);
 
   const controller = new AbortController();
   const { signal } = controller;
@@ -39,28 +33,27 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       day === moment().format('MM/DD') &&
       (parseInt(moment(slot.startTime, "HH:mm:ss").format('H'))) < (parseInt(moment().format('H')) + 1)
     ) ||
-    court.slotUnavailables.some(unavailable =>
-      unavailable.slot.id === slot.id &&
-      moment(unavailable.date, "YYYY-MM-DD").format('MM/DD') === day
+    court.bookingDetails.some(bookingDetail =>
+      bookingDetail.slot.id === slot.id &&
+      moment(bookingDetail.date, "YYYY-MM-DD").format('MM/DD') === day
     )
   )
 
 
   // HANDLE COURT
-  const [courtItems, setCourtItems] = useState([]);
+  const [courtItems, setCourtItems] = useState<any>([]);
+  const [currentCourt, setCurrentCourt] = useState<any>();
   const [court, setCourt] = useState<any>({});
   const handleSelectCourt = (item) => {
     setLoading(true);
-    setFormCalendar({
-      courtNo: item.key,
-      centreId: centre.id
-    });
-    loadCourt(centre.id, item.key);
+    setFormCalendar([]);
+    setCurrentCourt(item);
+    loadCourt(item.key);
   };
 
-  const loadCourt = async (centreId, courtNo) => {
+  const loadCourt = async (courtId) => {
     setLoading(true);
-    await axiosInstance.get(`/courtstar/court/${centreId}/${courtNo}`, { signal })
+    await axiosInstance.get(`/courtstar/court/booking-detail/${courtId}`, { signal })
       .then(res => {
         setCourt(res.data.data)
       })
@@ -77,15 +70,12 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   useEffect(() => {
     if (!isEmptyObject(centre)) {
       const items = centre.courts?.map((court) => ({
-        key: court.courtNo,
+        key: court.id,
         label: `${t('court')} ${court.courtNo}`
       }));
       setCourtItems(items);
-      setFormCalendar({
-        courtNo: items[0].key,
-        centreId: centre.id
-      });
-      loadCourt(centre.id, items[0].key);
+      setCurrentCourt(items[0]);
+      loadCourt(items[0].key);
     }
 
     return () => {
@@ -156,38 +146,35 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
   //HANDLE CHOOSE DAY SLOT
   const handleClick = (slot, day) => {
-    setFormCalendar(prevForm => {
-      let slotIds = Array.isArray(prevForm.slotIds) ? prevForm.slotIds : [];
-      if (slotIds.length && prevForm.date !== moment(day, "MM/DD").format("YYYY-MM-DD")) {
-        slotIds = [];
-        if (typeOfCalendar === 'manage')
-          toast.warning('You can only disable slots for one day at a time!')
-        else
-          toast.warning('You can only choose slots for one day!')
-      }
-      const slotIdIndex = slotIds.indexOf(slot.id);
+    const formattedDate = moment(day, "MM/DD").format("YYYY-MM-DD");
 
-      if (slotIdIndex > -1) {
-        // If slot ID exists, remove it
-        slotIds = [...slotIds.slice(0, slotIdIndex), ...slotIds.slice(slotIdIndex + 1)];
+    setFormCalendar((prevForm) => {
+
+      let updatedFormCalendar = prevForm ? [...prevForm] : [];
+
+      const slotIndex = updatedFormCalendar.findIndex(detail =>
+        detail.slotId === slot.id &&
+        detail.courtId === currentCourt.key &&
+        detail.date === formattedDate
+      );
+
+      if (slotIndex > -1) {
+        updatedFormCalendar.splice(slotIndex, 1);
       } else {
-        // If slot ID does not exist, add it
-        slotIds = [...slotIds, slot.id];
+        updatedFormCalendar.push({ date: formattedDate, slotId: slot.id, courtId: currentCourt.key });
       }
 
-      // Sort slotIds to maintain sequence
-      slotIds.sort((a, b) => a - b);
+      updatedFormCalendar.sort((a, b) => moment(a.date).diff(moment(b.date)));
 
-      return {
-        ...prevForm,
-        slotIds: slotIds,
-        date: moment(day, "MM/DD").format("YYYY-MM-DD")
-      };
+      return updatedFormCalendar;
     });
-  }
+  };
   //END CHOOSE DAY SLOT
 
-  console.log(formCalendar);
+  useEffect(() => {
+    console.log(formCalendar);
+  }, [formCalendar])
+
 
 
   const handleButton = async (form: any) => {
@@ -197,7 +184,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         await props.handleButton(form);
       } catch { }
       finally {
-        loadCourt(centre.id, form.courtNo);
+        loadCourt(courtItems[0].id);
       }
     } else {
       props.handleButton(form)
@@ -231,6 +218,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
                   typeOfCalendar={typeOfCalendar}
                   formCalendar={formCalendar}
                   handleButton={handleButton}
+                  handleReset={() => setFormCalendar([])}
                   handleSelectCourt={handleSelectCourt}
                   handleSelectWeek={handleSelectWeek}
                   handleSelectYear={handleSelectYear}

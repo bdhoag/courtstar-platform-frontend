@@ -91,7 +91,7 @@ const CalendarTable: React.FC<CalendarTableProps> = ({
                   className={
                     isDisable(day, slot)
                       ? "border p-1 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto bg-gray-300"
-                      : `${formCalendar?.slotIds?.includes(slot.id) && formCalendar?.date === moment(day, "MM/DD").format("YYYY-MM-DD") ? "bg-[#CDFAE7]" : ""} border p-1 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-300 ease hover:bg-[#CDFAE7]`
+                      : `${formCalendar.some(detail => detail.slotId === slot.id && detail.date === moment(day, "MM/DD").format("YYYY-MM-DD")) ? "bg-[#CDFAE7]" : ""} border p-1 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition cursor-pointer duration-300 ease hover:bg-[#CDFAE7]`
                   }
                 >
                 </td>

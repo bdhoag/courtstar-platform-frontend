@@ -23,6 +23,7 @@ const BookingForm = (props) => {
     fullName: "",
     email: "",
     phone: "",
+    bookingDetails: [],
   });
 
   const handleChange = (event) => {
@@ -40,13 +41,14 @@ const BookingForm = (props) => {
         fullName: (account.firstName + " " + account.lastName).trim(),
         email: account.email,
         phone: account.phone,
+        bookingDetails: [],
       }));
   }, [account]);
 
   useEffect(() => {
     setBookingForm((prevForm) => ({
       ...prevForm,
-      ...props.formCalendar,
+      bookingDetails: props.formCalendar,
     }));
   }, [props.formCalendar]);
 
@@ -100,7 +102,7 @@ const BookingForm = (props) => {
       />
       <div className='py-3 flex justify-center items-center gap-1 font-semibold'>
         {t('price')}:
-        <span className='text-rose-600'> {((props?.centre?.pricePerHour)*(bookingForm?.slotIds?.length))?.toLocaleString('de-DE')} VND/h</span>
+        <span className='text-rose-600'> {((props?.centre?.pricePerHour)*(bookingForm?.bookingDetails?.length))?.toLocaleString('de-DE')} VND/h</span>
       </div>
       <div className='flex items-center justify-center w-full'>
         <Button
