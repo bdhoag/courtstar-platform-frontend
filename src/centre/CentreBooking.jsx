@@ -104,16 +104,35 @@ const CentreBooking = () => {
                   <div className='text-3xl font-semibold'>
                     {centre.name}
                   </div>
-                  <div className='flex gap-2 my-3'>
-                    <Rating
-                      ratingWrapper='flex gap-1'
-                      value={centre.currentRate}
-                      editable={false}
-                    />
-                    <div className='text-base'>
-                      ({feedbackList.length})
-                    </div>
-                  </div>
+
+                  <>
+                    {
+                      centre.currentRate > 0
+                      ?
+                      <div className='flex gap-2 my-3'>
+                        <Rating
+                          ratingWrapper='flex gap-1'
+                          value={centre.currentRate}
+                          editable={false}
+                        />
+                        <div className='text-base'>
+                          (
+                            {feedbackList.length + " "}
+
+                            {
+                              feedbackList.length == 1
+                              ?
+                              t('feedback')
+                              :
+                              t('feedbacks')
+                            }
+                          )
+                        </div>
+                      </div>
+                      :
+                      ""
+                    }
+                  </>
                 </div>
                 <Button
                   label={t('bookNow')}

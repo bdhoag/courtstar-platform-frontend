@@ -39,7 +39,7 @@
   "openTime": "Giờ hoạt động",
   "numberOfCourts": "Số sân",
   "price": "Giá thuê",
-  "centreDetail": "Thông tin chi tiết",
+  "viewDetail": "Xem chi tiết",
   "termForCustomer": "Điều khoản người dùng",
   "termForPartner": "Điều khoản đối tác",
   "privacyPolicy": "Chính sách bảo mật",
@@ -104,7 +104,8 @@
   "information": "Thông tin",
   "edit": "Sửa",
   "status": "Trạng thái",
-  "feedbacks": "Phản hồi",
+  "feedbacks": "Đánh giá",
+  "feedback": "Đánh giá",
   "staffInformation": "Thông tin nhân viên",
   "addStaff": "Thêm Nhân viên",
   "fullName": "Họ Tên",
@@ -305,5 +306,6 @@
   "Friday": "Thứ Sáu",
   "Saturday": "Thứ Bảy",
   "Sunday": "Chủ Nhật",
-  "Description": "Mô tả"
+  "Description": "Mô tả",
+  "reset": "Đặt lại"
 }

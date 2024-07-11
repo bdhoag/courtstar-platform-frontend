@@ -5,6 +5,12 @@ export interface Item {
   label: string
 }
 
+export interface BookingDetail {
+  date: string;
+  slotId: string | number;
+  courtId: string | number
+}
+
 export interface CalendarProps {
   typeOfCalendar: 'booking' | 'manage';
   centre: any;
@@ -24,6 +30,7 @@ export interface CalendarHeaderProps {
   typeOfCalendar: 'booking' | 'manage';
   formCalendar: any;
   handleButton: (formCalendar: any) => void;
+  handleReset: () => void;
 }
 
 export interface Slot {

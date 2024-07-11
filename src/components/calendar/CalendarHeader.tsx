@@ -17,6 +17,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   typeOfCalendar,
   formCalendar,
   handleButton,
+  handleReset,
 }) => {
   const { t } = useTranslation();
   return (
@@ -68,12 +69,17 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
       </div>
       <div className="flex gap-5">
         <Button
-          label={typeOfCalendar === 'booking' ? t('booking') : 'Disable'}
-          size='medium'
+          label={t('reset')}
           fullWidth
-          className='bg-primary-green hover:bg-teal-900 text-white'
+          className='hover:bg-red-600 hover:text-white text-red-600 border-red-600 border font-semibold min-w-24 py-2.5'
+          onClick={() => handleReset()}
+        />
+        <Button
+          label={typeOfCalendar === 'booking' ? t('booking') : 'Disable'}
+          fullWidth
+          className='bg-primary-green hover:bg-teal-900 text-white min-w-24 py-2.5'
           onClick={() => handleButton(formCalendar)}
-          disabled={!formCalendar.slotIds || formCalendar.slotIds?.length === 0}
+          disabled={!formCalendar?.length}
         />
       </div>
     </div>
