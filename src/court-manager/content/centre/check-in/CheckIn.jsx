@@ -28,9 +28,8 @@ const CheckIn = (props) => {
   });
   const [formCheckIn, setFormCheckIn] = useState({ // State to hold the form data for the check-in popup
     checkinId: '',
-    startTime: '',
-    endTime: '',
-    slotNo: '',
+    slots: [],
+    court: {},
     totalPrice: '',
     status: ''
   });
@@ -42,14 +41,13 @@ const CheckIn = (props) => {
   const [filterSlot, setFilterSlot] = useState('');
 
   // Function to open the check-in popup with the specified check-in details
-  const handleCheckInPopup = (checkinId, startTime, endTime, slotNo, totalPrice, status) => {
+  const handleCheckInPopup = (check_in) => {
     setFormCheckIn({
-      checkinId,
-      startTime,
-      endTime,
-      slotNo,
-      totalPrice,
-      status
+      checkinId: check_in.id,
+      slots: check_in.slots,
+      court: check_in.court,
+      totalPrice: check_in.totalPrice,
+      status: check_in.status
     });
     setCheckInPopup(true);
   };
@@ -93,8 +91,7 @@ const CheckIn = (props) => {
               setQrLoading(false);
               if (qrPopup) {
                 handleQrPopupClose();
-                handleCheckInPopup(booking.id, booking.slot.startTime, booking.slot.endTime, booking.slot.slotNo,
-                  booking.totalPrice, booking.status);
+                handleCheckInPopup(booking);
               }
             })
             .catch(error => {
@@ -361,8 +358,7 @@ const CheckIn = (props) => {
                       ? "bg-slate-200 px-10 py-1 grid grid-cols-12 gap-2 hover:px-8 cursor-pointer mt-2 rounded-lg ease-in-out duration-300"
                       : "bg-white px-10 py-1 grid grid-cols-12 gap-2 hover:bg-teal-50 hover:px-8 cursor-pointer mt-2 rounded-lg shadow ease-in-out duration-300"}
                     onClick={
-                      () => handleCheckInPopup(checkin.id, checkin?.slot?.startTime, checkin?.slot?.endTime, checkin?.slot?.slotNo,
-                        checkin?.totalPrice, checkin?.status)
+                      () => handleCheckInPopup(checkin)
                     }
                   >
                     <div className="col-span-3 px-3 flex items-center truncate">
@@ -382,9 +378,6 @@ const CheckIn = (props) => {
                     </div>
                     <div className="col-span-2 flex flex-col justify-center items-center font-semibold">
                       {checkin.slots.map((slot, index) => slot.slotNo + (index === checkin.slots.length - 1 ? "" : ", "))}
-                      {/* <div className="text-sm font-normal">
-                        ({moment(checkin?.slot?.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(checkin?.slot?.endTime, 'HH:mm:ss').format('HH:mm')})
-                      </div> */}
                     </div>
                   </div>
                 ))}
@@ -404,19 +397,31 @@ const CheckIn = (props) => {
                       <span className="font-semibold">Address: </span>
                       {props.centreDetail.address}
                     </div>
-                    <div className="flex gap-3">
-                      <div>
-                        <span className="font-semibold">Slot: </span>
-                        ({moment(formCheckIn.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(formCheckIn.endTime, 'HH:mm:ss').format('HH:mm')})
-                      </div>
-                      <div>
-                        <span className="font-semibold">Court number: </span>
-                        {formCheckIn.slotNo}
-                      </div>
-                    </div>
                     <div>
                       <span className="font-semibold">Total price: </span>
-                      <span className="font-semibold text-rose-600">{formCheckIn.totalPrice}₫/h</span>
+                      <span className="font-semibold text-rose-600">{formCheckIn.totalPrice.toLocaleString('de-DE')}₫/h</span>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <div>
+                        <span className="font-semibold">Court number: </span>
+                        {formCheckIn.court.courtNo}
+                      </div>
+                      <div>
+                        <div className="font-semibold w-full text-center mb-2">Slot: </div>
+                        <div className="grid grid-cols-2 mx-auto content-center gap-2">
+                          {formCheckIn.slots.map((slot, index) => (
+                            <div
+                              key={index}
+                              className={`flex flex-col justify-center items-center font-semibold text-gray-500 text-xs bg-teal-100 rounded-lg ${
+                                formCheckIn.slots.length % 2 !== 0 && index === formCheckIn.slots.length - 1 ? 'last:col-span-2 w-1/2 mx-auto' : ''
+                              }`}
+                            >
+                              <div className="font-bold text-gray-800 text-base">{slot.slotNo}</div>
+                              ({moment(slot.startTime, 'HH:mm:ss').format('H')}h - {moment(slot.endTime, 'HH:mm:ss').format('H')}h)
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                     <div className="text-sm flex justify-center gap-20">
                       <button
