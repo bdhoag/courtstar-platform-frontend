@@ -103,10 +103,10 @@ const BookingHistory = () => {
                             {booking.date}
                           </div>
                           <div className="flex gap-3">
-                            <div>
+                            {/* <div>
                               <span className="font-semibold">Time: </span>
                               {moment(booking.slot.startTime, 'HH:mm:ss').format('HH:mm')} - {moment(booking.slot.endTime, 'HH:mm:ss').format('HH:mm')}
-                            </div>
+                            </div> */}
                             <div>
                               <span className="font-semibold">Court number: </span>
                               {booking.court.courtNo}
