@@ -268,6 +268,7 @@ const Withdrawal = () => {
         <div className="h-[500px] flex items-center justify-center">
           <SpinnerLoading height='80' width='80' color='#2B5A50' />
         </div>
+<<<<<<< Updated upstream
       ) : (
         <>
           <div className="px-10 bg-white py-4 grid grid-cols-4 gap-x-1 rounded-xl shadow">
@@ -312,6 +313,59 @@ const Withdrawal = () => {
               <div
                 key={request.id}
                 className={`grid grid-cols-4 py-3 px-10 mt-2 rounded-lg shadow ease-in-out duration-300 font-medium
+=======
+        : <>
+          {requestList && requestList.length > 0
+            ? <div className="mt-5 mb-10">
+              <div className="px-10 bg-white py-4 grid grid-cols-6 gap-x-1 rounded-xl shadow">
+                <div className="">
+                  <InputText
+                    placeholder="Enter name of centre"
+                    label="Name"
+                    value={nameFilter}
+                    onchange={(e) => setNameFilter(e.target.value)}
+                  />
+                </div>
+                <div className="">
+                  <InputText
+                    placeholder="Enter name of centre"
+                    label="Name"
+                    value={nameFilter}
+                    onchange={(e) => setNameFilter(e.target.value)}
+                  />
+                </div>
+                <div className="">
+                  <InputText
+                    placeholder="Enter name of centre"
+                    label="Name"
+                    value={nameFilter}
+                    onchange={(e) => setNameFilter(e.target.value)}
+                  />
+                </div>
+
+                <div className="">
+                  <InputText
+                    placeholder="Enter name of centre"
+                    label="Name"
+                    value={nameFilter}
+                    onchange={(e) => setNameFilter(e.target.value)}
+                  />
+                </div>
+                <div className="">
+                  <div className="font-semibold mb-2">Status</div>
+                  <Dropdown
+                    placeholder="Select District"
+                    items={items}
+                    onSelect={handleSelectItem}
+                    buttonClassName='!px-3'
+                  />
+                </div>
+              </div>
+              {requestList.map((request) => (
+                <div
+                  key={request.id}
+                  className={`grid grid-cols-4 py-3 px-10 mt-2 rounded-lg shadow ease-in-out duration-300 font-medium
+>>>>>>> Stashed changes
                         ${!request.dateAuthenticate ? 'bg-white' : 'bg-slate-50'}
                         hover:hover:px-8 cursor-pointer`}
                 onClick={() => handleOpenRequestDetail(request)}

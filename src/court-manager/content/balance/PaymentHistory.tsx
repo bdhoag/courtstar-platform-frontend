@@ -34,26 +34,25 @@ const PaymentHistory: React.FC = () => {
     console.log(`Selected: ${item.label}`);
   };
 
+  const controller = new AbortController();
+  const { signal } = controller;
+  const loadHistory = async () => {
+    await axiosInstance.get(`/courtstar/transfer-money/manager/all`, { signal })
+      .then(res => {
+        setHistories(res.data.data);
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
+      .finally(
+        () => {
+          setLoading(false);
+        }
+      );
+  }
+
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-    const loadHistory = async () => {
-      await axiosInstance.get(`/courtstar/transfer-money/manager/all`, { signal })
-        .then(res => {
-          setHistories(res.data.data);
-        })
-        .catch(err => {
-          console.log(err.message);
-        })
-        .finally(
-          () => {
-            setLoading(false);
-          }
-        );
-    }
-
     loadHistory();
-
     return () => {
       controller.abort();
     }
