@@ -96,6 +96,7 @@ const Withdrawal = () => {
       const res = await axiosInstance.get(`/courtstar/transfer-money/all`);
       const sortedData = res.data.data
         .map((item) => ({ ...item, loading: false }))
+        .sort((a, b) => b.id - a.id);
       setRequestList(sortedData);
     } catch (error: any) {
       console.log(error.message);
