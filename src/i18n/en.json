@@ -375,5 +375,11 @@
   "refunderPolicy": "REFUND POLICY",
   "frequency": "Frequency",
   "weeklyBooking": "Weekly booking",
-  "apply": "Apply"
+  "apply": "Apply",
+  "plsEnterEmail": "*Please enter your password!",
+  "plsEnterPassword": "*Please enter your password!",
+  "wrongMailOrPass": "Wrong email or password!",
+  "plsEnterFirstName": "*Please enter your first name!",
+  "plsEnterLastName": "*Please enter your last name!",
+  "plsEnterPhone": "*Please enter your phone number!"
 }
