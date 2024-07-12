@@ -31,7 +31,7 @@ export interface CalendarHeaderProps {
   formCalendar: any;
   handleButton: (formCalendar: any) => void;
   handleReset: () => void;
-  handleWeeklyBooking: () => void;
+  handleWeeklyBooking: (number: number, status: boolean) => void;
 }
 
 export interface Slot {

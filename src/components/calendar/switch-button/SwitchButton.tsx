@@ -4,7 +4,7 @@ import Button from '../../button';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
-  onChange: () => void
+  onChange: (number: number, status: boolean) => void
 }
 
 const SwitchButton: React.FC<Props> = ({ onChange }) => {
@@ -21,8 +21,8 @@ const SwitchButton: React.FC<Props> = ({ onChange }) => {
 
 
   const handleChange = () => {
+    onChange(frequency, !isChecked);
     setIsChecked(!isChecked);
-    onChange();
   };
 
   const handleChangeFrequency = (e) => {
@@ -100,7 +100,7 @@ const SwitchButton: React.FC<Props> = ({ onChange }) => {
                   <input
                     type="text"
                     id="counter-input"
-                    className="flex-shrink-0 border-0 bg-transparent text-base font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center !block font-semibold"
+                    className="flex-shrink-0 border-0 bg-transparent text-base focus:outline-none focus:ring-0 max-w-[2.5rem] text-center !block font-semibold"
                     placeholder=""
                     value={frequency}
                     onChange={handleChangeFrequency}
@@ -121,14 +121,21 @@ const SwitchButton: React.FC<Props> = ({ onChange }) => {
                     label={t('apply')}
                     fullWidth
                     className='bg-primary-green hover:bg-teal-900 text-white p-1 text-sm'
-                    onClick={() => setIsDropdownOpen(false)}
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      if (frequency == 0) {
+                        setIsChecked(false);
+                        setFrequency(1);
+                      };
+                      onChange(frequency, isChecked);
+                    }}
                   />
                   <Button
                     label={t('cancel')}
                     fullWidth
                     className='border-red-600 border text-red-600 hover:bg-red-600 hover:text-white p-1 text-sm'
                     onClick={() => {
-                      setIsChecked(false);
+                      handleChange();
                       setFrequency(1);
                     }}
                   />

@@ -13,9 +13,17 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
   const typeOfCalendar = props.typeOfCalendar;
   const [weeklyBooking, setWeeklyBooking] = useState<boolean>(false);
+  const [frequency, setFrequency] = useState<number>(0);
 
   useEffect(() => {
-    if (weeklyBooking) setFormCalendar([]);
+    console.log(frequency);
+  }, [frequency])
+
+
+  useEffect(() => {
+    console.log(weeklyBooking);
+
+    setFormCalendar([]);
   }, [weeklyBooking])
 
   const [formCalendar, setFormCalendar] = useState<BookingDetail[] | undefined>([]);
@@ -155,26 +163,55 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   const handleClick = (slot, day) => {
     const formattedDate = moment(day, "MM/DD").format("YYYY-MM-DD");
 
-    setFormCalendar((prevForm) => {
 
-      let updatedFormCalendar = prevForm ? [...prevForm] : [];
+    if (weeklyBooking) {
+      setFormCalendar((prevForm) => {
 
-      const slotIndex = updatedFormCalendar.findIndex(detail =>
-        detail.slotId === slot.id &&
-        detail.courtId === currentCourt.key &&
-        detail.date === formattedDate
-      );
+        let updatedFormCalendar = prevForm ? [...prevForm] : [];
 
-      if (slotIndex > -1) {
-        updatedFormCalendar.splice(slotIndex, 1);
-      } else {
-        updatedFormCalendar.push({ date: formattedDate, slotId: slot.id, courtId: currentCourt.key });
-      }
+        const slotIndex = updatedFormCalendar.findIndex(detail =>
+          detail.slotId === slot.id &&
+          detail.courtId === currentCourt.key &&
+          detail.date === formattedDate
+        );
 
-      updatedFormCalendar.sort((a, b) => moment(a.date).diff(moment(b.date)));
+        if (slotIndex > -1) {
+          updatedFormCalendar = updatedFormCalendar.filter(
+            item => item.slotId !== slot.id || moment(item.date).format('dd') !== moment(formattedDate).format('dd')
+          );
+        } else {
+          for (let i = 0; i < frequency; i++) {
+            const nextWeekDate = moment(formattedDate).add(i, 'weeks').format('YYYY-MM-DD');
+            updatedFormCalendar.push({ date: nextWeekDate, slotId: slot.id, courtId: currentCourt.key });
+          }
+        }
 
-      return updatedFormCalendar;
-    });
+        updatedFormCalendar.sort((a, b) => moment(a.date).diff(moment(b.date)));
+
+        return updatedFormCalendar;
+      });
+    } else {
+      setFormCalendar((prevForm) => {
+
+        let updatedFormCalendar = prevForm ? [...prevForm] : [];
+
+        const slotIndex = updatedFormCalendar.findIndex(detail =>
+          detail.slotId === slot.id &&
+          detail.courtId === currentCourt.key &&
+          detail.date === formattedDate
+        );
+
+        if (slotIndex > -1) {
+          updatedFormCalendar.splice(slotIndex, 1);
+        } else {
+          updatedFormCalendar.push({ date: formattedDate, slotId: slot.id, courtId: currentCourt.key });
+        }
+
+        updatedFormCalendar.sort((a, b) => moment(a.date).diff(moment(b.date)));
+
+        return updatedFormCalendar;
+      });
+    }
   };
   //END CHOOSE DAY SLOT
 
@@ -226,7 +263,10 @@ const Calendar: React.FC<CalendarProps> = (props) => {
                   formCalendar={formCalendar}
                   handleButton={handleButton}
                   handleReset={() => setFormCalendar([])}
-                  handleWeeklyBooking={() => setWeeklyBooking(!weeklyBooking)}
+                  handleWeeklyBooking={(number, status) => {
+                    setWeeklyBooking(status);
+                    setFrequency(number);
+                  }}
                   handleSelectCourt={handleSelectCourt}
                   handleSelectWeek={handleSelectWeek}
                   handleSelectYear={handleSelectYear}
