@@ -9,11 +9,13 @@ import Bell from '../components/notification';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import Button from '../components/button';
+import { toast } from 'react-toastify';
 
 const Header: React.FC = () => {
   const { t } = useTranslation();
   const { state, dispatch } = useAuth();
   const { token, role, isLogin, account } = state;
+  const [loadingLogout, setLoadingLogout] = useState(false);
 
   //HANDLE LOGIN POPUP
   const [loginPopupOpen, setLoginPopupOpen] = useState(false);
@@ -26,7 +28,7 @@ const Header: React.FC = () => {
 
   //HANDLE LOAD INFO
   useEffect(() => {
-    const load = async() => {
+    const load = async () => {
       await axiosInstance.get('/courtstar/account/myInfor')
         .then(res => {
           dispatch({ type: 'SET_ACCOUNT', payload: res.data.data });
@@ -36,7 +38,7 @@ const Header: React.FC = () => {
           localStorage.clear();
           dispatch({ type: 'LOGOUT' });
         })
-        .finally(()=>{
+        .finally(() => {
         })
     }
 
@@ -48,16 +50,25 @@ const Header: React.FC = () => {
   //HANDLE LOGOUT ACTION
   const navigate = useNavigate();
   const logout = async () => {
+    setLoadingLogout(true);
     await axiosInstance.post(`/courtstar/auth/logout`, { token })
       .then(() => {
         localStorage.clear();
         dispatch({ type: 'LOGOUT' });
+        toast.success('Log out successfully!', {
+          toastId: 'log-out-successfully'
+        })
         navigate('/');
       })
       .catch(error => {
         console.log(error.message);
+        toast.warning('Can not log out!', {
+          toastId: 'can-not-log-out'
+        })
       })
-      .finally();
+      .finally(
+        () => setLoadingLogout(false)
+      );
   };
 
   useEffect(() => {
@@ -168,7 +179,7 @@ const Header: React.FC = () => {
                 <Link
                   className="text-gray-200 font-medium hover:text-white transition-all ease-in-out duration-200
                 cursor-pointer py-1 relative after:sm:absolute after:sm:bottom-0 after:sm:left-0 after:sm:bg-white after:sm:h-0.5 after:sm:w-0 hover:after:sm:w-full after:sm:transition-all after:sm:ease-in-out after:sm:duration-200 after:sm:rounded-md"
-                  to={role === 'STAFF'? "/myCentre/:id" :"/myCentre/balance"}
+                  to={role === 'STAFF' ? "/myCentre/:id" : "/myCentre/balance"}
                 >
                   {t('myCentre')}
                 </Link>
@@ -206,7 +217,11 @@ const Header: React.FC = () => {
 
             {(isLogin === true) && (
               <div className="flex items-center gap-3">
-                <DropdownHeader userEmail={account.email} logout={logout} />
+                <DropdownHeader
+                  userEmail={account.email}
+                  logout={logout}
+                  loadingLogout={loadingLogout}
+                />
                 <Bell
                   notifications={notifications}
                 />

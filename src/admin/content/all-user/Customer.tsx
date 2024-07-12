@@ -163,7 +163,7 @@ const Customer = () => {
                   {currentListCustomer.map((customer, index) => (
                     <div
                       key={customer.id}
-                      className="bg-white px-10 py-3 grid grid-cols-12 content-center gap-2 font-medium hover:bg-teal-50 hover:px-8 cursor-pointer mt-1 rounded-lg shadow-sm ease-in-out duration-300"
+                      className="bg-white px-10 py-3 grid grid-cols-12 content-center gap-2 font-medium mt-1 rounded-lg shadow-sm"
                     >
                       <div className="col-span-4 content-center truncate ml-4">
                         {customer.firstName} {customer.lastName}
