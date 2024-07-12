@@ -439,7 +439,7 @@ function CentreInfo(props) {
                       <div className="">
                         {court.courtNo}.
                       </div>
-                      <div className="flex justify-between gap-1 w-full items-center">
+                      <div className="flex justify-between gap-1 w-full items-center text-sm">
                         <div className="flex gap-1 ">
                           <div className='font-semibold'>{t('status')}:</div>
                           <div className={court.status ? 'font-semibold text-primary-green' : 'font-semibold text-red-500'}>

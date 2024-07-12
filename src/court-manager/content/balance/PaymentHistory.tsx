@@ -73,56 +73,79 @@ const PaymentHistory = forwardRef<ChildHandle>((props, ref) => {
           <div className="text-center font-semibold text-white py-1.5 text-2xl bg-primary-green rounded-t-xl">
             Withdrawal history
           </div>
-          <div className="px-10 py-4 grid grid-cols-12 gap-2">
-            <div className="col-span-2 text-center">
-              <InputText
-                placeholder={t('enterUserName')}
-                label="Bank's name"
-                value=""
-                onchange={() => { }}
-              />
+          {histories?.length > 0
+            ?
+            <div className="px-10 py-4 grid grid-cols-12 gap-2">
+              <div className="col-span-2 text-center">
+                <InputText
+                  placeholder={t('enterUserName')}
+                  label="Bank's name"
+                  value=""
+                  onchange={() => { }}
+                />
+              </div>
+              <div className="col-span-2 text-center">
+                <InputText
+                  placeholder={t('enterUserName')}
+                  label="Account number"
+                  value=""
+                  onchange={() => { }}
+                />
+              </div>
+              <div className="col-span-2 text-center">
+                <InputText
+                  placeholder={t('enterUserName')}
+                  label="Card Holder's Name"
+                  value=""
+                  onchange={() => { }}
+                />
+              </div>
+              <div className="col-span-2 text-center">
+                <InputText
+                  placeholder={t('enterUserName')}
+                  label="Amount"
+                  value=""
+                  onchange={() => { }}
+                />
+              </div>
+              <div className="col-span-2 text-center">
+                <InputText
+                  placeholder={t('enterUserName')}
+                  label="Date Create Order"
+                  value=""
+                  onchange={() => { }}
+                />
+              </div>
+              <div className="col-span-2 text-center">
+                <Dropdown
+                  label="Status"
+                  items={options}
+                  onSelect={() => handleSelectDropdown}
+                  placeholder={t('Select date')}
+                />
+              </div>
             </div>
-            <div className="col-span-2 text-center">
-              <InputText
-                placeholder={t('enterUserName')}
-                label="Account number"
-                value=""
-                onchange={() => { }}
-              />
+            :
+            <div className='flex flex-col items-center justify-center h-[300px] text-3xl text-primary mx-auto'>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="250" height="250"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-search-x"
+              >
+                <path d="m13.5 8.5-5 5" />
+                <path d="m8.5 8.5 5 5" />
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              No request found.
             </div>
-            <div className="col-span-2 text-center">
-              <InputText
-                placeholder={t('enterUserName')}
-                label="Card Holder's Name"
-                value=""
-                onchange={() => { }}
-              />
-            </div>
-            <div className="col-span-2 text-center">
-              <InputText
-                placeholder={t('enterUserName')}
-                label="Amount"
-                value=""
-                onchange={() => { }}
-              />
-            </div>
-            <div className="col-span-2 text-center">
-              <InputText
-                placeholder={t('enterUserName')}
-                label="Date Create Order"
-                value=""
-                onchange={() => { }}
-              />
-            </div>
-            <div className="col-span-2 text-center">
-              <Dropdown
-                label="Status"
-                items={options}
-                onSelect={() => handleSelectDropdown}
-                placeholder={t('Select date')}
-              />
-            </div>
-          </div>
+          }
         </div>
         <div className="mt-2 font-medium">
           {histories?.map((item: any) => (
