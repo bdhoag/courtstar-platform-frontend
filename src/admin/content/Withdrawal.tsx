@@ -314,7 +314,7 @@ const Withdrawal = () => {
                 key={request.id}
                 className={`grid grid-cols-4 py-3 px-10 mt-2 rounded-lg shadow ease-in-out duration-300 font-medium
                         ${!request.dateAuthenticate ? 'bg-white' : 'bg-slate-50'}
-                        hover:hover:px-8 cursor-pointer`}
+                        hover:px-8 cursor-pointer`}
                 onClick={() => handleOpenRequestDetail(request)}
               >
                 <div className="self-center font-semibold ml-5 truncate">

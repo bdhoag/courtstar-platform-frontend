@@ -85,6 +85,8 @@ const Content = (props) => {
     }
   }
 
+  console.log(checkIn);
+
   return (
     <div className="flex-1 flex justify-center max-w-screen-1440 px-14 mx-auto">
 
