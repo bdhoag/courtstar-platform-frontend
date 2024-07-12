@@ -12,6 +12,12 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   const [loading, setLoading] = useState(false);
 
   const typeOfCalendar = props.typeOfCalendar;
+  const [weeklyBooking, setWeeklyBooking] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (weeklyBooking) setFormCalendar([]);
+  }, [weeklyBooking])
+
   const [formCalendar, setFormCalendar] = useState<BookingDetail[] | undefined>([]);
 
   const controller = new AbortController();
@@ -185,7 +191,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         await props.handleButton(form);
       } catch { }
       finally {
-        loadCourt(courtItems[0].key);
+        loadCourt(currentCourt.key);
       }
     } else {
       props.handleButton(form)
@@ -220,6 +226,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
                   formCalendar={formCalendar}
                   handleButton={handleButton}
                   handleReset={() => setFormCalendar([])}
+                  handleWeeklyBooking={() => setWeeklyBooking(!weeklyBooking)}
                   handleSelectCourt={handleSelectCourt}
                   handleSelectWeek={handleSelectWeek}
                   handleSelectYear={handleSelectYear}

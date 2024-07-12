@@ -66,7 +66,7 @@
   "alreadyHaveAnAccount": "Đã có tài khoản",
   "yourProfile": "Thông tin Cá nhân",
   "update": "Cập Nhật",
-  "cancel": "Huỷ Bỏ",
+  "cancel": "Huỷ bỏ",
   "forgotPassword": "Quên Mật Khẩu",
   "forgotPasswordNote": "Nhập email của bạn và chúng tôi sẽ gửi mã xác nhận đến email!",
   "sendCode": "Gửi mã",
@@ -371,5 +371,8 @@
   "refundPolicy": [
     "Khi đã đặt lịch và thanh toán thành công, bạn không được phép hủy phiên tòa vì bất kỳ lý do gì. Nếu bạn hủy, bạn sẽ không được hoàn lại số tiền đã thanh toán.",
     "Trong trường hợp tòa án đã đặt của bạn bị Quản lý tòa án hủy vì lý do liên quan đến việc sửa chữa tòa án hoặc từ đối tác, bạn sẽ được hoàn lại 100% số tiền bạn đã đóng."
-  ]
+  ],
+  "frequency": "Tần suất",
+  "weeklyBooking": "Đặt hàng tuần",
+  "apply": "Áp dụng"
 }
