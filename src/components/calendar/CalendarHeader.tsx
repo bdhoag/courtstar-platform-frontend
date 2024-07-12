@@ -3,6 +3,7 @@ import Dropdown from '../dropdown';
 import Button from '../button';
 import { CalendarHeaderProps } from './index';
 import { useTranslation } from 'react-i18next';
+import SwitchButton from './switch-button/SwitchButton';
 
 const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   yearItems,
@@ -18,6 +19,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   formCalendar,
   handleButton,
   handleReset,
+  handleWeeklyBooking,
 }) => {
   const { t } = useTranslation();
   return (
@@ -67,6 +69,17 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
           </button>
         </div>
       </div>
+      {
+        typeOfCalendar === "booking"
+        ?
+        <div>
+          <SwitchButton
+            onChange={handleWeeklyBooking}
+          />
+        </div>
+        :
+        ""
+      }
       <div className="flex gap-5">
         <Button
           label={t('reset')}
