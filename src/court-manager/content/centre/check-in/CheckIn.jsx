@@ -16,39 +16,27 @@ const CheckIn = (props) => {
   const [optionDropdownDate, setOptionDropdownDate] = useState([]);
   const { t } = useTranslation();
   const { id } = useParams(); // Get the booking ID from the URL parameters
-  const [apiCheckin, setApiCheckin] = useState(props.apiCheckin || []); // State to hold the check-in data from the API
+  const [apiCheckin, setApiCheckin] = useState(); // State to hold the check-in data from the API
   const [checkInPopup, setCheckInPopup] = useState(false); // State to control the visibility of the check-in popup
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
-  const [listSlot, setListSlot] = useState(() => {
-    const slotNumbers = apiCheckin.flatMap(item => (
-      item.slots.map(slot => slot.slotNo)
-    ));
-    return slotNumbers;
-  });
-  const [formCheckIn, setFormCheckIn] = useState({ // State to hold the form data for the check-in popup
-    checkinId: '',
-    slots: [],
-    court: {},
-    totalPrice: '',
-    status: ''
-  });
+  const itemsPerPage = 5;
+
+  const [formCheckIn, setFormCheckIn] = useState({});
   const [filteredCheckins, setFilteredCheckins] = useState([]);
   const [filterName, setFilterName] = useState('');
   const [filterEmail, setFilterEmail] = useState('');
   const [filterDate, setFilterDate] = useState('');
   const [filterPhone, setFilterPhone] = useState('');
   const [filterSlot, setFilterSlot] = useState('');
+  const [loadingBtn, setLoadingBtn] = useState(false);
+
+  useEffect(() => {
+    setApiCheckin(props.apiCheckin);
+  }, [props.apiCheckin])
 
   // Function to open the check-in popup with the specified check-in details
   const handleCheckInPopup = (check_in) => {
-    setFormCheckIn({
-      checkinId: check_in.id,
-      slots: check_in.slots,
-      court: check_in.court,
-      totalPrice: check_in.totalPrice,
-      status: check_in.status
-    });
+    setFormCheckIn(check_in);
     setCheckInPopup(true);
   };
 
@@ -74,6 +62,7 @@ const CheckIn = (props) => {
 
   // Function to handle the check-in process
   const handleCheckin = async (checkInId) => {
+    setLoadingBtn(true);
     setQrLoading(true);
     let booking = {};
     await axiosInstance.post(`/courtstar/check-in/${checkInId}`)
@@ -103,35 +92,38 @@ const CheckIn = (props) => {
         console.log(error.message);
       })
       .finally(() => {
-
+        setLoadingBtn(false);
       });
   };
 
-  console.log();
-
   // Function to handle the check-in process
   const handleUndoCheckin = async (checkInId) => {
-    try {
-      const res = await axiosInstance.post(`/courtstar/check-in/undo/${checkInId}`);
-      if (res.data.data) {
-        handleCheckInPopupClose();
-        toast.success('Undo check-in successfully', {
-          toastId: 'undo-checkin-success'
-        });
-        // Reload the check-in data after successful check-in
-        const loadCheckIn = async () => {
-          try {
-            const res = await axiosInstance.get(`/courtstar/booking/${id}`);
-            setApiCheckin(res.data.data);
-          } catch (error) {
-            console.log(error.message);
-          }
-        };
-        loadCheckIn();
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+    setLoadingBtn(true);
+    await axiosInstance.post(`/courtstar/check-in/undo/${checkInId}`)
+      .then(res => {
+        if (res.data.data) {
+          handleCheckInPopupClose();
+          toast.success('Undo check-in successfully', {
+            toastId: 'undo-checkin-success'
+          });
+          // Reload the check-in data after successful check-in
+          const loadCheckIn = async () => {
+            try {
+              const res = await axiosInstance.get(`/courtstar/booking/${id}`);
+              setApiCheckin(res.data.data);
+            } catch (error) {
+              console.log(error.message);
+            }
+          };
+          loadCheckIn();
+        }
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(() => {
+        setLoadingBtn(false);
+      });
   };
 
   // Function to close the check-in popup
@@ -186,9 +178,7 @@ const CheckIn = (props) => {
   // Extract the slots from the apiCheckin data
 
   const getUniqueSlots = (apiCheckin) => {
-    const slots = apiCheckin.flatMap(checkin =>
-      checkin.slots.map(slot => parseInt(slot.slotNo, 10))
-    );
+    const slots = props.apiCheckin.map(item => item.slot.slotNo);
 
     const uniqueSlots = [...new Set(slots)].sort((a, b) => a - b);
 
@@ -223,25 +213,25 @@ const CheckIn = (props) => {
 
   useEffect(() => {
     const applyFilters = () => {
-      let updatedCheckins = [...apiCheckin];
+      let updatedCheckins = apiCheckin ? [...apiCheckin] : [];
 
       if (filterName) {
         updatedCheckins = updatedCheckins.filter(checkin => {
-          const fullName = `${checkin?.account?.firstName || ''} ${checkin?.account?.lastName || ''} ${checkin?.guest?.fullName || ''}`.toLowerCase();
+          const fullName = `${checkin?.bookingSchedule?.account?.firstName || ''} ${checkin?.bookingSchedule?.account?.lastName || ''} ${checkin?.bookingSchedule?.guest?.fullName || ''}`.toLowerCase();
           return fullName.includes(filterName.toLowerCase());
         });
       }
 
       if (filterEmail) {
         updatedCheckins = updatedCheckins.filter(checkin => {
-          const email = (checkin?.account?.email || checkin?.guest?.email || '').toLowerCase();
+          const email = (checkin?.bookingSchedule?.account?.email || checkin?.bookingSchedule?.guest?.email || '').toLowerCase();
           return email.includes(filterEmail.toLowerCase());
         });
       }
 
       if (filterPhone) {
         updatedCheckins = updatedCheckins.filter(checkin => {
-          const phone = (checkin?.account?.phone || checkin?.guest?.phone || '').toLowerCase();
+          const phone = (checkin?.bookingSchedule?.account?.phone || checkin?.bookingSchedule?.guest?.phone || '').toLowerCase();
           return phone.includes(filterPhone.toLowerCase());
         });
       }
@@ -263,20 +253,21 @@ const CheckIn = (props) => {
   }, [filterName, filterEmail, filterPhone, filterDate, filterSlot, apiCheckin]);
 
   const indexOfLastApiCheckins = currentPage * itemsPerPage;
-  const indexOfFirstApiCheckins = indexOfLastApiCheckins- itemsPerPage;
+  const indexOfFirstApiCheckins = indexOfLastApiCheckins - itemsPerPage;
   const currentListApiCheckins = filteredCheckins.slice(indexOfFirstApiCheckins, indexOfLastApiCheckins);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   }
+
   return (
     <div className="w-[70rem] my-12">
       <div className="flex justify-between items-center">
         <div className="text-3xl font-bold">
-          Check in ({apiCheckin.length})
+          Check in ({apiCheckin?.length})
         </div>
         <div>
-          {apiCheckin.length
+          {apiCheckin?.length
             ?
             <Button
               label={t('Check in')}
@@ -302,7 +293,7 @@ const CheckIn = (props) => {
       </div>
 
       {
-        apiCheckin.length
+        apiCheckin?.length
           ?
           <>
             <div className="mt-4">
@@ -350,11 +341,12 @@ const CheckIn = (props) => {
                   />
                 </div>
               </div>
+
               <div className="mt-2 font-medium">
-                {currentListApiCheckins.map((checkin) => (
+                {currentListApiCheckins?.map((checkin) => (
                   <div
                     key={checkin.id}
-                    className={checkin?.status
+                    className={checkin?.checkedIn
                       ? "bg-slate-200 px-10 py-1 grid grid-cols-12 gap-2 hover:px-8 cursor-pointer mt-2 rounded-lg ease-in-out duration-300"
                       : "bg-white px-10 py-1 grid grid-cols-12 gap-2 hover:bg-teal-50 hover:px-8 cursor-pointer mt-2 rounded-lg shadow ease-in-out duration-300"}
                     onClick={
@@ -362,6 +354,27 @@ const CheckIn = (props) => {
                     }
                   >
                     <div className="col-span-3 px-3 flex items-center truncate">
+                      {checkin?.bookingSchedule?.account?.firstName} {checkin?.bookingSchedule?.account?.lastName}
+                      {checkin?.bookingSchedule?.guest?.fullName}
+                    </div>
+                    <div className="col-span-3 px-3 flex items-center truncate">
+                      {checkin?.bookingSchedule?.account?.email}
+                      {checkin?.bookingSchedule?.guest?.email}
+                    </div>
+                    <div className="col-span-2 flex items-center justify-center">
+                      {moment(checkin?.date, 'yyyy-MM-DD').format('DD/MM')}
+                    </div>
+                    <div className="col-span-2 flex items-center justify-center">
+                      {checkin?.bookingSchedule?.account?.phone}
+                      {checkin?.bookingSchedule?.guest?.phone}
+                    </div>
+                    <div className="col-span-2 flex flex-col justify-center items-center font-semibold">
+                      {checkin.slot?.slotNo}
+                      <div className="font-normal text-slate-500 text-sm">
+                        ({moment(checkin.slot.startTime, 'HH:mm:ss').format('H')}h - {moment(checkin.slot.endTime, 'HH:mm:ss').format('H')}h)
+                      </div>
+                    </div>
+                    {/* <div className="col-span-3 px-3 flex items-center truncate">
                       {checkin?.account?.firstName} {checkin?.account?.lastName}
                       {checkin?.guest?.fullName}
                     </div>
@@ -378,7 +391,7 @@ const CheckIn = (props) => {
                     </div>
                     <div className="col-span-2 flex flex-col justify-center items-center font-semibold">
                       {checkin.slots.map((slot, index) => slot.slotNo + (index === checkin.slots.length - 1 ? "" : ", "))}
-                    </div>
+                    </div> */}
                   </div>
                 ))}
               </div>
@@ -390,65 +403,58 @@ const CheckIn = (props) => {
               html={
                 <div className="flex gap-7 max-w-5xl">
                   <div className="flex flex-col gap-3">
-                    <div className="font-semibold text-xl">
-                      {props.centreDetail.name}
+                    <div>
+                      <span className="font-semibold">Address: </span> {props?.centreDetail?.address}
+                    </div>
+                    <div className="flex gap-6">
+                      <div className="">
+                        <span className="font-semibold">Date: </span>
+                        {formCheckIn?.date}
+                      </div>
+                      <div className="self-center">
+                        <span className="font-semibold">Slot: </span>
+                        {formCheckIn?.slot?.slotNo}
+                        <span className="font-normal text-slate-500 text-sm">
+                          ({moment(formCheckIn?.slot?.startTime, 'HH:mm:ss').format('H')}h - {moment(formCheckIn?.slot?.endTime, 'HH:mm:ss').format('H')}h)
+                        </span>
+                      </div>
                     </div>
                     <div>
-                      <span className="font-semibold">Address: </span>
-                      {props.centreDetail.address}
+                      <span className="font-semibold">Court number: </span>
+                      {formCheckIn?.court?.courtNo}
                     </div>
                     <div>
                       <span className="font-semibold">Total price: </span>
-                      <span className="font-semibold text-rose-600">{formCheckIn.totalPrice.toLocaleString('de-DE')}₫/h</span>
+                      <span className="font-semibold text-rose-600">{formCheckIn?.bookingSchedule?.totalPrice?.toLocaleString('de-DE')}₫/h</span>
                     </div>
-                    <div className="flex flex-col gap-3">
-                      <div>
-                        <span className="font-semibold">Court number: </span>
-                        {formCheckIn.court.courtNo}
-                      </div>
-                      <div>
-                        <div className="font-semibold w-full text-center mb-2">Slot: </div>
-                        <div className="grid grid-cols-2 mx-auto content-center gap-2">
-                          {formCheckIn.slots.map((slot, index) => (
-                            <div
-                              key={index}
-                              className={`flex flex-col justify-center items-center font-semibold text-gray-500 text-xs bg-teal-100 rounded-lg ${
-                                formCheckIn.slots.length % 2 !== 0 && index === formCheckIn.slots.length - 1 ? 'last:col-span-2 w-1/2 mx-auto' : ''
-                              }`}
-                            >
-                              <div className="font-bold text-gray-800 text-base">{slot.slotNo}</div>
-                              ({moment(slot.startTime, 'HH:mm:ss').format('H')}h - {moment(slot.endTime, 'HH:mm:ss').format('H')}h)
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-sm flex justify-center gap-20">
-                      <button
-                        className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300"
-                        onClick={
-                          formCheckIn.status
-                            ?
-                            () => {
-                              handleUndoCheckin(formCheckIn.checkinId);
-                            }
-                            :
-                            () => {
-                              handleCheckin(formCheckIn.checkinId);
-                            }
-                        }
-                      >
-                        {formCheckIn.status
+                    <Button
+                      className={`block text-center py-1 w-full border ${formCheckIn.checkedIn ? 'bg-gray-800 hover:bg-gray-400' : 'bg-primary-green hover:bg-teal-900'} text-white rounded-md font-semibold transition-all ease-in-out duration-300`}
+                      onClick={
+                        formCheckIn?.checkedIn
+                          ?
+                          () => {
+                            handleUndoCheckin(formCheckIn.id);
+                          }
+                          :
+                          () => {
+                            handleCheckin(formCheckIn.id);
+                          }
+                      }
+                      label={
+                        formCheckIn?.checkedIn
                           ?
                           'Undo'
                           :
                           'Check in'
-                        }
-                      </button>
-                    </div>
+                      }
+                      loading={loadingBtn}
+                      loadingColor="#fff"
+                    />
                   </div>
                 </div>
               }
+              centreInfo
+              title={props?.centreDetail?.name}
             />
 
             <PopupModal
