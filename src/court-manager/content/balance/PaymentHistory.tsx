@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import axiosInstance from '../../../config/axiosConfig';
 import SpinnerLoading from '../../../components/SpinnerLoading';
 import InputText from '../../../components/input-text';
@@ -6,36 +6,34 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import Dropdown from '../../../components/dropdown';
 
-const PaymentHistory: React.FC = () => {
+interface ChildHandle {
+  increment: () => void;
+}
 
+const PaymentHistory = forwardRef<ChildHandle>((props, ref) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
-  const [histories, setHistories] = useState<any>();
+  const [histories, setHistories] = useState<any>([]);
   const options = [
-    {
-      key: 1,
-      label: "All"
-    },
-    {
-      key: 2,
-      label: "Pending"
-    },
-    {
-      key: 3,
-      label: "Accepted"
-    },
-    {
-      key: 4,
-      label: "Denied"
-    }
+    { key: 1, label: "All" },
+    { key: 2, label: "Pending" },
+    { key: 3, label: "Accepted" },
+    { key: 4, label: "Denied" }
   ];
 
-  const handleSelectDropdown = (item) => {
+  useImperativeHandle(ref, () => ({
+    increment() {
+      loadHistory();
+    }
+  }));
+
+  const handleSelectDropdown = (item: { key: number; label: string }) => {
     console.log(`Selected: ${item.label}`);
   };
 
   const controller = new AbortController();
   const { signal } = controller;
+
   const loadHistory = async () => {
     await axiosInstance.get(`/courtstar/transfer-money/manager/all`, { signal })
       .then(res => {
@@ -56,8 +54,7 @@ const PaymentHistory: React.FC = () => {
     loadHistory();
     return () => {
       controller.abort();
-    }
-
+    };
   }, []);
 
   return (
@@ -121,20 +118,18 @@ const PaymentHistory: React.FC = () => {
               <Dropdown
                 label="Status"
                 items={options}
-                onSelect={handleSelectDropdown}
+                onSelect={() => handleSelectDropdown}
                 placeholder={t('Select date')}
               />
             </div>
           </div>
         </div>
         <div className="mt-2 font-medium">
-          {histories?.map((item) => (
+          {histories?.map((item: any) => (
             <div
               key={item.id}
               className="bg-white px-10 py-2 grid grid-cols-12 gap-2 mt-2 rounded-lg shadow"
-              onClick={
-                () => { }
-              }
+              onClick={() => { }}
             >
               <div className="col-span-2 px-3 flex items-center truncate">
                 {item?.nameBanking}
@@ -175,6 +170,6 @@ const PaymentHistory: React.FC = () => {
         </div>
       </div>
   )
-}
+});
 
-export default PaymentHistory
+export default PaymentHistory;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Counter from '../../../components/Counter';
 import Button from '../../../components/button';
 import { useTranslation } from 'react-i18next';
@@ -21,6 +21,8 @@ export default function MyBalance(props) {
     amount: '',
     cardHolderName: ''
   })
+
+  const childRef = useRef();
 
   useEffect(() => {
     if (props.balanceDetail) {
@@ -45,6 +47,13 @@ export default function MyBalance(props) {
             toastId: 'create-request-withdrawal-success'
           })
           setOpenModal(false);
+          setFormWithdraw({
+            nameBanking: '',
+            numberBanking: '',
+            amount: '',
+            cardHolderName: ''
+          });
+          childRef.current.increment();
         }
       })
       .catch(error => {
@@ -254,14 +263,13 @@ export default function MyBalance(props) {
                   <span className='text-[7px]'>VND</span>
                 </div>
               </div>
-
             </div>
           </div>
-
         </div>
-
         <div>
-          <PaymentHistory />
+          <PaymentHistory
+            ref={childRef}
+          />
         </div>
       </div>
   )
