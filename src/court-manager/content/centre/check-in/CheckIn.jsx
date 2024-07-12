@@ -296,7 +296,7 @@ const CheckIn = (props) => {
         apiCheckin?.length
           ?
           <>
-            <div className="mt-4">
+            <div className="my-4">
               <div className="px-10 py-4 grid grid-cols-12 gap-2 bg-white shadow rounded-xl ">
                 <div className="col-span-3">
                   <InputText
@@ -374,24 +374,6 @@ const CheckIn = (props) => {
                         ({moment(checkin.slot.startTime, 'HH:mm:ss').format('H')}h - {moment(checkin.slot.endTime, 'HH:mm:ss').format('H')}h)
                       </div>
                     </div>
-                    {/* <div className="col-span-3 px-3 flex items-center truncate">
-                      {checkin?.account?.firstName} {checkin?.account?.lastName}
-                      {checkin?.guest?.fullName}
-                    </div>
-                    <div className="col-span-3 px-3 flex items-center truncate">
-                      {checkin?.account?.email}
-                      {checkin?.guest?.email}
-                    </div>
-                    <div className="col-span-2 flex items-center justify-center">
-                      {moment(checkin?.date, 'yyyy-MM-DD').format('DD/MM')}
-                    </div>
-                    <div className="col-span-2 flex items-center justify-center">
-                      {checkin?.account?.phone}
-                      {checkin?.guest?.phone}
-                    </div>
-                    <div className="col-span-2 flex flex-col justify-center items-center font-semibold">
-                      {checkin.slots.map((slot, index) => slot.slotNo + (index === checkin.slots.length - 1 ? "" : ", "))}
-                    </div> */}
                   </div>
                 ))}
               </div>
