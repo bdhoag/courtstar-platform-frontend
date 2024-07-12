@@ -82,12 +82,19 @@ const Password: React.FC<PasswordProps> = (props) => {
         type={showPassword ? "text" : "password"}
         name={props.name}
         id={props.id}
-        className='w-full py-2.5 px-6 border border-gray-300 rounded-lg placeholder:text-sm placeholder:font-normal outline-gray-400'
+        className={`w-full py-2.5 px-6 border rounded-lg placeholder:text-sm placeholder:font-normal  ${props.error ? 'border-red-500 animate-shake outline-red-400 placeholder:text-red-500' : 'border-gray-300 outline-gray-400'}`}
         placeholder={props.placeholder}
         onChange={props.onchange}
         value={props.value}
       />
-      <PasswordStrength password={props.value} evaluate={props.evaluate} />
+      {props.error
+        ?
+        <div className='text-red-500 text-xs font-semibold text-end -mt-1 animate-shake'>
+          {props.errorMsg}
+        </div>
+        :
+        <PasswordStrength password={props.value} evaluate={props.evaluate} />
+      }
     </div>
   );
 };

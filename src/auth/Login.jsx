@@ -18,6 +18,8 @@ function Login(props) {
 
   const [loading, setLoading] = useState(false);
 
+  const [formError, setFormError] = useState(false);
+
   //CLOSE LOGIN MODAL
   const handleClose = () => {
     props.setIsOpen();
@@ -49,6 +51,10 @@ function Login(props) {
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    if (!formLogin.email || !formLogin.password) {
+      setFormError(true);
+      return;
+    }
     setLoading(true);
     await axiosInstance.post(`/courtstar/auth/token`, formLogin)
       .then(res => {
@@ -63,9 +69,14 @@ function Login(props) {
         });
       })
       .catch(error => {
-        toast.error(error.message, {
+        toast.error((error.message === 'Request failed with status code 401') || (error.message === 'Request failed with status code 400')
+          ?
+          'Wrong email or password!'
+          :
+          error.message, {
           toastId: 'login-error'
         });
+        console.log(error.message);
       })
       .finally(
         () => {
@@ -96,6 +107,8 @@ function Login(props) {
             label="Email*"
             value={formLogin.email}
             onchange={handleChange}
+            error={(formError && !formLogin.email)}
+            errorMsg='*Please enter your email!'
           />
         </div>
         <div className="mb-0">
@@ -107,6 +120,8 @@ function Login(props) {
             value={formLogin.password}
             onchange={handleChange}
             evaluate={false}
+            error={(formError && !formLogin.password)}
+            errorMsg='*Please enter your password!'
           />
         </div>
         <div className="flex items-center justify-between mt-4 mb-5 px-0.5">

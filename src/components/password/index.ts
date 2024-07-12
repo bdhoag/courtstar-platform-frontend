@@ -13,6 +13,8 @@ export interface PasswordProps {
   onchange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   evaluate?: boolean;
+  error?: boolean;
+  errorMsg?: string;
 }
 
 export default Password;
