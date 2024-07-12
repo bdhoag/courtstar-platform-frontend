@@ -374,5 +374,11 @@
   ],
   "frequency": "Tần suất",
   "weeklyBooking": "Đặt hàng tuần",
-  "apply": "Áp dụng"
+  "apply": "Áp dụng",
+  "plsEnterEmail": "*Hãy nhập email của bạn!",
+  "plsEnterPassword": "*Hãy nhập mật khẩu!",
+  "wrongMailOrPass" : "Email hoặc mật khẩu đã sai!",
+  "plsEnterFirstName": "*Hãy nhập tên của bạn!",
+  "plsEnterLastName": "*Hãy nhập họ của bạn!",
+  "plsEnterPhone": "*Hãy nhập số điện thoại của bạn!"
 }

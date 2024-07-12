@@ -23,6 +23,7 @@ function Login(props) {
   //CLOSE LOGIN MODAL
   const handleClose = () => {
     props.setIsOpen();
+    setFormError(false);
   }
 
   //HANDLE FORGET PASSWORD POPUP
@@ -71,7 +72,7 @@ function Login(props) {
       .catch(error => {
         toast.error((error.message === 'Request failed with status code 401') || (error.message === 'Request failed with status code 400')
           ?
-          'Wrong email or password!'
+          t('wrongMailOrPass')
           :
           error.message, {
           toastId: 'login-error'
@@ -108,7 +109,7 @@ function Login(props) {
             value={formLogin.email}
             onchange={handleChange}
             error={(formError && !formLogin.email)}
-            errorMsg='*Please enter your email!'
+            errorMsg={t('plsEnterEmail')}
           />
         </div>
         <div className="mb-0">
@@ -121,7 +122,7 @@ function Login(props) {
             onchange={handleChange}
             evaluate={false}
             error={(formError && !formLogin.password)}
-            errorMsg='*Please enter your password!'
+            errorMsg={t('plsEnterPassword')}
           />
         </div>
         <div className="flex items-center justify-between mt-4 mb-5 px-0.5">
@@ -139,13 +140,13 @@ function Login(props) {
             fullWidth
             fullRounded
             size='medium'
-            className='bg-primary-green hover:bg-teal-900 text-white'
+            className='bg-primary-green hover:bg-teal-900 text-white shadow'
             loading={loading}
           />
         </div>
         <div className='flex justify-center mt-4 '>
           <button
-            className="text-center text-sm border border-black rounded-full py-3 px-14 inline-flex items-center hover:bg-gray-200 transition-all duration-300 ease-in-out"
+            className="text-center text-sm shadow border rounded-full py-3 px-14 inline-flex items-center hover:bg-gray-200 transition-all duration-300 ease-in-out"
             href="#"
           >
             <img className='mr-3 w-fit'

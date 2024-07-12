@@ -89,7 +89,7 @@ const Password: React.FC<PasswordProps> = (props) => {
       />
       {props.error
         ?
-        <div className='text-red-500 text-xs font-semibold text-end -mt-1 animate-shake'>
+        <div className='text-red-500 text-xs font-semibold text-end -mt-2 animate-shake'>
           {props.errorMsg}
         </div>
         :

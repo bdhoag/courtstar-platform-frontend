@@ -59,7 +59,7 @@ const InputText: React.FC<InputTextProps> = ({
         disabled={disabled}
       />
       {error &&
-        <div className='text-red-500 text-xs font-semibold text-end -mt-1 animate-shake'>
+        <div className='text-red-500 text-xs font-semibold text-end -mt-2 animate-shake'>
           {errorMsg}
         </div>
       }
