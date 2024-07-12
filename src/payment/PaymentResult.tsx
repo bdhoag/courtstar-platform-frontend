@@ -9,25 +9,31 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-interface Slot {
-  slotNo: number;
-  startTime: string;
-  endTime: string;
+interface BookingDetails {
+  date: string;
+  court: {
+    courtNo: number;
+  };
+  slot: {
+    slotNo: number;
+    startTime: string;
+    endTime: string;
+    status: boolean
+  };
+  checkedIn: boolean
 }
 
 interface BookingSchedule {
-  account?: { email: string };
-  guest?: { email: string };
+  account?: {
+    email: string
+  };
+  guest?: { 
+    email: string 
+  };
   centreName: string;
   centreAddress: string;
-  date: string;
   totalPrice: number;
-  status: boolean;
-  slots: Slot[];
-  court: {
-    courtNo: number;
-    status: boolean;
-  };
+  bookingDetails: BookingDetails[];
   success: boolean;
 }
 
@@ -73,7 +79,7 @@ const PaymentResult: React.FC = () => {
           {result === '1' ? (
             <div className="text-center text-green-500 text-xl font-bold flex justify-center">
               <img src={check} className="pr-3" alt="check" />
-              Payment success!
+              Payment successfully!
             </div>
           ) : (
             <div className='divide-y divide-slate-700'>
@@ -113,34 +119,29 @@ const PaymentResult: React.FC = () => {
                     <strong>Centre Address:</strong> {bookingSchedule.centreAddress}
                   </p>
                   <p>
-                    <strong>Date:</strong> {bookingSchedule.date}
-                  </p>
-                  <p>
                     <strong>Total Price:</strong> {bookingSchedule.totalPrice.toLocaleString('de-DE')}
                     <span className="text-sm font-semibold text-gray-500"> VND</span>
                   </p>
-                  <p>
-                    <strong>Status:</strong> {bookingSchedule.status ? 'Checked in' : 'Not yet'}
-                  </p>
                 </div>
-                <div className="flex flex-col justify-start">
-                  <div className="mb-4">
-                    <p className="text-xl font-semibold">Court No: {bookingSchedule.court.courtNo}</p>
+                {bookingSchedule.bookingDetails.map((detail, index) => (
+                  <div key={index} className="mb-4 grid grid-cols-2 text-lg">
+                    <p>
+                      <strong>Date:</strong> {detail.date}
+                    </p>
+                    <p>
+                      <strong>Court No:</strong> {detail.court.courtNo}
+                    </p>
+                    <p>
+                      <strong>Status:</strong> {detail.checkedIn ? 'Checked in' : 'Not yet'}
+                    </p>
+                    <p>
+                      <strong>Slot No:</strong> {detail.slot.slotNo}
+                    </p>
+                    <p>
+                      <strong>Time:</strong> {moment(detail.slot.startTime, "hh:mm:ss").format("H:mm")} - {moment(detail.slot.endTime, "hh:mm:ss").format("H:mm")}
+                    </p>
                   </div>
-                  <div>
-                    <p className="text-xl font-semibold">Slot:</p>
-                    {bookingSchedule.slots.map((slot, index) => (
-                      <div key={index} className="mb-4">
-                        <ul className="list-disc list-inside">
-                          <li className="text-lg">
-                            <strong>Slot No:</strong> {slot.slotNo + " "}
-                            ({moment(slot.startTime, "hh:mm:ss").format("H:mm")} - {moment(slot.endTime, "hh:mm:ss").format("H:mm")})
-                          </li>
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
             </>
           )}
