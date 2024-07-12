@@ -307,5 +307,69 @@
   "Saturday": "Thứ Bảy",
   "Sunday": "Chủ Nhật",
   "Description": "Mô tả",
-  "reset": "Đặt lại"
+  "reset": "Đặt lại",
+  "Partners": "Điều khoản đối tác",
+  "basicTerm": "Điều khoản cơ bản",
+  "basicTermsPartner": [
+    "Tất cả các đối tác muốn hợp tác với chúng tôi đều phải có giấy phép kinh doanh rõ ràng, minh bạch.",
+    "Sân phải có địa chỉ rõ ràng và chất lượng tốt.",
+    "Đối tác phải chấp nhận tất cả các điều khoản của chúng tôi."
+  ],
+  "condition": "Điều kiện chung",
+  "uploadCourt": "Chính sách đăng sân",
+  "uploadCondition": [
+    "Chúng tôi yêu cầu bạn cung cấp đầy đủ các thông tin về sân như tên trung tâm, địa chỉ trung tâm, quận, quận, giá mỗi giờ, số lượng sân, thời gian mở và đóng, hình ảnh thật của sân, mô tả sân.",
+    "Khi bạn đã đăng thành công Trung tâm của mình, hệ thống của chúng tôi sẽ kiểm tra và xác thực nó. Sau khi xác thực thành công, Trung tâm của bạn sẽ được hiển thị trên trang web của chúng tôi."
+  ],
+  "partnerSharing": "Chính sách hoa hồng",
+  "moneySharing": [
+    "Chính sách của chúng tôi dựa trên giá thị trường hiện tại, chúng tôi sẽ được hưởng 5% cho mỗi lần đặt sân mà khách hàng thực hiện.",
+    "Giá chúng tôi đưa ra là hợp lý nhất trên thị trường, chúng tôi sẽ không chấp nhận bất kỳ trường hợp nào muốn thương lượng về giá cả."
+  ],
+  "withdrawalPolicy": "Chính sách rút tiền",
+  "withdrawPolicy": [
+    "Đối với tiền của Người quản lý sân trên web của chúng tôi, bạn có thể yêu cầu rút tiền bất cứ lúc nào. Chúng tôi yêu cầu bạn nhập chính xác Tên ngân hàng, Mã số ngân hàng, Số tiền, Tên chủ thẻ.",
+    "Chính sách rút tiền của chúng tôi sẽ xuất hiện trong vòng 2 đến 3 ngày. Chúng tôi hy vọng rằng Người quản lý sân sẽ đợi cho đến khi tiền vào tài khoản của họ sau khi đưa ra yêu cầu. Nếu sau 2 đến 3 ngày không nhận được, vui lòng liên hệ email Courtstar.se@gmail.com để chúng tôi có thể hỗ trợ kịp thời."
+  ],
+  "prohibitedActivity": "Những hoạt động bị cấm",
+  "prohibitedActPartner": [
+    "Quản lý sân không được đăng thông tin sai lệch về sân mà bạn muốn hợp tác trên trang web của chúng tôi.",
+    "Không được có hành vi lừa đảo tiền bạc đối với khách hàng của chúng tôi.",
+    "Không thu thập thông tin về sân trên hệ thống của chúng tôi khi chưa có sự đồng ý của CourtStar."
+  ],
+  "copyRight": "Bản Quyền",
+  "allCopyright": "Nội dung trên ứng dụng này, bao gồm hình ảnh, văn bản và video được bảo vệ theo bản quyền và nhãn hiệu, vì vậy việc sử dụng bất kỳ nội dung nào trong số đó mà không có sự đồng ý sẽ là bất hợp pháp. Ngoại trừ nội dung do người dùng tải lên, tất cả tài liệu có sẵn đều là tài sản của ứng dụng này. Điều khoản của ứng dụng này không cấp cho ai quyền sử dụng tên của ứng dụng hoặc bất kỳ thông tin nào khác như tên miền, nhãn hiệu, mẫu và các tính năng phân biệt khác. Chúng tôi có quyền sử dụng nhận xét, phản hồi và đề xuất của bạn về ứng dụng này.",
+  "Customer": "Chính sách và điều kiện cho Khách Hàng",
+  "beLiable": "Bạn sẽ chịu trách nhiệm về mọi hoạt động diễn ra trong hồ sơ người dùng của mình.",
+  "basicTerms": [
+    "Bạn chịu trách nhiệm về mọi hoạt động xảy ra trong tài khoản người dùng của mình.",
+    "Bạn không được spam các tính năng trên trang web của chúng tôi.",
+    "Bạn không được ăn cắp ý tưởng hoặc nhãn hiệu của chúng tôi.",
+    "Bạn phải tuân thủ các điều khoản đặt phòng của chúng tôi."
+  ],
+  "generalConditions": [
+    "Chúng tôi có quyền chấm dứt dịch vụ của mình vì bất kỳ lý do gì mà không cần thông báo bất cứ lúc nào.",
+    "Việc bạn tiếp tục sử dụng ứng dụng này sẽ đồng nghĩa với việc bạn chấp nhận những thay đổi hoặc sửa đổi đó, những gì cấu thành nên thay đổi quan trọng sẽ được xác định theo quyết định riêng của chúng tôi, một cách thiện chí và sử dụng lẽ thường cũng như phán đoán hợp lý.",
+    "Chúng tôi có quyền từ chối cung cấp dịch vụ cho bất kỳ ai vì bất kỳ phán quyết hợp lý nào.",
+    "Khi bạn sử dụng dịch vụ của bất kỳ sân nào mà bạn đã đặt, bạn phải tuân thủ các quy định của sân đó cũng như trên trang web của chúng tôi.",
+    "Giá sân mà chúng tôi trưng bày đã được chúng tôi kiểm chứng so với chất lượng của sân đó nên bạn có thể yên tâm rằng mình sẽ được trải nghiệm dịch vụ với mức giá phù hợp."
+  ],
+  "useThe": "Bạn không được truy cập hoặc sử dụng ứng dụng cho bất kỳ mục đích nào khác ngoài mục đích mà chúng tôi cung cấp ứng dụng. Không được sử dụng ứng dụng này liên quan đến bất kỳ nỗ lực thương mại nào ngoại trừ những nỗ lực được chúng tôi xác nhận hoặc phê duyệt cụ thể. Với tư cách là người dùng ứng dụng, bạn đồng ý không: Bạn không được truy cập hoặc sử dụng ứng dụng cho bất kỳ mục đích nào khác ngoài mục đích mà chúng tôi cung cấp ứng dụng. Không được sử dụng ứng dụng này liên quan đến bất kỳ nỗ lực thương mại nào ngoại trừ những nỗ lực được chúng tôi xác nhận hoặc phê duyệt cụ thể. Với tư cách là người dùng ứng dụng, bạn đồng ý không:",
+  "prohibitedActivities": [
+    "Truy xuất một cách có hệ thống dữ liệu hoặc nội dung khác từ ứng dụng để tạo hoặc biên dịch, trực tiếp hoặc gián tiếp, một bộ sưu tập, biên soạn, cơ sở dữ liệu hoặc thư mục mà không có sự cho phép bằng văn bản của chúng tôi.",
+    "Phá vỡ, vô hiệu hóa hoặc can thiệp vào các tính năng liên quan đến bảo mật của Ứng dụng, bao gồm các tính năng ngăn chặn hoặc hạn chế việc sử dụng hoặc sao chép bất kỳ Nội dung nào hoặc thực thi các hạn chế đối với việc sử dụng ứng dụng và/hoặc Nội dung có trong đó.",
+    "Lừa đảo, lừa đảo hoặc đánh lừa chúng tôi và những người dùng khác, đặc biệt là trong mọi nỗ lực tìm hiểu thông tin tài khoản nhạy cảm như mật khẩu người dùng.",
+    "Sử dụng không đúng cách các dịch vụ hỗ trợ của chúng tôi hoặc gửi báo cáo sai về hành vi lạm dụng hoặc hành vi sai trái.",
+    "Can thiệp, làm gián đoạn hoặc tạo gánh nặng quá mức cho ứng dụng hoặc mạng hoặc dịch vụ được kết nối với ứng dụng.",
+    "Cố gắng mạo danh người dùng hoặc người khác hoặc sử dụng tên người dùng của người dùng khác.",
+    "Sử dụng bất kỳ thông tin nào có được từ ứng dụng để quấy rối, lạm dụng hoặc làm hại người khác.",
+    "Giải mã, dịch ngược, tháo rời hoặc thiết kế đối chiếu bất kỳ phần mềm nào bao gồm hoặc tạo thành một phần của ứng dụng theo bất kỳ cách nào.",
+    "Quấy rối, làm phiền, đe dọa hoặc đe dọa bất kỳ nhân viên hoặc đại lý nào của chúng tôi tham gia cung cấp bất kỳ phần nào của Sản phẩm trên thị trường cho bạn.",
+    "Sao chép hoặc điều chỉnh phần mềm ứng dụng, bao gồm nhưng không giới hạn ở Flash, PHP, HTML, JavaScript hoặc mã khác."
+  ],
+  "refunderPolicy": "Chính sách hoàn tiền",
+  "refundPolicy": [
+    "Khi đã đặt lịch và thanh toán thành công, bạn không được phép hủy phiên tòa vì bất kỳ lý do gì. Nếu bạn hủy, bạn sẽ không được hoàn lại số tiền đã thanh toán.",
+    "Trong trường hợp tòa án đã đặt của bạn bị Quản lý tòa án hủy vì lý do liên quan đến việc sửa chữa tòa án hoặc từ đối tác, bạn sẽ được hoàn lại 100% số tiền bạn đã đóng."
+  ]
 }

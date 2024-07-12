@@ -359,5 +359,18 @@
     "There must be no money scams against our customers.",
     "Do not collect information about courts on our system without CourtStar's consent"
   ],
-  "reset": "Reset"
+  "reset": "Reset",
+  "Partners": "Terms and Conditions for Partner",
+  "basicTerm": "Basic Terms",
+  "condition": "GENERAL CONDITION",
+  "uploadCourt": "Upload-Court Policy",
+  "partnerSharing": "Money-Sharing Policy",
+  "withdrawalPolicy": "Withdraw Policy",
+  "prohibitedActivity": "PROHIBITED ACTIVITIES",
+  "copyRight": "COPYRIGHT",
+  "allCopyright": "The content on this app, including images, texts, and videos are protected under copyright and trademark, so it will be illegal to use any of them without consent. Except for the content uploaded by the users, all the material available is the property of this app. The Terms of this app gives no one a right to using the app’s name or any other information such as domain name, trademarks, templates, and other distinguishing features. We have the right to use your remarks, feedback, and recommendations regarding this app.The content on this app, including images, texts, and videos are protected under copyright and trademark, so it will be illegal to use any of them without consent. Except for the content uploaded by the users, all the material available is the property of this app. The Terms of this app gives no one a right to using the app’s name or any other information such as domain name, trademarks, templates, and other distinguishing features. We have the right to use your remarks, feedback, and recommendations regarding this app.",
+  "Customer": "Terms and Conditions for Customer",
+  "beLiable": "You will be liable for every activity that takes place within your user profile.",
+  "useThe": "You may not access or use the app for any purpose other than that for which we make the app available. The app may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us. As a user of the app, you agree not to:You may not access or use the app for any purpose other than that for which we make the app available. The app may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us. As a user of the app, you agree not to:",
+  "refunderPolicy": "REFUND POLICY"
 }
