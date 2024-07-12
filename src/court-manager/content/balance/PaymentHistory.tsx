@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import axiosInstance from '../../../config/axiosConfig';
 import SpinnerLoading from '../../../components/SpinnerLoading';
 import InputText from '../../../components/input-text';
@@ -10,7 +10,7 @@ interface ChildHandle {
   increment: () => void;
 }
 
-const PaymentHistory = forwardRef<ChildHandle>((props, ref) => {
+const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [histories, setHistories] = useState<any>([]);
