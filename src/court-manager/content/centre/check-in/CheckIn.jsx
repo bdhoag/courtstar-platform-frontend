@@ -245,7 +245,7 @@ const CheckIn = (props) => {
       }
 
       // Sort the checkins to move checked-in ones to the bottom
-      updatedCheckins.sort((a, b) => a.status - b.status);
+      updatedCheckins.sort((a, b) => a.checkedIn - b.checkedIn);
       setFilteredCheckins(updatedCheckins);
     };
 
