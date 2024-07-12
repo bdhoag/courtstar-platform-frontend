@@ -39,7 +39,8 @@ const PaymentHistory: React.FC = () => {
   const loadHistory = async () => {
     await axiosInstance.get(`/courtstar/transfer-money/manager/all`, { signal })
       .then(res => {
-        setHistories(res.data.data);
+        const sortedHistories = res.data.data.sort((a, b) => b.id - a.id);
+        setHistories(sortedHistories);
       })
       .catch(err => {
         console.log(err.message);
@@ -76,49 +77,49 @@ const PaymentHistory: React.FC = () => {
             Withdrawal history
           </div>
           <div className="px-10 py-4 grid grid-cols-12 gap-2">
-            <div className="col-span-2">
+            <div className="col-span-2 text-center">
               <InputText
                 placeholder={t('enterUserName')}
-                label={t('fullName')}
+                label="Bank's name"
                 value=""
                 onchange={() => { }}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-2 text-center">
               <InputText
                 placeholder={t('enterUserName')}
-                label={t('fullName')}
+                label="Account number"
                 value=""
                 onchange={() => { }}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-2 text-center">
               <InputText
                 placeholder={t('enterUserName')}
-                label={t('fullName')}
+                label="Card Holder's Name"
                 value=""
                 onchange={() => { }}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-2 text-center">
               <InputText
                 placeholder={t('enterUserName')}
-                label={t('fullName')}
+                label="Amount"
                 value=""
                 onchange={() => { }}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-2 text-center">
               <InputText
                 placeholder={t('enterUserName')}
-                label={t('fullName')}
+                label="Date Create Order"
                 value=""
                 onchange={() => { }}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-2 text-center">
               <Dropdown
-                label="Date"
+                label="Status"
                 items={options}
                 onSelect={handleSelectDropdown}
                 placeholder={t('Select date')}
