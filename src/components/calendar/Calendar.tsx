@@ -34,6 +34,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       (parseInt(moment(slot.startTime, "HH:mm:ss").format('H'))) < (parseInt(moment().format('H')) + 1)
     ) ||
     court.bookingDetails.some(bookingDetail =>
+      bookingDetail.status &&
       bookingDetail.slot.id === slot.id &&
       moment(bookingDetail.date, "YYYY-MM-DD").format('MM/DD') === day
     )
@@ -184,7 +185,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         await props.handleButton(form);
       } catch { }
       finally {
-        loadCourt(courtItems[0].id);
+        loadCourt(courtItems[0].key);
       }
     } else {
       props.handleButton(form)

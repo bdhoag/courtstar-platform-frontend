@@ -187,7 +187,7 @@ function CentreInfo(props) {
 
   const disableSlot = async (formCalendar) => {
     // setLoading(true);
-    await axiosInstance.post(`/courtstar/slot/disable`, formCalendar)
+    await axiosInstance.post(`/courtstar/slot/disable`, { bookingDetails: formCalendar })
       .then(res => {
         console.log(res.data.data);
       })
