@@ -381,5 +381,8 @@
   "wrongMailOrPass": "Wrong email or password!",
   "plsEnterFirstName": "*Please enter your first name!",
   "plsEnterLastName": "*Please enter your last name!",
-  "plsEnterPhone": "*Please enter your phone number!"
+  "plsEnterPhone": "*Please enter your phone number!",
+  "youWillNotAbleToRecoverTheEntireSelection": "You will not able to recover the entire selection",
+  "youWillNotAbleToRecoverThisAction": "You will not able to recover this action",
+  "areYouSure": "Are you sure"
 }
