@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react';
 import './index.css';
 import Button from '../../button';
 import { useTranslation } from 'react-i18next';
+import showAlert from '../../alert';
 
 interface Props {
-  onChange: (number: number, status: boolean) => void
+  onChange: (number: number, status: boolean) => void,
+  existSelection: boolean
 }
 
-const SwitchButton: React.FC<Props> = ({ onChange }) => {
+const SwitchButton: React.FC<Props> = ({ onChange, existSelection }) => {
   const { t } = useTranslation();
 
   const [isChecked, setIsChecked] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [frequency, setFrequency] = useState<any>(1);
+  const [frequency, setFrequency] = useState<any>(2);
 
   useEffect(() => {
     if (isChecked) setIsDropdownOpen(true);
@@ -21,15 +23,27 @@ const SwitchButton: React.FC<Props> = ({ onChange }) => {
 
 
   const handleChange = () => {
-    onChange(frequency, !isChecked);
-    setIsChecked(!isChecked);
+    const confirm = () => {
+      onChange(frequency, !isChecked);
+      setIsChecked(!isChecked);
+    }
+
+    if (existSelection)
+      showAlert({
+        title: t('areYouSure') + "?",
+        message: t('youWillNotAbleToRecoverTheEntireSelection') + "!",
+        type: 'warning',
+        onConfirmClick: () => confirm()
+      });
+    else confirm();
   };
 
   const handleChangeFrequency = (e) => {
-    if (isNaN(e.target.value) || e.target.value > 10 || e.target.value < 0) {
+    if (isNaN(e.target.value) || e.target.value > 10 || e.target.value < 0 || e.target.value === "0") {
 
     } else {
-      setFrequency(e.target.value);
+      if (e.target.value === "") setFrequency("");
+      else setFrequency(parseInt(e.target.value));
     }
   };
 
@@ -85,7 +99,7 @@ const SwitchButton: React.FC<Props> = ({ onChange }) => {
 
           <div className="max-w-xs mx-auto">
               <div className="relative flex items-center justify-center mb-4 font-semibold">
-                {t('frequency')} (1 - 10):
+                {t('frequency')} (2 - 10):
               </div>
               <div className="relative flex items-center justify-center mb-4">
                   <Button
@@ -94,7 +108,7 @@ const SwitchButton: React.FC<Props> = ({ onChange }) => {
                     }
                     fullRounded
                     onClick={() => setFrequency(frequency - 1)}
-                    disabled={frequency === 1}
+                    disabled={frequency === 2}
                     className='hover:bg-primary-green bg-white border-primary-green text-primary-green border-2 hover:text-white p-px disabled:opacity-70'
                   />
                   <input
@@ -123,9 +137,9 @@ const SwitchButton: React.FC<Props> = ({ onChange }) => {
                     className='bg-primary-green hover:bg-teal-900 text-white p-1 text-sm'
                     onClick={() => {
                       setIsDropdownOpen(false);
-                      if (frequency == 0) {
+                      if (frequency == 0 || frequency == 1) {
                         setIsChecked(false);
-                        setFrequency(1);
+                        setFrequency(2);
                       };
                       onChange(frequency, isChecked);
                     }}
@@ -136,7 +150,7 @@ const SwitchButton: React.FC<Props> = ({ onChange }) => {
                     className='border-red-600 border text-red-600 hover:bg-red-600 hover:text-white p-1 text-sm'
                     onClick={() => {
                       handleChange();
-                      setFrequency(1);
+                      setFrequency(2);
                     }}
                   />
               </div>

@@ -102,7 +102,7 @@ const BookingForm = (props) => {
       />
       <div className='py-3 flex justify-center items-center gap-1 font-semibold'>
         {t('price')}:
-        <span className='text-rose-600'> {((props?.centre?.pricePerHour)*(bookingForm?.bookingDetails?.length))?.toLocaleString('de-DE')} VND/h</span>
+        <span className='text-rose-600'> {((props?.centre?.pricePerHour)*(bookingForm?.bookingDetails?.length))?.toLocaleString('de-DE')} VND</span>
       </div>
       <div className='flex items-center justify-center w-full'>
         <Button

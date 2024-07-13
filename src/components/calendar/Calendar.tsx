@@ -6,6 +6,7 @@ import CalendarTable from './CalendarTable';
 import SpinnerLoading from '../SpinnerLoading';
 import axiosInstance from '../../config/axiosConfig';
 import { useTranslation } from 'react-i18next';
+import showAlert from '../alert';
 
 const Calendar: React.FC<CalendarProps> = (props) => {
   const { t } = useTranslation();
@@ -235,7 +236,15 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     }
   }
 
-
+  const handleReset = () => {
+    if (formCalendar && formCalendar.length)
+    showAlert({
+      title: t('areYouSure') + "?",
+      message: t('youWillNotAbleToRecoverTheEntireSelection') + "!",
+      type: 'warning',
+      onConfirmClick: () => setFormCalendar([])
+    });
+  }
 
   return (
     <div className=''>
@@ -262,11 +271,12 @@ const Calendar: React.FC<CalendarProps> = (props) => {
                   typeOfCalendar={typeOfCalendar}
                   formCalendar={formCalendar}
                   handleButton={handleButton}
-                  handleReset={() => setFormCalendar([])}
+                  handleReset={handleReset}
                   handleWeeklyBooking={(number, status) => {
                     setWeeklyBooking(status);
                     setFrequency(number);
                   }}
+                  existSelection={formCalendar != undefined && formCalendar.length != 0}
                   handleSelectCourt={handleSelectCourt}
                   handleSelectWeek={handleSelectWeek}
                   handleSelectYear={handleSelectYear}

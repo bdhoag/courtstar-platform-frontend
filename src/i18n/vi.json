@@ -380,5 +380,8 @@
   "wrongMailOrPass" : "Email hoặc mật khẩu đã sai!",
   "plsEnterFirstName": "*Hãy nhập tên của bạn!",
   "plsEnterLastName": "*Hãy nhập họ của bạn!",
-  "plsEnterPhone": "*Hãy nhập số điện thoại của bạn!"
+  "plsEnterPhone": "*Hãy nhập số điện thoại của bạn!",
+  "youWillNotAbleToRecoverTheEntireSelection": "Bạn sẽ không thể khôi phục lại những sự lựa chọn hiện tại",
+  "youWillNotAbleToRecoverThisAction": "Bạn sẽ không thể khôi phục lại hành động này",
+  "areYouSure": "Bạn chắc chưa"
 }

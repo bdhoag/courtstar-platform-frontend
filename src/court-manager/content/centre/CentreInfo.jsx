@@ -11,6 +11,7 @@ import Button from '../../../components/button';
 import SpinnerLoading from '../../../components/SpinnerLoading';
 import Calendar from '../../../components/calendar';
 import Feedback from '../../../components/feedback';
+import showAlert from '../../../components/alert';
 
 function CentreInfo(props) {
   const { t } = useTranslation();
@@ -319,7 +320,14 @@ function CentreInfo(props) {
                     <line x1="14" x2="14" y1="11" y2="17" />
                   </svg>
                 }
-                onClick={() => handleDelete(centreDetail.id)}
+                onClick={() => {
+                  showAlert({
+                    title: t('areYouSure') + "?",
+                    message: t('youWillNotAbleToRecoverThisAction') + "!",
+                    type: 'warning',
+                    onConfirmClick: () => handleDelete(centreDetail.id)
+                  });
+                }}
                 loading={deleteLoading}
                 disabled={!centreDetail.approveDate}
               />
@@ -408,7 +416,14 @@ function CentreInfo(props) {
                       <button
                         className="flex justify-center items-center text-primary-green  rounded-md
                         px-2 hover:bg-primary-green hover:text-white ease-in-out duration-300 cursor-pointer"
-                        onClick={() => handleAddCourt(centreDetail.id)}
+                        onClick={() => {
+                          showAlert({
+                            title: t('areYouSure') + "?",
+                            message: t('youWillNotAbleToRecoverThisAction') + "!",
+                            type: 'warning',
+                            onConfirmClick: () => handleAddCourt(centreDetail.id)
+                          });
+                        }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

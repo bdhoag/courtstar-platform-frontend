@@ -20,6 +20,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
   handleButton,
   handleReset,
   handleWeeklyBooking,
+  existSelection,
 }) => {
   const { t } = useTranslation();
   return (
@@ -75,6 +76,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
         <div>
           <SwitchButton
             onChange={handleWeeklyBooking}
+            existSelection={existSelection}
           />
         </div>
         :
