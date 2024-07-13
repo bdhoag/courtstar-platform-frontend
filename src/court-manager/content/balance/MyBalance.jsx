@@ -8,6 +8,7 @@ import PopupModal from '../../../components/PopupModal';
 import InputText from '../../../components/input-text';
 import axiosInstance from '../../../config/axiosConfig';
 import { toast } from 'react-toastify';
+import CreditCard from '../../../components/credit-card/CreditCard';
 
 export default function MyBalance(props) {
 
@@ -70,7 +71,14 @@ export default function MyBalance(props) {
   }
 
   const htmlModal = (
-    <div className="flex flex-col gap-1 w-96">
+    <div className="flex flex-col gap-3 w-[440px]">
+      <div className=''>
+        <CreditCard
+          bankName={formWithdraw.nameBanking}
+          cardHolderName={formWithdraw.cardHolderName}
+          number={formWithdraw.numberBanking}
+        />
+      </div>
       <InputText
         id='nameBanking'
         name='nameBanking'
@@ -94,7 +102,7 @@ export default function MyBalance(props) {
         id='cardHolderName'
         name='cardHolderName'
         label="Holder name"
-        value={formWithdraw.cardHolderName}
+        value={formWithdraw.cardHolderName.toUpperCase()}
         placeholder="Enter your bank account holder name"
         onchange={handleInputChange}
       />
@@ -110,8 +118,11 @@ export default function MyBalance(props) {
       />
 
       <Button
-        label='Confirm'
-        className='py-1.5 bg-primary-green text-white mt-3'
+        label={t('confirm')}
+        fullWidth
+        fullRounded
+        size='medium'
+        className='bg-primary-green hover:bg-teal-900 text-white'
         onClick={handleWithdraw}
         loading={loading}
       />
