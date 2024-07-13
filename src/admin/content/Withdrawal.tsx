@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Dropdown, { Item } from "../../components/dropdown";  // Ensure Item is imported correctly
 import InputText from "../../components/input-text";
 import PopupModal from "../../components/PopupModal";
+import CreditCard from "../../components/credit-card";
 
 const Withdrawal = () => {
   const [loading, setLoading] = useState(true);
@@ -125,16 +126,15 @@ const Withdrawal = () => {
           </>
         }
       </div>
-      <div className="">
-        <span className="font-semibold">Card holder name:</span> {requestDetail?.cardHolderName}
+
+      <div className="my-3">
+        <CreditCard
+          bankName={requestDetail?.nameBanking}
+          cardHolderName={requestDetail?.cardHolderName}
+          number={requestDetail?.numberBanking}
+        />
       </div>
 
-      <div className="">
-        <span className="font-semibold">Bank name:</span> {requestDetail?.nameBanking}
-      </div>
-      <div className="">
-        <span className="font-semibold">Bank account number:</span> {requestDetail?.numberBanking}
-      </div>
       {!requestDetail?.dateAuthenticate
         ?
         <>

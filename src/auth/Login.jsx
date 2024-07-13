@@ -64,7 +64,12 @@ function Login(props) {
         localStorage.setItem('role', dataObj.data.role);
         dispatch({ type: 'LOGIN', payload: { token: dataObj.data.token, role: dataObj.data.role } });
         handleClose();
-        navigate('/');
+
+        if (dataObj.data.role === "MANAGER") navigate('/myCentre/balance')
+        else if (dataObj.data.role === "STAFF") navigate('/myCentre/:id')
+        else if (dataObj.data.role === "ADMIN") navigate('/admin')
+        else navigate('/');
+
         toast.success(dataObj.message, {
           toastId: 'login-success'
         });
