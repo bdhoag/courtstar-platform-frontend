@@ -109,7 +109,6 @@ const BookingForm = (props) => {
         <Button
           label={t('confirm')}
           fullWidth
-          fullRounded
           size='medium'
           className='bg-primary-green hover:bg-teal-900 text-white'
           loading={loading}
