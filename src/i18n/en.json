@@ -456,9 +456,10 @@
   "enterCardholderName": "Enter Holder's Name",
   "noReason" : "No reason",
   "overviewThisWeek": "Overview this week",
-  "centreApproved": "Centre approved",
-  "partnerRegistration": "Partner registration",
-  "customerRegistration": "Customer registration",
+  "approvedCentre": "Approved centre",
+  "registeredPartner": "Registered partner",
+  "registeredCustomer": "Registered customer",
   "revenueGrowthChart": "Revenue growth chart",
-  "accountAndCentreRegistrationChart": "Account and centre registration chart"
+  "accountAndCentreRegistrationChart": "Account and centre registration chart",
+  "export": "Export"
 }

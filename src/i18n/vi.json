@@ -456,9 +456,10 @@
   "enterCardholderName": "Nhập tên chủ thẻ",
   "noReason": "Không có lý do",
   "overviewThisWeek": "Tổng quan tuần này",
-  "centreApproved": "Sân đã phê duyệt",
-  "partnerRegistration": "Đăng ký đối tác",
-  "customerRegistration": "Đăng ký khách hàng",
+  "approvedCentre": "Sân đã phê duyệt",
+  "registeredPartner": "Đối tác đã đăng ký",
+  "registeredCustomer": "Khách hàng đã đăng ký",
   "revenueGrowthChart": "Biểu đồ tăng trưởng doanh thu",
-  "accountAndCentreRegistrationChart": "Biểu đồ số lượng đăng ký tài khoản và đăng ký sân"
+  "accountAndCentreRegistrationChart": "Biểu đồ số lượng đăng ký tài khoản và đăng ký sân",
+  "export": "Xuất"
 }

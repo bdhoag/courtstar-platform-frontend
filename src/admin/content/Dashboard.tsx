@@ -1,17 +1,21 @@
 import Counter from "../../components/Counter";
 import Chart from 'react-apexcharts';
 import moment from 'moment';
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axiosInstance from "../../config/axiosConfig";
 import SpinnerLoading from "../../components/SpinnerLoading";
 import { useTranslation } from "react-i18next";
+import Button from "../../components/button";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const latestDay = Array.from({ length: 10 }, (_, index) =>
   moment().subtract(9 - index, 'days').format("YYYY-MM-DD")
 );
 
 const getArrays = (Obj, isMoney) => {
-  let arrays = [];
+  let arrays: any[] = [];
   latestDay.forEach(e => {
     if (Obj[e]) {
       if (isMoney) arrays.push(Obj[e] * 0.05/1000);
@@ -24,7 +28,7 @@ const getArrays = (Obj, isMoney) => {
 }
 
 const getRateArrays = (Obj) => {
-  let arrays = [];
+  let arrays: any[] = [];
   for (let index = 0; index < latestDay.length; index++) {
     if (index === 0) {
       arrays.push(0);
@@ -44,13 +48,13 @@ const getRateArrays = (Obj) => {
   return arrays;
 }
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const { t } = useTranslation();
   const controller = new AbortController();
   const { signal } = controller;
-  const [data, setData] = useState();
+  const [data, setData] = useState<any>();
   const [loading, setLoading] = useState(true);
-  const [chartData, setChartData] = useState(
+  const [chartData, setChartData] = useState<any>(
     {
       customers: [],
       managers: [],
@@ -84,9 +88,9 @@ const Dashboard = () => {
     setChartData(
       ((prev) => ({
         ...prev,
-        customers: getArrays(data.customers),
-        managers: getArrays(data.managers),
-        centres: getArrays(data.centres),
+        customers: getArrays(data.customers, false),
+        managers: getArrays(data.managers, false),
+        centres: getArrays(data.centres, false),
         revenues: getArrays(data.revenues, true),
         rates: getRateArrays(data.revenues)
       }))
@@ -108,7 +112,7 @@ const Dashboard = () => {
     },
   ];
 
-  const revenueOptions = {
+  const revenueOptions: ApexCharts.ApexOptions = {
     chart: {
       fontFamily: 'Inter',
       animations: {
@@ -133,13 +137,13 @@ const Dashboard = () => {
       x: {
         show: true,
         formatter: function (val) {
-          return moment().subtract(10 - val, 'days').format('MMM DD');
+          return moment().subtract(10 - val, 'days').format('MMM DD, YYYY');
         }
       },
       y: [
         {
           title: {
-            formatter: function (val, a) {
+            formatter: function (val) {
               return val + ":"
             }
           },
@@ -149,7 +153,7 @@ const Dashboard = () => {
         },
         {
           title: {
-            formatter: function (val, a) {
+            formatter: function (val) {
               return val + ":"
             }
           },
@@ -166,9 +170,13 @@ const Dashboard = () => {
     },
     yaxis: {
       labels: {
-        formatter: function (val) {
-          return Math.round(val);
-        },
+          formatter: function (val) {
+              if (Number.isInteger(val)) {
+                  return val.toString();
+              } else {
+                  return '';
+              }
+          }
       }
     },
     plotOptions: {
@@ -180,26 +188,26 @@ const Dashboard = () => {
 
   const overviewSeries = [
     {
-      name: t('customerRegistration'),
+      name: t('registeredCustomer'),
       color: '#2563eb',
       data: chartData.customers,
       type: "line"
     },
     {
-      name: t('partnerRegistration'),
+      name: t('registeredPartner'),
       color: '#9563eb',
       data: chartData.managers,
       type: "line"
     },
     {
-      name: t('centreRegistration'),
+      name: t('approvedCentre'),
       color: '#9ca3af',
       data: chartData.centres,
       type: "line"
     },
   ];
 
-  const overviewOptions = {
+  const overviewOptions: ApexCharts.ApexOptions = {
     chart: {
       fontFamily: 'Inter',
       animations: {
@@ -225,7 +233,7 @@ const Dashboard = () => {
       x: {
         show: true,
         formatter: function (val) {
-          return moment().subtract(10 - val, 'days').format('MMM DD');
+          return moment().subtract(10 - val, 'days').format('MMM DD, YYYY');
         }
       },
       y: [
@@ -236,7 +244,7 @@ const Dashboard = () => {
             }
           },
           formatter: function (val) {
-            return val
+            return val + ""
           }
         },
         {
@@ -246,7 +254,7 @@ const Dashboard = () => {
             }
           },
           formatter: function (val) {
-            return val
+            return val + ""
           }
         },
         {
@@ -256,7 +264,7 @@ const Dashboard = () => {
             }
           },
           formatter: function (val) {
-            return val
+            return val + ""
           }
         }
       ]
@@ -265,14 +273,56 @@ const Dashboard = () => {
       categories: Array.from({ length: 10 }, (_, index) =>
         moment().subtract(9 - index, 'days').format('MMM DD')
       )
+    },
+    yaxis: {
+      labels: {
+          formatter: function (val) {
+              if (Number.isInteger(val)) {
+                  return val.toString();
+              } else {
+                  return '';
+              }
+          }
+      }
     }
   };
 
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [exportLoading, setExportLoading] = useState(false);
+
+  const exportToPDF = async() => {
+    setExportLoading(true);
+    if (contentRef.current) {
+      await html2canvas(contentRef.current).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save(`dashboard-export-${moment().format('yyyyMMDDHHmmss')}.pdf`);
+      });
+    }
+    setExportLoading(false);
+  };
 
   return (
     <div className="py-6 w-full flex flex-col gap-5">
-      <div className="text-3xl font-bold">
-        {t('dashboard')}
+      <div className="flex justify-between items-center">
+        <div className="text-3xl font-bold">
+          {t('dashboard')}
+        </div>
+        <Button
+          label={t('export')}
+          icon={
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          }
+          size="medium"
+          className="bg-primary-green text-white hover:bg-teal-900 w-32"
+          onClick={exportToPDF}
+          loading={exportLoading}
+        />
       </div>
       {loading
         ?
@@ -284,7 +334,9 @@ const Dashboard = () => {
           />
         </div>
         :
-        <>
+        <div ref={contentRef}
+          className="w-full flex flex-col gap-5"
+        >
           <div className='w-full h-[20rem] rounded-lg relative flex justify-between shadow-lg'>
             <div className='absolute w-full h-full overflow-hidden rounded-lg'>
               <img
@@ -317,7 +369,7 @@ const Dashboard = () => {
 
                 <div className='py-3 px-5 w-full shadow-md rounded-lg bg-white font-semibold'>
                   <div className='flex justify-between items-center mb-2'>
-                    <div>{t('centreApproved')}</div>
+                    <div>{t('approvedCentre')}</div>
                   </div>
                   <div className='text-lg flex gap-0.5 font-bold'>
                     <Counter
@@ -328,7 +380,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className='py-3 px-5 w-full shadow-md rounded-lg bg-white font-semibold'>
-                  {t('partnerRegistration')}
+                  {t('registeredPartner')}
                   <div className='text-lg flex gap-0.5 font-bold mt-2'>
                     <Counter
                       endNumber={data?.weekManager}
@@ -338,7 +390,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className='py-3 px-5 w-full shadow-md rounded-lg bg-white font-semibold'>
-                  {t('customerRegistration')}
+                  {t('registeredCustomer')}
                   <div className='text-lg flex gap-0.5 font-bold mt-2'>
                     <Counter
                       endNumber={data?.weekCustomer}
@@ -377,7 +429,7 @@ const Dashboard = () => {
             </div>
 
           </div>
-        </>
+        </div>
       }
     </div>
   );
