@@ -7,6 +7,7 @@ import axiosInstance from '../../../../config/axiosConfig';
 import Button from '../../../../components/button';
 import SpinnerLoading from '../../../../components/SpinnerLoading';
 import Pagination from '../../../../components/pagination';
+import { toast } from "react-toastify";
 
 function StaffInfo() {
   const controller = new AbortController();
@@ -36,6 +37,20 @@ function StaffInfo() {
   };
   const handleEditStaffPopupClose = () => {
     setEditStaffPopup(false);
+  };
+
+  // HANDLE DELETE STAFF
+  const handleDeleteStaff = async (staffId) => {
+    try {
+      await axiosInstance.post(`/courtstar/account/${staffId}`);
+      loadStaffInfo(); // Reload the staff list after deletion
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      toast.success(t('deleteStaffSuccess'), {
+        toastId: 'delete-staff-success'
+      });
+    }
   };
 
   const [staffInfo, setStaffInfo] = useState([]);
@@ -142,7 +157,9 @@ function StaffInfo() {
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-pencil"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" /><path d="m15 5 4 4" /></svg>
                       </div>
-                      <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300">
+                      <div className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300"
+                        onClick={() => handleDeleteStaff(staff.account.id)}
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
                       </div>
                     </div>
