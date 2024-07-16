@@ -112,10 +112,10 @@ const Staff = () => {
   const currentListStaff: any = filteredStaff.slice(indexOfFirstStaff, indexOfLastStaff);
 
   return (
-    <div className="py-5 px-7">
+    <div className="py-6 w-full">
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
-        {t('staffs')} 
+        {t('staffs')}
         </div>
       </div>
 

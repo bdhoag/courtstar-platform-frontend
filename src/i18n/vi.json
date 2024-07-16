@@ -453,6 +453,12 @@
   "accountNumber": "Số tài khoản",
   "enterAccountNumber": "Nhập số tài khoản",
   "cardholderName": "Tên chủ thẻ",
-  "enterCardholderName": "Nhập tên chủ thẻ"
-  "noReason": "Không có lý do"
+  "enterCardholderName": "Nhập tên chủ thẻ",
+  "noReason": "Không có lý do",
+  "overviewThisWeek": "Tổng quan tuần này",
+  "centreApproved": "Sân đã phê duyệt",
+  "partnerRegistration": "Đăng ký đối tác",
+  "customerRegistration": "Đăng ký khách hàng",
+  "revenueGrowthChart": "Biểu đồ tăng trưởng doanh thu",
+  "accountAndCentreRegistrationChart": "Biểu đồ số lượng đăng ký tài khoản và đăng ký sân"
 }

@@ -52,7 +52,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [chartData, setChartData] = useState(
     {
-      users: [],
+      customers: [],
+      managers: [],
       centres: [],
       revenues: [],
       rate: [],
@@ -83,7 +84,8 @@ const Dashboard = () => {
     setChartData(
       ((prev) => ({
         ...prev,
-        users: getArrays(data.users),
+        customers: getArrays(data.customers),
+        managers: getArrays(data.managers),
         centres: getArrays(data.centres),
         revenues: getArrays(data.revenues, true),
         rates: getRateArrays(data.revenues)
@@ -178,9 +180,15 @@ const Dashboard = () => {
 
   const overviewSeries = [
     {
-      name: t('userRegistration'),
+      name: t('customerRegistration'),
       color: '#2563eb',
-      data: chartData.users,
+      data: chartData.customers,
+      type: "line"
+    },
+    {
+      name: t('partnerRegistration'),
+      color: '#9563eb',
+      data: chartData.managers,
       type: "line"
     },
     {
@@ -209,9 +217,9 @@ const Dashboard = () => {
       }
     },
     stroke: {
-      width: [3, 3],
-      curve: ['smooth', 'smooth'],
-      dashArray: [0, 0]
+      width: [3, 3, 3],
+      curve: ['smooth', 'smooth', 'smooth'],
+      dashArray: [0, 0, 0]
     },
     tooltip: {
       x: {
@@ -221,6 +229,16 @@ const Dashboard = () => {
         }
       },
       y: [
+        {
+          title: {
+            formatter: function (val) {
+              return val + ":"
+            }
+          },
+          formatter: function (val) {
+            return val
+          }
+        },
         {
           title: {
             formatter: function (val) {
@@ -252,9 +270,9 @@ const Dashboard = () => {
 
 
   return (
-    <div className="py-5 px-7 flex flex-col gap-5">
-      <div className="text-3xl font-semibold">
-      {t('dashboard')}
+    <div className="py-6 w-full flex flex-col gap-5">
+      <div className="text-3xl font-bold">
+        {t('dashboard')}
       </div>
       {loading
         ?
@@ -267,51 +285,89 @@ const Dashboard = () => {
         </div>
         :
         <>
-          <div className="bg-white rounded-2xl py-3 px-5 flex flex-col gap-5">
-            <div className="flex justify-between items-center font-semibold">
-              <div className="text-lg">
-                Overview
+          <div className='w-full h-[20rem] rounded-lg relative flex justify-between shadow-lg'>
+            <div className='absolute w-full h-full overflow-hidden rounded-lg'>
+              <img
+                src="/images/bg-admin.svg"
+                alt="bg-balance"
+                className='object-cover object-center w-full h-full'
+              />
+            </div>
+            <div className='z-10 px-20 w-full flex flex-col gap-10 justify-center'>
+              <div className='flex justify-between items-center'>
+                <div>
+                  <div className='text-2xl font-semibold mb-2'>{t('overviewThisWeek')}</div>
+                </div>
+              </div>
+
+              <div className='flex gap-10'>
+
+                <div className='py-3 px-5 w-full shadow-md rounded-lg bg-white font-semibold'>
+                  <div className='flex justify-between items-center mb-2'>
+                    <div>{t('revenue')}</div>
+                  </div>
+                  <div className='text-lg flex gap-0.5 font-bold'>
+                    <Counter
+                      endNumber={data?.weekRevenue}
+                      duration={1000}
+                    />
+                    <span className='text-[7px]'>VND</span>
+                  </div>
+                </div>
+
+                <div className='py-3 px-5 w-full shadow-md rounded-lg bg-white font-semibold'>
+                  <div className='flex justify-between items-center mb-2'>
+                    <div>{t('centreApproved')}</div>
+                  </div>
+                  <div className='text-lg flex gap-0.5 font-bold'>
+                    <Counter
+                      endNumber={data?.weekCentre}
+                      duration={1000}
+                    />
+                  </div>
+                </div>
+
+                <div className='py-3 px-5 w-full shadow-md rounded-lg bg-white font-semibold'>
+                  {t('partnerRegistration')}
+                  <div className='text-lg flex gap-0.5 font-bold mt-2'>
+                    <Counter
+                      endNumber={data?.weekManager}
+                      duration={1000}
+                    />
+                  </div>
+                </div>
+
+                <div className='py-3 px-5 w-full shadow-md rounded-lg bg-white font-semibold'>
+                  {t('customerRegistration')}
+                  <div className='text-lg flex gap-0.5 font-bold mt-2'>
+                    <Counter
+                      endNumber={data?.weekCustomer}
+                      duration={1000}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div className="flex gap-2.5 justify-between text-gray-500">
-              <div className="p-4 border rounded-xl text-2xl font-semibold w-full">
-                <div className="text-sm font-medium mb-1">
-                {t('totalRevenue')}
-                </div>
-                <Counter
-                  endNumber={data?.totalRevenue}
-                  duration={1000}
-                  postfix=" VND"
-                />
-              </div>
-              <div className="p-4 border rounded-xl text-2xl font-semibold w-full">
-                <div className="text-sm font-medium mb-1">
-                {t('totalCentre')}
-                </div>
-                <Counter
-                  endNumber={data?.totalCentre}
-                  duration={1000}
-                />
-              </div>
-              <div className="p-4 border rounded-xl text-2xl font-semibold w-full">
-                <div className="text-sm font-medium mb-1">
-                {t('totalUser')}
-                </div>
-                <Counter
-                  endNumber={data?.totalUser}
-                  duration={1000}
-                />
-              </div>
+          </div>
+          <div className="bg-white rounded-lg flex flex-col gap-5">
+            <div className="text-center font-semibold text-white py-1.5 text-2xl bg-primary-green rounded-t-lg">
+              {t('revenueGrowthChart')}
             </div>
-
-            <div className="flex flex-col gap-5 w-full">
+            <div className="flex flex-col gap-5 w-full py-2 px-5">
               <Chart
                 height="350"
                 width="100%"
                 options={revenueOptions}
                 series={revenueSeries}
               />
+            </div>
+
+          </div>
+          <div className="bg-white rounded-lg flex flex-col gap-5">
+            <div className="text-center font-semibold text-white py-1.5 text-2xl bg-primary-green rounded-t-lg">
+              {t('accountAndCentreRegistrationChart')}
+            </div>
+            <div className="flex flex-col gap-5 w-full py-2 px-5">
               <Chart
                 height="350"
                 width="100%"
@@ -319,6 +375,7 @@ const Dashboard = () => {
                 series={overviewSeries}
               />
             </div>
+
           </div>
         </>
       }

@@ -438,7 +438,7 @@ const AllCentre = () => {
         centreInfo
       />
       <div id="top"
-        className="py-5 px-7">
+        className="py-6 w-full">
         <div className="flex justify-between">
           <div className="text-3xl font-bold">
             {t('allCenTre')}
