@@ -150,22 +150,24 @@ const AllCentre = () => {
     console.log(`Selected: ${item}`);
   };
 
+  const load = async () => {
+    setLoading(true)
+    await axiosInstance.get(`/courtstar/centre/allCentre`, { signal })
+      .then(res => {
+        setListCentre(res.data.data.reverse());
+        setFilteredCentres(res.data.data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
+      .finally(
+        () => {
+          setLoading(false);
+        }
+      );
+  }
+
   useEffect(() => {
-    const load = async () => {
-      await axiosInstance.get(`/courtstar/centre/allCentre`, { signal })
-        .then(res => {
-          setListCentre(res.data.data.reverse());
-          setFilteredCentres(res.data.data);
-        })
-        .catch(error => {
-          console.log(error.message);
-        })
-        .finally(
-          () => {
-            setLoading(false);
-          }
-        );
-    }
     load();
   }, [])
 
@@ -238,7 +240,8 @@ const AllCentre = () => {
           toast.success('Delete successfully', {
             toastId: 'delete-success'
           });
-          window.location.reload();
+          setIsOpenModal(false);
+          load();
         }
       })
       .catch(error => {
