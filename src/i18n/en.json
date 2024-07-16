@@ -446,5 +446,6 @@
   "manage": "Manage",
   "moveStaff": "Move Staff",
   "Submit": "Submit",
-  "selectCentre": "Select Centre"
+  "selectCentre": "Select Centre",
+  "noReason" : "No reason"
 }

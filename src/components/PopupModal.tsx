@@ -29,7 +29,7 @@ const PopupModal: React.FC<PopupModalProps> = ({ isOpen, html, setIsOpen, centre
   return (
     <div className={isOpen === false ? 'hidden' : ''}>
       <div className='text-gray-800'>
-        <div className='fixed z-40 top-0 left-0 h-screen w-screen bg-gray-900 opacity-40'>
+        <div className='fixed z-50 top-0 left-0 h-screen w-screen bg-gray-900 opacity-40'>
         </div>
 
         <div className='fixed z-50 top-0 left-0 h-screen w-screen flex justify-center items-center'>
