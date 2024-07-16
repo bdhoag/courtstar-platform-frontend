@@ -6,6 +6,7 @@ import moment from 'moment';
 import Dialog from '../../components/Dialog';
 import { toast } from 'react-toastify';
 import SpinnerLoading from '../../components/SpinnerLoading';
+import showAlert from '../../components/alert';
 
 const PostCentre = () => {
   const controller = new AbortController();
@@ -192,7 +193,14 @@ const PostCentre = () => {
         }}
         html={centreInfor}
         title={centreDetail?.name}
-        submit={() => approveRequest(centreDetail?.id)}
+        submit={() => {
+          showAlert({
+            title: t('areYouSure') + "?",
+            message: t('youAllowThisCentreOpenInTheSystem') + "!",
+            type: 'success',
+            onConfirmClick: () => approveRequest(centreDetail?.id)
+          });
+        }}
         submitDeny={() => denyRequest(centreDetail?.id)}
         centreInfo
       />

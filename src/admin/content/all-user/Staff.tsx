@@ -5,10 +5,12 @@ import axiosInstance from '../../../config/axiosConfig';
 import SpinnerLoading from '../../../components/SpinnerLoading';
 import { toast } from 'react-toastify';
 import Pagination from '../../../components/pagination';
+import { useTranslation } from 'react-i18next';
+import showAlert from '../../../components/alert';
 
 
 const Staff = () => {
-
+  const { t } = useTranslation();
   const controller = new AbortController();
   const { signal } = controller;
   const [listStaff, setListStaff] = useState<any>([]);
@@ -71,7 +73,7 @@ const Staff = () => {
 
   console.log(listStaff);
 
-  const deleteManager = async (id, index) => {
+  const deleteStaff = async (id, index) => {
     setListStaff(prevListCourt => {
       // Create a copy of the previous state array
       const updatedListCourt = [...prevListCourt];
@@ -213,7 +215,14 @@ const Staff = () => {
                               ) : (
                                 <div
                                   className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300"
-                                  onClick={() => deleteManager(staff.account.id, index)}
+                                  onClick={() => {
+                                    showAlert({
+                                      title: t('areYouSure') + "?",
+                                      message: t('youDeleteThisStaffAccount') + "!",
+                                      type: 'warning',
+                                      onConfirmClick: () => deleteStaff(staff.account.id, index)
+                                    });
+                                  } }
                                 >
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"

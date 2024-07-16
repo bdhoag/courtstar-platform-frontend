@@ -5,10 +5,12 @@ import axiosInstance from '../../../config/axiosConfig';
 import SpinnerLoading from '../../../components/SpinnerLoading';
 import { toast } from 'react-toastify';
 import Pagination from '../../../components/pagination';
+import showAlert from '../../../components/alert';
+import { useTranslation } from 'react-i18next';
 
 
 const Manager = () => {
-
+  const { t } = useTranslation();
   const controller = new AbortController();
   const { signal } = controller;
   const [listManager, setListManager] = useState<any>([]);
@@ -204,7 +206,14 @@ const Manager = () => {
                             ) : (
                               <div
                                 className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300"
-                                onClick={() => deleteManager(manager.account.id, index)}
+                                onClick={() => {
+                                  showAlert({
+                                    title: t('areYouSure') + "?",
+                                    message: t('youDeleteThisManagerAccount') + "!",
+                                    type: 'warning',
+                                    onConfirmClick: () => deleteManager(manager.account.id, index)
+                                  });
+                                }}
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
