@@ -5,10 +5,12 @@ import axiosInstance from '../../../config/axiosConfig';
 import SpinnerLoading from '../../../components/SpinnerLoading';
 import { toast } from 'react-toastify';
 import Pagination from '../../../components/pagination';
+import { useTranslation } from 'react-i18next';
+import showAlert from '../../../components/alert';
 
 
 const Customer = () => {
-
+  const { t } = useTranslation();
   const controller = new AbortController();
   const { signal } = controller;
   const [listCustomer, setListCustomer] = useState<any>([]);
@@ -204,7 +206,14 @@ const Customer = () => {
                             ) : (
                               <div
                                 className="p-1.5 rounded-full hover:bg-red-600 hover:text-white cursor-pointer ease-in-out duration-300"
-                                onClick={() => deleteAccount(customer.id, index)}
+                                onClick={() =>{
+                                  showAlert({
+                                    title: t('areYouSure') + "?",
+                                    message: t('youDeleteThisCustomerAccount') + "!",
+                                    type: 'warning',
+                                    onConfirmClick: () => deleteAccount(customer.id, index)
+                                  });
+                                }}
                               >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"

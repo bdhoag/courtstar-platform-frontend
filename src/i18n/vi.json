@@ -383,5 +383,11 @@
   "plsEnterPhone": "*Hãy nhập số điện thoại của bạn!",
   "youWillNotAbleToRecoverTheEntireSelection": "Bạn sẽ không thể khôi phục lại những sự lựa chọn hiện tại",
   "youWillNotAbleToRecoverThisAction": "Bạn sẽ không thể khôi phục lại hành động này",
-  "areYouSure": "Bạn chắc chưa"
+  "areYouSure": "Bạn đã chắc chắn",
+  "youAllowThisCentreOpenInTheSystem": "Bạn chấp thuận cho sân này xuất hiện trên hệ thống",
+  "youAllowThisWithdrawalRequest": "Bạn chấp thuận cho yêu cầu rút tiền này",
+  "youDeleteThisManagerAccount": "Bạn xóa tài khoản quản lý này",
+  "youDeleteThisStaffAccount": "Bạn xóa tài khoản nhân viên này",
+  "youDeleteThisCustomerAccount": "Bạn xóa tài khoản khách hàng này",
+  "enterManagerEmail": "Nhập Email của quản lý"
 }

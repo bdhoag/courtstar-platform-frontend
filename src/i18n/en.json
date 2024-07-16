@@ -52,6 +52,7 @@
   "enterFirstName": "Enter your First Name",
   "enterLastName": "Enter your Last Name",
   "enterEmail": "Enter your Email",
+  "enterManagerEmail": "Enter email of Manager",
   "enterPhone": "Enter your Phone",
   "enterPassword": "Enter your Password",
   "firstName": "First Name*",
@@ -384,5 +385,10 @@
   "plsEnterPhone": "*Please enter your phone number!",
   "youWillNotAbleToRecoverTheEntireSelection": "You will not able to recover the entire selection",
   "youWillNotAbleToRecoverThisAction": "You will not able to recover this action",
-  "areYouSure": "Are you sure"
+  "areYouSure": "Are you sure",
+  "youAllowThisCentreOpenInTheSystem": "You allow this centre open in the system",
+  "youAllowThisWithdrawalRequest": "You allow this Withdrawal Request",
+  "youDeleteThisManagerAccount": "You delete this manager account",
+  "youDeleteThisStaffAccount": "You delete this staff account",
+  "youDeleteThisCustomerAccount": "You delete this customer account"
 }

@@ -482,15 +482,15 @@ const AllCentre = () => {
               <div className="px-10 bg-white py-4 grid grid-cols-5 gap-x-1 rounded-xl shadow">
                 <div className="">
                   <InputText
-                    placeholder="Enter name of centre"
-                    label="Name"
+                    placeholder={t('enterCentreName')}
+                    label={t('centreName')}
                     value={nameFilter}
                     onchange={(e) => setNameFilter(e.target.value)}
                   />
                 </div>
                 <div className="">
                   <InputText
-                    placeholder="Enter email of manager"
+                    placeholder={t('enterManagerEmail')}
                     label="Email"
                     value={emailFilter}
                     onchange={(e) => setEmailFilter(e.target.value)}

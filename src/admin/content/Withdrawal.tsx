@@ -8,13 +8,15 @@ import Dropdown, { Item } from "../../components/dropdown";  // Ensure Item is i
 import InputText from "../../components/input-text";
 import PopupModal from "../../components/PopupModal";
 import CreditCard from "../../components/credit-card";
+import showAlert from "../../components/alert";
+import { useTranslation } from 'react-i18next'; 
 
 const Withdrawal = () => {
   const [loading, setLoading] = useState(true);
   const [requestList, setRequestList] = useState<any>();
   const [requestDetail, setRequestDetail] = useState<any>(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
-
+  const { t } = useTranslation();
   const amountItems: Item[] = [
     { key: 'all', label: 'All Request' },
     { key: 'asc', label: 'Ascending' },
@@ -156,7 +158,14 @@ const Withdrawal = () => {
                   <path d="M20 6 9 17l-5-5" />
                 </svg>}
                 label='Accept'
-                onClick={() => handleAcceptRequest(requestDetail)}
+                onClick={() => {
+                  showAlert({
+                    title: t('areYouSure') + "?",
+                    message: t('youAllowThisWithdrawalRequest') + "!",
+                    type: 'success',
+                    onConfirmClick: () => handleAcceptRequest(requestDetail)
+                  });
+                }}
               />
               <Button
                 className="text-center text-red-500 text-xs font-semibold w-full py-1 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white"
