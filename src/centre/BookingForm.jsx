@@ -101,9 +101,19 @@ const BookingForm = (props) => {
         onchange={handleChange}
         disabled={account?.email}
       />
+      <div className='flex flex-w gap-10 mt-3'>
+        <button class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700 w-[120px]">
+          <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4" />
+          <label for="bordered-radio-1" class="w-full py-4 ms-2 text-sm font-medium">ZaloPay</label>
+        </button>
+        <button class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700 w-[120px]">
+          <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4" />
+          <label for="bordered-radio-2" class="w-full py-4 ms-2 text-sm font-medium">VNPay</label>
+        </button>
+      </div>
       <div className='py-3 flex justify-center items-center gap-1 font-semibold'>
         {t('price')}:
-        <span className='text-rose-600'> {((props?.centre?.pricePerHour)*(bookingForm?.bookingDetails?.length))?.toLocaleString('de-DE')} VND</span>
+        <span className='text-rose-600'> {((props?.centre?.pricePerHour) * (bookingForm?.bookingDetails?.length))?.toLocaleString('de-DE')} VND</span>
       </div>
       <div className='flex items-center justify-center w-full'>
         <Button
