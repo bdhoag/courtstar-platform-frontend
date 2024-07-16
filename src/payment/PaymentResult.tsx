@@ -27,8 +27,8 @@ interface BookingSchedule {
   account?: {
     email: string
   };
-  guest?: { 
-    email: string 
+  guest?: {
+    email: string
   };
   centreName: string;
   centreAddress: string;
@@ -42,8 +42,9 @@ const PaymentResult: React.FC = () => {
   const [result, setResult] = useState<string | null>(null);
   const [bookingSchedule, setBookingSchedule] = useState<BookingSchedule | null>(null);
   const query = useQuery();
-  const status = query.get('status');
-  const appTransId = query.get('apptransid');
+  const [status, setStatus] = useState<any>(query.get('status'));
+  const [appTransId, setAppTransId] = useState<any>(query.get('apptransid'));
+  const location = useLocation();
 
   useEffect(() => {
     const load = async () => {
@@ -61,6 +62,18 @@ const PaymentResult: React.FC = () => {
 
     if (status === '1') {
       load();
+    } else if (!status) {
+      axiosInstance.get(`/courtstar/payment-vn-pay/callback${location.search}`)
+        .then(res => {
+          setStatus(res.data.status);
+          setAppTransId(res.data.appTransId);
+        })
+        .catch(error => {
+          console.log(error.message);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     } else {
       setLoading(false);
     }
