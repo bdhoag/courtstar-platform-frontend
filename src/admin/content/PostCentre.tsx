@@ -246,8 +246,8 @@ const PostCentre = () => {
                           {centre.managerEmail}
                         </div>
                         <div className="w-fit justify-self-end">
-                          <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-rose-500 rounded-md">
-                            Pending
+                          <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-yellow-400 rounded-md">
+                           {t('Pending')}
                           </div>
                         </div>
                       </div>

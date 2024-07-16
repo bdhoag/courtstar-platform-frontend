@@ -41,7 +41,6 @@ const PartnerTerm = () => {
                                     <li key={index}>{item}</li>
                                 ))}
                             </ul>
-                            <p className='text-lg font-semibold font py-6'>2.4 Disable-Court Policy</p>
                             <p className='text-lg font-semibold font py-6'>3. {t('prohibitedActivity')} </p>
                             <ul className='font-normal text-base py-4' style={{paddingLeft: '50px', listStyleType: 'disc' }}>
                                 {t('prohibitedActPartner', { returnObjects: true }).map((item, index) => (

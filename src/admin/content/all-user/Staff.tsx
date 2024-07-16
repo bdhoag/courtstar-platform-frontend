@@ -115,7 +115,7 @@ const Staff = () => {
     <div className="py-5 px-7">
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
-          Staffs
+        {t('staffs')} 
         </div>
       </div>
 
@@ -137,8 +137,8 @@ const Staff = () => {
                   <InputText
                     id="name"
                     name="name"
-                    placeholder="Enter the user's name"
-                    label="Name"
+                    placeholder={t('enterStaffName')}
+                    label={t('staffName')}
                     value={nameFilter}
                     onchange={(e) => setNameFilter(e.target.value)}
                   />
@@ -147,7 +147,7 @@ const Staff = () => {
                   <InputText
                     id="email"
                     name="email"
-                    placeholder="Enter the user's email"
+                    placeholder={t('enterStaffEmail')}
                     label="Email"
                     value={emailFilter}
                     onchange={(e) => setEmailFilter(e.target.value)}
@@ -157,8 +157,8 @@ const Staff = () => {
                   <InputText
                     id="phone"
                     name="phone"
-                    placeholder="Enter the user's phone number"
-                    label="Phone number"
+                    placeholder={t('enterStaffPhone')}
+                    label={t('phone')}
                     value={phoneFilter}
                     onchange={(e) => setPhoneFilter(e.target.value)}
                   />

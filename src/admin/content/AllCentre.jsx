@@ -117,17 +117,17 @@ const AllCentre = () => {
   ];
 
   const ratingItems = [
-    { key: 'all', label: 'All Rating' },
-    { key: '1', label: '1 Star' },
-    { key: '2', label: '2 Stars' },
-    { key: '3', label: '3 Stars' },
-    { key: '4', label: '4 Stars' },
-    { key: '5', label: '5 Stars' },
+    { key: 'all', label: t('allRating') },
+    { key: '1', label: t('1star') },
+    { key: '2', label: t('2star') },
+    { key: '3', label: t('3star') },
+    { key: '4', label: t('4star') },
+    { key: '5', label: t('5star') },
   ];
   const deleteItems = [
-    { key: 'all', label: 'All Status' },
-    { key: 'true', label: 'Unavailable' },
-    { ket: 'false', label: 'Available' }
+    { key: 'all', label: t('allStatus') },
+    { key: 'true', label: t('deleted') },
+    { ket: 'false', label: t('active') }
   ];
   const [listCentre, setListCentre] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -474,9 +474,9 @@ const AllCentre = () => {
                   />
                 </div>
                 <div className="">
-                  <div className="font-semibold mb-2">District</div>
+                  <div className="font-semibold mb-2">{t('district')}</div>
                   <Dropdown
-                    placeholder="Select District"
+                    placeholder={t('selectTheDistrict')}
                     items={items}
                     onSelect={handleSelectDistrict}
                     buttonClassName='!px-3'
@@ -484,18 +484,18 @@ const AllCentre = () => {
                 </div>
 
                 <div className="">
-                  <div className="font-semibold mb-2">Feedback</div>
+                  <div className="font-semibold mb-2">{t('feedback')}</div>
                   <Dropdown
-                    placeholder="Select Rating"
+                    placeholder={t('selectRating')}
                     items={ratingItems}
                     onSelect={handleSelectRating}
                     buttonClassName='!px-3'
                   />
                 </div>
                 <div className="">
-                  <div className="font-semibold mb-2">Status</div>
+                  <div className="font-semibold mb-2">{t('status')}</div>
                   <Dropdown
-                    placeholder="Select Status"
+                    placeholder={t('selectStatus')}
                     items={deleteItems}
                     onSelect={handleSelectDelete}
                     buttonClassName='!px-3'
@@ -532,11 +532,11 @@ const AllCentre = () => {
                         {centre.deleted === true
                           ?
                           <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-rose-500 rounded-md">
-                            Deleted
+                            {t('deleted')}
                           </div>
                           :
                           <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-primary-green rounded-md">
-                            Active
+                             {t('active')}
                           </div>
                         }
                       </div>
