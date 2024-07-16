@@ -4,7 +4,7 @@ import SpinnerLoading from '../../../components/SpinnerLoading';
 import InputText from '../../../components/input-text';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import Dropdown from '../../../components/dropdown';
+import Dropdown, { Item } from '../../../components/dropdown';
 
 interface ChildHandle {
   increment: () => void;
@@ -14,11 +14,25 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [histories, setHistories] = useState<any>([]);
-  const options = [
+  const [filteredHistories, setFilteredHistories] = useState<any>([]);
+  const [bankFilter, setBankFilter] = useState('');
+  const [accountFilter, setAccountFilter] = useState('');
+  const [cardHolderFilter, setCardHolderFilter] = useState('');
+  const [amountFilter, setAmountFilter] = useState('');
+  const [dateFilter, setDateFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState(1);
+
+  const statusOptions: Item[] = [
     { key: 1, label: "All" },
     { key: 2, label: "Pending" },
     { key: 3, label: "Accepted" },
     { key: 4, label: "Denied" }
+  ];
+
+  const dateItems: Item[] = [
+    { key: 'all', label: 'All Request' },
+    { key: 'asc', label: 'Ascending' },
+    { key: 'dsc', label: 'Descending' }
   ];
 
   useImperativeHandle(ref, () => ({
@@ -27,27 +41,19 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
     }
   }));
 
-  const handleSelectDropdown = (item: { key: number; label: string }) => {
-    console.log(`Selected: ${item.label}`);
-  };
-
   const controller = new AbortController();
   const { signal } = controller;
 
   const loadHistory = async () => {
-    await axiosInstance.get(`/courtstar/transfer-money/manager/all`, { signal })
-      .then(res => {
-        const sortedHistories = res.data.data.sort((a, b) => b.id - a.id);
-        setHistories(sortedHistories);
-      })
-      .catch(err => {
-        console.log(err.message);
-      })
-      .finally(
-        () => {
-          setLoading(false);
-        }
-      );
+    try {
+      const res = await axiosInstance.get(`/courtstar/transfer-money/manager/all`, { signal });
+      const sortedHistories = res.data.data.sort((a, b) => b.id - a.id);
+      setHistories(sortedHistories);
+    } catch (err:any) {
+      console.log(err.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -56,6 +62,60 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
       controller.abort();
     };
   }, []);
+
+  useEffect(() => {
+    const applyFilters = () => {
+      let updatedHistories = histories;
+
+      if (bankFilter) {
+        updatedHistories = updatedHistories.filter(history =>
+          history.nameBanking.toLowerCase().includes(bankFilter.toLowerCase())
+        );
+      }
+
+      if (accountFilter) {
+        updatedHistories = updatedHistories.filter(history =>
+          history.numberBanking.toLowerCase().includes(accountFilter.toLowerCase())
+        );
+      }
+
+      if (cardHolderFilter) {
+        updatedHistories = updatedHistories.filter(history =>
+          history.cardHolderName.toLowerCase().includes(cardHolderFilter.toLowerCase())
+        );
+      }
+
+      if (amountFilter) {
+        updatedHistories = updatedHistories.filter(history =>
+          history.amount.toString().includes(amountFilter)
+        );
+      }
+
+      if (dateFilter && dateFilter !== 'all') {
+        updatedHistories = updatedHistories.slice().sort((a, b) => {
+          if (dateFilter === 'asc') {
+            return moment(a.dateCreateWithdrawalOrder).diff(b.dateCreateWithdrawalOrder);
+          } else if (dateFilter === 'dsc') {
+            return moment(b.dateCreateWithdrawalOrder).diff(a.dateCreateWithdrawalOrder);
+          }
+          return 0;
+        });
+      }
+
+      if (statusFilter && statusFilter !== 1) {
+        updatedHistories = updatedHistories.filter(history => {
+          if (statusFilter === 2) return !history.dateAuthenticate;
+          if (statusFilter === 3) return history.status;
+          if (statusFilter === 4) return !history.status && history.dateAuthenticate;
+          return true;
+        });
+      }
+
+      setFilteredHistories(updatedHistories);
+    };
+
+    applyFilters();
+  }, [bankFilter, accountFilter, cardHolderFilter, amountFilter, dateFilter, statusFilter, histories]);
 
   return (
     loading
@@ -78,50 +138,50 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
             <div className="px-10 py-4 grid grid-cols-12 gap-2">
               <div className="col-span-2 text-center">
                 <InputText
-                  placeholder={t('enterUserName')}
+                  placeholder="Enter Name of Bank"
                   label="Bank's name"
-                  value=""
-                  onchange={() => { }}
+                  value={bankFilter}
+                  onchange={(e) => setBankFilter(e.target.value)}
                 />
               </div>
               <div className="col-span-2 text-center">
                 <InputText
-                  placeholder={t('enterUserName')}
+                  placeholder="Enter Account number"
                   label="Account number"
-                  value=""
-                  onchange={() => { }}
+                  value={accountFilter}
+                  onchange={(e) => setAccountFilter(e.target.value)}
                 />
               </div>
               <div className="col-span-2 text-center">
                 <InputText
-                  placeholder={t('enterUserName')}
+                  placeholder="Enter Holder name"
                   label="Card Holder's Name"
-                  value=""
-                  onchange={() => { }}
+                  value={cardHolderFilter}
+                  onchange={(e) => setCardHolderFilter(e.target.value)}
                 />
               </div>
               <div className="col-span-2 text-center">
                 <InputText
-                  placeholder={t('enterUserName')}
+                  placeholder="Enter Amount"
                   label="Amount"
-                  value=""
-                  onchange={() => { }}
+                  value={amountFilter}
+                  onchange={(e) => setAmountFilter(e.target.value)}
                 />
               </div>
               <div className="col-span-2 text-center">
-                <InputText
-                  placeholder={t('enterUserName')}
+                <Dropdown
+                  placeholder="Enter Date Create"
                   label="Date Create Order"
-                  value=""
-                  onchange={() => { }}
+                  items={dateItems}
+                  onSelect={(item) => setDateFilter(item?.key ?? 'all')}
                 />
               </div>
               <div className="col-span-2 text-center">
                 <Dropdown
                   label="Status"
-                  items={options}
-                  onSelect={() => handleSelectDropdown}
-                  placeholder={t('Select date')}
+                  items={statusOptions}
+                  onSelect={(item:any) => setStatusFilter(item.key)}
+                  placeholder={t('Select Status')}
                 />
               </div>
             </div>
@@ -148,7 +208,7 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
           }
         </div>
         <div className="mt-2 font-medium">
-          {histories?.map((item: any) => (
+          {filteredHistories?.map((item: any) => (
             <div
               key={item.id}
               className="bg-white px-10 py-2 grid grid-cols-12 gap-2 mt-2 rounded-lg shadow"
