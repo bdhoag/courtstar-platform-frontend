@@ -382,61 +382,72 @@ const CheckIn = (props) => {
             <PopupModal
               isOpen={checkInPopup}
               setIsOpen={handleCheckInPopupClose}
+              centreInfo
+              title={t('bookingDetail')}
               html={
-                <div className="flex gap-7 max-w-5xl">
-                  <div className="flex flex-col gap-3">
-                    <div>
-                      <span className="font-semibold">Address: </span> {props?.centreDetail?.address}
-                    </div>
-                    <div className="flex gap-6">
-                      <div className="">
-                        <span className="font-semibold">Date: </span>
-                        {formCheckIn?.date}
-                      </div>
-                      <div className="self-center">
-                        <span className="font-semibold">Slot: </span>
-                        {formCheckIn?.slot?.slotNo}
-                        <span className="font-normal text-slate-500 text-sm">
-                          ({moment(formCheckIn?.slot?.startTime, 'HH:mm:ss').format('H')}h - {moment(formCheckIn?.slot?.endTime, 'HH:mm:ss').format('H')}h)
-                        </span>
-                      </div>
-                    </div>
+                <div className="flex flex-col gap-3">
+                  <div className="">
+                    <span className="font-semibold">Name: </span>
+                    {formCheckIn?.bookingSchedule?.account?.firstName} {formCheckIn?.bookingSchedule?.account?.lastName}
+                    {formCheckIn?.bookingSchedule?.guest?.fullName}
+                  </div>
+
+                  <div className="">
+                    <span className="font-semibold">Email: </span>
+                    {formCheckIn?.bookingSchedule?.account?.email}
+                    {formCheckIn?.bookingSchedule?.guest?.email}
+                  </div>
+
+                  <div className="">
+                    <span className="font-semibold">Phone: </span>
+                    {formCheckIn?.bookingSchedule?.account?.phone}
+                    {formCheckIn?.bookingSchedule?.guest?.phone}
+                  </div>
+
+                  <div className="">
+                    <span className="font-semibold">Date: </span>
+                    {formCheckIn?.date}
+                  </div>
+
+                  <div className="flex justify-between">
                     <div>
                       <span className="font-semibold">Court number: </span>
                       {formCheckIn?.court?.courtNo}
                     </div>
-                    <div>
-                      <span className="font-semibold">Total price: </span>
-                      <span className="font-semibold text-rose-600">{formCheckIn?.bookingSchedule?.totalPrice?.toLocaleString('de-DE')}₫/h</span>
+
+                    <div className="">
+                      <span className="font-semibold">Slot: </span>
+                      {formCheckIn?.slot?.slotNo}
+                      <span className="font-normal text-slate-500 text-sm">
+                        ({moment(formCheckIn?.slot?.startTime, 'HH:mm:ss').format('H')}h - {moment(formCheckIn?.slot?.endTime, 'HH:mm:ss').format('H')}h)
+                      </span>
                     </div>
-                    <Button
-                      className={`block text-center py-1 w-full border ${formCheckIn.checkedIn ? 'bg-gray-800 hover:bg-gray-400' : 'bg-primary-green hover:bg-teal-900'} text-white rounded-md font-semibold transition-all ease-in-out duration-300`}
-                      onClick={
-                        formCheckIn?.checkedIn
-                          ?
-                          () => {
-                            handleUndoCheckin(formCheckIn.id);
-                          }
-                          :
-                          () => {
-                            handleCheckin(formCheckIn.id);
-                          }
-                      }
-                      label={
-                        formCheckIn?.checkedIn
-                          ?
-                          'Undo'
-                          :
-                          'Check in'
-                      }
-                      loading={loadingBtn}
-                      loadingColor="#fff"
-                    />
                   </div>
+                  <Button
+                    className={`block text-center py-1 w-full border ${formCheckIn.checkedIn ? 'bg-gray-800 hover:bg-gray-400' : 'bg-primary-green hover:bg-teal-900'} text-white rounded-md font-semibold transition-all ease-in-out duration-300`}
+                    onClick={
+                      formCheckIn?.checkedIn
+                        ?
+                        () => {
+                          handleUndoCheckin(formCheckIn.id);
+                        }
+                        :
+                        () => {
+                          handleCheckin(formCheckIn.id);
+                        }
+                    }
+                    label={
+                      formCheckIn?.checkedIn
+                        ?
+                        'Undo'
+                        :
+                        'Check in'
+                    }
+                    loading={loadingBtn}
+                    loadingColor="#fff"
+                  />
                 </div>
               }
-              centreInfo
-              title={props?.centreDetail?.name}
             />
 
             <PopupModal
