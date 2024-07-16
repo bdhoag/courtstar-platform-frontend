@@ -239,7 +239,7 @@ const PostCentre = () => {
       />
 
       <div
-        className='py-7 px-7'
+        className="py-6 w-full"
       >
         <div className="text-3xl font-bold">
         {t('postCentre')}

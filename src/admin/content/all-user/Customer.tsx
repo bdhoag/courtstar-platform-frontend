@@ -111,7 +111,7 @@ const Customer = () => {
   const currentListCustomer: any = filteredCustomer.slice(indexOfFirstCustomer, indexOfLastCustomer);
 
   return (
-    <div className="py-5 px-7">
+    <div className="py-6 w-full">
       <div className="flex justify-between">
         <div className="text-3xl font-bold">
         {t('customer')}

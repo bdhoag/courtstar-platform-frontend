@@ -159,9 +159,15 @@ export default function MyBalance(props) {
           centreInfo
           title={'Your Information'}
         />
-        <div className='w-full h-[20rem] rounded-lg bg-gradient-to-r from-emerald-50 to-[#408576] bg-opacity-40 relative
-        flex justify-between px-20 shadow-lg'>
-          <div className='w-full flex flex-col gap-10 justify-center'>
+        <div className='w-full h-[20rem] rounded-lg relative flex justify-between shadow-lg'>
+          <div className='absolute w-full h-full overflow-hidden rounded-lg'>
+            <img
+              src="/images/bg-balance.svg"
+              alt="bg-balance"
+              className='object-cover object-center w-full h-full'
+            />
+          </div>
+          <div className='z-10 px-20 w-full flex flex-col gap-10 justify-center'>
             <div className='flex justify-between items-center'>
               <div>
                 <div className='text-2xl font-semibold mb-2'>{t('myBalance')}</div>

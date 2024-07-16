@@ -267,7 +267,7 @@ const Withdrawal = () => {
     load();
   }, []);
   return (
-    <div className='py-7 px-7'>
+    <div className="py-6 w-full">
       <PopupModal
         isOpen={isOpenModal}
         setIsOpen={() => {

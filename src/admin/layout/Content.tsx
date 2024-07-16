@@ -11,7 +11,7 @@ type Props = {
 
 const Content = (props: Props) => {
   return (
-    <div className='flex-1'>
+    <div className='flex-1 flex justify-center max-w-screen-1440 px-14 mx-auto'>
       {props.tab === 1 && <Dashboard />}
 
       {props.tab === 2 && <AllCentre />}

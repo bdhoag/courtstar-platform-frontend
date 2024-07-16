@@ -453,6 +453,12 @@
   "accountNumber": "Account Number",
   "enterAccountNumber": "Enter Account number",
   "cardholderName": "Card Holder's Name",
-  "enterCardholderName": "Enter Holder's Name"
-  "noReason" : "No reason"
+  "enterCardholderName": "Enter Holder's Name",
+  "noReason" : "No reason",
+  "overviewThisWeek": "Overview this week",
+  "centreApproved": "Centre approved",
+  "partnerRegistration": "Partner registration",
+  "customerRegistration": "Customer registration",
+  "revenueGrowthChart": "Revenue growth chart",
+  "accountAndCentreRegistrationChart": "Account and centre registration chart"
 }
