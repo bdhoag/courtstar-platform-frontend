@@ -57,6 +57,13 @@ const BookingHistory = () => {
   const indexOfFirstBooking = indexOfLastBooking - itemsPerPage;
   const currentBookings = bookings.slice(indexOfFirstBooking, indexOfLastBooking);
 
+  const isFeedbackAvailable = (bookingDetails) => {
+    // Get the latest end time from booking details
+    const endTimes = bookingDetails.map(detail => moment(`${detail.date} ${detail.slot.endTime}`, 'YYYY-MM-DD HH:mm:ss'));
+    const latestEndTime = moment.max(endTimes);
+    return moment().isAfter(latestEndTime);
+  };
+
   return (
     <div className="font-Inter text-base overflow-x-hidden text-gray-800">
       <FeedbackForm
@@ -86,6 +93,7 @@ const BookingHistory = () => {
                       key={booking.id}
                       booking={booking}
                       handleFeedbackPopup={handleFeedbackPopup}
+                      isFeedbackAvailable={isFeedbackAvailable}
                     />
                   ))
                 ) : (
@@ -111,7 +119,7 @@ const BookingHistory = () => {
   );
 };
 
-const BookingCard = ({ booking, handleFeedbackPopup }) => (
+const BookingCard = ({ booking, handleFeedbackPopup, isFeedbackAvailable }) => (
   <div className="bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7 max-w-5xl w-full">
     <img
       src={booking.centreImg || centrePlaceholder}
@@ -126,6 +134,7 @@ const BookingCard = ({ booking, handleFeedbackPopup }) => (
       </div>
       <div>
         <span className="font-semibold">Court Number: </span>
+        {booking.bookingDetails[0].court.courtNo}
       </div>
       <div>
         <span className="font-semibold">Total price: </span>
@@ -143,10 +152,6 @@ const BookingCard = ({ booking, handleFeedbackPopup }) => (
             {moment(detail.date).format('DD/MM/YYYY')}
           </div>
           <div>
-            <span className="font-semibold">Court number: </span>
-            {detail.court.courtNo}
-          </div>
-          <div>
             <span className='font-semibold'>Slot: {detail.slot.slotNo} / </span> 
             <span className="font-semibold">Time: </span>
             {moment(detail.slot.startTime, 'HH:mm:ss').format('HH:mm')} -{' '}
@@ -156,12 +161,21 @@ const BookingCard = ({ booking, handleFeedbackPopup }) => (
       ))}
       <div className="flex justify-center items-end h-full">
         {booking.rate === 0 ? (
-          <button
-            className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300" 
-            onClick={() => handleFeedbackPopup(booking)}
-          >
-            Feedback
-          </button>
+          isFeedbackAvailable(booking.bookingDetails) ? (
+            <button
+              className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300" 
+              onClick={() => handleFeedbackPopup(booking)}
+            >
+              Feedback
+            </button>
+          ) : (
+            <button
+              className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold opacity-80"
+              disabled
+            >
+              Feedback
+            </button>
+          )
         ) : (
           <Rating ratingWrapper="flex gap-1" value={booking.rate} editable={false} />
         )}
