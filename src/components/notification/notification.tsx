@@ -19,17 +19,17 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification, onNot
 
   return (
     <li className={`flex items-center justify-between gap-2 hover:rounded-md transition-all ease-in-out duration-300 p-2 hover:bg-gray-100 cursor-pointer border-t border-gray-200`}
-        onClick={() => onNotificationClick(notification)}>
-        <img src={icon} alt="" className='w-7 h-7 mr-2' />
-        <div className="flex-1 flex flex-col items-start">
-            <span className="text-gray-700">{t(notification.content)}</span>
-            <span className="text-gray-500 text-sm flex items-end gap-3">
-              {!notification.status && (
-                <span className="inline-flex items-center justify-center p-1 mb-0.5 h-2 w-2 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-400 rounded-full" />
-              )}
-              {moment(notification.date).fromNow()}
-            </span>
-        </div>
+      onClick={() => onNotificationClick(notification)}>
+      <img src={icon} alt="" className='w-7 h-7 mr-2' />
+      <div className="flex-1 flex flex-col items-start">
+        <span className="text-gray-700">{notification.content ? t(notification.content) : t('noReason')}</span>
+        <span className="text-gray-500 text-sm flex items-end gap-3">
+          {!notification.status && (
+            <span className="inline-flex items-center justify-center p-1 mb-0.5 h-2 w-2 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-400 rounded-full" />
+          )}
+          {moment(notification.date).fromNow()}
+        </span>
+      </div>
     </li>
   );
 };
