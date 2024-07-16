@@ -215,7 +215,7 @@ const PostCentre = () => {
         className='py-7 px-7'
       >
         <div className="text-3xl font-bold">
-          Post Centre Request
+        {t('postCentre')}
         </div>
 
         {loading

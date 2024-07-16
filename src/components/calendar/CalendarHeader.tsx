@@ -90,7 +90,7 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
           onClick={() => handleReset()}
         />
         <Button
-          label={typeOfCalendar === 'booking' ? t('booking') : 'Disable'}
+          label={typeOfCalendar === 'booking' ? t('booking') : t('Disable')}
           fullWidth
           className='bg-primary-green hover:bg-teal-900 text-white min-w-24 py-2.5'
           onClick={() => handleButton(formCalendar)}

@@ -84,7 +84,7 @@ function EditStaff(props) {
                 html={html}
                 isOpen={props.isOpen}
                 setIsOpen={handleClose}
-                title={'Move Staff'}
+                title={t('moveStaff')}
                 centreInfo
             />
         </div>
