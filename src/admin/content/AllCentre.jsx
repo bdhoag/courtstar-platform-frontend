@@ -14,6 +14,7 @@ import Calendar from "../../components/calendar";
 import { toast } from "react-toastify";
 import Feedback from "../../components/feedback";
 import Pagination from "../../components/pagination";
+import showAlert from "../../components/alert";
 
 const AllCentre = () => {
 
@@ -229,58 +230,6 @@ const AllCentre = () => {
       })
   }
 
-  const handleDisable = async (centreId) => {
-    setActivateLoading(true);
-    await axiosInstance.post(`/courtstar/centre/disable/${centreId}`)
-      .then(res => {
-        if (res.data.data) {
-          setCentreDetail((prevForm) => ({
-            ...prevForm,
-            status: false
-          }))
-          toast.success('Disable successfully', {
-            toastId: 'disable-success'
-          });
-        }
-      })
-      .catch(error => {
-        toast.error(error.message, {
-          toastId: 'disable-unsuccess'
-        });
-      })
-      .finally(
-        () => {
-          setActivateLoading(false);
-        }
-      );
-  }
-
-  const handleActive = async (centreId) => {
-    setActivateLoading(true);
-    await axiosInstance.post(`/courtstar/centre/active/${centreId}`)
-      .then(res => {
-        if (res.data.data) {
-          setCentreDetail((prevForm) => ({
-            ...prevForm,
-            status: true
-          }))
-          toast.success('Active successfully', {
-            toastId: 'active-success'
-          });
-        }
-      })
-      .catch(error => {
-        toast.error(error.message, {
-          toastId: 'active-unsuccess'
-        });
-      })
-      .finally(
-        () => {
-          setActivateLoading(false);
-        }
-      );
-  }
-
   const handleDelete = async (centreId) => {
     setDeleteLoading(true);
     await axiosInstance.post(`/courtstar/centre/delete/${centreId}`)
@@ -323,127 +272,152 @@ const AllCentre = () => {
   const centreInfo = (
     <>
       {centreDetail &&
-        <div
-          className="h-[calc(80vh)] w-[calc(80vw)] overflow-y-auto px-2 mx-2"
-        >
-          <div className="flex justify-between gap-4">
-            <div className="w-[44rem]">
-              <XCarousel images={centreDetail?.images} />
-            </div>
+        <>
+          <div
+            className="h-[calc(75vh)] w-[calc(80vw)] overflow-y-auto px-2 mx-2"
+          >
+            <div className="">
+              <div className="flex justify-between gap-4">
+                <div className="w-[44rem]">
+                  <XCarousel images={centreDetail?.images} />
+                </div>
 
-            <div className="flex-1 w-[410px] flex flex-col gap-3">
-              <div className="flex flex-col gap-3">
-                <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow flex flex-col gap-3">
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex justify-between text-lg font-semibold">
-                      {t('information')}
-                      {(centreDetail?.deleted)
-                        ?
-                        <div className="bg-red-500 text-white text-sm px-3 py-1 rounded-md font-semibold">
-                          Deleted
-                        </div>
-                        :
-                        <div className="font-semibold">
-                          {centreDetail?.status
+                <div className="flex-1 w-[410px] flex flex-col gap-3">
+                  <div className="flex flex-col gap-3">
+                    <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow flex flex-col gap-3">
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex justify-between text-lg font-semibold">
+                          {t('information')}
+                          {(centreDetail?.deleted)
                             ?
-                            <div className="bg-primary-green text-white text-sm px-3 py-1 rounded-md">
-                              Opening
+                            <div className="bg-red-500 text-white text-sm px-3 py-1 rounded-md font-semibold">
+                              Deleted
                             </div>
                             :
-                            <div className="bg-black text-white px-3 text-sm py-1 rounded-md">
-                              Closed
+                            <div className="font-semibold">
+                              {centreDetail?.status
+                                ?
+                                <div className="bg-primary-green text-white text-sm px-3 py-1 rounded-md">
+                                  Opening
+                                </div>
+                                :
+                                <div className="bg-black text-white px-3 text-sm py-1 rounded-md">
+                                  Closed
+                                </div>
+                              }
                             </div>
                           }
                         </div>
-                      }
+                        <div className="px-2">
+                          <div>
+                            <span className='font-semibold'>{t('address')}: </span>
+                            {centreDetail.address}
+                          </div>
+
+                          <div>
+                            <span className='font-semibold'>{t('openTime')}: </span>
+                            {moment(centreDetail.openTime, 'HH:mm:ss').format('HH:mm')} - {moment(centreDetail.closeTime, 'HH:mm:ss').format('HH:mm')}
+                          </div>
+
+                          <div>
+                            <span className='font-semibold'>{t('price')}: </span>
+                            <span className='font-semibold text-rose-600'>
+                              {centreDetail?.pricePerHour?.toLocaleString('de-DE')} VND/h
+                            </span>
+                          </div>
+
+                        </div>
+                      </div>
                     </div>
-                    <div className="px-2">
-                      <div>
-                        <span className='font-semibold'>{t('address')}: </span>
-                        {centreDetail.address}
-                      </div>
 
-                      <div>
-                        <span className='font-semibold'>{t('openTime')}: </span>
-                        {moment(centreDetail.openTime, 'HH:mm:ss').format('HH:mm')} - {moment(centreDetail.closeTime, 'HH:mm:ss').format('HH:mm')}
+                    {centreDetail?.description &&
+                      <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow">
+                        <span className='font-semibold'>{t('description')}: </span>
+                        <div dangerouslySetInnerHTML={{ __html: centreDetail.description }}>
+                        </div>
                       </div>
+                    }
 
-                      <div>
-                        <span className='font-semibold'>{t('price')}: </span>
-                        <span className='font-semibold text-rose-600'>
-                          {centreDetail?.pricePerHour?.toLocaleString('de-DE')} VND/h
-                        </span>
+                    <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow flex flex-col gap-3">
+                      <div className="flex justify-between text-lg font-semibold">
+                        <div>
+                          <span className='font-semibold'>{t('numberOfCourts')}: </span>
+                          {centreDetail.numberOfCourts}
+                        </div>
                       </div>
-
+                      <div className="mx-auto">
+                        <div className="grid grid-cols-2 gap-x-20">
+                          {centreDetail?.courts?.map((court, index) => (
+                            <div
+                              key={court.id}
+                              className="flex items-center gap-1"
+                            >
+                              <div className="">
+                                {court.courtNo}.
+                              </div>
+                              <div className="flex justify-between gap-1 w-full items-center">
+                                <div className="flex gap-1 ">
+                                  <div className='font-semibold'>{t('status')}:</div>
+                                  <div className={court.status ? 'font-semibold text-primary-green' : 'font-semibold text-red-500'}>
+                                    {court.status ? 'Active' : 'Close'}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {centreDetail?.description &&
-                  <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow">
-                    <span className='font-semibold'>{t('description')}: </span>
-                    <div dangerouslySetInnerHTML={{ __html: centreDetail.description }}>
-                    </div>
+              <div id="top" className='flex-1 bg-white rounded-lg shadow-md my-3'>
+                <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
+                  <span className='text-3xl font-medium'>Feedbacks</span>
+                </div>
+                {loadingFeedback
+                  ?
+                  <SpinnerLoading
+                    height='80'
+                    width='80'
+                    color='#2B5A50'
+                  />
+                  :
+                  <div className="">
+                    <Feedback
+                      listItem={feedbackList}
+                      itemsPerPage={10}
+                    />
                   </div>
                 }
 
-                <div className="bg-white h-fit w-full px-4 py-2 rounded-md shadow flex flex-col gap-3">
-                  <div className="flex justify-between text-lg font-semibold">
-                    <div>
-                      <span className='font-semibold'>{t('numberOfCourts')}: </span>
-                      {centreDetail.numberOfCourts}
-                    </div>
-                  </div>
-                  <div className="mx-auto">
-                    <div className="grid grid-cols-2 gap-x-20">
-                      {centreDetail?.courts?.map((court, index) => (
-                        <div
-                          key={court.id}
-                          className="flex items-center gap-1"
-                        >
-                          <div className="">
-                            {court.courtNo}.
-                          </div>
-                          <div className="flex justify-between gap-1 w-full items-center">
-                            <div className="flex gap-1 ">
-                              <div className='font-semibold'>{t('status')}:</div>
-                              <div className={court.status ? 'font-semibold text-primary-green' : 'font-semibold text-red-500'}>
-                                {court.status ? 'Active' : 'Close'}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
 
-          <div id="top" className='flex-1 bg-white rounded-lg shadow-md my-3'>
-            <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
-              <span className='text-3xl font-medium'>Feedbacks</span>
-            </div>
-            {loadingFeedback
-              ?
-              <SpinnerLoading
-                height='80'
-                width='80'
-                color='#2B5A50'
+          {!centreDetail?.deleted
+            &&
+            <div className="pt-2">
+              <Button
+                className="text-center text-red-500 text-lg font-semibold w-full py-1 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white"
+                icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>}
+                label={t('delete')}
+                onClick={() => {
+                  showAlert({
+                    title: t('areYouSure') + "?",
+                    message: t('youAllowThisWithdrawalRequest') + "!",
+                    type: 'warning',
+                    onConfirmClick: () => handleDelete(centreDetail?.id)
+                  });
+                }}
+                loading={deleteLoading}
+                loadingColor='#ef4444'
               />
-              :
-              <div className="">
-                <Feedback
-                  listItem={feedbackList}
-                  itemsPerPage={10}
-                />
-              </div>
-            }
+            </div>
+          }
 
-          </div>
-
-        </div>
+        </>
       }
     </>
   );
@@ -555,11 +529,11 @@ const AllCentre = () => {
                         {centre.deleted === true
                           ?
                           <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-rose-500 rounded-md">
-                            Unavailable
+                            Deleted
                           </div>
                           :
                           <div className="mx-auto text-white text-xs font-semibold px-2 py-1 bg-primary-green rounded-md">
-                            Available
+                            Active
                           </div>
                         }
                       </div>
