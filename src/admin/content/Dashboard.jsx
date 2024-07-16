@@ -4,6 +4,7 @@ import moment from 'moment';
 import { useEffect, useState } from "react";
 import axiosInstance from "../../config/axiosConfig";
 import SpinnerLoading from "../../components/SpinnerLoading";
+import { useTranslation } from "react-i18next";
 
 const latestDay = Array.from({ length: 10 }, (_, index) =>
   moment().subtract(9 - index, 'days').format("YYYY-MM-DD")
@@ -44,7 +45,7 @@ const getRateArrays = (Obj) => {
 }
 
 const Dashboard = () => {
-
+  const { t } = useTranslation();
   const controller = new AbortController();
   const { signal } = controller;
   const [data, setData] = useState();
@@ -92,13 +93,13 @@ const Dashboard = () => {
 
   const revenueSeries = [
     {
-      name: 'Revenue',
+      name: t('revenue'),
       color: '#2B5A50',
       data: chartData.revenues,
       type: "bar",
     },
     {
-      name: 'Profit growth',
+      name: t('profitGrowth'),
       color: '#dc2626',
       data: chartData.rates,
       type: "line",
@@ -177,13 +178,13 @@ const Dashboard = () => {
 
   const overviewSeries = [
     {
-      name: 'User Registration',
+      name: t('userRegistration'),
       color: '#2563eb',
       data: chartData.users,
       type: "line"
     },
     {
-      name: 'Centre Registration',
+      name: t('centreRegistration'),
       color: '#9ca3af',
       data: chartData.centres,
       type: "line"
@@ -253,7 +254,7 @@ const Dashboard = () => {
   return (
     <div className="py-5 px-7 flex flex-col gap-5">
       <div className="text-3xl font-semibold">
-        Dashboard
+      {t('dashboard')}
       </div>
       {loading
         ?
@@ -282,14 +283,14 @@ const Dashboard = () => {
                   <path d="M9.91671 4.66667L7.00004 1.75L4.08337 4.66667" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M7 1.75V8.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                Export
+                {t('Export')}
               </button>
             </div>
 
             <div className="flex gap-2.5 justify-between text-gray-500">
               <div className="p-4 border rounded-xl text-2xl font-semibold w-full">
                 <div className="text-sm font-medium mb-1">
-                  Total Revenue
+                {t('totalRevenue')}
                 </div>
                 <Counter
                   endNumber={data?.totalRevenue}
@@ -299,7 +300,7 @@ const Dashboard = () => {
               </div>
               <div className="p-4 border rounded-xl text-2xl font-semibold w-full">
                 <div className="text-sm font-medium mb-1">
-                  Total Centre
+                {t('totalCentre')}
                 </div>
                 <Counter
                   endNumber={data?.totalCentre}
@@ -308,7 +309,7 @@ const Dashboard = () => {
               </div>
               <div className="p-4 border rounded-xl text-2xl font-semibold w-full">
                 <div className="text-sm font-medium mb-1">
-                  Total User
+                {t('totalUser')}
                 </div>
                 <Counter
                   endNumber={data?.totalUser}

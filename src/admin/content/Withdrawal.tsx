@@ -18,20 +18,20 @@ const Withdrawal = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { t } = useTranslation();
   const amountItems: Item[] = [
-    { key: 'all', label: 'All Request' },
-    { key: 'asc', label: 'Ascending' },
-    { key: 'dsc', label: 'Descending' }
+    { key: 'all', label: t('allRequest') },
+    { key: 'asc', label: t('Ascending') },
+    { key: 'dsc', label: t('Descending') }
   ];
   const dateItems: Item[] = [
-    { key: 'all', label: 'All Request' },
-    { key: 'asc', label: 'Ascending' },
-    { key: 'dsc', label: 'Descending' }
+    { key: 'all', label: t('allRequest') },
+    { key: 'asc', label: t('Ascending') },
+    { key: 'dsc', label: t('Descending') }
   ];
   const statusItems: Item[] = [
-    { key: 'all', label: 'All Request' },
-    { key: 'acp', label: 'Accepted' },
-    { key: 'den', label: 'Denied' },
-    { key: 'pen', label: 'Pending' }
+    { key: 'all', label: t('allRequest') },
+    { key: 'acp', label: t('Accepted') },
+    { key: 'den', label: t('Denied') },
+    { key: 'pen', label: t('Pending') }
   ];
 
   const [filteredRequest, setFilteredRequest] = useState<any>();
@@ -279,7 +279,7 @@ const Withdrawal = () => {
         centreInfo
       />
       <div className="text-3xl font-bold mb-4">
-        Withdrawal Request
+        {t('withdrawalRequest')}
       </div>
       {loading ? (
         <div className="h-[500px] flex items-center justify-center">
@@ -290,34 +290,34 @@ const Withdrawal = () => {
           <div className="px-10 bg-white py-4 grid grid-cols-4 gap-x-1 rounded-xl shadow">
             <div className="">
               <InputText
-                placeholder="Enter email of manager"
-                label="Manager's Email"
+                placeholder={t('enterManagerEmail')}
+                label={t('managerEmail')}
                 value={emailFilter}
                 onchange={(e) => setEmailFilter(e.target.value)}
               />
             </div>
             <div className="">
-              <div className="font-semibold mb-2">Amount</div>
+              <div className="font-semibold mb-2">{t('amount')}</div>
               <Dropdown
-                placeholder="Select Amount"
+                placeholder={t('selectAmount')}
                 items={amountItems}
                 onSelect={(item) => setAmountFilter(item?.key ?? 'all')}
                 buttonClassName='!px-3'
               />
             </div>
             <div className="">
-              <div className="font-semibold mb-2">Date Create</div>
+              <div className="font-semibold mb-2">{t('dateCreate')}</div>
               <Dropdown
-                placeholder="Select Date Create"
+                placeholder={t('selectDateCreate')}
                 items={dateItems}
                 onSelect={(item) => setDateFilter(item?.key ?? 'all')}
                 buttonClassName='!px-3'
               />
             </div>
             <div className="">
-              <div className="font-semibold mb-2">Status</div>
+              <div className="font-semibold mb-2">{t('status')}</div>
               <Dropdown
-                placeholder="Select Status"
+                placeholder={t('selectStatus')}
                 items={statusItems}
                 onSelect={(item) => setStatusFilter(item?.key ?? 'all')}
                 buttonClassName='!px-3'
@@ -344,15 +344,15 @@ const Withdrawal = () => {
                 </div>
                 {request.status ?
                   <div className="text-xs mx-auto py-1 px-2 text-white bg-primary-green w-fit font-semibold rounded">
-                    Accepted
+                    {t('Accepted')}
                   </div>
                   : !request.dateAuthenticate ?
                     <div className="text-xs mx-auto py-1 px-2 text-white bg-yellow-400 w-fit font-semibold rounded">
-                      Pending
+                      {t('Pending')}
                     </div>
                     :
                     <div className="text-xs mx-auto py-1 px-2 text-white bg-rose-500 w-fit font-semibold rounded">
-                      Denied
+                      {t('Denied')}
                     </div>
                 }
               </div>
