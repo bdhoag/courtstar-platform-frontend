@@ -432,5 +432,20 @@
   "userRegistration": "Số người đăng kí",
   "centreRegistration": "Số sân đăng kí",
   "Export": "Xuất bản",
-  "weekRevenue": "Doanh thu tuần này"
+  "weekRevenue": "Doanh thu tuần này",
+  "postCentre": "Yêu cầu đăng sân",
+  "allDate": "Theo ngày",
+  "allSlot": "Theo slot",
+  "bookingDetail": "Chi tiết đặt sân",
+  "Date": "Ngày chơi",
+  "selectDate": "Chọn ngày",
+  "courtNumber": "Sân số",
+  "checkIn": "Điểm danh",
+  "opening": "Đang mở",
+  "Disable": "Vô hiệu hóa",
+  "manage": "Quản lý",
+  "moveStaff": "Chuyển nhân viên",
+  "Submit": "Xác nhận",
+  "selectCentre": "Chọn sân",
+  "noReason": "Không có lý do"
 }

@@ -161,7 +161,7 @@ const CheckIn = (props) => {
   useEffect(() => {
     const currentDate = moment();
 
-    const next10Days = [{ label: 'All Date' }];
+    const next10Days = [{ label: t('allDate') }];
     for (let i = 0; i < 10; i++) {
       const nextDate = moment(currentDate).add(i, 'days').format('DD/MM');
       next10Days.push({ label: nextDate });
@@ -183,7 +183,7 @@ const CheckIn = (props) => {
     const uniqueSlots = [...new Set(slots)].sort((a, b) => a - b);
 
     const formattedSlots = [
-      { label: 'All Slot' },
+      { label: t('allSlot') },
       ...uniqueSlots.map(slot => ({ label: slot.toString() }))
     ];
 
@@ -264,13 +264,13 @@ const CheckIn = (props) => {
     <div className="w-[70rem] my-12">
       <div className="flex justify-between items-center">
         <div className="text-3xl font-bold">
-          Check in ({apiCheckin?.length})
+          {t('checkIn')} ({apiCheckin?.length})
         </div>
         <div>
           {apiCheckin?.length
             ?
             <Button
-              label={t('Check in')}
+              label={t('checkIn')}
               fullWidth
               size='medium'
               className='bg-primary-green hover:bg-teal-900 text-white'
@@ -316,10 +316,10 @@ const CheckIn = (props) => {
                 </div>
                 <div className="col-span-2">
                   <Dropdown
-                    label="Date"
+                    label={t('Date')}
                     items={optionDropdownDate}
                     onSelect={handleSelectDate}
-                    placeholder={t('Select date')}
+                    placeholder={t('selectDate')}
                   />
                 </div>
                 <div className="col-span-2">
@@ -387,7 +387,7 @@ const CheckIn = (props) => {
               html={
                 <div className="flex flex-col gap-3">
                   <div className="">
-                    <span className="font-semibold">Name: </span>
+                    <span className="font-semibold">{t('fullName')}: </span>
                     {formCheckIn?.bookingSchedule?.account?.firstName} {formCheckIn?.bookingSchedule?.account?.lastName}
                     {formCheckIn?.bookingSchedule?.guest?.fullName}
                   </div>
@@ -399,19 +399,19 @@ const CheckIn = (props) => {
                   </div>
 
                   <div className="">
-                    <span className="font-semibold">Phone: </span>
+                    <span className="font-semibold">{t('phone')}: </span>
                     {formCheckIn?.bookingSchedule?.account?.phone}
                     {formCheckIn?.bookingSchedule?.guest?.phone}
                   </div>
 
                   <div className="">
-                    <span className="font-semibold">Date: </span>
+                    <span className="font-semibold">{t('Date')}: </span>
                     {formCheckIn?.date}
                   </div>
 
                   <div className="flex justify-between">
                     <div>
-                      <span className="font-semibold">Court number: </span>
+                      <span className="font-semibold">{t('courtNumber')}: </span>
                       {formCheckIn?.court?.courtNo}
                     </div>
 
@@ -441,7 +441,7 @@ const CheckIn = (props) => {
                         ?
                         'Undo'
                         :
-                        'Check in'
+                        t('checkIn')
                     }
                     loading={loadingBtn}
                     loadingColor="#fff"

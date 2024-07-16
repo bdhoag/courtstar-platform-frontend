@@ -432,5 +432,20 @@
   "userRegistration": "User Registration",
   "centreRegistration": "Centre Registration",
   "Export": "Export",
-  "weekRevenue": "Week's Revenue"
+  "weekRevenue": "Week's Revenue",
+  "postCentre": "Post Centre Request",
+  "allDate": "All Date",
+  "allSlot": "All Slot",
+  "bookingDetail": "Booking Detail",
+  "Date": "Date",
+  "selectDate": "Select Date",
+  "courtNumber": "Court Number",
+  "checkIn": "Check in",
+  "opening": "Opening",
+  "Disable": "Disable",
+  "manage": "Manage",
+  "moveStaff": "Move Staff",
+  "Submit": "Submit",
+  "selectCentre": "Select Centre",
+  "noReason" : "No reason"
 }
