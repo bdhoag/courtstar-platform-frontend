@@ -201,7 +201,14 @@ const PostCentre = () => {
             onConfirmClick: () => approveRequest(centreDetail?.id)
           });
         }}
-        submitDeny={() => denyRequest(centreDetail?.id)}
+        submitDeny={() => {
+          showAlert({
+            title: t('areYouSure') + "?",
+            message: t('youAllowThisWithdrawalRequest') + "!",
+            type: 'warning',
+            onConfirmClick: () => denyRequest(centreDetail?.id)
+          });
+        }}
         centreInfo
       />
       <div

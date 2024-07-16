@@ -9,7 +9,7 @@ import InputText from "../../components/input-text";
 import PopupModal from "../../components/PopupModal";
 import CreditCard from "../../components/credit-card";
 import showAlert from "../../components/alert";
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 
 const Withdrawal = () => {
   const [loading, setLoading] = useState(true);
@@ -144,7 +144,7 @@ const Withdrawal = () => {
             ?
             <div className="mt-2 flex gap-1 w-full">
               <Button
-                className="text-center text-primary-green text-xs font-semibold w-full py-1 border-primary-green border-2 rounded hover:bg-primary-green hover:text-white"
+                className="text-center text-white bg-primary-green font-semibold w-full py-1 border-primary-green border-2 rounded hover:bg-teal-900 hover:text-white"
                 icon={<svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20" height="20"
@@ -168,7 +168,7 @@ const Withdrawal = () => {
                 }}
               />
               <Button
-                className="text-center text-red-500 text-xs font-semibold w-full py-1 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white"
+                className="text-center text-red-500 font-semibold w-full py-1 border-red-500 border-2 rounded hover:bg-red-500 hover:text-white"
                 icon={<svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20" height="20"
@@ -184,7 +184,14 @@ const Withdrawal = () => {
                   <path d="m6 6 12 12" />
                 </svg>}
                 label='Deny'
-                onClick={() => handleDenyRequest(requestDetail)}
+                onClick={() => {
+                  showAlert({
+                    title: t('areYouSure') + "?",
+                    message: t('youAllowThisWithdrawalRequest') + "!",
+                    type: 'warning',
+                    onConfirmClick: () => handleDenyRequest(requestDetail)
+                  });
+                }}
               />
             </div>
             :
