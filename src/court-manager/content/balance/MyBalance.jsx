@@ -265,10 +265,10 @@ export default function MyBalance(props) {
               </div>
 
               <div className='py-3 px-5 w-full shadow-md rounded-lg bg-white font-semibold'>
-                {t('expectedRevenue')}
+                {t('weekRevenue')}
                 <div className='text-lg flex gap-0.5 font-bold mt-2'>
                   <Counter
-                    endNumber={balanceDetail?.totalRevenue}
+                    endNumber={balanceDetail?.weekRevenue}
                     duration={1000}
                   />
                   <span className='text-[7px]'>VND</span>

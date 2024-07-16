@@ -2,7 +2,6 @@
   "home": "Home",
   "aboutUs": "About us",
   "partnerRegister": "Partner Register",
-  "myDashboard": "My Dashboard",
   "myCentre": "My Centre",
   "logIn": "Log in",
   "signUp": "Sign up",
@@ -290,8 +289,8 @@
   "topUp": "Top-up",
   "withdraw": "Withdraw",
   "billPayment": "Bill Payment",
-  "todayIncome": "Today Income",
-  "todayBookings": "Today Bookings",
+  "todayIncome": "Today's Income",
+  "todayBookings": "Today's Bookings",
   "expectedRevenue": "Expected Revenue",
   "amount": "Amount",
   "selectAmount": "Select Amount",
@@ -432,5 +431,6 @@
   "revenue": "Revenue",
   "userRegistration": "User Registration",
   "centreRegistration": "Centre Registration",
-  "Export": "Export"
+  "Export": "Export",
+  "weekRevenue": "Week's Revenue"
 }

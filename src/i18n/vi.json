@@ -295,7 +295,7 @@
   "allUser": "Tất cả người dùng",
   "centreManager": "Nhà Quản lý",
   "managerName": "Tên của Quản lý",
-  "enterManagerName": "Nhập tên của Quản lý", 
+  "enterManagerName": "Nhập tên của Quản lý",
   "customer": "Khách hàng",
   "customerName": "Tên của Khách hàng",
   "enterCustomerName": "Nhập tên của Khách hàng",
@@ -431,5 +431,6 @@
   "revenue": "Doanh thu",
   "userRegistration": "Số người đăng kí",
   "centreRegistration": "Số sân đăng kí",
-  "Export": "Xuất bản"
+  "Export": "Xuất bản",
+  "weekRevenue": "Doanh thu tuần này"
 }
