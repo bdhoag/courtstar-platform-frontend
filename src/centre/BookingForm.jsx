@@ -23,6 +23,7 @@ const BookingForm = (props) => {
     fullName: "",
     email: "",
     phone: "",
+    paymentType: "ZALOPAY",
     bookingDetails: [],
   });
 
