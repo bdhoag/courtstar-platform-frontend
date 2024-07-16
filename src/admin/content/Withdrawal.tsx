@@ -337,7 +337,7 @@ const Withdrawal = () => {
                   {request.managerEmail}
                 </div>
                 <div className="self-center text-center truncate">
-                  {request.amount}
+                  {request.amount.toLocaleString('de-DE')} VND
                 </div>
                 <div className="self-center text-center truncate">
                   {moment(request.dateCreateWithdrawalOrder).format('yyyy-MM-DD')}

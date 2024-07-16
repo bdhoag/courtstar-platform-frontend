@@ -417,7 +417,7 @@
   "deleted": "Đã xóa",
   "active": "Đang hoạt động",
   "dateCreate": "Ngày tạo yêu cầu",
-  "selectDateCreate": "Chọn kiểu lọc ngày tạo yêu cầu",
+  "selectDateCreate": "Chọn kiểu lọc ngày",
   "allRequest": "Trạng thái ban đầu",
   "Ascending": "Tăng dần",
   "Descending": "Giảm dần",
@@ -445,5 +445,12 @@
   "manage": "Quản lý",
   "moveStaff": "Chuyển nhân viên",
   "Submit": "Xác nhận",
-  "selectCentre": "Chọn sân"
+  "selectCentre": "Chọn sân",
+  "withdrawalHistory": "Lịch sử giao dịch",
+  "bankName": "Tên ngân hàng",
+  "enterNameBank": "Nhập tên Ngân Hàng",
+  "accountNumber": "Số tài khoản",
+  "enterAccountNumber": "Nhập số tài khoản",
+  "cardholderName": "Tên chủ thẻ",
+  "enterCardholderName": "Nhập tên chủ thẻ"
 }

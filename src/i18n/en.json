@@ -446,5 +446,12 @@
   "manage": "Manage",
   "moveStaff": "Move Staff",
   "Submit": "Submit",
-  "selectCentre": "Select Centre"
+  "selectCentre": "Select Centre",
+  "withdrawalHistory": "Withdrawal history",
+  "bankName": "Bank's Name",
+  "enterNameBank": "Enter Name of Bank",
+  "accountNumber": "Account Number",
+  "enterAccountNumber": "Enter Account number",
+  "cardholderName": "Card Holder's Name",
+  "enterCardholderName": "Enter Holder's Name"
 }
