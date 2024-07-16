@@ -23,16 +23,16 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
   const [statusFilter, setStatusFilter] = useState(1);
 
   const statusOptions: Item[] = [
-    { key: 1, label: "All" },
-    { key: 2, label: "Pending" },
-    { key: 3, label: "Accepted" },
-    { key: 4, label: "Denied" }
+    { key: 1, label: t('allRequest') },
+    { key: 2, label: t("Pending") },
+    { key: 3, label: t("Accepted") },
+    { key: 4, label: t("Denied") }
   ];
 
   const dateItems: Item[] = [
-    { key: 'all', label: 'All Request' },
-    { key: 'asc', label: 'Ascending' },
-    { key: 'dsc', label: 'Descending' }
+    { key: 'all', label: t('allRequest') },
+    { key: 'asc', label: t('Ascending') },
+    { key: 'dsc', label: t('Descending') }
   ];
 
   useImperativeHandle(ref, () => ({
@@ -131,57 +131,57 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
       <div className="mt-4">
         <div className="bg-white shadow rounded-xl">
           <div className="text-center font-semibold text-white py-1.5 text-2xl bg-primary-green rounded-t-xl">
-            Withdrawal history
+            {t('withdrawalHistory')}
           </div>
           {histories?.length > 0
             ?
             <div className="px-10 py-4 grid grid-cols-12 gap-2">
-              <div className="col-span-2 text-center">
+              <div className="col-span-2">
                 <InputText
-                  placeholder="Enter Name of Bank"
-                  label="Bank's name"
+                  placeholder={t('enterNameBank')}
+                  label={t('bankName')}
                   value={bankFilter}
                   onchange={(e) => setBankFilter(e.target.value)}
                 />
               </div>
-              <div className="col-span-2 text-center">
+              <div className="col-span-2">
                 <InputText
-                  placeholder="Enter Account number"
-                  label="Account number"
+                  placeholder={t('enterAccountNumber')}
+                  label={t('accountNumber')}
                   value={accountFilter}
                   onchange={(e) => setAccountFilter(e.target.value)}
                 />
               </div>
-              <div className="col-span-2 text-center">
+              <div className="col-span-2">
                 <InputText
-                  placeholder="Enter Holder name"
-                  label="Card Holder's Name"
+                  placeholder={t('enterCardholderName')}
+                  label={t('cardholderName')}
                   value={cardHolderFilter}
                   onchange={(e) => setCardHolderFilter(e.target.value)}
                 />
               </div>
-              <div className="col-span-2 text-center">
+              <div className="col-span-2">
                 <InputText
-                  placeholder="Enter Amount"
-                  label="Amount"
+                  placeholder={t('enterAmount')}
+                  label={t('amount')}
                   value={amountFilter}
                   onchange={(e) => setAmountFilter(e.target.value)}
                 />
               </div>
-              <div className="col-span-2 text-center">
+              <div className="col-span-2">
                 <Dropdown
-                  placeholder="Enter Date Create"
-                  label="Date Create Order"
+                  placeholder={t('selectDateCreate')}
+                  label={t('dateCreate')}
                   items={dateItems}
                   onSelect={(item) => setDateFilter(item?.key ?? 'all')}
                 />
               </div>
-              <div className="col-span-2 text-center">
+              <div className="col-span-2">
                 <Dropdown
-                  label="Status"
+                  label={t('status')}
                   items={statusOptions}
                   onSelect={(item:any) => setStatusFilter(item.key)}
-                  placeholder={t('Select Status')}
+                  placeholder={t('selectStatus')}
                 />
               </div>
             </div>
@@ -224,7 +224,7 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
                 {item?.cardHolderName}
               </div>
               <div className="col-span-2 flex items-center justify-center">
-                {item?.amount}
+                {item?.amount.toLocaleString('de-DE')} VND
               </div>
               <div className="col-span-2 flex flex-col justify-center items-center font-semibold">
                 {moment(item?.dateCreateWithdrawalOrder).format("yyyy-MM-DD")}
@@ -235,17 +235,17 @@ const PaymentHistory = forwardRef<ChildHandle>((_, ref) => {
                   {item?.status
                     ?
                     <div className="col-span-2 text-xs mx-auto py-1 px-2 text-white bg-primary-green w-fit font-semibold rounded">
-                      Accepted
+                      {t("Accepted")}
                     </div>
                     :
                     <div className="col-span-2 text-xs mx-auto py-1 px-2 text-white bg-rose-500 w-fit font-semibold rounded">
-                      Denied
+                      {t("Denied")}
                     </div>
                   }
                 </>
                 :
                 <div className="col-span-2 text-xs mx-auto py-1 px-2 text-white bg-yellow-400 w-fit font-semibold rounded">
-                  Pending
+                  {t("Pending")}
                 </div>
               }
             </div>
