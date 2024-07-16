@@ -170,7 +170,7 @@ const Header: React.FC = () => {
                 cursor-pointer py-1 relative after:sm:absolute after:sm:bottom-0 after:sm:left-0 after:sm:bg-white after:sm:h-0.5 after:sm:w-0 hover:after:sm:w-full after:sm:transition-all after:sm:ease-in-out after:sm:duration-200 after:sm:rounded-md"
                   to="/admin"
                 >
-                  {t('myDashboard')}
+                  {t('dashboard')}
                 </Link>
               }
 
