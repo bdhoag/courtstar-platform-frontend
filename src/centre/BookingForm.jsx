@@ -101,15 +101,44 @@ const BookingForm = (props) => {
         onchange={handleChange}
         disabled={account?.email}
       />
-      <div className='flex flex-w gap-10 mt-3'>
-        <button class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700 w-[120px]">
-          <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4" />
-          <label for="bordered-radio-1" class="w-full py-4 ms-2 text-sm font-medium">ZaloPay</label>
-        </button>
-        <button class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700 w-[120px]">
-          <input checked id="bordered-radio-2" type="radio" value="" name="bordered-radio" class="w-4 h-4" />
-          <label for="bordered-radio-2" class="w-full py-4 ms-2 text-sm font-medium">VNPay</label>
-        </button>
+      <div className='w-full flex flex-col gap-2'>
+        <div className='text-base font-semibold'>
+          {t('paymentMethod')}*
+        </div>
+        <div className="flex justify-center items-center gap-10 text-lg font-semibold">
+          <div
+            className={`flex w-32 h-[50px] gap-2 items-center border rounded-lg p-2 hover:bg-[#CDFAE7] hover:border-[#CDFAE7] cursor-pointer transition-all ease-in-out duration-300 ${bookingForm.paymentType === "ZALOPAY" ? 'bg-[#CDFAE7] border-[#CDFAE7]' : "" }`}
+            onClick={() => setBookingForm((prevForm) => ({
+              ...prevForm,
+              paymentType: "ZALOPAY",
+            }))}
+          >
+            <img
+              src="/images/zalopay-logo.png"
+              alt="zalo-pay"
+              className='w-8 h-8'
+            />
+            <div>
+              ZaloPay
+            </div>
+          </div>
+          <div
+            className={`flex w-32 h-[50px] gap-2 items-center border rounded-lg p-2 hover:bg-[#CDFAE7] hover:border-[#CDFAE7] cursor-pointer transition-all ease-in-out duration-300 ${bookingForm.paymentType === "VNPAY" ? 'bg-[#CDFAE7] border-[#CDFAE7]' : "" }`}
+            onClick={() => setBookingForm((prevForm) => ({
+              ...prevForm,
+              paymentType: "VNPAY",
+            }))}
+          >
+            <img
+              src="/images/vnpay-logo.png"
+              alt="vn-pay"
+              className='w-9'
+            />
+            <div>
+              VNPay
+            </div>
+          </div>
+        </div>
       </div>
       <div className='py-3 flex justify-center items-center gap-1 font-semibold'>
         {t('price')}:
