@@ -237,11 +237,11 @@ function CentreInfo(props) {
               {centreDetail.status
                 ?
                 <div className="bg-primary-green text-white px-3 py-1 rounded-xl">
-                  Opening
+                  {t('opening')}
                 </div>
                 :
                 <div className="bg-red-500 text-white px-3 py-1 rounded-xl">
-                  Closed
+                  {t('closed')}
                 </div>
               }
             </>
@@ -458,7 +458,7 @@ function CentreInfo(props) {
                         <div className="flex gap-1 ">
                           <div className='font-semibold'>{t('status')}:</div>
                           <div className={court.status ? 'font-semibold text-primary-green' : 'font-semibold text-red-500'}>
-                            {court.status ? 'Active' : 'Close'}
+                            {court.status ? t('active') : t('close')}
                           </div>
                         </div>
                         {
@@ -530,7 +530,7 @@ function CentreInfo(props) {
 
       <div id="manage" className='flex-1 rounded-lg shadow-gray-400 shadow-md'>
         <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
-          <span className='text-3xl font-medium'>Manage</span>
+          <span className='text-3xl font-medium'> {t('manage')} </span>
         </div>
         <div className='bg-white rounded-b-lg p-8 pt-0'>
           <div className="">
@@ -545,7 +545,7 @@ function CentreInfo(props) {
 
       <div id="top" className='flex-1 bg-white rounded-lg shadow-gray-400 shadow-md mt-3'>
         <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
-          <span className='text-3xl font-medium'>Feedbacks</span>
+          <span className='text-3xl font-medium'>{t('feedbacks')}</span>
         </div>
         <div className="">
           <Feedback
