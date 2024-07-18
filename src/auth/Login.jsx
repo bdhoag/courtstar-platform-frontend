@@ -150,16 +150,16 @@ function Login(props) {
           />
         </div>
         <div className='flex justify-center mt-4 '>
-          <button
+          <a
             className="text-center text-sm shadow border rounded-full py-3 px-14 inline-flex items-center hover:bg-gray-200 transition-all duration-300 ease-in-out"
-            href="#"
+            href='http://localhost:8080/courtstar/account/createEmail'
           >
             <img className='mr-3 w-fit'
               src={google}
               alt='google'
             />
             {t('continueWithGoogle')}
-          </button>
+          </a>
         </div>
       </form>
     </div>

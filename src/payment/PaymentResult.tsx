@@ -92,7 +92,7 @@ const PaymentResult: React.FC = () => {
           <SpinnerLoading height="80" width="80" color="#2B5A50" />
         </div>
       ) : (
-        <div className="w-full max-w-[620px] bg-white shadow-lg border rounded-lg p-6 m-10">
+        <div className="w-full max-w-[630px] bg-white shadow-lg border rounded-lg p-6 m-10">
           {result === '1' ? (
             <div className="gap-2 text-green-500 text-xl font-bold flex justify-center">
               <img src={check} alt="check" />

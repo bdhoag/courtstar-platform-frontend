@@ -64,9 +64,9 @@ const BookingHistory = () => {
 
   const isFeedbackAvailable = (bookingDetails) => {
     // Get the latest end time from booking details
-    const startTimes = bookingDetails.map(detail => moment(`${detail.date} ${detail.slot.startTime}`, 'YYYY-MM-DD HH:mm:ss'));
-    const earliestStartTime = moment.min(startTimes);
-    return moment().isAfter(earliestStartTime);
+    const endTimes = bookingDetails.map(detail => moment(`${detail.date} ${detail.slot.endTime}`, 'YYYY-MM-DD HH:mm:ss'));
+    const earliestEndTime = moment.min(endTimes);
+    return moment().isAfter(earliestEndTime);
   };
 
   return (
