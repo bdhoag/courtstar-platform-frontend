@@ -39,6 +39,9 @@ const Withdrawal = () => {
   const [amountFilter, setAmountFilter] = useState('all');
   const [dateFilter, setDateFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [openDesc, setOpenDesc] = useState(false);
+  const [description, setDescription] = useState('');
+
 
   useEffect(() => {
     const applyFilters = () => {
@@ -184,14 +187,7 @@ const Withdrawal = () => {
                   <path d="m6 6 12 12" />
                 </svg>}
                 label='Deny'
-                onClick={() => {
-                  showAlert({
-                    title: t('areYouSure') + "?",
-                    message: t('youAllowThisWithdrawalRequest') + "!",
-                    type: 'warning',
-                    onConfirmClick: () => handleDenyRequest(requestDetail)
-                  });
-                }}
+                onClick={() => setOpenDesc(true)}
               />
             </div>
             :
@@ -243,12 +239,13 @@ const Withdrawal = () => {
   };
 
   const handleDenyRequest = async (request) => {
+    setOpenDesc(false);
     setRequestDetail((prev) => ({
       ...prev,
       loading: true
     }));
     try {
-      const res = await axiosInstance.post(`/courtstar/transfer-money/authenticate-deny-withdrawal-order/${request.id}`);
+      const res = await axiosInstance.post(`/courtstar/transfer-money/authenticate-deny-withdrawal-order/${request.id}`, { description });
       toast.success('Denied withdrawal!', {
         toastId: 'deny-withdrawal-success'
       });
@@ -260,12 +257,33 @@ const Withdrawal = () => {
       toast.error(error.message, {
         toastId: 'deny-withdrawal-unsuccess'
       });
+      setRequestDetail((prev) => ({
+        ...prev,
+        loading: false
+      }));
     }
   };
 
   useEffect(() => {
     load();
   }, []);
+
+  const formDesc = (
+    <div className="">
+      <InputText
+        id='description'
+        name='description'
+        value={description}
+        onchange={(e) => setDescription(e.target.value)}
+      />
+      <Button
+        className='bg-primary-green mx-auto mt-3 w-full py-0.5 text-white hover:bg-teal-900'
+        label={t('confirm')}
+        onClick={() => handleDenyRequest(requestDetail)}
+      />
+    </div>
+  )
+
   return (
     <div className="py-6 w-full">
       <PopupModal
@@ -277,6 +295,13 @@ const Withdrawal = () => {
         html={requestInfo}
         title='Request Detail'
         centreInfo
+      />
+      <PopupModal
+        isOpen={openDesc}
+        setIsOpen={() => setOpenDesc(false)}
+        html={formDesc}
+        centreInfo
+        title={t('reasonForDenial')}
       />
       <div className="text-3xl font-bold mb-4">
         {t('withdrawalRequest')}
