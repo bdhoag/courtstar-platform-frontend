@@ -19,7 +19,7 @@ const CheckIn = (props) => {
   const [apiCheckin, setApiCheckin] = useState(); // State to hold the check-in data from the API
   const [checkInPopup, setCheckInPopup] = useState(false); // State to control the visibility of the check-in popup
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   const [formCheckIn, setFormCheckIn] = useState({});
   const [filteredCheckins, setFilteredCheckins] = useState([]);
@@ -236,11 +236,11 @@ const CheckIn = (props) => {
         });
       }
 
-      if (filterDate && filterDate !== 'All Date') {
+      if (filterDate && filterDate !==  t('allDate')) {
         updatedCheckins = updatedCheckins.filter(checkin => moment(checkin.date, 'yyyy-MM-DD').format('DD/MM') === filterDate);
       }
 
-      if (filterSlot && filterSlot !== 'All Slot') {
+      if (filterSlot && filterSlot !== t('allSlot')) {
         updatedCheckins = updatedCheckins.filter(checkin => checkin.slot.slotNo === parseInt(filterSlot));
       }
 

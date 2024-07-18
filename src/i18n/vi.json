@@ -461,5 +461,6 @@
   "registeredCustomer": "Khách hàng đã đăng ký",
   "revenueGrowthChart": "Biểu đồ tăng trưởng doanh thu",
   "accountAndCentreRegistrationChart": "Biểu đồ số lượng đăng ký tài khoản và đăng ký sân",
-  "export": "Xuất"
+  "export": "Xuất bản",
+  "addStaffSuccess": "Thêm nhân viên thành công"
 }

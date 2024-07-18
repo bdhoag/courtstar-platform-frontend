@@ -111,7 +111,7 @@
   "edit": "Edit",
   "status": "Status",
   "selectStatus": "Select Status",
-  "feedbacks": "feedbacks",
+  "feedbacks": "Feedbacks",
   "feedback": "feedback",
   "staffInformation": "Staff Information",
   "addStaff": "Add Staff",
@@ -461,5 +461,6 @@
   "registeredCustomer": "Registered customer",
   "revenueGrowthChart": "Revenue growth chart",
   "accountAndCentreRegistrationChart": "Account and centre registration chart",
-  "export": "Export"
+  "export": "Export",
+  "addStaffSuccess": "Add Staff Success"
 }
