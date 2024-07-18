@@ -421,8 +421,8 @@
   "allRequest": "Trạng thái ban đầu",
   "Ascending": "Tăng dần",
   "Descending": "Giảm dần",
-  "Accepted": "Chấp thuận",
-  "Denied": "Từ chối",
+  "Accepted": "Đã chấp nhận",
+  "Denied": "Đã từ chối",
   "Pending": "Đang chờ",
   "totalRevenue": "Tổng doanh thu",
   "totalCentre": "Tổng số sân",
@@ -462,5 +462,8 @@
   "revenueGrowthChart": "Biểu đồ tăng trưởng doanh thu",
   "accountAndCentreRegistrationChart": "Biểu đồ số lượng đăng ký tài khoản và đăng ký sân",
   "export": "Xuất bản",
-  "addStaffSuccess": "Thêm nhân viên thành công"
+  "addStaffSuccess": "Thêm nhân viên thành công",
+  "enterReasonForDenied": "Nhập lý do từ chối",
+  "reasonForDenial": "Lý do từ chối",
+  "accept" : "Chấp nhận"
 }

@@ -462,5 +462,8 @@
   "revenueGrowthChart": "Revenue growth chart",
   "accountAndCentreRegistrationChart": "Account and centre registration chart",
   "export": "Export",
-  "addStaffSuccess": "Add Staff Success"
+  "addStaffSuccess": "Add Staff Success",
+  "enterReasonForDenied": "Enter the reason for the refusal",
+  "reasonForDenial": "Reason For Refusal",
+  "accept": "Accept"
 }
