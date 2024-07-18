@@ -59,9 +59,9 @@ const BookingHistory = () => {
 
   const isFeedbackAvailable = (bookingDetails) => {
     // Get the latest end time from booking details
-    const endTimes = bookingDetails.map(detail => moment(`${detail.date} ${detail.slot.endTime}`, 'YYYY-MM-DD HH:mm:ss'));
-    const latestEndTime = moment.max(endTimes);
-    return moment().isAfter(latestEndTime);
+    const startTimes = bookingDetails.map(detail => moment(`${detail.date} ${detail.slot.startTime}`, 'YYYY-MM-DD HH:mm:ss'));
+    const earliestStartTime = moment.min(startTimes);
+    return moment().isAfter(earliestStartTime);
   };
 
   return (
@@ -170,7 +170,7 @@ const BookingCard = ({ booking, handleFeedbackPopup, isFeedbackAvailable }) => (
             </button>
           ) : (
             <button
-              className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold opacity-80"
+              className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold opacity-70"
               disabled
             >
               Feedback
