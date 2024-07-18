@@ -404,22 +404,25 @@ const CheckIn = (props) => {
                     {formCheckIn?.bookingSchedule?.guest?.phone}
                   </div>
 
+                  <div>
+                    <span className="font-semibold">{t('courtNumber')}: </span>
+                    {formCheckIn?.court?.courtNo}
+                  </div>
+
                   <div className="">
                     <span className="font-semibold">{t('Date')}: </span>
                     {formCheckIn?.date}
                   </div>
 
                   <div className="flex justify-between">
-                    <div>
-                      <span className="font-semibold">{t('courtNumber')}: </span>
-                      {formCheckIn?.court?.courtNo}
-                    </div>
+
 
                     <div className="">
-                      <span className="font-semibold">Slot: </span>
-                      {formCheckIn?.slot?.slotNo}
-                      <span className="font-normal text-slate-500 text-sm">
-                        ({moment(formCheckIn?.slot?.startTime, 'HH:mm:ss').format('H')}h - {moment(formCheckIn?.slot?.endTime, 'HH:mm:ss').format('H')}h)
+                      <span className="font-semibold">
+                        Slot: {formCheckIn?.slot?.slotNo} / Time:
+                      </span>
+                      <span className="font-normal">
+                        {" " + moment(formCheckIn?.slot?.startTime, 'HH:mm:ss').format('H')}h - {moment(formCheckIn?.slot?.endTime, 'HH:mm:ss').format('H')}h
                       </span>
                     </div>
                   </div>
