@@ -63,8 +63,6 @@ const CheckIn = (props) => {
   // Function to handle the check-in process
   const handleCheckin = async (checkInId) => {
     setLoadingBtn(true);
-    setQrLoading(true);
-    let booking = {};
     await axiosInstance.post(`/courtstar/check-in/${checkInId}`)
       .then(res => {
         if (res.data.data) {
@@ -76,12 +74,6 @@ const CheckIn = (props) => {
           axiosInstance.get(`/courtstar/booking/${id}`)
             .then(res => {
               setApiCheckin(res.data.data);
-              booking = res.data.data.filter(booking => booking.id === checkInId)[0];
-              setQrLoading(false);
-              if (qrPopup) {
-                handleQrPopupClose();
-                handleCheckInPopup(booking);
-              }
             })
             .catch(error => {
               console.log(error.message);
@@ -93,6 +85,47 @@ const CheckIn = (props) => {
       })
       .finally(() => {
         setLoadingBtn(false);
+      });
+  };
+
+  // Function to handle the check-in process
+  const handleQrCheckin = async (checkInId) => {
+    setQrLoading(true);
+    let bookingDetail = {};
+    await axiosInstance.post(`/courtstar/check-in/qr/${checkInId}`)
+      .then(res => {
+        if (res.data.data) {
+          toast.success('Check-in successfully', {
+            toastId: 'checkin-success'
+          });
+          let detailId = res.data.data;
+          // Reload the check-in data after successful check-in
+          axiosInstance.get(`/courtstar/booking/${id}`)
+            .then(res => {
+              setApiCheckin(res.data.data);
+              bookingDetail = res.data.data.filter(booking => booking.id === detailId)[0];
+              setQrLoading(false);
+              if (qrPopup) {
+                handleQrPopupClose();
+                handleCheckInPopup(bookingDetail);
+              }
+            })
+            .catch(error => {
+              console.log(error.message);
+            });
+        } else {
+          toast.error('Có lỗi xảy ra!', {
+            toastId: 'checkin-fail'
+          });
+          setQrLoading(false);
+        }
+      })
+      .catch(error => {
+        toast.error('Có lỗi xảy ra!', {
+          toastId: 'checkin-fail'
+        });
+      })
+      .finally(() => {
       });
   };
 
@@ -201,13 +234,7 @@ const CheckIn = (props) => {
     if (data) {
       let id = parseInt(data.text);
       console.log(id);
-      if (apiCheckin.filter(booking => booking.id === id)[0]) handleCheckin(id);
-      else {
-        toast.warning('Nhầm sân rồi bạn ơi!', {
-          toastId: 'checkin-fail'
-        });
-      }
-
+      handleQrCheckin(id);
     }
   }, [data])
 
