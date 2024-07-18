@@ -197,6 +197,7 @@ const PostCentre = () => {
         name='description'
         value={description}
         onchange={(e) => setDescription(e.target.value)}
+        placeholder={t('enterReasonForDenied')}
       />
       <Button
         className='bg-primary-green mx-auto mt-3 w-full py-0.5 text-white hover:bg-teal-900'

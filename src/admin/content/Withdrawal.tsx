@@ -160,7 +160,7 @@ const Withdrawal = () => {
                 >
                   <path d="M20 6 9 17l-5-5" />
                 </svg>}
-                label='Accept'
+                label={t('accept')}
                 onClick={() => {
                   showAlert({
                     title: t('areYouSure') + "?",
@@ -186,7 +186,7 @@ const Withdrawal = () => {
                   <path d="M18 6 6 18" />
                   <path d="m6 6 12 12" />
                 </svg>}
-                label='Deny'
+                label={t('deny')}
                 onClick={() => setOpenDesc(true)}
               />
             </div>
@@ -205,11 +205,11 @@ const Withdrawal = () => {
           {requestDetail?.status
             ?
             <div className="text-center py-1 mt-2 text-white bg-primary-green font-semibold rounded">
-              Accepted
+              {t('Accepted')}
             </div>
             :
             <div className="text-center py-1 mt-2 text-white bg-rose-500 font-semibold rounded">
-              Denied
+              {t('Denied')}
             </div>
           }
         </>
@@ -252,11 +252,13 @@ const Withdrawal = () => {
       if (res.data.data) {
         load();
         setIsOpenModal(false);
+        setDescription('');
       }
     } catch (error: any) {
       toast.error(error.message, {
         toastId: 'deny-withdrawal-unsuccess'
       });
+      setDescription('');
       setRequestDetail((prev) => ({
         ...prev,
         loading: false
@@ -275,6 +277,7 @@ const Withdrawal = () => {
         name='description'
         value={description}
         onchange={(e) => setDescription(e.target.value)}
+        placeholder={t('enterReasonForDenied')}
       />
       <Button
         className='bg-primary-green mx-auto mt-3 w-full py-0.5 text-white hover:bg-teal-900'
