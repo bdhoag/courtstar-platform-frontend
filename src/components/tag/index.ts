@@ -4,7 +4,7 @@ export interface TagProps {
   label: string,
   bgColor?: string,
   txtColor?: string,
-  class?: string
+  className?: string
 }
 
 export default Tag;

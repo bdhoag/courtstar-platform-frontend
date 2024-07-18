@@ -5,8 +5,13 @@ import Rating from '../components/Rating';
 import moment from 'moment';
 import Pagination from '../components/pagination/pagination';
 import SpinnerLoading from '../components/SpinnerLoading';
+import { useTranslation } from 'react-i18next';
+import Tag from '../components/tag';
+import Button from '../components/button';
+import PopupModal from '../components/PopupModal';
 
 const BookingHistory = () => {
+  const { t } = useTranslation();
   const [feedbackPopup, setFeedbackPopup] = useState(false);
   const [loading, setLoading] = useState(true);
   const [bookings, setBookings] = useState([]);
@@ -80,7 +85,7 @@ const BookingHistory = () => {
           <div className="font-bold text-3xl uppercase text-start w-full pb-5 pl-2">
             Booking History
           </div>
-          <div className="flex gap-5 w-full rounded-2xl py-10 min-h-[50px]">
+          <div className="flex gap-5 w-full rounded-2xl min-h-[50px]">
             {loading ? (
               <SpinnerLoading type="page" height="80" width="80" color="#2B5A50" />
             ) : error ? (
@@ -119,70 +124,103 @@ const BookingHistory = () => {
   );
 };
 
-const BookingCard = ({ booking, handleFeedbackPopup, isFeedbackAvailable }) => (
-  <div className="bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7 max-w-5xl w-full">
-    <img
-      src={booking.centreImg || centrePlaceholder}
-      alt={booking.centreName}
-      className="min-w-80 max-w-80 h-56 rounded-lg object-cover object-center"
-    />
-    <div className="flex flex-col gap-3 w-full">
-      <div className="font-semibold text-xl">{booking.centreName}</div>
-      <div>
-        <span className="font-semibold">Address: </span>
-        {booking.centreAddress}
-      </div>
-      <div>
-        <span className="font-semibold">Court Number: </span>
-        {booking.bookingDetails[0].court.courtNo}
-      </div>
-      <div>
-        <span className="font-semibold">Total price: </span>
-        <span className="font-semibold text-rose-600">
-          {booking.totalPrice.toLocaleString('vi-VN', {
-            style: 'currency',
-            currency: 'VND',
-          })}
-        </span>
-      </div>
-      {booking.bookingDetails.map((detail) => (
-        <div key={detail.id} className="border-t pt-3">
+const BookingCard = ({ booking, handleFeedbackPopup, isFeedbackAvailable }) => {
+  const { t } = useTranslation();
+  const [feedbackDetailOpen, setFeedbackDetailOpen] = useState(false);
+  return (
+    <div className='w-full flex justify-center items-center'>
+      <PopupModal
+        isOpen={feedbackDetailOpen}
+        setIsOpen={() => setFeedbackDetailOpen(false)}
+        html={
           <div>
-            <span className="font-semibold">Date: </span>
-            {moment(detail.date).format('DD/MM/YYYY')}
+            <div className='w-full flex justify-center items-center text-3xl font-semibold mb-4'>
+              Booking Details
+            </div>
+            <div className='grid grid-cols-2 gap-2'>
+              {booking.bookingDetails.map((detail, index) => (
+                <div key={detail.id} className={`text-lg p-4 rounded-lg border relative
+                  ${booking.bookingDetails.length % 2 !== 0 && index === booking.bookingDetails.length - 1
+                  ? 'col-span-2 mx-auto' : ''}
+                  ${detail.checkedIn ? "border-[#2B5A50]" : moment(detail.date).isBefore(moment().startOf('day')) ? "border-[#dc2626]" : "border-[#9ca3af]"}
+                `}>
+                  <Tag
+                    label={detail.checkedIn ? "Checked in" : moment(detail.date).isBefore(moment().startOf('day')) ? "Expired" : "Not yet"}
+                    bgColor={detail.checkedIn ? "bg-[#2B5A50]" : moment(detail.date).isBefore(moment().startOf('day')) ? "bg-[#dc2626]" : "bg-[#9ca3af]"}
+                    txtColor="text-[#fff]"
+                    className='top-0 right-0 rounded-tr-md rounded-bl-lg'
+                  />
+                  <div>
+                    <span className="font-semibold">Date: </span>
+                    {moment(detail.date).format('DD/MM/YYYY')}
+                  </div>
+                  <div>
+                    <span className='font-semibold'>Slot: {detail.slot.slotNo} / </span>
+                    <span className="font-semibold">Time: </span>
+                    {moment(detail.slot.startTime, 'HH:mm:ss').format('HH:mm')} -{' '}
+                    {moment(detail.slot.endTime, 'HH:mm:ss').format('HH:mm')}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        }
+      />
+      <div className="bg-white rounded-2xl shadow-2xl border py-5 px-7 flex gap-7 max-w-5xl w-full">
+        <img
+          src={booking.centreImg || centrePlaceholder}
+          alt={booking.centreName}
+          className="min-w-80 max-w-80 h-56 rounded-lg object-cover object-center"
+        />
+        <div className="flex flex-col gap-3 w-full justify-between">
+          <div className="font-semibold text-xl">{booking.centreName}</div>
+          <div>
+            <span className="font-semibold">Address: </span>
+            {booking.centreAddress}, {t(booking.centreDistrict)}
           </div>
           <div>
-            <span className='font-semibold'>Slot: {detail.slot.slotNo} / </span> 
-            <span className="font-semibold">Time: </span>
-            {moment(detail.slot.startTime, 'HH:mm:ss').format('HH:mm')} -{' '}
-            {moment(detail.slot.endTime, 'HH:mm:ss').format('HH:mm')}
+            <span className="font-semibold">Court Number: </span>
+            {booking.bookingDetails[0].court.courtNo}
+          </div>
+          <div>
+            <span className="font-semibold">Total price: </span>
+            <span className="font-semibold text-rose-600">
+              {booking.totalPrice.toLocaleString('vi-VN')} VND
+            </span>
+          </div>
+          <Button
+            label='View detail'
+            fullWidth
+            className='bg-gray-800 text-white py-1 font-semibold'
+            onClick={() => setFeedbackDetailOpen(true)}
+          />
+          <div className="flex justify-center items-end">
+            {booking.rate === 0 ? (
+              isFeedbackAvailable(booking.bookingDetails) ? (
+                <button
+                  className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300"
+                  onClick={() => handleFeedbackPopup(booking)}
+                >
+                  Feedback
+                </button>
+              ) : (
+                <button
+                  className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold opacity-70"
+                  disabled
+                >
+                  Feedback
+                </button>
+              )
+            ) : (
+              <Rating ratingWrapper="flex gap-1" value={booking.rate} editable={false} />
+            )}
           </div>
         </div>
-      ))}
-      <div className="flex justify-center items-end h-full">
-        {booking.rate === 0 ? (
-          isFeedbackAvailable(booking.bookingDetails) ? (
-            <button
-              className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold hover:bg-teal-900 transition-all ease-in-out duration-300" 
-              onClick={() => handleFeedbackPopup(booking)}
-            >
-              Feedback
-            </button>
-          ) : (
-            <button
-              className="block text-center py-1 w-full border bg-primary-green text-white rounded-md font-semibold opacity-70"
-              disabled
-            >
-              Feedback
-            </button>
-          )
-        ) : (
-          <Rating ratingWrapper="flex gap-1" value={booking.rate} editable={false} />
-        )}
       </div>
     </div>
-  </div>
-);
+
+  );
+};
 
 const NoBookingsIcon = () => (
   <svg
