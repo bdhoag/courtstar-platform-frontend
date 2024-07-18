@@ -4,6 +4,7 @@ import axiosInstance from '../config/axiosConfig';
 import SpinnerLoading from '../components/SpinnerLoading';
 import check from '../assets/images/circle-check.svg';
 import moment from 'moment';
+import Tag from '../components/tag';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -124,37 +125,46 @@ const PaymentResult: React.FC = () => {
                   </span>
                 </div>
                 <h2 className="text-2xl font-bold mb-4 text-center">Booking Schedule</h2>
-                <div className="mb-4 flex flex-col text-lg">
-                  <p>
-                    <strong>Centre Name:</strong> {bookingSchedule.centreName}
+                <div className="px-10 flex flex-col text-lg">
+                  <p className='text-2xl mb-3 text-center'>
+                    <strong>{bookingSchedule.centreName}</strong>
                   </p>
-                  <p>
-                    <strong>Centre Address:</strong> {bookingSchedule.centreAddress}
+                  <p className='mb-2'>
+                    <strong>Address:</strong> {bookingSchedule.centreAddress}
                   </p>
-                  <p>
-                    <strong>Total Price:</strong> {bookingSchedule.totalPrice.toLocaleString('de-DE')}
-                    <span className="text-sm font-semibold text-gray-500"> VND</span>
-                  </p>
-                </div>
-                {bookingSchedule.bookingDetails.map((detail, index) => (
-                  <div key={index} className="mb-4 grid grid-cols-2 text-lg">
-                    <p>
-                      <strong>Date:</strong> {detail.date}
+                  <div className='flex justify-between'>
+                    <p className=''>
+                      <strong>Court Number:</strong> {bookingSchedule.bookingDetails[0].court.courtNo}
                     </p>
                     <p>
-                      <strong>Court No:</strong> {detail.court.courtNo}
-                    </p>
-                    <p>
-                      <strong>Status:</strong> {detail.checkedIn ? 'Checked in' : 'Not yet'}
-                    </p>
-                    <p>
-                      <strong>Slot No:</strong> {detail.slot.slotNo}
-                    </p>
-                    <p>
-                      <strong>Time:</strong> {moment(detail.slot.startTime, "hh:mm:ss").format("H:mm")} - {moment(detail.slot.endTime, "hh:mm:ss").format("H:mm")}
+                      <strong>Total Price:</strong> {bookingSchedule.totalPrice.toLocaleString('de-DE')}
+                      <span className="text-sm font-semibold text-gray-500"> VND</span>
                     </p>
                   </div>
-                ))}
+                </div>
+                <hr className='my-3'/>
+                <div className='grid grid-cols-2 gap-2'>
+                  {bookingSchedule.bookingDetails.map((detail, index) => (
+                    <div key={index}
+                      className={`text-lg p-4 rounded-lg border relative
+                    ${bookingSchedule.bookingDetails.length % 2 !== 0 && index === bookingSchedule.bookingDetails.length - 1
+                      ? 'col-span-2 w-1/2 mx-auto' : ''}`}>
+                        <Tag
+                          label={detail.checkedIn ? "Checked in" : moment(detail.date).isBefore(moment().startOf('day')) ? "Expired" : "Not yet"}
+                          bgColor={detail.checkedIn ? "bg-[#CDFAE7]" : moment(detail.date).isBefore(moment().startOf('day')) ? "bg-[#fca5a5]" : "bg-[#9ca3af]"}
+                          txtColor={detail.checkedIn ? "text-[#2B5A50]" : moment(detail.date).isBefore(moment().startOf('day')) ? "text-[#dc2626]" : "text-[#fff]"}
+                          class='top-1 right-1'
+                        />
+                        <p>
+                          <strong>Date:</strong> {moment(detail.date).format("DD/MM/yyyy")}
+                        </p>
+                        <p>
+                          <strong>Slot: {detail.slot.slotNo}</strong>  <strong>/ Time: </strong>{moment(detail.slot.startTime, "hh:mm:ss").format("H:mm")} - {moment(detail.slot.endTime, "hh:mm:ss").format("H:mm")}
+                        </p>
+                    </div>
+                  ))}
+                </div>
+
               </div>
             </>
           )}
