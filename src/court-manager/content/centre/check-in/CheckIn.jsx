@@ -263,7 +263,7 @@ const CheckIn = (props) => {
         });
       }
 
-      if (filterDate && filterDate !==  t('allDate')) {
+      if (filterDate && filterDate !== t('allDate')) {
         updatedCheckins = updatedCheckins.filter(checkin => moment(checkin.date, 'yyyy-MM-DD').format('DD/MM') === filterDate);
       }
 
@@ -286,6 +286,18 @@ const CheckIn = (props) => {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   }
+
+  const isExpired = (day, slot) => (
+    day < moment().format('MM/DD') ||
+    (
+      day === moment().format('MM/DD') &&
+      moment(slot.endTime, "HH:mm:ss").isBefore(moment())
+    )
+  )
+
+  const isOnTime = (day, slot) => (
+    day === moment().format('MM/DD') && moment(slot.endTime, "HH:mm:ss").format("HH") === (moment().format("HH"))
+  )
 
   return (
     <div className="w-[70rem] my-12">
@@ -373,9 +385,10 @@ const CheckIn = (props) => {
                 {currentListApiCheckins?.map((checkin) => (
                   <div
                     key={checkin.id}
-                    className={checkin?.checkedIn
-                      ? "bg-slate-200 px-10 py-1 grid grid-cols-12 gap-2 hover:px-8 cursor-pointer mt-2 rounded-lg ease-in-out duration-300"
-                      : "bg-white px-10 py-1 grid grid-cols-12 gap-2 hover:bg-teal-50 hover:px-8 cursor-pointer mt-2 rounded-lg shadow ease-in-out duration-300"}
+                    className={`px-10 py-1 grid grid-cols-12 gap-2 hover:px-8 cursor-pointer mt-2 rounded-lg ease-in-out duration-300 shadow
+                      ${checkin?.checkedIn
+                        ? "bg-[#CDFAE7]"
+                        : isExpired(moment(checkin?.date, 'yyyy-MM-DD').format('MM/DD'), checkin?.slot) ? "bg-red-200" : "bg-white"}`}
                     onClick={
                       () => handleCheckInPopup(checkin)
                     }
@@ -442,8 +455,6 @@ const CheckIn = (props) => {
                   </div>
 
                   <div className="flex justify-between">
-
-
                     <div className="">
                       <span className="font-semibold">
                         Slot: {formCheckIn?.slot?.slotNo} / Time:
@@ -469,12 +480,13 @@ const CheckIn = (props) => {
                     label={
                       formCheckIn?.checkedIn
                         ?
-                        'Undo'
+                        t('undo')
                         :
                         t('checkIn')
                     }
                     loading={loadingBtn}
                     loadingColor="#fff"
+                    disabled={!isOnTime(moment(formCheckIn?.date, 'yyyy-MM-DD').format('MM/DD'), formCheckIn?.slot)}
                   />
                 </div>
               }
@@ -528,7 +540,8 @@ const CheckIn = (props) => {
             There are no booking yet!
           </div>
       }
-      {filteredCheckins.length > itemsPerPage
+      {
+        filteredCheckins.length > itemsPerPage
         &&
         <Pagination
           totalItems={filteredCheckins.length}
@@ -538,7 +551,7 @@ const CheckIn = (props) => {
         />
       }
 
-    </div>
+    </div >
   );
 };
 

@@ -480,5 +480,7 @@
   "deleteProfileError": "Delete Profile Error",
   "profileUpdatedSuccessfully": "Profile Updated Successfully",
   "profileUpdatedError": "Profile Update Error",
-  "youAllowDeleteThisCentre": "You want to delete this centre"
+  "youAllowDeleteThisCentre": "You want to delete this centre",
+  "expired": "Expired",
+  "undo": "Undo"
 }
