@@ -119,25 +119,29 @@ const Withdrawal = () => {
   const requestInfo = (
     <div className="text-black w-96">
       <div className="">
-        <span className="font-semibold">Manager's email:</span> {requestDetail?.managerEmail}
+        <span className="font-semibold">Email:</span> {requestDetail?.managerEmail}
       </div>
       <div className="">
-        <span className="font-semibold">Created date:</span> {moment(requestDetail?.dateCreateWithdrawalOrder).format('yyyy-MM-DD')}
+        <span className="font-semibold">{t('createdDate')}:</span> {moment(requestDetail?.dateCreateWithdrawalOrder).format('yyyy-MM-DD')}
       </div>
       <div className="">
         {requestDetail?.dateAuthenticate &&
           <>
-            <span className="font-semibold">Response date:</span> {moment(requestDetail?.dateAuthenticate).format('yyyy-MM-DD')}
+            <span className="font-semibold">{t('responseDate')}:</span> {moment(requestDetail?.dateAuthenticate).format('yyyy-MM-DD')}
           </>
         }
       </div>
 
-      <div className="my-3">
-        <CreditCard
-          bankName={requestDetail?.nameBanking}
-          cardHolderName={requestDetail?.cardHolderName}
-          number={requestDetail?.numberBanking}
-        />
+      <div className="">
+        <span className="font-semibold">{t('bankName')}:</span> {requestDetail?.nameBanking}
+      </div>
+
+      <div className="">
+        <span className="font-semibold">{t('cardholderName')}:</span> {requestDetail?.cardHolderName}
+      </div>
+
+      <div className="">
+        <span className="font-semibold">{t('accountNumber')}:</span> {requestDetail?.numberBanking}
       </div>
 
       {!requestDetail?.dateAuthenticate
@@ -296,7 +300,7 @@ const Withdrawal = () => {
           setRequestDetail(null);
         }}
         html={requestInfo}
-        title='Request Detail'
+        title={t('requestDetail')}
         centreInfo
       />
       <PopupModal

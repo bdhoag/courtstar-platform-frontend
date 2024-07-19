@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import SpinnerLoading from './SpinnerLoading';
+import { t } from 'i18next';
 
 function Dropdown(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -100,7 +101,7 @@ function Dropdown(props) {
                   <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                 </svg>
-                Your profile
+               {t('yourProfile')}
               </Link>
               <Link className='flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-100'
                 to="/bookingHistory"
@@ -121,7 +122,7 @@ function Dropdown(props) {
                   <path d="M3 3v5h5" />
                   <path d="M12 7v5l4 2" />
                 </svg>
-                Booking history
+                {t('bookingHistory')}
               </Link>
               <button className='flex w-full items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-red-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-100'
                 onClick={props.logout}
@@ -140,7 +141,7 @@ function Dropdown(props) {
                   <polyline points="16 17 21 12 16 7" />
                   <line x1="21" x2="9" y1="12" y2="12" />
                 </svg>
-                Log out
+                {t('logOut')}
               </button>
             </div>
           )}
