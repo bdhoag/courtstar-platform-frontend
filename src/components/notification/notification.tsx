@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NotificationItemProps } from "./index";
 import notify from '../../assets/images/icon-notify.svg';
 import check from '/images/check-check.svg';
@@ -8,8 +8,9 @@ import ticket from '/images/ticket-check.svg';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
-const NotificationItem: React.FC<NotificationItemProps> = ({ notification, onNotificationClick }) => {
+const NotificationItem: React.FC<NotificationItemProps> = (props) => {
   const { t } = useTranslation();
+  const [notification, setNotification] = useState(props.notification);
   let icon: string = "";
   if (notification.type === 'REGISTERED') icon = check;
   else if (notification.type === 'ADD_CENTRE') icon = request;
@@ -19,7 +20,16 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification, onNot
 
   return (
     <li className={`flex items-center justify-between gap-2 hover:rounded-md transition-all ease-in-out duration-300 p-2 hover:bg-gray-100 cursor-pointer border-t border-gray-200`}
-      onClick={() => onNotificationClick(notification)}>
+      onClick={() => {
+        setNotification(
+          (prev) => ({
+            ...prev,
+            status: true
+          })
+        );
+        props.onNotificationClick(notification);
+
+      }}>
       <img src={icon} alt="" className='w-7 h-7 mr-2' />
       <div className="flex-1 flex flex-col items-start">
         <span className="text-gray-700">{notification.content ? t(notification.content) : t('noReason')}</span>
