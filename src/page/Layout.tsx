@@ -20,7 +20,7 @@ const Layout: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token && role) {
+    if (token && token !== "" && role && role !== "") {
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
       navigate("/");

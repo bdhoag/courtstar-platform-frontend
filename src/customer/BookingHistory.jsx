@@ -63,10 +63,15 @@ const BookingHistory = () => {
   const currentBookings = bookings.slice(indexOfFirstBooking, indexOfLastBooking);
 
   const isFeedbackAvailable = (bookingDetails) => {
-    // Get the latest end time from booking details
+    // Check if at least one booking detail has checkIn set to true
+    const hasCheckedIn = bookingDetails.some(detail => detail.checkedIn);
+
+    // Get the earliest end time from booking details
     const endTimes = bookingDetails.map(detail => moment(`${detail.date} ${detail.slot.endTime}`, 'YYYY-MM-DD HH:mm:ss'));
     const earliestEndTime = moment.min(endTimes);
-    return moment().isAfter(earliestEndTime);
+
+    // Feedback is available only if at least one booking detail has checkIn true and the current time is after the earliest end time
+    return hasCheckedIn && moment().isAfter(earliestEndTime);
   };
 
   return (
@@ -218,7 +223,6 @@ const BookingCard = ({ booking, handleFeedbackPopup, isFeedbackAvailable }) => {
         </div>
       </div>
     </div>
-
   );
 };
 
