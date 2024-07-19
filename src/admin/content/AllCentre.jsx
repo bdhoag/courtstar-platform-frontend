@@ -294,18 +294,18 @@ const AllCentre = () => {
                           {(centreDetail?.deleted)
                             ?
                             <div className="bg-red-500 text-white text-sm px-3 py-1 rounded-md font-semibold">
-                              Deleted
+                              {t('deleted')}
                             </div>
                             :
                             <div className="font-semibold">
                               {centreDetail?.status
                                 ?
                                 <div className="bg-primary-green text-white text-sm px-3 py-1 rounded-md">
-                                  Opening
+                                  {t('opening')}
                                 </div>
                                 :
                                 <div className="bg-black text-white px-3 text-sm py-1 rounded-md">
-                                  Closed
+                                  {t('closed')}
                                 </div>
                               }
                             </div>
@@ -377,7 +377,7 @@ const AllCentre = () => {
 
               <div id="top" className='flex-1 bg-white rounded-lg shadow-md my-3'>
                 <div className='text-white rounded-t-lg bg-primary-green flex items-center justify-center gap-1.5 py-2'>
-                  <span className='text-3xl font-medium'>Feedbacks</span>
+                  <span className='text-3xl font-medium'>{t('feedbacks')}</span>
                 </div>
                 {loadingFeedback
                   ?
@@ -409,7 +409,7 @@ const AllCentre = () => {
                 onClick={() => {
                   showAlert({
                     title: t('areYouSure') + "?",
-                    message: t('youAllowThisWithdrawalRequest') + "!",
+                    message: t('youAllowDeleteThisCentre') + "!",
                     type: 'warning',
                     onConfirmClick: () => handleDelete(centreDetail?.id)
                   });

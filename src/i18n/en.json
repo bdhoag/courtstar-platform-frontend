@@ -465,5 +465,20 @@
   "addStaffSuccess": "Add Staff Success",
   "enterReasonForDenied": "Enter the reason for the refusal",
   "reasonForDenial": "Reason For Refusal",
-  "accept": "Accept"
+  "accept": "Accept",
+  "requestDetail": "Request Detail",
+  "createdDate":"Created date",
+  "responseDate": "Response date",
+  "logOutSuccessfully": "Log out successfully",
+  "bookingHistory": "Booking history",
+  "logOut": "Log out",
+  "myPlatform": "My Platform",
+  "EDIT_CENTRE_CONTENT": "EDIT_CENTRE_CONTENT",
+  "deleteStaffSuccess": "Delete Staff Successfully",
+  "youDeleteThisAccount": "You want to delete this account",
+  "deleteProfileSuccess": "Delete Profile Successfully",
+  "deleteProfileError": "Delete Profile Error",
+  "profileUpdatedSuccessfully": "Profile Updated Successfully",
+  "profileUpdatedError": "Profile Update Error",
+  "youAllowDeleteThisCentre": "You want to delete this centre"
 }

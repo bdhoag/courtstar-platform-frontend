@@ -55,14 +55,14 @@ const Header: React.FC = () => {
       .then(() => {
         localStorage.clear();
         dispatch({ type: 'LOGOUT' });
-        toast.success('Log out successfully!', {
+        toast.success(`${t('logOutSuccessfully')}!`, {
           toastId: 'log-out-successfully'
         })
         navigate('/');
       })
       .catch(error => {
         console.log(error.message);
-        toast.warning('Can not log out!', {
+        toast.warning('Can not log out now!', {
           toastId: 'can-not-log-out'
         })
       })
@@ -96,11 +96,14 @@ const Header: React.FC = () => {
         <nav className="max-w-screen-1440 1440:mx-auto mx-4 w-full sm:flex sm:items-center sm:justify-between">
 
           <div className="flex items-center justify-between min-w-[416px]">
-            <div className='py-2'>
+            <Link className='py-2'
+              to={'/'}
+            >
               <img src={logo}
                 className="h-16"
                 alt='logo' />
-            </div>
+
+            </Link>
             <div className="sm:hidden">
               <button type="button"
                 className="p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
@@ -170,7 +173,7 @@ const Header: React.FC = () => {
                 cursor-pointer py-1 relative after:sm:absolute after:sm:bottom-0 after:sm:left-0 after:sm:bg-white after:sm:h-0.5 after:sm:w-0 hover:after:sm:w-full after:sm:transition-all after:sm:ease-in-out after:sm:duration-200 after:sm:rounded-md"
                   to="/admin"
                 >
-                  {t('dashboard')}
+                  {t('myPlatform')}
                 </Link>
               }
 
