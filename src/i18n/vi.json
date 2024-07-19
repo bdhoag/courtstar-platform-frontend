@@ -480,5 +480,7 @@
   "deleteProfileError": "Xóa tài khoản không thành công",
   "profileUpdatedSuccessfully": "Hồ sơ đã cập nhật thành công",
   "profileUpdatedError": "Hồ sơ cập nhật không thành công",
-  "youAllowDeleteThisCentre": "Bạn chắc chắn muốn xóa sân này"
+  "youAllowDeleteThisCentre": "Bạn chắc chắn muốn xóa sân này",
+  "expired": "Đã hết hạn",
+  "undo": "Hoàn tác"
 }
