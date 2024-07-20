@@ -482,5 +482,7 @@
   "profileUpdatedError": "Profile Update Error",
   "youAllowDeleteThisCentre": "You want to delete this centre",
   "expired": "Expired",
-  "undo": "Undo"
+  "undo": "Undo",
+  "someoneIsPayingForThisSlotPleaseChooseAnotherSlot!": "Someone is paying for these slots, please choose another slot!",
+  "thisSlotCannotBeBookedConsecutivelyForTheNumberOfWeeksYouSelect": "This slot cannot be booked consecutively for the number of weeks you select!"
 }

@@ -7,6 +7,7 @@ import SpinnerLoading from '../SpinnerLoading';
 import axiosInstance from '../../config/axiosConfig';
 import { useTranslation } from 'react-i18next';
 import showAlert from '../alert';
+import { toast } from 'react-toastify';
 
 const Calendar: React.FC<CalendarProps> = (props) => {
   const { t } = useTranslation();
@@ -183,7 +184,13 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         } else {
           for (let i = 0; i < frequency; i++) {
             const nextWeekDate = moment(formattedDate).add(i, 'weeks').format('YYYY-MM-DD');
-            updatedFormCalendar.push({ date: nextWeekDate, slotId: slot.id, courtId: currentCourt.key });
+            if (isDisable(moment(nextWeekDate, 'YYYY-MM-DD').format('MM/DD'), slot)) {
+              toast.warn(t("thisSlotCannotBeBookedConsecutivelyForTheNumberOfWeeksYouSelect"), {
+                toastId: "invalid-choosing-slot",
+                autoClose: 5000
+              });
+              return prevForm;
+            } else updatedFormCalendar.push({ date: nextWeekDate, slotId: slot.id, courtId: currentCourt.key });
           }
         }
 

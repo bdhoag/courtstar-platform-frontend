@@ -482,5 +482,7 @@
   "profileUpdatedError": "Hồ sơ cập nhật không thành công",
   "youAllowDeleteThisCentre": "Bạn chắc chắn muốn xóa sân này",
   "expired": "Đã hết hạn",
-  "undo": "Hoàn tác"
+  "undo": "Hoàn tác",
+  "someoneIsPayingForThisSlotPleaseChooseAnotherSlot!": "Có người đang đặt những slot này, vui lòng chọn slot khác!",
+  "thisSlotCannotBeBookedConsecutivelyForTheNumberOfWeeksYouSelect": "Giờ chơi này không thể được đặt liên tiếp trong số tuần bạn chọn!"
 }
