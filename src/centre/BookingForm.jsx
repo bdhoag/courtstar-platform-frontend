@@ -5,6 +5,7 @@ import PopupModal from '../components/PopupModal';
 import Button from '../components/button';
 import { useAuth } from '../context/AuthContext';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const BookingForm = (props) => {
   const { t } = useTranslation();
@@ -60,7 +61,12 @@ const BookingForm = (props) => {
         window.location.href = res.data.data.order_url;
       })
       .catch(error => {
-        console.log(error.message);
+        toast.error(t("someoneIsPayingForThisSlotPleaseChooseAnotherSlot!")
+          , {
+            toastId: "invalid-slot-booking",
+            autoClose: 5000
+          }
+        );
       })
       .finally(() => {
         setLoading(false);
