@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import Dropdown, { Item } from "../../components/dropdown";  // Ensure Item is imported correctly
 import InputText from "../../components/input-text";
 import PopupModal from "../../components/PopupModal";
-import CreditCard from "../../components/credit-card";
 import showAlert from "../../components/alert";
 import { useTranslation } from 'react-i18next';
 
