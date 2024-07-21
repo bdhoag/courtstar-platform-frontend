@@ -132,6 +132,13 @@ const BookingHistory = () => {
 const BookingCard = ({ booking, handleFeedbackPopup, isFeedbackAvailable }) => {
   const { t } = useTranslation();
   const [feedbackDetailOpen, setFeedbackDetailOpen] = useState(false);
+  const isExpired = (day, slot) => (
+    day < moment().format('MM/DD') ||
+    (
+      day === moment().format('MM/DD') &&
+      moment(slot.endTime, "HH:mm:ss").isBefore(moment())
+    )
+  )
   return (
     <div className='w-full flex justify-center items-center'>
       <PopupModal
@@ -147,11 +154,11 @@ const BookingCard = ({ booking, handleFeedbackPopup, isFeedbackAvailable }) => {
                 <div key={detail.id} className={`text-lg p-4 rounded-lg border relative
                   ${booking.bookingDetails.length % 2 !== 0 && index === booking.bookingDetails.length - 1
                   ? 'col-span-2 mx-auto' : ''}
-                  ${detail.checkedIn ? "border-[#2B5A50]" : moment(detail.date).isBefore(moment().startOf('day')) ? "border-[#dc2626]" : "border-[#9ca3af]"}
+                  ${detail.checkedIn ? "border-[#2B5A50]" : isExpired(moment(detail.date, "YYYY-MM-DD").format("MM/DD"), detail.slot) ? "border-[#dc2626]" : "border-[#9ca3af]"}
                 `}>
                   <Tag
-                    label={detail.checkedIn ? "Checked in" : moment(detail.date).isBefore(moment().startOf('day')) ? "Expired" : "Not yet"}
-                    bgColor={detail.checkedIn ? "bg-[#2B5A50]" : moment(detail.date).isBefore(moment().startOf('day')) ? "bg-[#dc2626]" : "bg-[#9ca3af]"}
+                    label={detail.checkedIn ? "Checked in" : isExpired(moment(detail.date, "YYYY-MM-DD").format("MM/DD"), detail.slot) ? "Expired" : "Not yet"}
+                    bgColor={detail.checkedIn ? "bg-[#2B5A50]" : isExpired(moment(detail.date, "YYYY-MM-DD").format("MM/DD"), detail.slot) ? "bg-[#dc2626]" : "bg-[#9ca3af]"}
                     txtColor="text-[#fff]"
                     className='top-0 right-0 rounded-tr-md rounded-bl-lg'
                   />

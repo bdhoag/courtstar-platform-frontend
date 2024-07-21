@@ -272,7 +272,24 @@ const CheckIn = (props) => {
       }
 
       // Sort the checkins to move checked-in ones to the bottom
-      updatedCheckins.sort((a, b) => a.checkedIn - b.checkedIn);
+      updatedCheckins.sort((a, b) => {
+        if (isExpired(moment(a?.date, 'yyyy-MM-DD').format('MM/DD'), a?.slot)
+          && !isExpired(moment(b?.date, 'yyyy-MM-DD').format('MM/DD'), b?.slot)) {
+            return 1;
+        } else if (!isExpired(moment(a?.date, 'yyyy-MM-DD').format('MM/DD'), a?.slot)
+          && isExpired(moment(b?.date, 'yyyy-MM-DD').format('MM/DD'), b?.slot)) {
+            return -1;
+        }
+
+        if (!a.checkedIn && b.checkedIn) {
+            return -1;
+        } else if (a.checkedIn && !b.checkedIn) {
+            return 1;
+        }
+
+        return 0;
+    });
+
       setFilteredCheckins(updatedCheckins);
     };
 
