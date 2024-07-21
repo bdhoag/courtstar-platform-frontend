@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Button from '../button';
-import Rating from '../Rating';
 import { FeedbackProps } from './index';
 import Pagination from '../pagination';
 import FeedbackItem from './feedbackItem';
@@ -42,7 +41,6 @@ const Feedback: React.FC<FeedbackProps> = ({ listItem, itemsPerPage }) => {
                   onClick={() => setActiveFilter(2)}
                 />
               </div>
-              <Rating ratingWrapper="flex" editable value={0} />
             </div>
 
             <div className="p-4 divide-y-2">

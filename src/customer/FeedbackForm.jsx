@@ -29,6 +29,20 @@ function FeedbackForm(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        // Validation
+        if (rating === 0) {
+            toast.error("Please provide a rating.", {
+                toastId: 'feedback-error'
+            });
+            return;
+        }
+        if (!comment.trim()) {
+            toast.error("Please provide a comment.", {
+                toastId: 'feedback-error'
+            });
+            return;
+        }
+
         const feedbackData = {
             content: comment,
             rate: rating,
