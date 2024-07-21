@@ -296,7 +296,7 @@ const CheckIn = (props) => {
   )
 
   const isOnTime = (day, slot) => (
-    day === moment().format('MM/DD') && moment(slot.endTime, "HH:mm:ss").format("HH") === (moment().format("HH"))
+    day === moment().format('MM/DD') && moment(slot.startTime, "HH:mm:ss").format("HH") === (moment().format("HH"))
   )
 
   return (
