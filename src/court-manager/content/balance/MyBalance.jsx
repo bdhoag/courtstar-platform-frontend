@@ -40,6 +40,13 @@ export default function MyBalance(props) {
 
   const handleWithdraw = async () => {
     setLoading(true);
+    if (!formWithdraw.amount || formWithdraw.amount === "0") {
+      toast.error('Create request withdrawal error!', {
+        toastId: 'create-request-withdrawal-error'
+      });
+      setLoading(false);
+    }
+    else
     await axiosInstance.post(`/courtstar/transfer-money/create-withdrawal/${balanceDetail.id}`, formWithdraw)
       .then(res => {
         if (res.data.data) {
