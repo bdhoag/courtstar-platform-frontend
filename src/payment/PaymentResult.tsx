@@ -50,6 +50,14 @@ const PaymentResult: React.FC = () => {
   const [appTransId, setAppTransId] = useState<any>(query.get('apptransid'));
   const location = useLocation();
 
+  const isExpired = (day, slot) => (
+    day < moment().format('MM/DD') ||
+    (
+      day === moment().format('MM/DD') &&
+      moment(slot.endTime, "HH:mm:ss").isBefore(moment())
+    )
+  )
+
   useEffect(() => {
     const load = async () => {
       await axiosInstance.post(`/courtstar/payment/order-info`, { appTransId })
@@ -155,11 +163,11 @@ const PaymentResult: React.FC = () => {
                       className={`text-lg p-4 rounded-lg border relative
                         ${bookingSchedule.bookingDetails.length % 2 !== 0 && index === bookingSchedule.bookingDetails.length - 1
                         ? 'col-span-2 w-1/2 mx-auto' : ''}
-                        ${detail.checkedIn ? "border-[#2B5A50]" : moment(detail.date).isBefore(moment().startOf('day')) ? "border-[#dc2626]" : "border-[#9ca3af]"}
+                        ${detail.checkedIn ? "border-[#2B5A50]" : isExpired(moment(detail.date, "YYYY-MM-DD").format("MM/DD"), detail.slot) ? "border-[#dc2626]" : "border-[#9ca3af]"}
                       `}>
                         <Tag
-                          label={detail.checkedIn ? "Checked in" : moment(detail.date).isBefore(moment().startOf('day')) ? "Expired" : "Not yet"}
-                          bgColor={detail.checkedIn ? "bg-[#2B5A50]" : moment(detail.date).isBefore(moment().startOf('day')) ? "bg-[#dc2626]" : "bg-[#9ca3af]"}
+                          label={detail.checkedIn ? "Checked in" : isExpired(moment(detail.date, "YYYY-MM-DD").format("MM/DD"), detail.slot) ? "Expired" : "Not yet"}
+                          bgColor={detail.checkedIn ? "bg-[#2B5A50]" : isExpired(moment(detail.date, "YYYY-MM-DD").format("MM/DD"), detail.slot) ? "bg-[#dc2626]" : "bg-[#9ca3af]"}
                           txtColor="text-[#fff]"
                           className='top-0 right-0 rounded-tr-md rounded-bl-lg'
                         />
