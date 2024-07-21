@@ -362,7 +362,7 @@ const AllCentre = () => {
                                 <div className="flex gap-1 ">
                                   <div className='font-semibold'>{t('status')}:</div>
                                   <div className={court.status ? 'font-semibold text-primary-green' : 'font-semibold text-red-500'}>
-                                    {court.status ? 'Active' : 'Close'}
+                                    {court.status ? t('active') : t('close')}
                                   </div>
                                 </div>
                               </div>
