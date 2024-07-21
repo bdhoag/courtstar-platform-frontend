@@ -46,7 +46,7 @@ function Profile() {
     setUpdateLoading(true);
     try {
       const res = await axiosInstance.put(`/courtstar/account`, profileForm);
-      toast.success(t('profileUpdatedSuccessfully' + '!'), {
+      toast.success(`${t('profileUpdatedSuccessfully')}!`, {
         toastId: 'update-success'
       });
       dispatch({ type: 'SET_ACCOUNT', payload: res.data.data });

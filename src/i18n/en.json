@@ -486,5 +486,6 @@
   "expired": "Expired",
   "undo": "Undo",
   "someoneIsPayingForThisSlotPleaseChooseAnotherSlot!": "Someone is paying for these slots, please choose another slot!",
-  "thisSlotCannotBeBookedConsecutivelyForTheNumberOfWeeksYouSelect": "This slot cannot be booked consecutively for the number of weeks you select!"
+  "thisSlotCannotBeBookedConsecutivelyForTheNumberOfWeeksYouSelect": "This slot cannot be booked consecutively for the number of weeks you select!",
+  "loginSuccess": "Login successfully!"
 }

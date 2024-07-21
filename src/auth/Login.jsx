@@ -70,7 +70,7 @@ function Login(props) {
         else if (dataObj.data.role === "ADMIN") navigate('/admin')
         else navigate('/');
 
-        toast.success(dataObj.message, {
+        toast.success(t('loginSuccess'), {
           toastId: 'login-success'
         });
       })
