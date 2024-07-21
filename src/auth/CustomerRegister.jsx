@@ -202,8 +202,6 @@ function CustomerRegister() {
                 <a
                   className="text-sm border shadow rounded-full py-3 px-4 w-96 inline-flex items-center hover:bg-gray-200 transition-all duration-300 ease-in-out"
                   href='http://localhost:8080/courtstar/account/createEmail'
-                  target='_blank'
-                  rel="noreferrer"
                 >
                   <img className='mx-7'
                     src={google}

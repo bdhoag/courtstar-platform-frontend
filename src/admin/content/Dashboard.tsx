@@ -350,7 +350,7 @@ const Dashboard: React.FC = () => {
                   </div>
                   <div className='text-lg flex gap-0.5 font-bold'>
                     <Counter
-                      endNumber={data?.weekRevenue}
+                      endNumber={data?.weekRevenue * 0.05}
                       duration={1000}
                     />
                     <span className='text-[7px]'>VND</span>
