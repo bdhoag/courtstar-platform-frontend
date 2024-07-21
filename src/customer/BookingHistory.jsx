@@ -107,7 +107,7 @@ const BookingHistory = () => {
                     />
                   ))
                 ) : (
-                  <div className="flex flex-col items-center justify-center h-56 text-3xl text-primary">
+                  <div className="flex flex-col items-center justify-center h-[50vh] text-3xl text-primary">
                     <NoBookingsIcon />
                     You don't have any bookings yet!
                   </div>
