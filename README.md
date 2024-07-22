@@ -44,6 +44,7 @@ Ensure you have the following installed:
 ### Installation
 
 **Clone the repository:**
+
     ```sh
     
     git clone https://github.com/Court-Star/courtstar-platform-frontend.git
