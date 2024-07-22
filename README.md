@@ -46,8 +46,11 @@ Ensure you have the following installed:
 **Clone the repository:**
     ```sh
     git clone https://github.com/Court-Star/courtstar-platform-frontend.git
+    
     cd courtstar-platform-frontend
+    
     npm install
+    
     npm run dev
     ```
 
