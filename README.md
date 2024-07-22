@@ -45,6 +45,7 @@ Ensure you have the following installed:
 
 **Clone the repository:**
     ```sh
+    
     git clone https://github.com/Court-Star/courtstar-platform-frontend.git
     
     cd courtstar-platform-frontend
@@ -52,6 +53,7 @@ Ensure you have the following installed:
     npm install
     
     npm run dev
+    
     ```
 
 The frontend application will be available at `http://localhost:3000`.
